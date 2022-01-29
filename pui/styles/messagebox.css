@@ -1,0 +1,46 @@
+QFrame
+{
+    background-color: @background;
+    border-radius: 15px;
+}
+
+
+QGroupBox
+{
+    border: 0px;
+}
+
+
+QLineEdit
+{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+#labelTitle
+{
+    background-color: @background_second;
+    border-radius: 15px;
+}
+
+
+#pushButtonAccept,
+#pushButtonCancel
+{
+    color: @white;
+    background-color: @highlight;
+    border-radius: 5px;
+}
+#pushButtonAccept::disabled,
+#pushButtonCancel::disabled
+{
+    background-color: @disabled;
+}
+
+
+#pushButtonEye
+{
+    background-color: @background_second;
+    border-radius: 10px;
+}

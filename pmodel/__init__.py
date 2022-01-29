@@ -12,14 +12,14 @@ import pui
 
 
 def input_manager_setup():
-    """SPInputmanager.Setup.set_icons(
+    SPInputmanager.Setup.set_icons(
         eye_show=pui.images.data.icons.changeable.eye_visible21,
         eye_hide=pui.images.data.icons.changeable.eye_invisible21
-    )"""
+    )
 
 
 def graphics_setup():
-    """SPGraphics.Setup.set_icons(
+    SPGraphics.Setup.set_icons(
         eye_show=pui.images.data.icons.changeable.eye_visible21,
         eye_hide=pui.images.data.icons.changeable.eye_invisible21,
         enter_button=pui.images.data.icons.arrow_right21,
@@ -45,7 +45,7 @@ def graphics_setup():
 
     SPGraphics.Setup.set_message_box_details(
         SOFTWARE_NAME, title_text, title_font, pui.styles.data.css.messagebox
-    )"""
+    )
 
 
 def launch():
@@ -60,6 +60,11 @@ def launch():
         input_manager_setup()
         graphics_setup()
         Global.settings = pcontroller.settings_load()
+
+        from pmodel.main import MainModel
+        main = MainModel(parent=None)
+        main.show()
+        Global.kernel.exec_()
 
     except Exception as issue:
         Global.logsSystem.save(

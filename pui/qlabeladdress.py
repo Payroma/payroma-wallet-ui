@@ -1,0 +1,68 @@
+from plibs import *
+from pcontroller import translator, clipboard
+from pui import Size
+
+
+class QLabelAddress(SPGraphics.QuickWidget):
+    def __init__(
+            self, parent=None,
+            address: str = None,
+            fixed_width: int = None,
+            fixed_height: int = None,
+            fixed_size: QSize = None,
+            value_changed: callable = None,
+            start_value: object = None,
+            end_value: object = None,
+            duration: int = 300,
+            tooltip: SPGraphics.QuickToolTip = None,
+            copy_tooltip: SPGraphics.QuickToolTip = None
+    ):
+        super(QLabelAddress, self).__init__(
+            parent=parent, fixed_width=fixed_width, fixed_height=fixed_height,
+            fixed_size=fixed_size, value_changed=value_changed,
+            start_value=start_value, end_value=end_value, duration=duration,
+        )
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setLayout(QHBoxLayout())
+        self.layout().setContentsMargins(0, 0, 0, 0)
+
+        self.__label = SPGraphics.QuickLabel(
+            self, tooltip=tooltip
+        )
+        self.__label.setWordWrap(False)
+        self.__label.setObjectName('labelAddress')
+
+        self.__pushButton = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=copy_tooltip
+        )
+        self.__pushButton.clicked.connect(self.__clicked)
+
+        self.layout().addWidget(self.__label)
+        self.layout().addWidget(self.__pushButton, alignment=Qt.AlignRight)
+
+        self.__address = None
+
+        if address:
+            self.set_address(address)
+
+    @pyqtSlot()
+    def __clicked(self):
+        clipboard(self.get_address())
+        QObject.quickNotification.successfully(translator("Copied Successfully"))
+
+    def get_address(self) -> str:
+        return self.__address
+
+    def set_address(self, text: str, ellipsis_text: bool = True):
+        self.__address = text
+        self.__label.setText(text)
+
+        if ellipsis_text:
+            SPGraphics.text_ellipsis(self.__label, Qt.ElideMiddle)
+
+    def set_icon(self, icon: QIcon):
+        self.__pushButton.setIcon(icon)
+
+    def set_font(self, font: QFont):
+        self.__label.setFont(font)

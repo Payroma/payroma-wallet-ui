@@ -1,0 +1,195 @@
+QWidget
+{
+    color: @font;
+    outline: 0px;
+}
+
+
+QLabel,
+QPushButton,
+QRadioButton,
+QMenu,
+QListWidget,
+QTabWidget,
+QTabWidget::pane
+{
+    background: transparent;
+	border: 0px;
+}
+
+
+QSizeGrip
+{
+    background-color: @background_third;
+    border-top-left-radius: 24px;
+    border-bottom-right-radius: 15px;
+}
+
+
+QPushButton
+{
+	color: @white;
+	border-radius: 5px;
+}
+
+
+QLineEdit
+{
+	background-color: @background_second;
+    selection-background-color: gray;
+    border-radius: 10px;
+}
+
+
+QScrollBar::horizontal
+{
+    height: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
+}
+QScrollBar::vertical
+{
+    width: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+QScrollBar::handle
+{
+    background-color: @background_third;
+    border-radius: 4px;
+    min-width: 20px;
+    min-height: 20px;
+}
+QScrollBar,
+QScrollBar::add-page,
+QScrollBar::sub-page,
+QScrollBar::add-line,
+QScrollBar::sub-line
+{
+    background: transparent;
+}
+
+
+QProgressBar
+{
+    background-color: @line;
+    border-radius: 3px;
+}
+QProgressBar::chunk
+{
+    background-color: @positive;
+    border-radius: 3px;
+}
+
+
+QComboBox
+{
+	color: @white;
+    background-color: @highlight;
+    selection-background-color: gray;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+QComboBox::disabled
+{
+    color: @disabled_font;
+    background-color: @disabled;
+}
+QComboBox::on
+{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+QComboBox::drop-down
+{
+    image: url(':/images/icons/arrow-down-21.png');
+    margin-top: 10px;
+    margin-right: 8px;
+}
+QComboBox::drop-down:disabled
+{
+    image: none;
+}
+QComboBox QAbstractItemView
+{
+    color: @white;
+    background-color: @highlight;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+}
+QComboBox QAbstractItemView::item
+{
+	color: @white;
+    min-height: 35px;
+}
+QComboBox QListView::item:selected
+{
+    background-color: @white_a10;
+}
+QComboBox QScrollBar::handle
+{
+    background-color: @white_a50;
+}
+
+
+QScrollArea
+{
+    background: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0px;
+}
+
+
+QuickToolTip QLabel
+{
+	color: @white;
+}
+QuickToolTip #mainWidget
+{
+    background-color: @background_tooltip;
+    border-radius: 5px;
+}
+
+
+#mainWidget,
+#shadowWidget
+{
+    background-color: @background;
+    border-radius: 15px;
+}
+
+
+#headerWidget
+{
+	border-bottom: 1px solid @line;
+}
+
+
+#footerWidget
+{
+	border-top: 1px solid @line;
+}
+#footerWidget #pushButtonInvest,
+#footerWidget #labelAddress
+{
+    color: @font;
+    background: transparent;
+}
+
+
+#lineWidget
+{
+	background-color: @line;
+}
+
+
+#labelDescription,
+#labelAddress
+{
+	color: @font_description;
+}

@@ -1,0 +1,12 @@
+QGroupBox
+{
+    background-color: @background_tooltip;
+    border-radius: 10px;
+}
+
+
+QLabel
+{
+	color: @white;
+    background: transparent;
+}
