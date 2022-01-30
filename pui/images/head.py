@@ -27,7 +27,8 @@ DEFAULT = {
             'dollar21': QPixmap(':/images/icons/light/dollar-21.png'),
             'external21': QPixmap(':/images/icons/light/external-21.png'),
             'time21': QPixmap(':/images/icons/light/time-21.png'),
-            'cross31': QPixmap(':/images/icons/light/cross-31.png')
+            'cross31': QPixmap(':/images/icons/light/cross-31.png'),
+            'change21': QPixmap(':/images/icons/light/change-21.png')
         },
 
         'info41': QPixmap(':/images/icons/info-41.png'),

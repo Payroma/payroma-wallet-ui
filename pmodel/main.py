@@ -2,6 +2,7 @@ from plibs import *
 from pheader import *
 from pcontroller import url_open
 from pui import main
+from pmodel.settings import SettingsModel
 
 
 class GlobalEvents:
@@ -23,6 +24,13 @@ class MainModel(main.UiForm):
         QObject.mainModel.themeModeChanged = self.set_theme_mode
         QObject.mainModel.backgroundColorAnimated = self.background_color_animate
 
+        # Tabs
+        self.add_tab(SettingsModel(self), Tab.SETTINGS)
+
+    @pyqtSlot()
+    def settings_clicked(self):
+        QObject.mainModel.currentTabChanged(Tab.SETTINGS)
+
     @pyqtSlot()
     def exit_clicked(self):
         self.close()
@@ -30,3 +38,6 @@ class MainModel(main.UiForm):
     @pyqtSlot()
     def invest_clicked(self):
         url_open(Website.PAYROMA)
+
+    def default_theme(self):
+        pass

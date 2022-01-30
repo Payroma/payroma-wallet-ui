@@ -193,3 +193,23 @@ QuickToolTip #mainWidget
 {
 	color: @font_description;
 }
+
+
+QNotice
+{
+    background-color: @positive_a50;
+    border-radius: 10px;
+}
+QNotice #childPoint
+{
+    background-color: @positive;
+    border-radius: 5px;
+}
+QNotice::disabled
+{
+    background-color: @disabled_a50;
+}
+QNotice #childPoint::disabled
+{
+    background-color: @disabled;
+}

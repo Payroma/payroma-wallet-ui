@@ -53,3 +53,8 @@ class Global:
     translator = QTranslator()
     logsSystem = None
     settings = None
+
+
+# Tabs
+class Tab:
+    SETTINGS = 'settingsModel'
