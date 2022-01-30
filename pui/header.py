@@ -1,6 +1,6 @@
 from plibs import *
-from pui import SetupForm, fonts, images, Size
 from pheader import *
+from pui import SetupForm, fonts, images, Size
 
 
 class UiForm(QWidget, SetupForm):

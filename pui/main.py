@@ -1,6 +1,6 @@
 from plibs import *
-from pui import AppReForm, SetupForm, fonts, images, styles, Size, header, footer, tooltip
 from pheader import *
+from pui import AppReForm, SetupForm, fonts, images, styles, Size, header, footer, tooltip
 
 
 Size.defaultMainWidget = QSize(450, 650)

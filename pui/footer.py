@@ -1,7 +1,6 @@
 from plibs import *
 from pcontroller import translator
 from pui import SetupForm, images, qlabeladdress
-from pheader import *
 
 
 class UiForm(QWidget, SetupForm):

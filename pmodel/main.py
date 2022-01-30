@@ -1,10 +1,10 @@
 from plibs import *
+from pheader import *
 from pcontroller import url_open
 from pui import main
-from pheader import *
 
 
-class GlobalEvents(QObject):
+class GlobalEvents:
     currentTabChanged = None
     themeModeChanged = None
     backgroundColorAnimated = None
