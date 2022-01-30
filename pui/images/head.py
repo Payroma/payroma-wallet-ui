@@ -55,6 +55,7 @@ DEFAULT = {
 
     'illustrations': {
         'empty': QPixmap(':/images/illustrations/empty.png'),
+        'no_data': QPixmap(':/images/illustrations/nodata.png'),
         'theme_status': QPixmap(':/images/illustrations/sun.png')
     }
 

@@ -14,6 +14,7 @@ class UiForm(SetupForm):
         self.networkStatus = None
 
         self.networkSettingsR = None
+        self.addNewR = None
 
     def setup(self):
         self.settings = self.__align_top()
@@ -23,6 +24,7 @@ class UiForm(SetupForm):
         self.networkStatus = self.__align_top()
 
         self.networkSettingsR = self.__align_right()
+        self.addNewR = self.__align_right()
 
         super(UiForm, self).setup()
 
@@ -34,6 +36,7 @@ class UiForm(SetupForm):
         self.networkStatus.labelText.setText(translator("Network Connection Status"))
 
         self.networkSettingsR.labelText.setText(translator("Network settings to add a new and switching."))
+        self.addNewR.labelText.setText(translator("Add New"))
 
     def re_font(self):
         font = QFont()
@@ -45,6 +48,7 @@ class UiForm(SetupForm):
         self.networkStatus.labelText.setFont(font)
 
         self.networkSettingsR.labelText.setFont(font)
+        self.addNewR.labelText.setFont(font)
 
     def __align_top(self) -> SPGraphics.QuickToolTip:
         return SPGraphics.QuickToolTip(

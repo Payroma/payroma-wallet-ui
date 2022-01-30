@@ -3,6 +3,7 @@ from pheader import *
 from pcontroller import url_open
 from pui import main
 from pmodel.settings import SettingsModel
+from pmodel.networksettings import NetworkSettingsModel
 
 
 class GlobalEvents:
@@ -26,6 +27,7 @@ class MainModel(main.UiForm):
 
         # Tabs
         self.add_tab(SettingsModel(self), Tab.SETTINGS)
+        self.add_tab(NetworkSettingsModel(self), Tab.NETWORK_SETTINGS)
 
     @pyqtSlot()
     def settings_clicked(self):
