@@ -58,5 +58,5 @@ class Global:
 # Tabs
 class Tab:
     SETTINGS = 'settingsModel'
-    NETWORK_SETTINGS = 'networkSettingsModel'
+    NETWORKS_LIST = 'networkSettingsModel'
     ADD_NETWORK = 'addNetworkModel'

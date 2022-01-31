@@ -16,7 +16,7 @@ class UiForm(QWidget, SetupForm):
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QVBoxLayout())
         self.layout().setSpacing(11)
-        self.setObjectName(Tab.NETWORK_SETTINGS)
+        self.setObjectName(Tab.NETWORKS_LIST)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
             self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back

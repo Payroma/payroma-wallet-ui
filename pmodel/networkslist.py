@@ -1,11 +1,11 @@
 from plibs import *
 from pheader import *
-from pui import networksettings
+from pui import networkslist
 
 
-class NetworkSettingsModel(networksettings.UiForm):
+class NetworksListModel(networkslist.UiForm):
     def __init__(self, parent):
-        super(NetworkSettingsModel, self).__init__(parent)
+        super(NetworksListModel, self).__init__(parent)
 
         self.setup()
 

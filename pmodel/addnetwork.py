@@ -12,7 +12,7 @@ class AddNetworkModel(addnetwork.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.NETWORK_SETTINGS)
+        QObject.mainModel.currentTabChanged(Tab.NETWORKS_LIST)
 
     @pyqtSlot(str)
     def name_changed(self, text: str):

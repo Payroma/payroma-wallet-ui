@@ -20,7 +20,7 @@ class SettingsModel(settings.UiForm):
 
     @pyqtSlot()
     def network_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.NETWORK_SETTINGS)
+        QObject.mainModel.currentTabChanged(Tab.NETWORKS_LIST)
 
     @pyqtSlot()
     def backup_clicked(self):
