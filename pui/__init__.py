@@ -22,6 +22,7 @@ class Size:
     s81 = QSize(81, 81)
     s91 = QSize(91, 91)
     s100 = QSize(100, 100)
+    defaultLineEdit = QSize(301, 51)
     defaultMainWidget = None
     minimumMainWidget = None
     maximumMainWidget = None

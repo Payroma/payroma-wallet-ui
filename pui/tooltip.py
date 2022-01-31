@@ -15,6 +15,10 @@ class UiForm(SetupForm):
 
         self.networkSettingsR = None
         self.addNewR = None
+        self.networkNameAlert = None
+        self.networkRPCAlert = None
+        self.networkChainIdAlert = None
+        self.networkExplorerAlert = None
 
     def setup(self):
         self.settings = self.__align_top()
@@ -25,6 +29,10 @@ class UiForm(SetupForm):
 
         self.networkSettingsR = self.__align_right()
         self.addNewR = self.__align_right()
+        self.networkNameAlert = self.__align_right()
+        self.networkRPCAlert = self.__align_right()
+        self.networkChainIdAlert = self.__align_right()
+        self.networkExplorerAlert = self.__align_right()
 
         super(UiForm, self).setup()
 
@@ -37,6 +45,10 @@ class UiForm(SetupForm):
 
         self.networkSettingsR.labelText.setText(translator("Network settings to add a new and switching."))
         self.addNewR.labelText.setText(translator("Add New"))
+        self.networkNameAlert.labelText.setText(translator("Network name already exists before"))
+        self.networkRPCAlert.labelText.setText(translator("This RPC is unable to connect"))
+        self.networkChainIdAlert.labelText.setText(translator("Chain id is wrong"))
+        self.networkExplorerAlert.labelText.setText(translator("Explorer URL is wrong"))
 
     def re_font(self):
         font = QFont()
@@ -49,6 +61,10 @@ class UiForm(SetupForm):
 
         self.networkSettingsR.labelText.setFont(font)
         self.addNewR.labelText.setFont(font)
+        self.networkNameAlert.labelText.setFont(font)
+        self.networkRPCAlert.labelText.setFont(font)
+        self.networkChainIdAlert.labelText.setFont(font)
+        self.networkExplorerAlert.labelText.setFont(font)
 
     def __align_top(self) -> SPGraphics.QuickToolTip:
         return SPGraphics.QuickToolTip(

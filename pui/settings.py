@@ -50,6 +50,7 @@ class UiForm(QWidget, SetupForm):
         self.__qnoticeNetwork = qnotice.QNotice(
             self, fixed_size=Size.s21, tooltip=QObject.toolTip.networkStatus
         )
+        self.__qnoticeNetwork.setCursor(Qt.PointingHandCursor)
 
         self.__labelNetwork = SPGraphics.QuickLabel(
             self, text='#Current network', fixed_height=31
