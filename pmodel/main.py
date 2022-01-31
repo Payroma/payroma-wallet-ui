@@ -2,6 +2,7 @@ from plibs import *
 from pheader import *
 from pcontroller import url_open
 from pui import main
+from pmodel.walletslist import WalletsListModel
 from pmodel.settings import SettingsModel
 from pmodel.networkslist import NetworksListModel
 from pmodel.addnetwork import AddNetworkModel
@@ -27,6 +28,7 @@ class MainModel(main.UiForm):
         QObject.mainModel.backgroundColorAnimated = self.background_color_animate
 
         # Tabs
+        self.add_tab(WalletsListModel(self), Tab.WALLETS_LIST)
         self.add_tab(SettingsModel(self), Tab.SETTINGS)
         self.add_tab(NetworksListModel(self), Tab.NETWORKS_LIST)
         self.add_tab(AddNetworkModel(self), Tab.ADD_NETWORK)

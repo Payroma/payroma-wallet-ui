@@ -57,6 +57,7 @@ class Global:
 
 # Tabs
 class Tab:
+    WALLETS_LIST = 'walletsListModel'
     SETTINGS = 'settingsModel'
-    NETWORKS_LIST = 'networkSettingsModel'
+    NETWORKS_LIST = 'networksListModel'
     ADD_NETWORK = 'addNetworkModel'

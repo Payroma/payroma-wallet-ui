@@ -11,7 +11,7 @@ class SettingsModel(settings.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        pass
+        QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
 
     @pyqtSlot(bool)
     def switch_clicked(self, state: bool):

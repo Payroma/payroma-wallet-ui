@@ -11,6 +11,7 @@ class UiForm(SetupForm):
         self.exit = None
         self.copy = None
         self.back = None
+        self.remove = None
         self.networkStatus = None
 
         self.networkSettingsR = None
@@ -25,6 +26,7 @@ class UiForm(SetupForm):
         self.exit = self.__align_top()
         self.copy = self.__align_top()
         self.back = self.__align_top()
+        self.remove = self.__align_top()
         self.networkStatus = self.__align_top()
 
         self.networkSettingsR = self.__align_right()
@@ -41,6 +43,7 @@ class UiForm(SetupForm):
         self.exit.labelText.setText(translator("Exit"))
         self.copy.labelText.setText(translator("Copy"))
         self.back.labelText.setText(translator("Back"))
+        self.remove.labelText.setText(translator("Remove"))
         self.networkStatus.labelText.setText(translator("Network Connection Status"))
 
         self.networkSettingsR.labelText.setText(translator("Network settings to add a new and switching."))
@@ -57,6 +60,7 @@ class UiForm(SetupForm):
         self.exit.labelText.setFont(font)
         self.copy.labelText.setFont(font)
         self.back.labelText.setFont(font)
+        self.remove.labelText.setFont(font)
         self.networkStatus.labelText.setFont(font)
 
         self.networkSettingsR.labelText.setFont(font)
