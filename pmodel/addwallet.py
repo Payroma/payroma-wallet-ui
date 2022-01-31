@@ -8,7 +8,6 @@ class AddWalletModel(addwallet.UiForm):
         super(AddWalletModel, self).__init__(parent)
 
         self.setup()
-        self.reset()
 
     @pyqtSlot()
     def back_clicked(self):

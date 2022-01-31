@@ -8,7 +8,6 @@ class AddNetworkModel(addnetwork.UiForm):
         super(AddNetworkModel, self).__init__(parent)
 
         self.setup()
-        self.reset()
 
     @pyqtSlot()
     def back_clicked(self):
