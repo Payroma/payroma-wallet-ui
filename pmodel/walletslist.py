@@ -1,6 +1,7 @@
 from plibs import *
 from pheader import *
 from pui import walletslist
+from pmodel import walletitem
 
 
 class WalletsListModel(walletslist.UiForm):
