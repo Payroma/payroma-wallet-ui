@@ -1,0 +1,9 @@
+NetworkItem
+{
+	background-color: @background;
+	border-radius: 5px;
+}
+NetworkItem:hover
+{
+	background-color: @background_second;
+}

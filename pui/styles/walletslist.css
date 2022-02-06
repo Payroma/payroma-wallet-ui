@@ -3,6 +3,10 @@ WalletItem
 	background-color: @background;
 	border-radius: 5px;
 }
+WalletItem:hover
+{
+	background-color: @background_second;
+}
 
 
 #lineEditSearch

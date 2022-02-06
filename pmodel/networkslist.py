@@ -1,6 +1,7 @@
 from plibs import *
 from pheader import *
 from pui import networkslist
+from pmodel import networkitem
 
 
 class NetworksListModel(networkslist.UiForm):

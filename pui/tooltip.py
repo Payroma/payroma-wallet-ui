@@ -32,6 +32,7 @@ class UiForm(SetupForm):
         self.copyR = None
         self.favoriteR = None
         self.walletStatusR = None
+        self.networkStatusR = None
 
     def setup(self):
         self.settings = self.__align_top()
@@ -59,6 +60,7 @@ class UiForm(SetupForm):
         self.copyR = self.__align_right()
         self.favoriteR = self.__align_right()
         self.walletStatusR = self.__align_right()
+        self.networkStatusR = self.__align_right()
 
         super(UiForm, self).setup()
 
@@ -98,6 +100,7 @@ class UiForm(SetupForm):
         self.copyR.labelText.setText(translator("Copy"))
         self.favoriteR.labelText.setText(translator("Check to Favorite"))
         self.walletStatusR.labelText.setText(translator("Wallet connection status"))
+        self.networkStatusR.labelText.setText(translator("Network connection status"))
 
     def re_font(self):
         font = QFont()
@@ -127,6 +130,7 @@ class UiForm(SetupForm):
         self.copyR.labelText.setFont(font)
         self.favoriteR.labelText.setFont(font)
         self.walletStatusR.labelText.setFont(font)
+        self.networkStatusR.labelText.setFont(font)
 
     def __align_top(self) -> SPGraphics.QuickToolTip:
         return SPGraphics.QuickToolTip(

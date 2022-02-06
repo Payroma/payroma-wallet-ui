@@ -39,6 +39,7 @@ class Dir:
     DATABASE = 'database'
     TEMP = 'temp'
     LOGS = 'logs'
+    ASSETS = 'assets'
 
 
 # Settings Options  // Set settings options here
