@@ -77,7 +77,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonSkip = SPGraphics.QuickPushButton(
-            self, fixed_size=QSize(151, 31), value_changed=QObject.mainModel.textColorAnimated,
+            self, fixed_size=QSize(151, 51), value_changed=QObject.mainModel.textColorAnimated,
             start_value=styles.data.colors.disabled, end_value=styles.data.colors.highlight
         )
         self.__pushButtonSkip.clicked.connect(self.skip_clicked)
@@ -119,9 +119,12 @@ class UiForm(QWidget, SetupForm):
         self.__strengthBar.setFontSize(fonts.data.size.small)
 
         font.setPointSize(fonts.data.size.title)
-        font.setBold(True)
-        self.__pushButtonLogin.setFont(font)
+        font.setUnderline(True)
         self.__pushButtonSkip.setFont(font)
+
+        font.setBold(True)
+        font.setUnderline(False)
+        self.__pushButtonLogin.setFont(font)
 
         font.setPointSize(fonts.data.size.large)
         self.__labelUsername.setFont(font)

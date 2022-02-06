@@ -7,11 +7,11 @@ class GlobalEvents:
     loginChanged = None
 
 
-class LoginItem(login.UiForm):
+class LoginModel(login.UiForm):
     QObject.loginModel = GlobalEvents()
 
     def __init__(self, parent):
-        super(LoginItem, self).__init__(parent)
+        super(LoginModel, self).__init__(parent)
 
         self.setup()
 
@@ -21,6 +21,17 @@ class LoginItem(login.UiForm):
     @pyqtSlot()
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
+
+    @pyqtSlot(str)
+    def password_changed(self, text: str, valid: bool = False):
+        if text:
+            valid = True
+
+        super(LoginModel, self).password_changed(text, valid)
+
+    @pyqtSlot()
+    def login_clicked(self):
+        QObject.mainModel.currentTabChanged(Tab.AUTHENTICATOR)
 
     def login_changed(self, username: str, address: str):
         self.set_username(username)

@@ -15,7 +15,7 @@ IS_MAC = (OS_TYPE == 'darwin')
 
 
 # Application info
-SOFTWARE_NAME = 'Payroma Wallet'
+SOFTWARE_NAME = 'Payroma'
 VERSION = 'Decentralized Wallet v2.2022-02'
 SECRET_VALUE = (
     # Set the application password here
@@ -63,4 +63,5 @@ class Tab:
     SETTINGS = 'settingsModel'
     NETWORKS_LIST = 'networksListModel'
     ADD_NETWORK = 'addNetworkModel'
-    LOGIN = 'LOGIN'
+    LOGIN = 'LoginModel'
+    AUTHENTICATOR = 'AuthenticatorModel'
