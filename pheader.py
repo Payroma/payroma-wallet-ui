@@ -63,3 +63,4 @@ class Tab:
     SETTINGS = 'settingsModel'
     NETWORKS_LIST = 'networksListModel'
     ADD_NETWORK = 'addNetworkModel'
+    LOGIN = 'LOGIN'

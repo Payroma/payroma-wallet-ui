@@ -144,3 +144,11 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
             styles.data.colors.disabled.name()
         )
         sender.parent().setStyleSheet(css)
+
+    def text_color_animate(self, value: QColor):
+        sender = self.sender()
+        if not isinstance(sender, QVariantAnimation):
+            return
+
+        css = 'color: rgba%s;' % str(value.getRgb())
+        sender.parent().setStyleSheet(css)

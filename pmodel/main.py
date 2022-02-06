@@ -7,12 +7,14 @@ from pmodel.addwallet import AddWalletModel
 from pmodel.settings import SettingsModel
 from pmodel.networkslist import NetworksListModel
 from pmodel.addnetwork import AddNetworkModel
+from pmodel.login import LoginItem
 
 
 class GlobalEvents:
     currentTabChanged = None
     themeModeChanged = None
     backgroundColorAnimated = None
+    textColorAnimated = None
 
 
 class MainModel(main.UiForm):
@@ -27,6 +29,7 @@ class MainModel(main.UiForm):
         QObject.mainModel.currentTabChanged = self.set_current_tab
         QObject.mainModel.themeModeChanged = self.set_theme_mode
         QObject.mainModel.backgroundColorAnimated = self.background_color_animate
+        QObject.mainModel.textColorAnimated = self.text_color_animate
 
         # Tabs
         self.add_tab(WalletsListModel(self), Tab.WALLETS_LIST)
@@ -34,6 +37,7 @@ class MainModel(main.UiForm):
         self.add_tab(SettingsModel(self), Tab.SETTINGS)
         self.add_tab(NetworksListModel(self), Tab.NETWORKS_LIST)
         self.add_tab(AddNetworkModel(self), Tab.ADD_NETWORK)
+        self.add_tab(LoginItem(self), Tab.LOGIN)
 
     @pyqtSlot()
     def settings_clicked(self):
