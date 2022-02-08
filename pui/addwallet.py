@@ -57,7 +57,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__lineEditUsername = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.defaultLineEdit, layout_support=True, length=40
+            self, fixed_size=Size.default, layout_support=True, length=40
         )
         self.__lineEditUsername.setValidator(validator.username)
         self.__lineEditUsername.textChanged.connect(self.username_changed)
@@ -79,7 +79,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelUsernameAlert.hide()
 
         self.__lineEditPassword = SPGraphics.QuickLineEdit(
-            self, mode=QLineEdit.Password, fixed_size=Size.defaultLineEdit, layout_support=True
+            self, mode=QLineEdit.Password, fixed_size=Size.default, layout_support=True
         )
         self.__lineEditPassword.textChanged.connect(self.password_changed)
 
@@ -102,7 +102,7 @@ class UiForm(QWidget, SetupForm):
         self.__strengthBar.setFixedSize(QSize(301, 21))
 
         self.__lineEditConfirmPassword = SPGraphics.QuickLineEdit(
-            self, mode=QLineEdit.Password, fixed_size=Size.defaultLineEdit, layout_support=True
+            self, mode=QLineEdit.Password, fixed_size=Size.default, layout_support=True
         )
         self.__lineEditConfirmPassword.textChanged.connect(self.confirm_password_changed)
 
@@ -122,7 +122,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelConfirmPasswordAlert.hide()
 
         self.__lineEditPINCode = SPGraphics.QuickLineEdit(
-            self, mode=QLineEdit.Password, fixed_size=Size.defaultLineEdit, layout_support=True, length=6
+            self, mode=QLineEdit.Password, fixed_size=Size.default, layout_support=True, length=6
         )
         self.__lineEditPINCode.setValidator(validator.number)
         self.__lineEditPINCode.textChanged.connect(self.pin_code_changed)
@@ -148,7 +148,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelPINCodeAlert.hide()
 
         self.__lineEditAddress = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.defaultLineEdit, layout_support=True, length=42
+            self, fixed_size=Size.default, layout_support=True, length=42
         )
         self.__lineEditAddress.setValidator(validator.address)
         self.__lineEditAddress.textChanged.connect(self.address_changed)
@@ -170,7 +170,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelAddressAlert.hide()
 
         self.__pushButtonAdd = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.defaultLineEdit, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonAdd.setLayout(QVBoxLayout())

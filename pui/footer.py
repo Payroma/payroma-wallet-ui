@@ -46,7 +46,7 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_style(self):
-        self.labelAddressDonate.set_icon(QIcon(images.data.icons.changeable.copy21))
+        self.labelAddressDonate.setIcon(QIcon(images.data.icons.changeable.copy21))
 
     def re_translate(self):
         self.labelDonate.setText(translator("Donate"))
@@ -62,4 +62,4 @@ class UiForm(QWidget, SetupForm):
 
         font.setBold(True)
         font.setUnderline(False)
-        self.labelAddressDonate.set_font(font)
+        self.labelAddressDonate.setFont(font)

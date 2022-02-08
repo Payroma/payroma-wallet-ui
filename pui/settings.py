@@ -71,7 +71,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonBackup = SPGraphics.QuickPushButton(
-            self, fixed_size=QSize(301, 51), value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonBackup.setLayout(QVBoxLayout())
@@ -83,7 +83,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonImport = SPGraphics.QuickPushButton(
-            self, fixed_size=QSize(301, 51), value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonImport.setLayout(QVBoxLayout())

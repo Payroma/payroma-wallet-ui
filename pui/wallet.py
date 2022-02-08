@@ -149,7 +149,7 @@ class UiForm(QWidget, SetupForm):
         self.setStyleSheet(styles.data.css.wallet)
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__pushButtonMenu.setIcon(QIcon(images.data.icons.changeable.dots21))
-        self.__labelAddress.set_icon(QIcon(images.data.icons.changeable.copy21))
+        self.__labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
         self.__pushButtonDeposit.setIcon(QIcon(images.data.icons.changeable.deposit24))
         self.__pushButtonWithdraw.setIcon(QIcon(images.data.icons.changeable.withdraw24))
         self.__pushButtonStake.setIcon(QIcon(images.data.icons.changeable.stake24))
@@ -171,7 +171,7 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonExplorer.setFont(font)
         self.__pushButtonRemove.setFont(font)
         self.__pushButtonLogout.setFont(font)
-        self.__labelAddress.set_font(font)
+        self.__labelAddress.setFont(font)
 
         font.setPointSize(fonts.data.size.average)
         font.setBold(True)
@@ -246,8 +246,8 @@ class UiForm(QWidget, SetupForm):
         self.__labelUsername.setText(text)
 
     def set_address(self, text: str):
-        self.__labelAddress.set_address(text, False)
+        self.__labelAddress.setText(text, is_ellipsis=False)
 
     def reset(self):
         self.__labelUsername.clear()
-        self.__labelAddress.label.clear()
+        self.__labelAddress.clear()

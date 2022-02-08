@@ -129,7 +129,7 @@ class UiForm(QWidget, SetupForm):
                 continue
 
             widget = self.__listWidget.itemWidget(item)
-            if text in widget.get_username().lower() or text in widget.get_address().lower():
+            if text in widget.get_username().lower() or text in widget.text().lower():
                 item.setHidden(False)
             else:
                 item.setHidden(True)

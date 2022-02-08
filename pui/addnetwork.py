@@ -40,7 +40,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__lineEditName = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.defaultLineEdit, layout_support=True, length=40
+            self, fixed_size=Size.default, layout_support=True, length=40
         )
         self.__lineEditName.textChanged.connect(self.name_changed)
 
@@ -52,7 +52,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelNameAlert.hide()
 
         self.__lineEditRPC = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.defaultLineEdit, layout_support=True, length=200
+            self, fixed_size=Size.default, layout_support=True, length=200
         )
         self.__lineEditRPC.setValidator(validator.url)
         self.__lineEditRPC.textChanged.connect(self.rpc_changed)
@@ -65,13 +65,13 @@ class UiForm(QWidget, SetupForm):
         self.__labelRPCAlert.hide()
 
         self.__lineEditSymbol = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.defaultLineEdit, length=20
+            self, fixed_size=Size.default, length=20
         )
         self.__lineEditSymbol.setValidator(validator.symbol)
         self.__lineEditSymbol.textChanged.connect(self.symbol_changed)
 
         self.__lineEditChainId = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.defaultLineEdit, layout_support=True, length=10
+            self, fixed_size=Size.default, layout_support=True, length=10
         )
         self.__lineEditChainId.setValidator(validator.number)
         self.__lineEditChainId.textChanged.connect(self.chain_id_changed)
@@ -84,7 +84,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelChainIdAlert.hide()
 
         self.__lineEditExplorer = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.defaultLineEdit, layout_support=True, length=200
+            self, fixed_size=Size.default, layout_support=True, length=200
         )
         self.__lineEditExplorer.setValidator(validator.url)
         self.__lineEditExplorer.textChanged.connect(self.explorer_changed)
@@ -97,7 +97,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelExplorerAlert.hide()
 
         self.__pushButtonAdd = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.defaultLineEdit, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonAdd.setLayout(QVBoxLayout())

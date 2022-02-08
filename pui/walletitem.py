@@ -61,12 +61,12 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         favorite_icon.addPixmap(images.data.icons.changeable.favorite21, QIcon.Normal, QIcon.Off)
         favorite_icon.addPixmap(images.data.icons.favorite_checked21, QIcon.Normal, QIcon.On)
         self.__checkboxFavorite.setIcon(favorite_icon)
-        self.__labelAddress.set_icon(QIcon(images.data.icons.changeable.copy21))
+        self.__labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
 
     def re_font(self):
         font = QFont()
 
-        self.__labelAddress.set_font(font)
+        self.__labelAddress.setFont(font)
 
         font.setPointSize(fonts.data.size.average)
         font.setBold(True)
@@ -80,13 +80,13 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         return self.__labelUsername.text()
 
     def get_address(self) -> str:
-        return self.__labelAddress.get_address()
+        return self.__labelAddress.text()
 
     def set_username(self, text: str):
         self.__labelUsername.setText(text)
 
     def set_address(self, text: str):
-        self.__labelAddress.set_address(text)
+        self.__labelAddress.setText(text)
 
     def set_favorite(self, state: bool):
         self.__checkboxFavorite.setChecked(state)

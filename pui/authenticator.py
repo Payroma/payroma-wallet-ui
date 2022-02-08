@@ -107,7 +107,7 @@ class UiForm(QWidget, SetupForm):
         self.__lineEdit6.textChanged.connect(self.__line_edit_auto_cursor_move)
 
         self.__pushButtonConfirm = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.defaultLineEdit, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonConfirm.setLayout(QVBoxLayout())

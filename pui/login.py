@@ -48,7 +48,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__lineEditPassword = SPGraphics.QuickLineEdit(
-            self, mode=QLineEdit.Password, fixed_size=Size.defaultLineEdit, layout_support=True
+            self, mode=QLineEdit.Password, fixed_size=Size.default, layout_support=True
         )
         self.__lineEditPassword.textChanged.connect(self.password_changed)
 
@@ -64,7 +64,7 @@ class UiForm(QWidget, SetupForm):
         self.__strengthBar.setFixedSize(QSize(301, 21))
 
         self.__pushButtonLogin = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.defaultLineEdit, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonLogin.setLayout(QVBoxLayout())
@@ -102,7 +102,7 @@ class UiForm(QWidget, SetupForm):
     def re_style(self):
         self.setStyleSheet(styles.data.css.login)
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
-        self.__labelAddress.set_icon(QIcon(images.data.icons.changeable.copy21))
+        self.__labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
         self.__labelPasswordIcon.setPixmap(images.data.icons.changeable.key21)
         self.__pushButtonPasswordEye.setIcon(QIcon(images.data.icons.changeable.eye_visible21))
 
@@ -114,7 +114,7 @@ class UiForm(QWidget, SetupForm):
     def re_font(self):
         font = QFont()
 
-        self.__labelAddress.set_font(font)
+        self.__labelAddress.setFont(font)
         self.__lineEditPassword.setFont(font)
         self.__strengthBar.setFontSize(fonts.data.size.small)
 
@@ -159,12 +159,12 @@ class UiForm(QWidget, SetupForm):
         self.__labelUsername.setText(text)
 
     def set_address(self, text: str):
-        self.__labelAddress.set_address(text, False)
+        self.__labelAddress.setText(text, is_ellipsis=False)
 
     def reset(self):
         self.__all_inputs_disabled(False)
         self.__labelUsername.clear()
-        self.__labelAddress.label.clear()
+        self.__labelAddress.clear()
         self.__lineEditPassword.clear()
 
     def __inputs_validation(self):
