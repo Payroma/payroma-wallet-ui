@@ -1,6 +1,7 @@
 from plibs import *
 from pheader import *
 from pui import wallet
+from pmodel.tokenslist import TokensListModel
 
 
 class GlobalEvents:
@@ -17,6 +18,9 @@ class WalletModel(wallet.UiForm):
 
         # Events
         QObject.walletModel.walletChanged = self.wallet_changed
+
+        # Tabs
+        self.add_tab(TokensListModel(self), Tab.WalletTab.TOKENS_LIST)
 
     @pyqtSlot()
     def back_clicked(self):
