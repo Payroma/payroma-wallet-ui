@@ -11,6 +11,7 @@ DEFAULT = {
             'settings21': QPixmap(':/images/icons/light/settings-21.png'),
             'close21': QPixmap(':/images/icons/light/close-21.png'),
             'arrow_left21': QPixmap(':/images/icons/light/arrow-left-21.png'),
+            'arrow_less_left21': QPixmap(':/images/icons/light/arrow-less-left-21.png'),
             'plus21': QPixmap(':/images/icons/light/plus-21.png'),
             'favorite21': QPixmap(':/images/icons/light/favorite-21.png'),
             'key21': QPixmap(':/images/icons/light/key-21.png'),

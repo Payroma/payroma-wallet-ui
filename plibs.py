@@ -22,6 +22,7 @@ import struct
 import psutil
 import hashlib
 import platform
+import pyqrcode
 import SPCrypto
 import SPSecurity
 import SPSettings

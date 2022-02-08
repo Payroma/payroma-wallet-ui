@@ -2,10 +2,12 @@ from plibs import *
 from pheader import *
 from pui import wallet
 from pmodel.tokenslist import TokensListModel
+from pmodel.walletdetails import WalletDetailsModel
 
 
 class GlobalEvents:
     walletChanged = None
+    currentTabChanged = None
 
 
 class WalletModel(wallet.UiForm):
@@ -18,14 +20,24 @@ class WalletModel(wallet.UiForm):
 
         # Events
         QObject.walletModel.walletChanged = self.wallet_changed
+        QObject.walletModel.currentTabChanged = self.set_current_tab
 
         # Tabs
-        self.add_tab(TokensListModel(self), Tab.WalletTab.TOKENS_LIST)
+        self.tokensListModel = TokensListModel(self)
+        self.walletDetailsModel = WalletDetailsModel(self)
+
+        self.add_tab(self.tokensListModel, Tab.WalletTab.TOKENS_LIST)
+        self.add_tab(self.walletDetailsModel, Tab.WalletTab.WALLET_DETAILS)
 
     @pyqtSlot()
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
 
+    def details_clicked(self):
+        super(WalletModel, self).details_clicked()
+        self.set_current_tab(Tab.WalletTab.WALLET_DETAILS)
+
     def wallet_changed(self, username: str, address: str):
         self.set_username(username)
         self.set_address(address)
+        self.walletDetailsModel.set_address(address)

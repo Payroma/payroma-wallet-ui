@@ -69,3 +69,4 @@ class Tab:
 
     class WalletTab:
         TOKENS_LIST = 'tokensList'
+        WALLET_DETAILS = 'walletDetails'
