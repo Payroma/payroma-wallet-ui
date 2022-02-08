@@ -1,0 +1,11 @@
+TokenWidget
+{
+    background: transparent;
+	border-top: 1px solid @line;
+}
+
+
+#headerWidget
+{
+	background-color: @background_second;
+}

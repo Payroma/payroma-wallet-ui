@@ -63,5 +63,6 @@ class Tab:
     SETTINGS = 'settingsModel'
     NETWORKS_LIST = 'networksListModel'
     ADD_NETWORK = 'addNetworkModel'
-    LOGIN = 'LoginModel'
-    AUTHENTICATOR = 'AuthenticatorModel'
+    LOGIN = 'loginModel'
+    AUTHENTICATOR = 'authenticatorModel'
+    WALLET = 'walletModel'

@@ -1,0 +1,21 @@
+QPushButton
+{
+	color: @white;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0px;
+}
+QPushButton::hover
+{
+	background-color: @white_a10;
+}
+
+
+#mainWidget,
+#shadowWidget
+{
+    background-color: %s;
+    border-radius: 10px;
+    padding: 10px;
+}

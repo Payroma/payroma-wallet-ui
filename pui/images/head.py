@@ -28,7 +28,12 @@ DEFAULT = {
             'external21': QPixmap(':/images/icons/light/external-21.png'),
             'time21': QPixmap(':/images/icons/light/time-21.png'),
             'cross31': QPixmap(':/images/icons/light/cross-31.png'),
-            'change21': QPixmap(':/images/icons/light/change-21.png')
+            'change21': QPixmap(':/images/icons/light/change-21.png'),
+            'history24': QPixmap(':/images/icons/light/history-24.png'),
+            'deposit24': QPixmap(':/images/icons/light/deposit-24.png'),
+            'withdraw24': QPixmap(':/images/icons/light/withdraw-24.png'),
+            'stake24': QPixmap(':/images/icons/light/stake-24.png'),
+            'swap24': QPixmap(':/images/icons/light/swap-24.png')
         },
 
         'info41': QPixmap(':/images/icons/info-41.png'),
@@ -49,7 +54,7 @@ DEFAULT = {
         'receive24': QPixmap(':/images/icons/receive-24.png'),
         'approve24': QPixmap(':/images/icons/approve-24.png'),
         'plus21': QPixmap(':/images/icons/plus-21.png'),
-        'lock21': QPixmap(':/images/icons/lock-21.png'),
+        'logout21': QPixmap(':/images/icons/logout-21.png'),
         'arrow_right21': QPixmap(':/images/icons/arrow-right-21.png')
     },
 

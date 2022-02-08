@@ -33,6 +33,13 @@ class UiForm(SetupForm):
         self.favoriteR = None
         self.walletStatusR = None
         self.networkStatusR = None
+        self.menu = None
+
+        self.depositB = None
+        self.withdrawB = None
+        self.stakeB = None
+        self.swapB = None
+        self.historyB = None
 
     def setup(self):
         self.settings = self.__align_top()
@@ -61,6 +68,13 @@ class UiForm(SetupForm):
         self.favoriteR = self.__align_right()
         self.walletStatusR = self.__align_right()
         self.networkStatusR = self.__align_right()
+        self.menu = self.__align_right()
+
+        self.depositB = self.__align_bottom()
+        self.withdrawB = self.__align_bottom()
+        self.stakeB = self.__align_bottom()
+        self.swapB = self.__align_bottom()
+        self.historyB = self.__align_bottom()
 
         super(UiForm, self).setup()
 
@@ -101,6 +115,13 @@ class UiForm(SetupForm):
         self.favoriteR.labelText.setText(translator("Check to Favorite"))
         self.walletStatusR.labelText.setText(translator("Wallet connection status"))
         self.networkStatusR.labelText.setText(translator("Network connection status"))
+        self.menu.labelText.setText(translator("Menu"))
+
+        self.depositB.labelText.setText(translator("Deposit"))
+        self.withdrawB.labelText.setText(translator("Withdraw"))
+        self.stakeB.labelText.setText(translator("Staking"))
+        self.swapB.labelText.setText(translator("Swap"))
+        self.historyB.labelText.setText(translator("Transactions History"))
 
     def re_font(self):
         font = QFont()
@@ -131,6 +152,13 @@ class UiForm(SetupForm):
         self.favoriteR.labelText.setFont(font)
         self.walletStatusR.labelText.setFont(font)
         self.networkStatusR.labelText.setFont(font)
+        self.menu.labelText.setFont(font)
+
+        self.depositB.labelText.setFont(font)
+        self.withdrawB.labelText.setFont(font)
+        self.stakeB.labelText.setFont(font)
+        self.swapB.labelText.setFont(font)
+        self.historyB.labelText.setFont(font)
 
     def __align_top(self) -> SPGraphics.QuickToolTip:
         return SPGraphics.QuickToolTip(
@@ -141,4 +169,9 @@ class UiForm(SetupForm):
         return SPGraphics.QuickToolTip(
             self.__parent, text_align=Qt.AlignCenter, align=Qt.AlignRight,
             arrow_size=QSize(8, 15), margin=15
+        )
+
+    def __align_bottom(self) -> SPGraphics.QuickToolTip:
+        return SPGraphics.QuickToolTip(
+            self.__parent, text_align=Qt.AlignCenter, align=Qt.AlignBottom
         )
