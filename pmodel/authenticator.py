@@ -17,6 +17,10 @@ class AuthenticatorModel(authenticator.UiForm):
     def confirm_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.WALLET)
 
+    @pyqtSlot()
+    def forgot_clicked(self):
+        QObject.mainModel.currentTabChanged(Tab.AUTHENTICATOR_SETUP)
+
     def code_changed(self, text: str, valid: bool = False):
         if len(text) == 6:
             valid = True

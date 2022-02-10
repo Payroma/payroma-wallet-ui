@@ -27,7 +27,7 @@ class UiForm(SPGraphics.QuickListWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_translate(self):
-        self.labelTitle.setText(translator("No token has been added yet!"))
+        self.labelTitle.setText(translator("No tokens has been added yet!"))
         self.labelDescription.setText(translator(
             "Let's add your first token today, click on Menu + \"Add Token\" button."
         ))

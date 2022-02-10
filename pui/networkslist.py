@@ -52,7 +52,7 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonAddNew.setIcon(QIcon(images.data.icons.changeable.plus21))
 
     def re_translate(self):
-        self.__listWidget.labelTitle.setText(translator("No network has been added yet!"))
+        self.__listWidget.labelTitle.setText(translator("No networks has been added yet!"))
         self.__listWidget.labelDescription.setText(translator(
             "Let's add your first network today, click on \"+\" button. It's easy."
         ))

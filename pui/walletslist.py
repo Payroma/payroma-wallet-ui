@@ -74,7 +74,7 @@ class UiForm(QWidget, SetupForm):
 
     def re_translate(self):
         self.__lineEditSearch.setPlaceholderText(translator("Search"))
-        self.__listWidget.labelTitle.setText(translator("No wallet has been added yet!"))
+        self.__listWidget.labelTitle.setText(translator("No wallets has been added yet!"))
         self.__listWidget.labelDescription.setText(translator(
             "Let's add your first wallet today, click on \"+\" button. It's easy."
         ))

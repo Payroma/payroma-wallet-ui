@@ -1,0 +1,12 @@
+#progressDownloadWidget,
+#progressVerificationWidget,
+#progressScanWidget
+{
+	background-color: @positive;
+}
+#progressDownloadWidget:disabled,
+#progressVerificationWidget:disabled,
+#progressScanWidget:disabled
+{
+	background-color: @disabled;
+}

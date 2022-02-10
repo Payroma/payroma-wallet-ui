@@ -65,6 +65,7 @@ class Tab:
     ADD_NETWORK = 'addNetworkModel'
     LOGIN = 'loginModel'
     AUTHENTICATOR = 'authenticatorModel'
+    AUTHENTICATOR_SETUP = 'authenticatorSetupModel'
     WALLET = 'walletModel'
     STAKE_LIST = 'stakeListModel'
 
