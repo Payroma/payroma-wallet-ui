@@ -8,3 +8,6 @@ class AuthenticatorDownloadModel(authenticatordownload.UiForm):
         super(AuthenticatorDownloadModel, self).__init__(parent)
 
         self.setup()
+
+    def next_clicked(self):
+        QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.VERIFICATION)

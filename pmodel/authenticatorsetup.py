@@ -2,6 +2,7 @@ from plibs import *
 from pheader import *
 from pui import authenticatorsetup
 from pmodel.authenticatordownload import AuthenticatorDownloadModel
+from pmodel.authenticatorverification import AuthenticatorVerificationModel
 
 
 class GlobalEvents:
@@ -22,8 +23,10 @@ class AuthenticatorSetupModel(authenticatorsetup.UiForm):
 
         # Tabs
         self.authenticatorDownloadModel = AuthenticatorDownloadModel(self)
+        self.authenticatorVerificationModel = AuthenticatorVerificationModel(self)
 
         self.add_tab(self.authenticatorDownloadModel, Tab.AuthenticatorSetupTab.DOWNLOAD)
+        self.add_tab(self.authenticatorVerificationModel, Tab.AuthenticatorSetupTab.VERIFICATION)
 
     @pyqtSlot()
     def back_clicked(self):

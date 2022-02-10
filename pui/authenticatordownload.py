@@ -26,7 +26,7 @@ class UiForm(QWidget, SetupForm):
         self.layout().setAlignment(Qt.AlignCenter)
         self.layout().setContentsMargins(11, 0, 11, 0)
         self.layout().setVerticalSpacing(11)
-        self.setObjectName(Tab.WalletTab.WALLET_DETAILS)
+        self.setObjectName(Tab.AuthenticatorSetupTab.DOWNLOAD)
 
         self.__labelTitle = SPGraphics.QuickLabel(
             self, fixed_height=21, align=Qt.AlignCenter
@@ -84,13 +84,13 @@ class UiForm(QWidget, SetupForm):
         self.layout().addWidget(self.__labelAuthy, 4, 0, 1, 2)
         self.layout().addWidget(self.__pushButtonAuthy, 5, 0, 1, 1, Qt.AlignHCenter)
         self.layout().addWidget(self.__lineWidget, 6, 0, 1, 2)
-        self.layout().addWidget(self.__pushButtonNext, 7, 0, 1, 2, Qt.AlignBottom | Qt.AlignHCenter)
+        self.layout().addWidget(self.__pushButtonNext, 7, 0, 1, 2, Qt.AlignHCenter)
 
         super(UiForm, self).setup()
 
     def re_translate(self):
-        self.__labelTitle.setText(translator("Download and Install App"))
-        self.__labelDescription.setText(translator("Choose an authenticator application to download."))
+        self.__labelTitle.setText(translator("Two-Factor Authentication"))
+        self.__labelDescription.setText(translator("Choose the authenticator application to download."))
         self.__labelGoogle.setText(translator("1 - Google Authenticator"))
         self.__labelAuthy.setText(translator("2 - Authy"))
         self.__pushButtonNext.setText(translator("Next"))
@@ -98,8 +98,9 @@ class UiForm(QWidget, SetupForm):
     def re_font(self):
         font = QFont()
 
-        font.setPointSize(fonts.data.size.title)
         self.__labelDescription.setFont(font)
+
+        font.setPointSize(fonts.data.size.title)
         self.__labelGoogle.setFont(font)
         self.__labelAuthy.setFont(font)
 

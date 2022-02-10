@@ -126,7 +126,7 @@ class UiForm(QWidget, SetupForm):
         font.setUnderline(False)
         self.__pushButtonLogin.setFont(font)
 
-        font.setPointSize(fonts.data.size.large)
+        font.setPointSize(fonts.data.size.medium)
         self.__labelUsername.setFont(font)
 
     @pyqtSlot()

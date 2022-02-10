@@ -76,3 +76,4 @@ class Tab:
 
     class AuthenticatorSetupTab:
         DOWNLOAD = 'authenticatorDownloadModel'
+        VERIFICATION = 'authenticatorVerificationModel'
