@@ -121,7 +121,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__pushButtonForgot = SPGraphics.QuickPushButton(
             self, fixed_size=QSize(301, 31), value_changed=QObject.mainModel.textColorAnimated,
-            start_value=styles.data.colors.disabled, end_value=styles.data.colors.highlight
+            start_value=styles.data.colors.disabled_font, end_value=styles.data.colors.highlight
         )
         self.__pushButtonForgot.clicked.connect(self.forgot_clicked)
 

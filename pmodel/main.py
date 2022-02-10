@@ -10,6 +10,7 @@ from pmodel.addnetwork import AddNetworkModel
 from pmodel.login import LoginModel
 from pmodel.authenticator import AuthenticatorModel
 from pmodel.wallet import WalletModel
+from pmodel.stakelist import StakeListModel
 
 
 class GlobalEvents:
@@ -42,6 +43,7 @@ class MainModel(main.UiForm):
         self.add_tab(LoginModel(self), Tab.LOGIN)
         self.add_tab(AuthenticatorModel(self), Tab.AUTHENTICATOR)
         self.add_tab(WalletModel(self), Tab.WALLET)
+        self.add_tab(StakeListModel(self), Tab.STAKE_LIST)
 
     @pyqtSlot()
     def settings_clicked(self):

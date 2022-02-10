@@ -78,7 +78,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__pushButtonSkip = SPGraphics.QuickPushButton(
             self, fixed_size=QSize(151, 51), value_changed=QObject.mainModel.textColorAnimated,
-            start_value=styles.data.colors.disabled, end_value=styles.data.colors.highlight
+            start_value=styles.data.colors.disabled_font, end_value=styles.data.colors.highlight
         )
         self.__pushButtonSkip.clicked.connect(self.skip_clicked)
 

@@ -66,6 +66,7 @@ class Tab:
     LOGIN = 'loginModel'
     AUTHENTICATOR = 'authenticatorModel'
     WALLET = 'walletModel'
+    STAKE_LIST = 'stakeListModel'
 
     class WalletTab:
         TOKENS_LIST = 'tokensListModel'

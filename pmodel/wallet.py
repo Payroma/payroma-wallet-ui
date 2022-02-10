@@ -36,6 +36,10 @@ class WalletModel(wallet.UiForm):
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
 
+    @pyqtSlot()
+    def stake_clicked(self):
+        QObject.mainModel.currentTabChanged(Tab.STAKE_LIST)
+
     def details_clicked(self):
         super(WalletModel, self).details_clicked()
         self.set_current_tab(Tab.WalletTab.WALLET_DETAILS)

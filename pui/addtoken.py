@@ -111,7 +111,7 @@ class UiForm(QWidget, SetupForm):
         font.setBold(True)
         self.__pushButtonAdd.setFont(font)
 
-        font.setPointSize(fonts.data.size.medium)
+        font.setPointSize(fonts.data.size.average)
         self.__labelTitle.setFont(font)
 
     @pyqtSlot()

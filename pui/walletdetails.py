@@ -82,7 +82,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelPrivateKey.setFont(font)
 
-        font.setPointSize(fonts.data.size.medium)
+        font.setPointSize(fonts.data.size.average)
         font.setBold(True)
         self.__labelAddressTitle.setFont(font)
 
