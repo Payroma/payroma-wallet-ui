@@ -20,7 +20,7 @@ class UiForm(QWidget, SetupForm):
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QGridLayout())
         self.layout().setAlignment(Qt.AlignCenter)
-        self.layout().setContentsMargins(21, 0, 21, 0)
+        self.layout().setContentsMargins(11, 0, 11, 0)
         self.layout().setSpacing(11)
         self.setObjectName(Tab.WalletTab.WALLET_DETAILS)
 

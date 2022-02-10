@@ -3,6 +3,7 @@ from pheader import *
 from pui import wallet
 from pmodel.tokenslist import TokensListModel
 from pmodel.walletdetails import WalletDetailsModel
+from pmodel.addtoken import AddTokenModel
 
 
 class GlobalEvents:
@@ -25,9 +26,11 @@ class WalletModel(wallet.UiForm):
         # Tabs
         self.tokensListModel = TokensListModel(self)
         self.walletDetailsModel = WalletDetailsModel(self)
+        self.addTokenModel = AddTokenModel(self)
 
         self.add_tab(self.tokensListModel, Tab.WalletTab.TOKENS_LIST)
         self.add_tab(self.walletDetailsModel, Tab.WalletTab.WALLET_DETAILS)
+        self.add_tab(self.addTokenModel, Tab.WalletTab.ADD_TOKEN)
 
     @pyqtSlot()
     def back_clicked(self):
@@ -36,6 +39,10 @@ class WalletModel(wallet.UiForm):
     def details_clicked(self):
         super(WalletModel, self).details_clicked()
         self.set_current_tab(Tab.WalletTab.WALLET_DETAILS)
+
+    def add_token_clicked(self):
+        super(WalletModel, self).add_token_clicked()
+        self.set_current_tab(Tab.WalletTab.ADD_TOKEN)
 
     def wallet_changed(self, username: str, address: str):
         self.set_username(username)

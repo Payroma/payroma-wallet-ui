@@ -129,7 +129,7 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
 
     def re_translate(self):
-        self.__labelTitle.setText(translator("Add a network"))
+        self.__labelTitle.setText(translator("Add a Network"))
         self.__lineEditName.setPlaceholderText(translator("Network Name"))
         self.__lineEditRPC.setPlaceholderText(translator("RPC URL"))
         self.__lineEditSymbol.setPlaceholderText(translator("Currency Symbol"))

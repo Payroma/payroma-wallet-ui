@@ -68,5 +68,6 @@ class Tab:
     WALLET = 'walletModel'
 
     class WalletTab:
-        TOKENS_LIST = 'tokensList'
-        WALLET_DETAILS = 'walletDetails'
+        TOKENS_LIST = 'tokensListModel'
+        WALLET_DETAILS = 'walletDetailsModel'
+        ADD_TOKEN = 'addTokenModel'
