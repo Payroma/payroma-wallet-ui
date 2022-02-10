@@ -10,3 +10,17 @@
 {
 	background-color: @disabled;
 }
+
+
+#pushButtonGooglePlay
+{
+	image: url(:/images/brands/google-play.png);
+}
+#pushButtonAppStore
+{
+	image: url(:/images/brands/app-store.png);
+}
+#pushButtonAuthy
+{
+	image: url(:/images/brands/authy.png);
+}

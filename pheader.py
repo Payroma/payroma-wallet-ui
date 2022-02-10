@@ -73,3 +73,6 @@ class Tab:
         TOKENS_LIST = 'tokensListModel'
         WALLET_DETAILS = 'walletDetailsModel'
         ADD_TOKEN = 'addTokenModel'
+
+    class AuthenticatorSetupTab:
+        DOWNLOAD = 'authenticatorDownloadModel'

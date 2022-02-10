@@ -1,6 +1,7 @@
 from plibs import *
 from pheader import *
 from pui import authenticatorsetup
+from pmodel.authenticatordownload import AuthenticatorDownloadModel
 
 
 class GlobalEvents:
@@ -8,7 +9,7 @@ class GlobalEvents:
 
 
 class AuthenticatorSetupModel(authenticatorsetup.UiForm):
-    QObject.walletModel = GlobalEvents()
+    QObject.authenticatorSetupModel = GlobalEvents()
 
     def __init__(self, parent):
         super(AuthenticatorSetupModel, self).__init__(parent)
@@ -17,7 +18,12 @@ class AuthenticatorSetupModel(authenticatorsetup.UiForm):
         self.reset()
 
         # Events
-        QObject.walletModel.currentTabChanged = self.set_current_tab
+        QObject.authenticatorSetupModel.currentTabChanged = self.set_current_tab
+
+        # Tabs
+        self.authenticatorDownloadModel = AuthenticatorDownloadModel(self)
+
+        self.add_tab(self.authenticatorDownloadModel, Tab.AuthenticatorSetupTab.DOWNLOAD)
 
     @pyqtSlot()
     def back_clicked(self):
