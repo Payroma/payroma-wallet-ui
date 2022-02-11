@@ -24,4 +24,4 @@ class AuthenticatorModel(authenticator.UiForm):
     def otp_code_changed(self, text: str, valid: bool = False):
         if len(text) == 6:
             valid = True
-        super(AuthenticatorModel, self).code_changed(text, valid)
+        super(AuthenticatorModel, self).otp_code_changed(text, valid)
