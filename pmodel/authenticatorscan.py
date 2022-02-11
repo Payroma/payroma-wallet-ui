@@ -16,6 +16,10 @@ class AuthenticatorScanModel(authenticatorscan.UiForm):
     def back_clicked(self):
         QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.VERIFICATION)
 
+    @pyqtSlot()
+    def confirm_clicked(self):
+        QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.FINISHED)
+
     def otp_code_changed(self, text: str, valid: bool = False):
         if len(text) == 6:
             valid = True

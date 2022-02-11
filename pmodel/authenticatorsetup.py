@@ -4,6 +4,7 @@ from pui import authenticatorsetup
 from pmodel.authenticatordownload import AuthenticatorDownloadModel
 from pmodel.authenticatorverification import AuthenticatorVerificationModel
 from pmodel.authenticatorscan import AuthenticatorScanModel
+from pmodel.authenticatorfinished import AuthenticatorFinishedModel
 
 
 class GlobalEvents:
@@ -26,10 +27,12 @@ class AuthenticatorSetupModel(authenticatorsetup.UiForm):
         self.authenticatorDownloadModel = AuthenticatorDownloadModel(self)
         self.authenticatorVerificationModel = AuthenticatorVerificationModel(self)
         self.authenticatorScanModel = AuthenticatorScanModel(self)
+        self.authenticatorFinishedModel = AuthenticatorFinishedModel(self)
 
         self.add_tab(self.authenticatorDownloadModel, Tab.AuthenticatorSetupTab.DOWNLOAD)
         self.add_tab(self.authenticatorVerificationModel, Tab.AuthenticatorSetupTab.VERIFICATION)
         self.add_tab(self.authenticatorScanModel, Tab.AuthenticatorSetupTab.SCAN)
+        self.add_tab(self.authenticatorFinishedModel, Tab.AuthenticatorSetupTab.FINISHED)
 
     @pyqtSlot()
     def back_clicked(self):

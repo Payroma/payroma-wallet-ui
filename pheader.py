@@ -78,3 +78,4 @@ class Tab:
         DOWNLOAD = 'authenticatorDownloadModel'
         VERIFICATION = 'authenticatorVerificationModel'
         SCAN = 'authenticatorScanModel'
+        FINISHED = 'authenticatorFinishedModel'

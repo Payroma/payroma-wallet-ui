@@ -63,7 +63,8 @@ DEFAULT = {
         'coin': QPixmap(':/images/illustrations/coin.png'),
         'no_data': QPixmap(':/images/illustrations/nodata.png'),
         'theme_status': QPixmap(':/images/illustrations/sun.png'),
-        'authenticator': QPixmap(':/images/illustrations/authenticator.png')
+        'authenticator': QPixmap(':/images/illustrations/authenticator.png'),
+        'done': QPixmap(':/images/illustrations/done.png')
     }
 
 }
