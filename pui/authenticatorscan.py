@@ -10,10 +10,10 @@ class UiForm(QWidget, SetupForm):
 
         self.__pushButtonBack = None
         self.__labelTitle = None
-        self.__labelQRDescription = None
+        self.__labelDescription = None
         self.__labelQR = None
-        self.__labelHashDescription = None
-        self.__labelHash = None
+        self.__labelQRDescription = None
+        self.__labelKey = None
         self.__labelInputTitle = None
         self.__inputsWidget = None
         self.__lineEdit1 = None
@@ -47,20 +47,20 @@ class UiForm(QWidget, SetupForm):
             self, fixed_height=21, align=Qt.AlignCenter
         )
 
-        self.__labelQRDescription = SPGraphics.QuickLabel(
+        self.__labelDescription = SPGraphics.QuickLabel(
             self, fixed_height=21, align=Qt.AlignHCenter
         )
-        self.__labelQRDescription.setWordWrap(False)
+        self.__labelDescription.setWordWrap(False)
 
         self.__labelQR = SPGraphics.QuickLabel(
             self, scaled=True, fixed_size=QSize(131, 131)
         )
 
-        self.__labelHashDescription = SPGraphics.QuickLabel(
+        self.__labelQRDescription = SPGraphics.QuickLabel(
             self, fixed_height=31
         )
 
-        self.__labelHash = qlabeladdress.QLabelAddress(
+        self.__labelKey = qlabeladdress.QLabelAddress(
             self, fixed_height=21, copy_tooltip=QObject.toolTip.copyR
         )
 
@@ -136,10 +136,10 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.raise_()
 
         self.layout().addWidget(self.__labelTitle, 0, 0, 1, 2)
-        self.layout().addWidget(self.__labelQRDescription, 1, 0, 1, 2)
+        self.layout().addWidget(self.__labelDescription, 1, 0, 1, 2)
         self.layout().addWidget(self.__labelQR, 3, 0, 2, 1)
-        self.layout().addWidget(self.__labelHashDescription, 3, 1, 1, 1, Qt.AlignVCenter)
-        self.layout().addWidget(self.__labelHash, 4, 1, 1, 1, Qt.AlignTop)
+        self.layout().addWidget(self.__labelQRDescription, 3, 1, 1, 1, Qt.AlignVCenter)
+        self.layout().addWidget(self.__labelKey, 4, 1, 1, 1, Qt.AlignTop)
         self.layout().addWidget(self.__labelInputTitle, 5, 0, 1, 2)
         self.layout().addWidget(self.__inputsWidget, 6, 0, 1, 2, Qt.AlignHCenter)
         self.layout().addWidget(self.__pushButtonConfirm, 7, 0, 1, 2, Qt.AlignHCenter)
@@ -156,28 +156,27 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_less_left21))
-        self.__labelHash.setIcon(QIcon(images.data.icons.changeable.copy21))
+        self.__labelKey.setIcon(QIcon(images.data.icons.changeable.copy21))
 
     def re_translate(self):
         self.__labelTitle.setText(translator("Scan QR Code"))
-        self.__labelQRDescription.setText(translator("Scan this QR code in your authenticator app."))
-        self.__labelHashDescription.setText(translator(
-            "If you are unable to scan this QR code,\nPlease enter this code manually into the app."
+        self.__labelDescription.setText(translator("Scan this QR code in your authenticator app."))
+        self.__labelQRDescription.setText(translator(
+            "If you are unable to scan this QR code,\nPlease enter this key manually into the app."
         ))
-        self.__labelInputTitle.setText(translator("Verification Code"))
+        self.__labelInputTitle.setText(translator("Confirmation Code"))
         self.__pushButtonConfirm.setText(translator("Confirm"))
 
     def re_font(self):
         font = QFont()
 
-        self.__labelHashDescription.setFont(font)
+        self.__labelQRDescription.setFont(font)
 
         font.setPointSize(fonts.data.size.title)
-        self.__labelQRDescription.setFont(font)
-        self.__labelHash.setFont(font)
+        self.__labelDescription.setFont(font)
+        self.__labelKey.setFont(font)
         self.__labelInputTitle.setFont(font)
 
-        font.setPointSize(fonts.data.size.average)
         font.setBold(True)
         self.__pushButtonConfirm.setFont(font)
 
@@ -228,7 +227,7 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
-    def set_otp_hash(self, text: str, description: str = ''):
+    def set_key(self, text: str, description: str = ''):
         image_file = io.BytesIO()
         title = 'Payroma%20Wallet'
         qr_format = f'otpauth://totp/{title}:{description}?secret={text}&issuer={title}'
@@ -244,13 +243,13 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__labelQR.setPixmap(QPixmap.fromImage(image))
-        self.__labelHash.setText(text, is_ellipsis=False)
-        SPGraphics.text_ellipsis(self.__labelHash.label, Qt.ElideMiddle, width=221)
+        self.__labelKey.setText(text, is_ellipsis=False)
+        SPGraphics.text_ellipsis(self.__labelKey.label, Qt.ElideMiddle, width=221)
 
     def reset(self):
         self.__all_inputs_disabled(False)
         self.__labelQR.clear()
-        self.__labelHash.clear()
+        self.__labelKey.clear()
         self.__lineEdit1.clear()
         self.__lineEdit2.clear()
         self.__lineEdit3.clear()

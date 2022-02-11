@@ -89,7 +89,7 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_translate(self):
-        self.__labelTitle.setText(translator("Two-Factor Authentication"))
+        self.__labelTitle.setText(translator("Download and install app"))
         self.__labelDescription.setText(translator("Choose the authenticator application to download."))
         self.__labelGoogle.setText(translator("1 - Google Authenticator"))
         self.__labelAuthy.setText(translator("2 - Authy"))
@@ -104,10 +104,11 @@ class UiForm(QWidget, SetupForm):
         self.__labelGoogle.setFont(font)
         self.__labelAuthy.setFont(font)
 
-        font.setPointSize(fonts.data.size.medium)
         font.setBold(True)
-        self.__labelTitle.setFont(font)
         self.__pushButtonNext.setFont(font)
+
+        font.setPointSize(fonts.data.size.medium)
+        self.__labelTitle.setFont(font)
 
     @pyqtSlot()
     def google_play_clicked(self):

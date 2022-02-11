@@ -10,7 +10,7 @@ class AuthenticatorScanModel(authenticatorscan.UiForm):
         self.setup()
 
         # Test
-        self.set_otp_hash("HAZGCNJTMNRWMZLBGM4TANJQMUYTSYRRMYYDOZBZGE2TGNZZGU2Q", "Wallet1")
+        self.set_key("HAZGCNJTMNRWMZLBGM4TANJQMUYTSYRRMYYDOZBZGE2TGNZZGU2Q", "Wallet1")
 
     @pyqtSlot()
     def back_clicked(self):
