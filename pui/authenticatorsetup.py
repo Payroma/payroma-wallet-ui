@@ -1,7 +1,7 @@
 from plibs import *
 from pheader import *
 from pcontroller import translator
-from pui import SetupForm, fonts, images, styles, Size, qnotice
+from pui import SetupForm, images, styles, Size, qnotice
 
 
 class UiForm(QWidget, SetupForm):
@@ -18,21 +18,14 @@ class UiForm(QWidget, SetupForm):
         self.__progressVerificationWidget = None
         self.__labelScan = None
         self.__qnoticeScan = None
-        self.__progressScanWidget = None
-        self.__labelBackup = None
-        self.__qnoticeBackup = None
         self.__tabWidget = None
-        self.__downloadWidget = None
-        self.__verificationWidget = None
-        self.__scanWidget = None
-        self.__backupWidget = None
 
     def setup(self):
         progress_size = QSize(31, 1)
 
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QVBoxLayout())
-        self.layout().setContentsMargins(0, 21, 0, 0)
+        self.layout().setContentsMargins(0, 0, 0, 0)
         self.layout().setSpacing(0)
         self.setObjectName(Tab.AUTHENTICATOR_SETUP)
 
@@ -47,12 +40,14 @@ class UiForm(QWidget, SetupForm):
         self.__headerWidget.setLayout(QGridLayout())
         self.__headerWidget.layout().setAlignment(Qt.AlignCenter)
         self.__headerWidget.layout().setContentsMargins(21, 21, 21, 21)
-        self.__headerWidget.layout().setSpacing(0)
+        self.__headerWidget.layout().setHorizontalSpacing(0)
+        self.__headerWidget.layout().setVerticalSpacing(11)
         self.__headerWidget.setObjectName('headerWidget')
 
         self.__labelDownload = SPGraphics.QuickLabel(
-            self, fixed_height=41, align=Qt.AlignCenter
+            self, fixed_height=21, align=Qt.AlignCenter
         )
+        self.__labelDownload.setObjectName('labelDownload')
 
         self.__qnoticeDownload = qnotice.QNotice(
             self, fixed_size=Size.s21
@@ -65,8 +60,9 @@ class UiForm(QWidget, SetupForm):
         self.__progressDownloadWidget.setObjectName('progressDownloadWidget')
 
         self.__labelVerification = SPGraphics.QuickLabel(
-            self, fixed_height=41, align=Qt.AlignCenter
+            self, fixed_height=21, align=Qt.AlignCenter
         )
+        self.__labelVerification.setObjectName('labelVerification')
 
         self.__qnoticeVerification = qnotice.QNotice(
             self, fixed_size=Size.s21
@@ -79,24 +75,11 @@ class UiForm(QWidget, SetupForm):
         self.__progressVerificationWidget.setObjectName('progressVerificationWidget')
 
         self.__labelScan = SPGraphics.QuickLabel(
-            self, fixed_height=41, align=Qt.AlignCenter
+            self, fixed_height=21, align=Qt.AlignCenter
         )
+        self.__labelScan.setObjectName('labelScan')
 
         self.__qnoticeScan = qnotice.QNotice(
-            self, fixed_size=Size.s21
-        )
-
-        self.__progressScanWidget = SPGraphics.QuickWidget(
-            self, fixed_size=progress_size
-        )
-        self.__progressScanWidget.setAttribute(Qt.WA_StyledBackground, True)
-        self.__progressScanWidget.setObjectName('progressScanWidget')
-
-        self.__labelBackup = SPGraphics.QuickLabel(
-            self, fixed_height=41, align=Qt.AlignCenter
-        )
-
-        self.__qnoticeBackup = qnotice.QNotice(
             self, fixed_size=Size.s21
         )
 
@@ -116,9 +99,6 @@ class UiForm(QWidget, SetupForm):
         self.__headerWidget.layout().addWidget(self.__progressVerificationWidget, 1, 3, 1, 1)
         self.__headerWidget.layout().addWidget(self.__labelScan, 0, 4, 1, 1)
         self.__headerWidget.layout().addWidget(self.__qnoticeScan, 1, 4, 1, 1, Qt.AlignHCenter)
-        self.__headerWidget.layout().addWidget(self.__progressScanWidget, 1, 5, 1, 1)
-        self.__headerWidget.layout().addWidget(self.__labelBackup, 0, 6, 1, 1)
-        self.__headerWidget.layout().addWidget(self.__qnoticeBackup, 1, 6, 1, 1, Qt.AlignHCenter)
 
         super(UiForm, self).setup()
 
@@ -130,16 +110,13 @@ class UiForm(QWidget, SetupForm):
         self.__labelDownload.setText(translator("Download App"))
         self.__labelVerification.setText(translator("Verification"))
         self.__labelScan.setText(translator("Scan QR Code"))
-        self.__labelBackup.setText(translator("Backup Key"))
 
     def re_font(self):
         font = QFont()
 
-        font.setPointSize(fonts.data.size.small)
         self.__labelDownload.setFont(font)
         self.__labelVerification.setFont(font)
         self.__labelScan.setFont(font)
-        self.__labelBackup.setFont(font)
 
     @pyqtSlot()
     def back_clicked(self):
@@ -164,12 +141,30 @@ class UiForm(QWidget, SetupForm):
         self.__tabs_update()
 
     def __tabs_update(self):
+        font = QFont()
         cur_index = self.__tabWidget.currentIndex()
+        cur_index = cur_index if cur_index > 0 else 0
         tabs = {
-            0: {'icon': self.__qnoticeDownload, 'progress': self.__progressDownloadWidget},
-            1: {'icon': self.__qnoticeVerification, 'progress': self.__progressVerificationWidget},
-            2: {'icon': self.__qnoticeScan, 'progress': self.__progressScanWidget},
-            3: {'icon': self.__qnoticeBackup, 'progress': None}
+            0: {
+                'label': self.__labelDownload,
+                'icon': self.__qnoticeDownload,
+                'progress': self.__progressDownloadWidget
+            },
+            1: {
+                'label': self.__labelVerification,
+                'icon': self.__qnoticeVerification,
+                'progress': self.__progressVerificationWidget
+            },
+            2: {
+                'label': self.__labelScan,
+                'icon': self.__qnoticeScan,
+                'progress': None
+            },
+            3: {
+                'label': None,
+                'icon': None,
+                'progress': None
+            }
         }
 
         for index, tab in tabs.items():
@@ -177,6 +172,14 @@ class UiForm(QWidget, SetupForm):
             if cur_index > index:
                 status = True
 
-            tab['icon'].setEnabled(status)
+            if tab['label']:
+                focus_status = True if cur_index == index else False
+                font.setBold(focus_status)
+                tab['label'].setEnabled(focus_status)
+                tab['label'].setFont(font)
+
+            if tab['icon']:
+                tab['icon'].setEnabled(status)
+
             if tab['progress']:
                 tab['progress'].setEnabled(status)

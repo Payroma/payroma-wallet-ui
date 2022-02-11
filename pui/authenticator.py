@@ -1,7 +1,7 @@
 from plibs import *
 from pheader import *
 from pcontroller import translator
-from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
+from pui import SetupForm, fonts, images, styles, Size
 
 
 class UiForm(QWidget, SetupForm):
@@ -193,9 +193,9 @@ class UiForm(QWidget, SetupForm):
             inputs[current_index - 1].setFocus()
 
         code = ''.join(i.text() for i in inputs)
-        self.code_changed(code)
+        self.otp_code_changed(code)
 
-    def code_changed(self, text: str, valid: bool = False):
+    def otp_code_changed(self, text: str, valid: bool = False):
         self.__lineEdit1.isValid = valid
         self.__lineEdit2.isValid = valid
         self.__lineEdit3.isValid = valid
@@ -230,12 +230,12 @@ class UiForm(QWidget, SetupForm):
         valid = False
         try:
             if (
-                    self.__lineEdit1.isValid and
-                    self.__lineEdit2.isValid and
-                    self.__lineEdit3.isValid and
-                    self.__lineEdit4.isValid and
-                    self.__lineEdit5.isValid and
-                    self.__lineEdit6.isValid
+                self.__lineEdit1.isValid and
+                self.__lineEdit2.isValid and
+                self.__lineEdit3.isValid and
+                self.__lineEdit4.isValid and
+                self.__lineEdit5.isValid and
+                self.__lineEdit6.isValid
             ):
                 valid = True
         except AttributeError:

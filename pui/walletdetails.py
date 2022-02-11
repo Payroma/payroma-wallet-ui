@@ -105,13 +105,15 @@ class UiForm(QWidget, SetupForm):
     def set_address(self, text: str):
         image_file = io.BytesIO()
 
-        qr_generator = pyqrcode.create(text, error='L', version=3, mode='binary')
+        qr_generator = pyqrcode.create(text, error='L', mode='binary')
         qr_generator.png(
             image_file, scale=7, module_color=styles.data.colors.font.getRgb(),
             background=styles.data.colors.background.getRgb()
         )
 
-        image = QImage.fromData(image_file.getvalue(), 'png')
+        image = QImage.fromData(image_file.getvalue(), 'png').scaled(
+            self.__labelAddressQR.size(), Qt.KeepAspectRatio
+        )
 
         self.__labelAddressQR.setPixmap(QPixmap.fromImage(image))
 

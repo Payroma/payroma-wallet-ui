@@ -11,7 +11,6 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack = None
         self.__labelTitle = None
         self.__labelDescription = None
-
         self.__labelUsername = None
         self.__labelAddress = None
         self.__lineEditPassword = None
@@ -21,7 +20,6 @@ class UiForm(QWidget, SetupForm):
         self.__labelPINCodeIcon = None
         self.__pushButtonPINCodeEye = None
         self.__labelPINCodeAlert = None
-
         self.__pushButtonVerify = None
         self.__loadingEffectVerify = None
         self.__inputManager = None
@@ -61,6 +59,7 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditPassword = SPGraphics.QuickLineEdit(
             self, mode=QLineEdit.Password, fixed_size=Size.default, layout_support=True
         )
+        self.__lineEditPassword.setObjectName('lineEditPassword')
         self.__lineEditPassword.textChanged.connect(self.password_changed)
 
         self.__labelPasswordIcon = SPGraphics.QuickLabel(
@@ -75,6 +74,7 @@ class UiForm(QWidget, SetupForm):
             self, mode=QLineEdit.Password, fixed_size=Size.default, layout_support=True, length=6
         )
         self.__lineEditPINCode.setValidator(validator.number)
+        self.__lineEditPINCode.setObjectName('lineEditPINCode')
         self.__lineEditPINCode.textChanged.connect(self.pin_code_changed)
 
         self.__labelPINCodeIcon = SPGraphics.QuickLabel(
@@ -105,13 +105,13 @@ class UiForm(QWidget, SetupForm):
             light_color=styles.data.colors.white.name()
         )
 
-        self.layout().addWidget(self.__labelTitle, alignment=Qt.AlignCenter)
-        self.layout().addWidget(self.__labelDescription, alignment=Qt.AlignCenter)
-        self.layout().addWidget(self.__labelUsername, alignment=Qt.AlignCenter)
-        self.layout().addWidget(self.__labelAddress, alignment=Qt.AlignCenter)
-        self.layout().addWidget(self.__lineEditPassword, alignment=Qt.AlignCenter)
-        self.layout().addWidget(self.__lineEditPINCode, alignment=Qt.AlignCenter)
-        self.layout().addWidget(self.__pushButtonVerify, alignment=Qt.AlignCenter)
+        self.layout().addWidget(self.__labelTitle, alignment=Qt.AlignHCenter)
+        self.layout().addWidget(self.__labelDescription, alignment=Qt.AlignHCenter)
+        self.layout().addWidget(self.__labelUsername, alignment=Qt.AlignHCenter)
+        self.layout().addWidget(self.__labelAddress, alignment=Qt.AlignHCenter)
+        self.layout().addWidget(self.__lineEditPassword, alignment=Qt.AlignHCenter)
+        self.layout().addWidget(self.__lineEditPINCode, alignment=Qt.AlignHCenter)
+        self.layout().addWidget(self.__pushButtonVerify, alignment=Qt.AlignHCenter)
         self.__lineEditPassword.layout().addWidget(self.__labelPasswordIcon, alignment=Qt.AlignLeft)
         self.__lineEditPassword.layout().addWidget(self.__pushButtonPasswordEye, alignment=Qt.AlignRight)
         self.__lineEditPINCode.layout().addWidget(self.__labelPINCodeIcon, alignment=Qt.AlignLeft)

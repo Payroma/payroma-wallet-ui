@@ -1,19 +1,30 @@
-QLineEdit
+#headerWidget
 {
-    padding-right: 40px;
-    padding-left: 40px;
+	background-color: @background_second;
+}
+
+
+#labelDownload,
+#labelVerification,
+#labelScan
+{
+	color: @font;
+}
+#labelDownload:disabled,
+#labelVerification:disabled,
+#labelScan:disabled
+{
+	color: @font_description;
 }
 
 
 #progressDownloadWidget,
-#progressVerificationWidget,
-#progressScanWidget
+#progressVerificationWidget
 {
 	background-color: @positive;
 }
 #progressDownloadWidget:disabled,
-#progressVerificationWidget:disabled,
-#progressScanWidget:disabled
+#progressVerificationWidget:disabled
 {
 	background-color: @disabled;
 }
@@ -30,4 +41,12 @@ QLineEdit
 #pushButtonAuthy
 {
 	image: url(:/images/brands/authy.png);
+}
+
+
+#lineEditPassword,
+#lineEditPINCode
+{
+    padding-right: 40px;
+    padding-left: 40px;
 }
