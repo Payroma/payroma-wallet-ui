@@ -17,6 +17,10 @@ class AuthenticatorVerificationModel(authenticatorverification.UiForm):
     def back_clicked(self):
         QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.DOWNLOAD)
 
+    @pyqtSlot()
+    def verify_clicked(self):
+        QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.SCAN)
+
     @pyqtSlot(str)
     def password_changed(self, text: str):
         valid = True if text else False
