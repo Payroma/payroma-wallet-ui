@@ -46,7 +46,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelNameAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.networkNameAlert
+            fixed_size=Size.s21, tooltip=QObject.toolTip.networkNameAlertR
         )
         self.__labelNameAlert.setCursor(Qt.PointingHandCursor)
         self.__labelNameAlert.hide()
@@ -59,7 +59,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelRPCAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.networkRPCAlert
+            fixed_size=Size.s21, tooltip=QObject.toolTip.networkRPCAlertR
         )
         self.__labelRPCAlert.setCursor(Qt.PointingHandCursor)
         self.__labelRPCAlert.hide()
@@ -78,7 +78,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelChainIdAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.networkChainIdAlert
+            fixed_size=Size.s21, tooltip=QObject.toolTip.networkChainIdAlertR
         )
         self.__labelChainIdAlert.setCursor(Qt.PointingHandCursor)
         self.__labelChainIdAlert.hide()
@@ -91,7 +91,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelExplorerAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.networkExplorerAlert
+            fixed_size=Size.s21, tooltip=QObject.toolTip.networkExplorerAlertR
         )
         self.__labelExplorerAlert.setCursor(Qt.PointingHandCursor)
         self.__labelExplorerAlert.hide()

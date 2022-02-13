@@ -54,7 +54,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelUsername.setWordWrap(False)
 
         self.__pushButtonMenu = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.menu
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.menuR
         )
         self.__pushButtonMenu.clicked.connect(self.menu_clicked)
 

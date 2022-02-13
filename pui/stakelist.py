@@ -23,7 +23,7 @@ class UiForm(QWidget, SetupForm):
 
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QVBoxLayout())
-        self.layout().setContentsMargins(0, 11, 0, 0)
+        self.layout().setContentsMargins(11, 11, 11, 0)
         self.layout().setSpacing(11)
         self.setObjectName(Tab.STAKE_LIST)
 
@@ -154,8 +154,8 @@ class UiForm(QWidget, SetupForm):
     def add_item(self, item: QListWidgetItem):
         self.__listWidget.add_quick_item(item)
 
-    def set_tvl(self, value: str, symbol: str):
-        self.__labelTVL.setText("TVL: {} {}".format(value, symbol))
+    def set_tvl(self, text: str, symbol: str):
+        self.__labelTVL.setText("TVL: {} {}".format(text, symbol))
 
     def reset(self):
         self.__listWidget.clear()

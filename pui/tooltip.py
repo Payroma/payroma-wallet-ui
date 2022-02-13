@@ -18,10 +18,7 @@ class UiForm(SetupForm):
         self.pinCodeAlert = None
         self.addressAlert = None
         self.networkStatus = None
-        self.networkNameAlert = None
-        self.networkRPCAlert = None
-        self.networkChainIdAlert = None
-        self.networkExplorerAlert = None
+        self.ShowBlockTime = None
 
         self.showR = None
         self.usernameInfoR = None
@@ -29,11 +26,15 @@ class UiForm(SetupForm):
         self.addressInfoR = None
         self.networkSettingsR = None
         self.addNewR = None
+        self.networkNameAlertR = None
+        self.networkRPCAlertR = None
+        self.networkChainIdAlertR = None
+        self.networkExplorerAlertR = None
         self.copyR = None
         self.favoriteR = None
         self.walletStatusR = None
         self.networkStatusR = None
-        self.menu = None
+        self.menuR = None
 
         self.depositB = None
         self.withdrawB = None
@@ -53,10 +54,7 @@ class UiForm(SetupForm):
         self.pinCodeAlert = self.__align_top()
         self.addressAlert = self.__align_top()
         self.networkStatus = self.__align_top()
-        self.networkNameAlert = self.__align_right()
-        self.networkRPCAlert = self.__align_right()
-        self.networkChainIdAlert = self.__align_right()
-        self.networkExplorerAlert = self.__align_right()
+        self.ShowBlockTime = self.__align_top()
 
         self.showR = self.__align_right()
         self.usernameInfoR = self.__align_right()
@@ -64,11 +62,15 @@ class UiForm(SetupForm):
         self.addressInfoR = self.__align_right()
         self.networkSettingsR = self.__align_right()
         self.addNewR = self.__align_right()
+        self.networkNameAlertR = self.__align_right()
+        self.networkRPCAlertR = self.__align_right()
+        self.networkChainIdAlertR = self.__align_right()
+        self.networkExplorerAlertR = self.__align_right()
         self.copyR = self.__align_right()
         self.favoriteR = self.__align_right()
         self.walletStatusR = self.__align_right()
         self.networkStatusR = self.__align_right()
-        self.menu = self.__align_right()
+        self.menuR = self.__align_right()
 
         self.depositB = self.__align_bottom()
         self.withdrawB = self.__align_bottom()
@@ -94,10 +96,7 @@ class UiForm(SetupForm):
         self.pinCodeAlert.labelText.setText(translator("PIN Code must be 6 numbers."))
         self.addressAlert.labelText.setText(translator("This address invalid."))
         self.networkStatus.labelText.setText(translator("Network Connection Status"))
-        self.networkNameAlert.labelText.setText(translator("Network name already exists before"))
-        self.networkRPCAlert.labelText.setText(translator("This RPC is unable to connect"))
-        self.networkChainIdAlert.labelText.setText(translator("Chain id is wrong"))
-        self.networkExplorerAlert.labelText.setText(translator("Explorer URL is wrong"))
+        self.ShowBlockTime.labelText.setText(translator("Show block time"))
 
         self.showR.labelText.setText(translator("Show"))
         self.usernameInfoR.labelText.setText(translator(
@@ -111,11 +110,15 @@ class UiForm(SetupForm):
         ))
         self.networkSettingsR.labelText.setText(translator("Network settings to add a new and switching."))
         self.addNewR.labelText.setText(translator("Add New"))
+        self.networkNameAlertR.labelText.setText(translator("Network name already exists before"))
+        self.networkRPCAlertR.labelText.setText(translator("This RPC is unable to connect"))
+        self.networkChainIdAlertR.labelText.setText(translator("Chain id is wrong"))
+        self.networkExplorerAlertR.labelText.setText(translator("Explorer URL is wrong"))
         self.copyR.labelText.setText(translator("Copy"))
         self.favoriteR.labelText.setText(translator("Check to Favorite"))
         self.walletStatusR.labelText.setText(translator("Wallet connection status"))
         self.networkStatusR.labelText.setText(translator("Network connection status"))
-        self.menu.labelText.setText(translator("Menu"))
+        self.menuR.labelText.setText(translator("Menu"))
 
         self.depositB.labelText.setText(translator("Deposit"))
         self.withdrawB.labelText.setText(translator("Withdraw"))
@@ -137,10 +140,7 @@ class UiForm(SetupForm):
         self.pinCodeAlert.labelText.setFont(font)
         self.addressAlert.labelText.setFont(font)
         self.networkStatus.labelText.setFont(font)
-        self.networkNameAlert.labelText.setFont(font)
-        self.networkRPCAlert.labelText.setFont(font)
-        self.networkChainIdAlert.labelText.setFont(font)
-        self.networkExplorerAlert.labelText.setFont(font)
+        self.ShowBlockTime.labelText.setFont(font)
 
         self.showR.labelText.setFont(font)
         self.usernameInfoR.labelText.setFont(font)
@@ -148,11 +148,15 @@ class UiForm(SetupForm):
         self.addressInfoR.labelText.setFont(font)
         self.networkSettingsR.labelText.setFont(font)
         self.addNewR.labelText.setFont(font)
+        self.networkNameAlertR.labelText.setFont(font)
+        self.networkRPCAlertR.labelText.setFont(font)
+        self.networkChainIdAlertR.labelText.setFont(font)
+        self.networkExplorerAlertR.labelText.setFont(font)
         self.copyR.labelText.setFont(font)
         self.favoriteR.labelText.setFont(font)
         self.walletStatusR.labelText.setFont(font)
         self.networkStatusR.labelText.setFont(font)
-        self.menu.labelText.setFont(font)
+        self.menuR.labelText.setFont(font)
 
         self.depositB.labelText.setFont(font)
         self.withdrawB.labelText.setFont(font)
