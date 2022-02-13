@@ -4,7 +4,31 @@ QPushButton:checked
 }
 
 
+StakeItem
+{
+	background-color: @background;
+	border-radius: 5px;
+}
+StakeItem:hover
+{
+	background-color: @background_second;
+}
+
+
 #labelTVL
 {
 	color: @highlight;
+}
+
+
+#labelStakeTokenIcon
+{
+	border: 2px solid @background;
+	border-radius: 12px;
+}
+
+
+#labelAPYValue
+{
+	color: @positive;
 }
