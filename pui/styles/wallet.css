@@ -1,7 +1,7 @@
-TokenWidget
+TokenItem
 {
-    background: transparent;
-	border-top: 1px solid @line;
+	background-color: @background;
+	border-radius: 5px;
 }
 
 

@@ -16,6 +16,8 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.setFixedHeight(81)
         self.setLayout(QGridLayout())
         self.layout().setAlignment(Qt.AlignVCenter)
+        self.layout().setContentsMargins(21, 0, 11, 0)
+        self.layout().setHorizontalSpacing(11)
         self.layout().setVerticalSpacing(0)
         self.setCursor(Qt.PointingHandCursor)
         self.setGraphicsEffect(SPGraphics.QuickShadow(
@@ -23,7 +25,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         ))
 
         self.__labelIcon = SPGraphics.QuickLabel(
-            self, scaled=True, fixed_size=Size.s51, align=Qt.AlignCenter
+            self, scaled=True, fixed_size=Size.s41, align=Qt.AlignCenter
         )
 
         self.__labelSymbol = SPGraphics.QuickLabel(
