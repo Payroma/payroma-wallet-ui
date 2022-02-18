@@ -1,9 +1,3 @@
-QPushButton:checked
-{
-    background-color: @background_second;
-}
-
-
 StakeItem
 {
 	background-color: @background;

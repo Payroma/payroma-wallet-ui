@@ -125,7 +125,6 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_style(self):
-        self.setStyleSheet(styles.data.css.addnetwork)
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
 
     def re_translate(self):
@@ -159,31 +158,34 @@ class UiForm(QWidget, SetupForm):
 
     @pyqtSlot(str)
     def name_changed(self, text: str, valid: bool = False):
-        self.__lineEditName.isValid = valid
+        self.__lineEditName.setProperty('isValid', valid)
         self.__labelNameAlert.setHidden(valid)
+        self.__polish(self.__lineEditName)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def rpc_changed(self, text: str, valid: bool = False):
-        self.__lineEditRPC.isValid = valid
+        self.__lineEditRPC.setProperty('isValid', valid)
         self.__labelRPCAlert.setHidden(valid)
+        self.__polish(self.__lineEditRPC)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def symbol_changed(self, text: str, valid: bool = False):
-        self.__lineEditSymbol.isValid = valid
+        self.__lineEditSymbol.setProperty('isValid', valid)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def chain_id_changed(self, text: str, valid: bool = False):
-        self.__lineEditChainId.isValid = valid
+        self.__lineEditChainId.setProperty('isValid', valid)
         self.__labelChainIdAlert.setHidden(valid)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def explorer_changed(self, text: str, valid: bool = False):
-        self.__lineEditExplorer.isValid = valid
+        self.__lineEditExplorer.setProperty('isValid', valid)
         self.__labelExplorerAlert.setHidden(valid)
+        self.__polish(self.__lineEditExplorer)
         self.__inputs_validation()
 
     @pyqtSlot()
@@ -209,17 +211,14 @@ class UiForm(QWidget, SetupForm):
 
     def __inputs_validation(self):
         valid = False
-        try:
-            if (
-                self.__lineEditName.isValid and
-                self.__lineEditRPC.isValid and
-                self.__lineEditSymbol.isValid and
-                self.__lineEditChainId.isValid and
-                self.__lineEditExplorer.isValid
-            ):
-                valid = True
-        except AttributeError:
-            pass
+        if (
+            self.__lineEditName.property('isValid') and
+            self.__lineEditRPC.property('isValid') and
+            self.__lineEditSymbol.property('isValid') and
+            self.__lineEditChainId.property('isValid') and
+            self.__lineEditExplorer.property('isValid')
+        ):
+            valid = True
 
         self.__pushButtonAdd.setEnabled(valid)
 
@@ -229,3 +228,8 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditSymbol.setDisabled(status)
         self.__lineEditChainId.setDisabled(status)
         self.__lineEditExplorer.setDisabled(status)
+
+    @staticmethod
+    def __polish(widget: QLineEdit):
+        widget.style().unpolish(widget)
+        widget.style().polish(widget)

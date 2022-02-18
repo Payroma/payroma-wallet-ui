@@ -22,13 +22,13 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.WALLETS_LIST)
 
         self.__lineEditSearch = SPGraphics.QuickLineEdit(
-            self, fixed_height=41, layout_support=True, length=40
+            self, fixed_height=41, layout_support=True
         )
+        self.__lineEditSearch.setProperty("iconable", True)
         self.__lineEditSearch.setMaximumWidth(501)
         self.__lineEditSearch.setFocusPolicy(Qt.ClickFocus)
         self.__lineEditSearch.setContextMenuPolicy(Qt.CustomContextMenu)
         self.__lineEditSearch.setValidator(validator.username)
-        self.__lineEditSearch.setObjectName('lineEditSearch')
         self.__lineEditSearch.textChanged.connect(self.search_changed)
 
         self.__labelSearchIcon = SPGraphics.QuickLabel(
@@ -119,8 +119,10 @@ class UiForm(QWidget, SetupForm):
         text = text.lower()
         if text:
             self.__pushButtonSearchClear.show()
+            self.__lineEditSearch.setProperty('clearable', True)
         else:
             self.__pushButtonSearchClear.hide()
+            self.__lineEditSearch.setProperty('clearable', False)
 
         for index in range(self.__listWidget.count()):
             item = self.__listWidget.item(index)
@@ -129,9 +131,15 @@ class UiForm(QWidget, SetupForm):
                 continue
 
             widget = self.__listWidget.itemWidget(item)
-            if text in widget.get_username().lower() or text in widget.text().lower():
+            if text in widget.get_username().lower() or text in widget.get_address().lower():
                 item.setHidden(False)
             else:
                 item.setHidden(True)
 
+        self.__polish(self.__lineEditSearch)
         self.repaint()
+
+    @staticmethod
+    def __polish(widget: QLineEdit):
+        widget.style().unpolish(widget)
+        widget.style().polish(widget)

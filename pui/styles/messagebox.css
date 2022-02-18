@@ -11,13 +11,6 @@ QGroupBox
 }
 
 
-QLineEdit
-{
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-
 #labelTitle
 {
     background-color: @background_second;

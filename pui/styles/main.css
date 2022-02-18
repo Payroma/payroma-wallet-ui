@@ -14,7 +14,7 @@ QTabWidget,
 QTabWidget::pane
 {
     background: transparent;
-	border: 0px;
+    border: 0px;
 }
 
 
@@ -28,16 +28,27 @@ QSizeGrip
 
 QPushButton
 {
-	color: @white;
-	border-radius: 5px;
+    color: @white;
+    border-radius: 5px;
 }
 
 
 QLineEdit
 {
-	background-color: @background_second;
+    background-color: @background_second;
     selection-background-color: gray;
     border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+QLineEdit[iconable="true"]
+{
+    padding-left: 40px;
+}
+QLineEdit[iconableRight="true"],
+QLineEdit[isValid="false"]
+{
+    padding-right: 40px;
 }
 
 
@@ -84,7 +95,7 @@ QProgressBar::chunk
 
 QComboBox
 {
-	color: @white;
+    color: @white;
     background-color: @highlight;
     selection-background-color: gray;
     border-radius: 5px;
@@ -123,7 +134,7 @@ QComboBox QAbstractItemView
 }
 QComboBox QAbstractItemView::item
 {
-	color: @white;
+    color: @white;
     min-height: 35px;
 }
 QComboBox QListView::item:selected
@@ -145,9 +156,29 @@ QScrollArea
 }
 
 
+QNotice
+{
+    background-color: @positive_a50;
+    border-radius: 10px;
+}
+QNotice #childPoint
+{
+    background-color: @positive;
+    border-radius: 5px;
+}
+QNotice::disabled
+{
+    background-color: @disabled_a50;
+}
+QNotice #childPoint::disabled
+{
+    background-color: @disabled;
+}
+
+
 QuickToolTip QLabel
 {
-	color: @white;
+    color: @white;
 }
 QuickToolTip #mainWidget
 {
@@ -166,13 +197,13 @@ QuickToolTip #mainWidget
 
 #headerWidget
 {
-	border-bottom: 1px solid @line;
+    border-bottom: 1px solid @line;
 }
 
 
 #footerWidget
 {
-	border-top: 1px solid @line;
+    border-top: 1px solid @line;
 }
 #footerWidget #pushButtonInvest,
 #footerWidget #labelAddress
@@ -184,32 +215,12 @@ QuickToolTip #mainWidget
 
 #lineWidget
 {
-	background-color: @line;
+    background-color: @line;
 }
 
 
 #labelDescription,
 #labelAddress
 {
-	color: @font_description;
-}
-
-
-QNotice
-{
-    background-color: @positive_a50;
-    border-radius: 10px;
-}
-QNotice #childPoint
-{
-    background-color: @positive;
-    border-radius: 5px;
-}
-QNotice::disabled
-{
-    background-color: @disabled_a50;
-}
-QNotice #childPoint::disabled
-{
-    background-color: @disabled;
+    color: @font_description;
 }

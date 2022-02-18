@@ -42,11 +42,3 @@
 {
 	image: url(:/images/brands/authy.png);
 }
-
-
-#lineEditPassword,
-#lineEditPINCode
-{
-    padding-right: 40px;
-    padding-left: 40px;
-}

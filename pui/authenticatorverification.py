@@ -59,7 +59,8 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditPassword = SPGraphics.QuickLineEdit(
             self, mode=QLineEdit.Password, fixed_size=Size.default, layout_support=True
         )
-        self.__lineEditPassword.setObjectName('lineEditPassword')
+        self.__lineEditPassword.setProperty("iconable", True)
+        self.__lineEditPassword.setProperty("iconableRight", True)
         self.__lineEditPassword.textChanged.connect(self.password_changed)
 
         self.__labelPasswordIcon = SPGraphics.QuickLabel(
@@ -73,8 +74,8 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditPINCode = SPGraphics.QuickLineEdit(
             self, mode=QLineEdit.Password, fixed_size=Size.default, layout_support=True, length=6
         )
+        self.__lineEditPINCode.setProperty("iconable", True)
         self.__lineEditPINCode.setValidator(validator.number)
-        self.__lineEditPINCode.setObjectName('lineEditPINCode')
         self.__lineEditPINCode.textChanged.connect(self.pin_code_changed)
 
         self.__labelPINCodeIcon = SPGraphics.QuickLabel(
@@ -166,12 +167,12 @@ class UiForm(QWidget, SetupForm):
 
     @pyqtSlot(str)
     def password_changed(self, text: str, valid: bool = False):
-        self.__lineEditPassword.isValid = valid
+        self.__lineEditPassword.setProperty('isValid', valid)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def pin_code_changed(self, text: str, valid: bool = False):
-        self.__lineEditPINCode.isValid = valid
+        self.__lineEditPINCode.setProperty('isValid', valid)
         self.__labelPINCodeAlert.setHidden(valid)
         self.__inputs_validation()
 
@@ -209,14 +210,11 @@ class UiForm(QWidget, SetupForm):
 
     def __inputs_validation(self):
         valid = False
-        try:
-            if (
-                self.__lineEditPassword.isValid and
-                self.__lineEditPINCode.isValid
-            ):
-                valid = True
-        except AttributeError:
-            pass
+        if (
+            self.__lineEditPassword.property('isValid') and
+            self.__lineEditPINCode.property('isValid')
+        ):
+            valid = True
 
         self.__pushButtonVerify.setEnabled(valid)
 

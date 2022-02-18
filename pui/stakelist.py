@@ -172,8 +172,11 @@ class UiForm(QWidget, SetupForm):
         QPushButton:checked
         {
             color: %s;
+            background-color: %s;
         }
         ''' % (
-            str(value.getRgb()), styles.data.colors.highlight.name()
+            str(value.getRgb()),
+            styles.data.colors.highlight.name(),
+            styles.data.colors.background_second.name()
         )
         sender.parent().setStyleSheet(css)
