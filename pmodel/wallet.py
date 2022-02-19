@@ -37,6 +37,10 @@ class WalletModel(wallet.UiForm):
         QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
 
     @pyqtSlot()
+    def withdraw_clicked(self):
+        QObject.mainModel.currentTabChanged(Tab.WITHDRAW)
+
+    @pyqtSlot()
     def stake_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.STAKE_LIST)
 

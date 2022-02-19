@@ -41,6 +41,7 @@ class UiForm(SetupForm):
         self.stakeB = None
         self.swapB = None
         self.historyB = None
+        self.addressValidB = None
 
     def setup(self):
         self.settings = self.__align_top()
@@ -77,6 +78,7 @@ class UiForm(SetupForm):
         self.stakeB = self.__align_bottom()
         self.swapB = self.__align_bottom()
         self.historyB = self.__align_bottom()
+        self.addressValidB = self.__align_bottom()
 
         super(UiForm, self).setup()
 
@@ -125,6 +127,7 @@ class UiForm(SetupForm):
         self.stakeB.labelText.setText(translator("Staking"))
         self.swapB.labelText.setText(translator("Swap"))
         self.historyB.labelText.setText(translator("Transactions History"))
+        self.addressValidB.labelText.setText(translator("Address Valid"))
 
     def re_font(self):
         font = QFont()
@@ -163,6 +166,7 @@ class UiForm(SetupForm):
         self.stakeB.labelText.setFont(font)
         self.swapB.labelText.setFont(font)
         self.historyB.labelText.setFont(font)
+        self.addressValidB.labelText.setFont(font)
 
     def __align_top(self) -> SPGraphics.QuickToolTip:
         return SPGraphics.QuickToolTip(
