@@ -19,6 +19,7 @@ class UiForm(SetupForm):
         self.addressAlert = None
         self.networkStatus = None
         self.ShowBlockTime = None
+        self.addNewAddressBook = None
 
         self.showR = None
         self.usernameInfoR = None
@@ -56,6 +57,7 @@ class UiForm(SetupForm):
         self.addressAlert = self.__align_top()
         self.networkStatus = self.__align_top()
         self.ShowBlockTime = self.__align_top()
+        self.addNewAddressBook = self.__align_top()
 
         self.showR = self.__align_right()
         self.usernameInfoR = self.__align_right()
@@ -99,6 +101,7 @@ class UiForm(SetupForm):
         self.addressAlert.labelText.setText(translator("This address invalid."))
         self.networkStatus.labelText.setText(translator("Network Connection Status"))
         self.ShowBlockTime.labelText.setText(translator("Show block time"))
+        self.addNewAddressBook.labelText.setText(translator("Add new to addresses book"))
 
         self.showR.labelText.setText(translator("Show"))
         self.usernameInfoR.labelText.setText(translator(
@@ -144,6 +147,7 @@ class UiForm(SetupForm):
         self.addressAlert.labelText.setFont(font)
         self.networkStatus.labelText.setFont(font)
         self.ShowBlockTime.labelText.setFont(font)
+        self.addNewAddressBook.labelText.setFont(font)
 
         self.showR.labelText.setFont(font)
         self.usernameInfoR.labelText.setFont(font)

@@ -1,6 +1,7 @@
 from plibs import *
 from pheader import *
 from pui import withdraw
+from pmodel.addressesbooklist import AddressesBookListModel
 
 
 class WithdrawModel(withdraw.UiForm):
@@ -8,6 +9,11 @@ class WithdrawModel(withdraw.UiForm):
         super(WithdrawModel, self).__init__(parent)
 
         self.setup()
+
+        # Tabs
+        self.addressesBookListModel = AddressesBookListModel(self)
+
+        self.add_tab(self.addressesBookListModel, '')
 
     @pyqtSlot()
     def back_clicked(self):
