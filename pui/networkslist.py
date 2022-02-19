@@ -9,13 +9,15 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
         self.__pushButtonBack = None
+        self.__headerWidget = None
         self.__pushButtonAddNew = None
         self.__listWidget = None
 
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QVBoxLayout())
-        self.layout().setSpacing(11)
+        self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().setSpacing(0)
         self.setObjectName(Tab.NETWORKS_LIST)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
@@ -23,6 +25,12 @@ class UiForm(QWidget, SetupForm):
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
+
+        self.__headerWidget = QWidget(self, flags=Qt.SubWindow)
+        self.__headerWidget.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+        self.__headerWidget.setLayout(QHBoxLayout())
+        self.__headerWidget.layout().setContentsMargins(16, 16, 11, 16)
+        self.__headerWidget.setObjectName('headerWidget')
 
         self.__pushButtonAddNew = SPGraphics.QuickPushButton(
             self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.addNewR
@@ -32,17 +40,18 @@ class UiForm(QWidget, SetupForm):
         self.__listWidget = SPGraphics.QuickListWidget(
             self, spacing=10, empty_illustration=images.data.illustrations.no_data
         )
-        self.__listWidget.layout().setAlignment(Qt.AlignCenter)
+        self.__listWidget.layout().setContentsMargins(21, 0, 21, 0)
+        self.__listWidget.layout().setAlignment(Qt.AlignVCenter)
         self.__listWidget.labelIllustration.setAlignment(Qt.AlignHCenter)
         self.__listWidget.labelTitle.setAlignment(Qt.AlignHCenter)
         self.__listWidget.labelDescription.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelDescription.setSizePolicy(QSizePolicy(
-            QSizePolicy.Expanding, QSizePolicy.Preferred
-        ))
         self.__listWidget.itemClicked.connect(self.item_clicked)
 
-        self.layout().addWidget(self.__pushButtonAddNew, alignment=Qt.AlignRight)
+        self.__pushButtonBack.raise_()
+
+        self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__listWidget)
+        self.__headerWidget.layout().addWidget(self.__pushButtonAddNew, alignment=Qt.AlignRight)
 
         super(UiForm, self).setup()
 

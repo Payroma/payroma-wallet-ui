@@ -280,34 +280,34 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot(str)
     def username_changed(self, text: str, valid: bool = False):
         self.__lineEditUsername.setProperty('isValid', valid)
-        self.__labelUsernameAlert.setHidden(valid)
+        self.__labelUsernameAlert.setHidden(valid or not text)
         self.__polish(self.__lineEditUsername)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def password_changed(self, text: str, valid: bool = False):
         self.__lineEditPassword.setProperty('isValid', valid)
-        self.__labelPasswordAlert.setHidden(valid)
+        self.__labelPasswordAlert.setHidden(valid or not text)
         self.__polish(self.__lineEditPassword)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def confirm_password_changed(self, text: str, valid: bool = False):
         self.__lineEditConfirmPassword.setProperty('isValid', valid)
-        self.__labelConfirmPasswordAlert.setHidden(valid)
+        self.__labelConfirmPasswordAlert.setHidden(valid or not text)
         self.__polish(self.__lineEditConfirmPassword)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def pin_code_changed(self, text: str, valid: bool = False):
         self.__lineEditPINCode.setProperty('isValid', valid)
-        self.__labelPINCodeAlert.setHidden(valid)
+        self.__labelPINCodeAlert.setHidden(valid or not text)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def address_changed(self, text: str, valid: bool = False):
         self.__lineEditAddress.setProperty('isValid', valid)
-        self.__labelAddressAlert.setHidden(valid)
+        self.__labelAddressAlert.setHidden(valid or not text)
         self.__polish(self.__lineEditAddress)
         self.__inputs_validation()
 

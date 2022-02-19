@@ -120,20 +120,21 @@ class UiForm(QWidget, SetupForm):
 
     @pyqtSlot(str)
     def address_changed(self, text: str, valid: bool = False):
-        self.__lineEditAddress.isValid = valid
-        self.__lineEditAddressAlert.setHidden(valid)
+        self.__lineEditAddress.setProperty('isValid', valid)
+        self.__lineEditAddressAlert.setHidden(valid or not text)
+        self.__polish(self.__lineEditAddress)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def symbol_changed(self, text: str, valid: bool = False):
         icon = assetsicons.get_asset_icon(text)
         self.__labelIcon.setPixmap(icon)
-        self.__lineEditSymbol.isValid = valid
+        self.__lineEditSymbol.setProperty('isValid', valid)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def decimals_changed(self, text: str, valid: bool = False):
-        self.__lineEditDecimals.isValid = valid
+        self.__lineEditDecimals.setProperty('isValid', valid)
         self.__inputs_validation()
 
     @pyqtSlot()
@@ -159,9 +160,9 @@ class UiForm(QWidget, SetupForm):
         valid = False
         try:
             if (
-                self.__lineEditAddress.isValid and
-                self.__lineEditSymbol.isValid and
-                self.__lineEditDecimals.isValid
+                self.__lineEditAddress.property('isValid') and
+                self.__lineEditSymbol.property('isValid') and
+                self.__lineEditDecimals.property('isValid')
             ):
                 valid = True
         except AttributeError:
@@ -173,3 +174,8 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditAddress.setDisabled(status)
         self.__lineEditSymbol.setDisabled(status)
         self.__lineEditDecimals.setDisabled(status)
+
+    @staticmethod
+    def __polish(widget: QLineEdit):
+        widget.style().unpolish(widget)
+        widget.style().polish(widget)

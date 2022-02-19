@@ -27,10 +27,8 @@ class LoginModel(login.UiForm):
         QObject.mainModel.currentTabChanged(Tab.WALLET)
 
     @pyqtSlot(str)
-    def password_changed(self, text: str, valid: bool = False):
-        if text:
-            valid = True
-
+    def password_changed(self, text: str):
+        valid = True if len(text) > 5 else False
         super(LoginModel, self).password_changed(text, valid)
 
     @pyqtSlot()

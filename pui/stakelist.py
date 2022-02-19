@@ -9,13 +9,13 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
         self.__pushButtonBack = None
+        self.__headerWidget = None
         self.__labelTitle = None
         self.__labelTVL = None
         self.__tabsWidget = None
         self.__pushButtonUpcoming = None
         self.__pushButtonLive = None
         self.__pushButtonEnded = None
-        self.__lineWidget = None
         self.__listWidget = None
 
     def setup(self):
@@ -23,8 +23,8 @@ class UiForm(QWidget, SetupForm):
 
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QVBoxLayout())
-        self.layout().setContentsMargins(11, 11, 11, 0)
-        self.layout().setSpacing(11)
+        self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().setSpacing(0)
         self.setObjectName(Tab.STAKE_LIST)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
@@ -32,6 +32,12 @@ class UiForm(QWidget, SetupForm):
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
+
+        self.__headerWidget = QWidget(self, flags=Qt.SubWindow)
+        self.__headerWidget.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+        self.__headerWidget.setLayout(QGridLayout())
+        self.__headerWidget.layout().setSpacing(11)
+        self.__headerWidget.setObjectName('headerWidget')
 
         self.__labelTitle = SPGraphics.QuickLabel(
             self, fixed_height=51, align=Qt.AlignCenter
@@ -74,27 +80,22 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonEnded.setAutoExclusive(True)
         self.__pushButtonEnded.clicked.connect(self.ended_clicked)
 
-        self.__lineWidget = SPGraphics.QuickWidget(
-            self, fixed_height=1
-        )
-        self.__lineWidget.setAttribute(Qt.WA_StyledBackground, True)
-        self.__lineWidget.setObjectName('lineWidget')
-
         self.__listWidget = SPGraphics.QuickListWidget(
             self, spacing=10, empty_illustration=images.data.illustrations.no_data
         )
-        self.__listWidget.layout().setAlignment(Qt.AlignCenter)
+        self.__listWidget.layout().setContentsMargins(21, 0, 21, 0)
+        self.__listWidget.layout().setAlignment(Qt.AlignVCenter)
         self.__listWidget.labelIllustration.setAlignment(Qt.AlignHCenter)
         self.__listWidget.labelTitle.setAlignment(Qt.AlignHCenter)
         self.__listWidget.itemClicked.connect(self.item_clicked)
 
         self.__pushButtonBack.raise_()
 
-        self.layout().addWidget(self.__labelTitle)
-        self.layout().addWidget(self.__labelTVL)
-        self.layout().addWidget(self.__tabsWidget)
-        self.layout().addWidget(self.__lineWidget)
+        self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__listWidget)
+        self.__headerWidget.layout().addWidget(self.__labelTitle)
+        self.__headerWidget.layout().addWidget(self.__labelTVL)
+        self.__headerWidget.layout().addWidget(self.__tabsWidget)
         self.__tabsWidget.layout().addWidget(self.__pushButtonUpcoming)
         self.__tabsWidget.layout().addWidget(self.__pushButtonLive)
         self.__tabsWidget.layout().addWidget(self.__pushButtonEnded)
@@ -172,11 +173,6 @@ class UiForm(QWidget, SetupForm):
         QPushButton:checked
         {
             color: %s;
-            background-color: %s;
         }
-        ''' % (
-            str(value.getRgb()),
-            styles.data.colors.highlight.name(),
-            styles.data.colors.background_second.name()
-        )
+        ''' % (str(value.getRgb()), styles.data.colors.highlight.name())
         sender.parent().setStyleSheet(css)

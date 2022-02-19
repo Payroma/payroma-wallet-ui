@@ -15,17 +15,17 @@ class AddTokenModel(addtoken.UiForm):
 
     @pyqtSlot(str)
     def address_changed(self, text: str):
-        valid = True if text else False
+        valid = True if len(text) == 42 else False
         super(AddTokenModel, self).address_changed(text, valid)
 
     @pyqtSlot(str)
     def symbol_changed(self, text: str):
-        valid = True if text else False
+        valid = True if len(text) > 5 else False
         super(AddTokenModel, self).symbol_changed(text, valid)
 
     @pyqtSlot(str)
     def decimals_changed(self, text: str):
-        valid = True if text else False
+        valid = True if len(text) > 5 else False
         super(AddTokenModel, self).decimals_changed(text, valid)
 
     @pyqtSlot()

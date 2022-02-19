@@ -16,9 +16,9 @@ class StakeListModel(stakelist.UiForm):
             '0x8c5e85747b529360bd90a9dd5d8405c4f91c53f6': {
                 'earnSymbol': 'PYA',
                 'stakeSymbol': 'PYA',
-                'apy': '16,589%',
+                'apy': '189%',
                 'totalStaked': '3,544,796',
-                'block': '2,592,000',
+                'block': '292,000',
                 'lock': True
             },
             '0x8c5e85747b529360bd90a9dd5d8405c4f91c53f7': {
@@ -26,7 +26,7 @@ class StakeListModel(stakelist.UiForm):
                 'stakeSymbol': 'PYA',
                 'apy': '14%',
                 'totalStaked': '234,155',
-                'block': '2,592,000',
+                'block': '292,000',
                 'lock': True
             },
             '0x8c5e85747b529360bd90a9dd5d8405c4f91c53f8': {
@@ -34,7 +34,7 @@ class StakeListModel(stakelist.UiForm):
                 'stakeSymbol': 'PYA',
                 'apy': '9%',
                 'totalStaked': '688,171',
-                'block': '2,592,000',
+                'block': '292,000',
                 'lock': True
             },
             '0x8c5e85747b529360bd90a9dd5d8405c4f91c53f9': {
@@ -42,7 +42,7 @@ class StakeListModel(stakelist.UiForm):
                 'stakeSymbol': 'USDT',
                 'apy': '4.6%',
                 'totalStaked': '1,326,654',
-                'block': '2,592,000',
+                'block': '292,000',
                 'lock': False
             },
             '0x8c5e85747b529360bd90a9dd5d8405c4f91c53f0': {
@@ -50,7 +50,7 @@ class StakeListModel(stakelist.UiForm):
                 'stakeSymbol': 'USDC',
                 'apy': '2.1%',
                 'totalStaked': '34,112',
-                'block': '2,592,000',
+                'block': '292,000',
                 'lock': False
             }
         }
@@ -62,7 +62,6 @@ class StakeListModel(stakelist.UiForm):
             item.set_block_number(info['block'])
             item.set_total_staked(info['totalStaked'], info['stakeSymbol'])
             item.set_duration_type(info['lock'])
-
             self.add_item(item)
 
     @pyqtSlot()

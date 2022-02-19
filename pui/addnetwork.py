@@ -159,14 +159,14 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot(str)
     def name_changed(self, text: str, valid: bool = False):
         self.__lineEditName.setProperty('isValid', valid)
-        self.__labelNameAlert.setHidden(valid)
+        self.__labelNameAlert.setHidden(valid or not text)
         self.__polish(self.__lineEditName)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def rpc_changed(self, text: str, valid: bool = False):
         self.__lineEditRPC.setProperty('isValid', valid)
-        self.__labelRPCAlert.setHidden(valid)
+        self.__labelRPCAlert.setHidden(valid or not text)
         self.__polish(self.__lineEditRPC)
         self.__inputs_validation()
 
@@ -178,13 +178,13 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot(str)
     def chain_id_changed(self, text: str, valid: bool = False):
         self.__lineEditChainId.setProperty('isValid', valid)
-        self.__labelChainIdAlert.setHidden(valid)
+        self.__labelChainIdAlert.setHidden(valid or not text)
         self.__inputs_validation()
 
     @pyqtSlot(str)
     def explorer_changed(self, text: str, valid: bool = False):
         self.__lineEditExplorer.setProperty('isValid', valid)
-        self.__labelExplorerAlert.setHidden(valid)
+        self.__labelExplorerAlert.setHidden(valid or not text)
         self.__polish(self.__lineEditExplorer)
         self.__inputs_validation()
 

@@ -16,5 +16,5 @@ class WithdrawModel(withdraw.UiForm):
 
     @pyqtSlot(str)
     def address_changed(self, text: str):
-        valid = True if text else False
-        super(WithdrawModel, self).address_changed(text, valid)
+        valid = True if len(text) == 42 else False
+        super(WithdrawModel, self).address_changed(text, valid, valid is True)

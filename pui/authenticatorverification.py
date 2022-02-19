@@ -173,7 +173,7 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot(str)
     def pin_code_changed(self, text: str, valid: bool = False):
         self.__lineEditPINCode.setProperty('isValid', valid)
-        self.__labelPINCodeAlert.setHidden(valid)
+        self.__labelPINCodeAlert.setHidden(valid or not text)
         self.__inputs_validation()
 
     @pyqtSlot()

@@ -8,6 +8,7 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
+        self.__headerWidget = None
         self.__lineEditSearch = None
         self.__labelSearchIcon = None
         self.__pushButtonSearchClear = None
@@ -16,10 +17,16 @@ class UiForm(QWidget, SetupForm):
 
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.setLayout(QGridLayout())
-        self.layout().setContentsMargins(11, 11, 11, 0)
-        self.layout().setSpacing(11)
+        self.setLayout(QVBoxLayout())
+        self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().setSpacing(0)
         self.setObjectName(Tab.WALLETS_LIST)
+
+        self.__headerWidget = QWidget(self, flags=Qt.SubWindow)
+        self.__headerWidget.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+        self.__headerWidget.setLayout(QHBoxLayout())
+        self.__headerWidget.layout().setContentsMargins(16, 16, 11, 16)
+        self.__headerWidget.setObjectName('headerWidget')
 
         self.__lineEditSearch = SPGraphics.QuickLineEdit(
             self, fixed_height=41, layout_support=True
@@ -49,18 +56,17 @@ class UiForm(QWidget, SetupForm):
         self.__listWidget = SPGraphics.QuickListWidget(
             self, spacing=10, empty_illustration=images.data.illustrations.coin
         )
-        self.__listWidget.layout().setAlignment(Qt.AlignCenter)
+        self.__listWidget.layout().setContentsMargins(21, 0, 21, 0)
+        self.__listWidget.layout().setAlignment(Qt.AlignVCenter)
         self.__listWidget.labelIllustration.setAlignment(Qt.AlignHCenter)
         self.__listWidget.labelTitle.setAlignment(Qt.AlignHCenter)
         self.__listWidget.labelDescription.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelDescription.setSizePolicy(QSizePolicy(
-            QSizePolicy.Expanding, QSizePolicy.Preferred
-        ))
         self.__listWidget.itemClicked.connect(self.item_clicked)
 
-        self.layout().addWidget(self.__lineEditSearch, 0, 0, 1, 1)
-        self.layout().addWidget(self.__pushButtonAddNew, 0, 1, 1, 1, Qt.AlignRight)
-        self.layout().addWidget(self.__listWidget, 1, 0, 1, 2)
+        self.layout().addWidget(self.__headerWidget)
+        self.layout().addWidget(self.__listWidget)
+        self.__headerWidget.layout().addWidget(self.__lineEditSearch)
+        self.__headerWidget.layout().addWidget(self.__pushButtonAddNew, alignment=Qt.AlignRight)
         self.__lineEditSearch.layout().addWidget(self.__labelSearchIcon, alignment=Qt.AlignLeft)
         self.__lineEditSearch.layout().addWidget(self.__pushButtonSearchClear, alignment=Qt.AlignRight)
 

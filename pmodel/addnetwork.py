@@ -15,27 +15,27 @@ class AddNetworkModel(addnetwork.UiForm):
 
     @pyqtSlot(str)
     def name_changed(self, text: str):
-        valid = True if text else False
+        valid = True if len(text) > 5 else False
         super(AddNetworkModel, self).name_changed(text, valid)
 
     @pyqtSlot(str)
     def rpc_changed(self, text: str):
-        valid = True if text else False
+        valid = True if len(text) > 5 else False
         super(AddNetworkModel, self).rpc_changed(text, valid)
 
     @pyqtSlot(str)
     def symbol_changed(self, text: str):
-        valid = True if text else False
+        valid = True if len(text) > 5 else False
         super(AddNetworkModel, self).symbol_changed(text, valid)
 
     @pyqtSlot(str)
     def chain_id_changed(self, text: str):
-        valid = True if text else False
+        valid = True if len(text) > 5 else False
         super(AddNetworkModel, self).chain_id_changed(text, valid)
 
     @pyqtSlot(str)
     def explorer_changed(self, text: str):
-        valid = True if text else False
+        valid = True if len(text) > 5 else False
         super(AddNetworkModel, self).explorer_changed(text, valid)
 
     @pyqtSlot()

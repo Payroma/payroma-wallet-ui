@@ -9,6 +9,12 @@ StakeItem:hover
 }
 
 
+QPushButton:checked
+{
+	background-color: @background_second;
+}
+
+
 #labelTVL
 {
 	color: @highlight;

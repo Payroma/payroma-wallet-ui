@@ -13,19 +13,17 @@ class UiForm(QWidget, SetupForm):
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QVBoxLayout())
-        self.layout().setContentsMargins(11, 0, 11, 0)
+        self.layout().setContentsMargins(0, 0, 0, 0)
         self.setObjectName(Tab.WalletTab.TOKENS_LIST)
 
         self.__listWidget = SPGraphics.QuickListWidget(
-            self, spacing=10, empty_illustration=images.data.illustrations.coin
+            self, spacing=10, empty_illustration=images.data.illustrations.no_data
         )
-        self.__listWidget.layout().setAlignment(Qt.AlignCenter)
+        self.__listWidget.layout().setContentsMargins(21, 0, 21, 0)
+        self.__listWidget.layout().setAlignment(Qt.AlignVCenter)
         self.__listWidget.labelIllustration.setAlignment(Qt.AlignHCenter)
         self.__listWidget.labelTitle.setAlignment(Qt.AlignHCenter)
         self.__listWidget.labelDescription.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelDescription.setSizePolicy(QSizePolicy(
-            QSizePolicy.Expanding, QSizePolicy.Preferred
-        ))
         self.__listWidget.itemClicked.connect(self.item_clicked)
 
         self.layout().addWidget(self.__listWidget)
