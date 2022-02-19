@@ -4,11 +4,20 @@ from pui import addressesbooklist
 from pmodel import addressbookitem
 
 
+class GlobalEvents:
+    searchChanged = None
+
+
 class AddressesBookListModel(addressesbooklist.UiForm):
+    QObject.addressesBookListModel = GlobalEvents()
+
     def __init__(self, parent):
         super(AddressesBookListModel, self).__init__(parent)
 
         self.setup()
+
+        # Events
+        QObject.addressesBookListModel.searchChanged = self.search
 
         # Test
         wallets = {
@@ -23,3 +32,4 @@ class AddressesBookListModel(addressesbooklist.UiForm):
 
     def item_clicked(self, item: QListWidgetItem):
         widget = super(AddressesBookListModel, self).item_clicked(item)
+        QObject.withdrawModel.addressChanged(widget.get_address())

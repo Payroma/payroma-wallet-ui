@@ -52,3 +52,20 @@ class UiForm(QWidget, SetupForm):
 
     def reset(self):
         self.__listWidget.clear()
+
+    def search(self, text: str):
+        text = text.lower()
+
+        for index in range(self.__listWidget.count()):
+            item = self.__listWidget.item(index)
+            if not text:
+                item.setHidden(False)
+                continue
+
+            widget = self.__listWidget.itemWidget(item)
+            if text in widget.get_username().lower() or text in widget.get_address().lower():
+                item.setHidden(False)
+            else:
+                item.setHidden(True)
+
+        self.repaint()
