@@ -12,7 +12,7 @@ class TokensListModel(tokenslist.UiForm):
 
         # Test
         tokens = {
-            'Ethereum Token': {'balance': '0', 'symbol': 'ETH'},
+            'Ethereum Token': {'balance': '100', 'symbol': 'ETH'},
             'Wrapped BNB': {'balance': '10.456789', 'symbol': 'BNB'},
             'BTCB Token': {'balance': '7', 'symbol': 'BTC'},
             'BSC-USD': {'balance': '547,544', 'symbol': 'USDT'},

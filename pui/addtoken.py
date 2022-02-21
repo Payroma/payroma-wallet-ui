@@ -12,7 +12,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelTitle = None
         self.__labelIcon = None
         self.__lineEditAddress = None
-        self.__lineEditAddressAlert = None
+        self.__labelAddressAlert = None
         self.__lineEditSymbol = None
         self.__lineEditDecimals = None
         self.__pushButtonAdd = None
@@ -47,12 +47,12 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditAddress.setValidator(validator.address)
         self.__lineEditAddress.textChanged.connect(self.address_changed)
 
-        self.__lineEditAddressAlert = SPGraphics.QuickLabel(
+        self.__labelAddressAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
             fixed_size=Size.s21, tooltip=QObject.toolTip.addressAlert
         )
-        self.__lineEditAddressAlert.setCursor(Qt.PointingHandCursor)
-        self.__lineEditAddressAlert.hide()
+        self.__labelAddressAlert.setCursor(Qt.PointingHandCursor)
+        self.__labelAddressAlert.hide()
 
         self.__lineEditSymbol = SPGraphics.QuickLineEdit(
             self, fixed_size=Size.default, length=20
@@ -85,7 +85,7 @@ class UiForm(QWidget, SetupForm):
         self.layout().addWidget(self.__lineEditSymbol)
         self.layout().addWidget(self.__lineEditDecimals)
         self.layout().addWidget(self.__pushButtonAdd)
-        self.__lineEditAddress.layout().addWidget(self.__lineEditAddressAlert, alignment=Qt.AlignRight)
+        self.__lineEditAddress.layout().addWidget(self.__labelAddressAlert, alignment=Qt.AlignRight)
         self.__pushButtonAdd.layout().addWidget(self.__loadingEffectAdd, alignment=Qt.AlignCenter)
 
         super(UiForm, self).setup()
@@ -121,7 +121,7 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot(str)
     def address_changed(self, text: str, valid: bool = False):
         self.__lineEditAddress.setProperty('isValid', valid)
-        self.__lineEditAddressAlert.setHidden(valid or not text)
+        self.__labelAddressAlert.setHidden(valid or not text)
         self.__polish(self.__lineEditAddress)
         self.__inputs_validation()
 
@@ -158,15 +158,12 @@ class UiForm(QWidget, SetupForm):
 
     def __inputs_validation(self):
         valid = False
-        try:
-            if (
-                self.__lineEditAddress.property('isValid') and
-                self.__lineEditSymbol.property('isValid') and
-                self.__lineEditDecimals.property('isValid')
-            ):
-                valid = True
-        except AttributeError:
-            pass
+        if (
+            self.__lineEditAddress.property('isValid') and
+            self.__lineEditSymbol.property('isValid') and
+            self.__lineEditDecimals.property('isValid')
+        ):
+            valid = True
 
         self.__pushButtonAdd.setEnabled(valid)
 

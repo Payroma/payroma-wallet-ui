@@ -233,7 +233,7 @@ class UiForm(QWidget, SetupForm):
     def __tab_changed(self):
         widget = self.__tabWidget.currentWidget()
         self.__tabTransMotion = SPGraphics.GeometryMotion(widget)
-        self.__tabTransMotion.temp_x(start_x=widget.width(), end_x=0, duration=300).start()
+        self.__tabTransMotion.temp_x(start_x=widget.width(), end_x=0, duration=500).start()
 
     def add_tab(self, model: QObject, name: str):
         self.__tabWidget.addTab(model, name)
