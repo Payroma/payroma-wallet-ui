@@ -13,3 +13,9 @@ AddressBookItem:hover
 {
     padding-right: 45px;
 }
+
+
+#lineEditAmount
+{
+    padding-right: 60px;
+}

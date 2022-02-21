@@ -2,6 +2,7 @@ from plibs import *
 from pheader import *
 from pui import withdraw
 from pmodel.addressesbooklist import AddressesBookListModel
+from pmodel.addamount import AddAmountModel
 
 
 class GlobalEvents:
@@ -21,16 +22,21 @@ class WithdrawModel(withdraw.UiForm):
 
         # Tabs
         self.addressesBookListModel = AddressesBookListModel(self)
+        self.addAmountModel = AddAmountModel(self)
 
         self.add_tab(self.addressesBookListModel, '')
+        self.add_tab(self.addAmountModel, '')
 
         # data
         self.__address = ''
 
+    def hideEvent(self, event: QHideEvent):
+        super(WithdrawModel, self).hideEvent(event)
+        self.reset()
+
     @pyqtSlot()
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.WALLET)
-        self.reset()
 
     @pyqtSlot(str)
     def address_changed(self, text: str):

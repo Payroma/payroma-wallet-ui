@@ -95,17 +95,11 @@ QProgressBar::chunk
 
 QComboBox
 {
-    color: @white;
-    background-color: @highlight;
+    background-color: @background_second;
     selection-background-color: gray;
-    border-radius: 5px;
+    border-radius: 10px;
     padding-left: 10px;
     padding-right: 10px;
-}
-QComboBox::disabled
-{
-    color: @disabled_font;
-    background-color: @disabled;
 }
 QComboBox::on
 {
@@ -114,8 +108,8 @@ QComboBox::on
 }
 QComboBox::drop-down
 {
-    image: url(':/images/icons/arrow-down-21.png');
-    margin-top: 10px;
+    image: url(':/images/icons/light/arrow-less-down-21.png');
+    margin-top: 15px;
     margin-right: 8px;
 }
 QComboBox::drop-down:disabled
@@ -124,26 +118,28 @@ QComboBox::drop-down:disabled
 }
 QComboBox QAbstractItemView
 {
-    color: @white;
-    background-color: @highlight;
+    background-color: @background_second;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    padding-left: 5px;
+    padding-left: 10px;
     padding-right: 5px;
     padding-bottom: 10px;
 }
 QComboBox QAbstractItemView::item
 {
-    color: @white;
-    min-height: 35px;
+    color: @font_description;
+    min-height: 41px;
 }
+QComboBox QListView::item:hover,
 QComboBox QListView::item:selected
 {
+    color: @font;
     background-color: @white_a10;
+    border-radius: 5px;
 }
 QComboBox QScrollBar::handle
 {
-    background-color: @white_a50;
+    background-color: @highlight;
 }
 
 
