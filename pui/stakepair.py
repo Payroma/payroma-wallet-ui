@@ -1,5 +1,3 @@
-import SPGraphics
-
 from plibs import *
 from pheader import *
 from pcontroller import translator

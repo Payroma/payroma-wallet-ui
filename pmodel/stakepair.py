@@ -1,6 +1,7 @@
 from plibs import *
 from pheader import *
 from pui import stakepair
+from pmodel.stakepairapproval import StakePairApprovalModel
 
 
 class GlobalEvents(QObject):
@@ -17,6 +18,11 @@ class StakePairModel(stakepair.UiForm):
 
         # Events
         QObject.stakePairModel.pairChanged = self.set_pair
+
+        # Tabs
+        self.stakePairApprovalModel = StakePairApprovalModel(self)
+
+        self.add_tab(self.stakePairApprovalModel, '')
 
     @pyqtSlot()
     def back_clicked(self):
