@@ -29,7 +29,7 @@ class UiForm(QWidget, SetupForm):
 
     def setup(self):
         button_size = QSize(61, 31)
-        menu_button_size = QSize(180, 41)
+        menu_button_size = QSize(181, 41)
 
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QVBoxLayout())

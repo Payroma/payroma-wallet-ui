@@ -68,6 +68,7 @@ class Tab:
     AUTHENTICATOR_SETUP = 'authenticatorSetupModel'
     WALLET = 'walletModel'
     STAKE_LIST = 'stakeListModel'
+    STAKE_PAIR = 'stakePairModel'
     DEPOSIT = 'depositModel'
     WITHDRAW = 'withdrawModel'
 

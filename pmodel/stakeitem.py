@@ -8,3 +8,6 @@ class StakeItem(stakeitem.UiForm):
         super(StakeItem, self).__init__(parent)
 
         self.setup()
+
+        # Data
+        self.interface = None

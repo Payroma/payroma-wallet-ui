@@ -62,8 +62,17 @@ class StakeListModel(stakelist.UiForm):
             item.set_block_number(info['block'])
             item.set_total_staked(info['totalStaked'], info['stakeSymbol'])
             item.set_duration_type(info['lock'])
+            item.interface = info
             self.add_item(item)
 
     @pyqtSlot()
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.WALLET)
+
+    @pyqtSlot(QListWidgetItem)
+    def item_clicked(self, item: QListWidgetItem):
+        widget = super(StakeListModel, self).item_clicked(item)
+        QObject.stakePairModel.pairChanged(
+            widget.interface['stakeSymbol'], widget.interface['earnSymbol']
+        )
+        QObject.mainModel.currentTabChanged(Tab.STAKE_PAIR)
