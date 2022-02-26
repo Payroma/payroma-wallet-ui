@@ -21,9 +21,11 @@ class WalletsListModel(walletslist.UiForm):
             item.set_address(address)
             self.add_item(item)
 
+    @pyqtSlot()
     def add_new_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.ADD_WALLET)
 
+    @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem):
         widget = super(WalletsListModel, self).item_clicked(item)
         QObject.loginModel.loginChanged(

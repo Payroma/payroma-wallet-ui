@@ -95,7 +95,7 @@ class UiForm(QWidget, SetupForm):
 
     def re_translate(self):
         self.__labelTitle.setText(translator("Add Token / Custom Token"))
-        self.__lineEditAddress.setPlaceholderText(translator("Contract Address"))
+        self.__lineEditAddress.setPlaceholderText(translator("Contract Address (0x)"))
         self.__lineEditSymbol.setPlaceholderText(translator("Symbol"))
         self.__lineEditDecimals.setPlaceholderText(translator("Decimals"))
         self.__pushButtonAdd.setText(translator("Add Token"))

@@ -29,13 +29,12 @@ class UiForm(QWidget, SetupForm):
         self.__headerWidget.setObjectName('headerWidget')
 
         self.__lineEditSearch = SPGraphics.QuickLineEdit(
-            self, fixed_height=41, layout_support=True
+            self, fixed_height=41, layout_support=True, length=42
         )
         self.__lineEditSearch.setProperty("iconable", True)
         self.__lineEditSearch.setMaximumWidth(501)
         self.__lineEditSearch.setFocusPolicy(Qt.ClickFocus)
         self.__lineEditSearch.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.__lineEditSearch.setValidator(validator.username)
         self.__lineEditSearch.textChanged.connect(self.search_changed)
 
         self.__labelSearchIcon = SPGraphics.QuickLabel(

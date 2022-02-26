@@ -50,7 +50,7 @@ class UiForm(QWidget, SetupForm):
 
     def re_translate(self):
         self.labelDonate.setText(translator("Donate"))
-        self.pushButtonInvest.setText(translator("Invest with Payroma"))
+        self.pushButtonInvest.setText(translator("Payroma.com"))
 
     def re_font(self):
         font = QFont()

@@ -48,10 +48,12 @@ class WalletModel(wallet.UiForm):
     def stake_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.STAKE_LIST)
 
+    @pyqtSlot()
     def details_clicked(self):
         super(WalletModel, self).details_clicked()
         self.set_current_tab(Tab.WalletTab.WALLET_DETAILS)
 
+    @pyqtSlot()
     def add_token_clicked(self):
         super(WalletModel, self).add_token_clicked()
         self.set_current_tab(Tab.WalletTab.ADD_TOKEN)

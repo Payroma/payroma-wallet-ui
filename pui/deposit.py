@@ -81,7 +81,7 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_style(self):
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_less_left21))
+        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
 
     def re_translate(self):

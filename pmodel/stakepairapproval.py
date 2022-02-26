@@ -9,5 +9,6 @@ class StakePairApprovalModel(stakepairapproval.UiForm):
 
         self.setup()
 
+    @pyqtSlot()
     def approval_clicked(self):
         QObject.stakePairModel.approvalChanged()

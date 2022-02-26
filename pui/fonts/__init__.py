@@ -13,7 +13,7 @@ CURRENT_TEMPLATE = None
 
 
 class data:
-    pass
+    size = None
 
 
 def load():

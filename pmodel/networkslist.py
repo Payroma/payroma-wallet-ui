@@ -28,9 +28,11 @@ class NetworksListModel(networkslist.UiForm):
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.SETTINGS)
 
+    @pyqtSlot()
     def add_new_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.ADD_NETWORK)
 
+    @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem):
         widget = super(NetworksListModel, self).item_clicked(item)
         for network in self.networks:

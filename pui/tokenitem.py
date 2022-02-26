@@ -96,3 +96,6 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         icon = assetsicons.get_asset_icon(text)
         self.__labelIcon.setPixmap(icon)
         self.__labelSymbol.setText(text)
+
+    def set_master(self):
+        self.__pushButtonRemove.deleteLater()

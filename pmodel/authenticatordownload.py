@@ -9,5 +9,6 @@ class AuthenticatorDownloadModel(authenticatordownload.UiForm):
 
         self.setup()
 
+    @pyqtSlot()
     def next_clicked(self):
         QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.VERIFICATION)

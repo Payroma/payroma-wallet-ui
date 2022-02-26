@@ -24,6 +24,9 @@ class TokensListModel(tokenslist.UiForm):
             item.set_balance(info['balance'])
             item.set_symbol(info['symbol'])
             self.add_item(item)
+            if name == 'Ethereum Token':
+                item.set_master()
 
+    @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem):
         widget = super(TokensListModel, self).item_clicked(item)

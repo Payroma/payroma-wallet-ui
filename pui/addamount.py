@@ -41,7 +41,7 @@ class UiForm(QWidget, SetupForm):
         self.__comboBoxTokens.currentIndexChanged.connect(self.token_changed)
 
         self.__lineEditAmount = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.default, layout_support=True
+            self, fixed_size=Size.default, layout_support=True, length=42
         )
         self.__lineEditAmount.setProperty('iconable', True)
         self.__lineEditAmount.setProperty('iconableRight', True)

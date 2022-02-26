@@ -121,7 +121,7 @@ class UiForm(SetupForm):
         self.networkExplorerAlertR.labelText.setText(translator("Explorer URL is wrong"))
         self.copyR.labelText.setText(translator("Copy"))
         self.favoriteR.labelText.setText(translator("Check to Favorite"))
-        self.walletStatusR.labelText.setText(translator("Wallet connection status"))
+        self.walletStatusR.labelText.setText(translator("Login status"))
         self.networkStatusR.labelText.setText(translator("Network connection status"))
         self.menuR.labelText.setText(translator("Menu"))
 

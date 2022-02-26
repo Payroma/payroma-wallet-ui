@@ -35,10 +35,9 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__lineEditAddress = SPGraphics.QuickLineEdit(
-            self, fixed_size=QSize(351, 51), layout_support=True
+            self, fixed_size=QSize(351, 51), layout_support=True, length=42
         )
         self.__lineEditAddress.setFocusPolicy(Qt.ClickFocus)
-        self.__lineEditAddress.setValidator(validator.username)
         self.__lineEditAddress.setProperty("iconable", True)
         self.__lineEditAddress.setObjectName('lineEditAddress')
         self.__lineEditAddress.textChanged.connect(self.address_changed)

@@ -57,7 +57,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__lineEditUsername = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.default, layout_support=True, length=40
+            self, fixed_size=Size.default, layout_support=True, length=30
         )
         self.__lineEditUsername.setProperty("iconable", True)
         self.__lineEditUsername.setProperty("iconableRight", True)
