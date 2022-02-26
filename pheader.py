@@ -71,6 +71,7 @@ class Tab:
     STAKE_PAIR = 'stakePairModel'
     DEPOSIT = 'depositModel'
     WITHDRAW = 'withdrawModel'
+    HISTORY_LIST = 'historyListModel'
 
     class WalletTab:
         TOKENS_LIST = 'tokensListModel'
