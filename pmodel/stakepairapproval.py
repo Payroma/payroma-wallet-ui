@@ -8,3 +8,6 @@ class StakePairApprovalModel(stakepairapproval.UiForm):
         super(StakePairApprovalModel, self).__init__(parent)
 
         self.setup()
+
+    def approval_clicked(self):
+        QObject.stakePairModel.approvalChanged()

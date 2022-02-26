@@ -2,10 +2,12 @@ from plibs import *
 from pheader import *
 from pui import stakepair
 from pmodel.stakepairapproval import StakePairApprovalModel
+from pmodel.stakepairamount import StakePairAmountModel
 
 
 class GlobalEvents(QObject):
     pairChanged = None
+    approvalChanged = None
 
 
 class StakePairModel(stakepair.UiForm):
@@ -18,11 +20,14 @@ class StakePairModel(stakepair.UiForm):
 
         # Events
         QObject.stakePairModel.pairChanged = self.set_pair
+        QObject.stakePairModel.approvalChanged = self.set_approved
 
         # Tabs
         self.stakePairApprovalModel = StakePairApprovalModel(self)
+        self.stakePairAmountModel = StakePairAmountModel(self)
 
         self.add_tab(self.stakePairApprovalModel, '')
+        self.add_tab(self.stakePairAmountModel, '')
 
     @pyqtSlot()
     def back_clicked(self):

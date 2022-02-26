@@ -99,13 +99,12 @@ class UiForm(QWidget, SetupForm):
 
         self.__tabWidget = QTabWidget(self)
         self.__tabWidget.findChild(QTabBar).hide()
-        self.__tabWidget.currentChanged.connect(self.__tab_changed)
 
         self.layout().addWidget(self.__labelStakeIcon, 0, 0, 1, 1, Qt.AlignHCenter)
         self.layout().addWidget(self.__labelX, 0, 1, 1, 1)
         self.layout().addWidget(self.__labelEarnIcon, 0, 2, 1, 1, Qt.AlignHCenter)
-        self.layout().addWidget(self.__labelStakeSymbol, 1, 0, 1, 1)
-        self.layout().addWidget(self.__labelEarnSymbol, 1, 2, 1, 1)
+        self.layout().addWidget(self.__labelStakeSymbol, 1, 0, 1, 1, Qt.AlignHCenter)
+        self.layout().addWidget(self.__labelEarnSymbol, 1, 2, 1, 1, Qt.AlignHCenter)
         self.layout().addWidget(self.__pushButtonStakeContract, 2, 0, 1, 1)
         self.layout().addWidget(self.__pushButtonEarnContract, 2, 2, 1, 1)
         self.layout().addWidget(self.__pushButtonStakeWebsite, 3, 0, 1, 1)
@@ -116,6 +115,7 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_style(self):
+        self.setStyleSheet(styles.data.css.stakepair)
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__labelX.setPixmap(images.data.icons.changeable.cross31)
         self.__pushButtonStakeContract.setIcon(QIcon(images.data.icons.changeable.external21))
@@ -173,12 +173,6 @@ class UiForm(QWidget, SetupForm):
     def staking_contract_clicked(self):
         pass
 
-    @pyqtSlot()
-    def __tab_changed(self):
-        widget = self.__tabWidget.currentWidget()
-        self.__tabTransMotion = SPGraphics.OpacityMotion(widget, SPGraphics.Property.OPACITY)
-        self.__tabTransMotion.temp_show().start()
-
     def add_tab(self, model: QObject, name: str):
         self.__tabWidget.addTab(model, name)
 
@@ -190,11 +184,17 @@ class UiForm(QWidget, SetupForm):
         self.re_translate()
 
     def set_approved(self):
-        self.__tabWidget.setCurrentIndex(0)
+        self.__tabWidget.setCurrentIndex(1)
+        self.__tab_changed()
 
     def reset(self):
         self.__labelStakeIcon.clear()
         self.__labelEarnIcon.clear()
         self.__labelStakeSymbol.clear()
         self.__labelEarnSymbol.clear()
-        self.__tabWidget.setCurrentIndex(1)
+        self.__tabWidget.setCurrentIndex(0)
+
+    def __tab_changed(self):
+        widget = self.__tabWidget.currentWidget()
+        self.__tabTransMotion = SPGraphics.OpacityMotion(widget, SPGraphics.Property.OPACITY)
+        self.__tabTransMotion.temp_show().start()
