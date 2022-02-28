@@ -72,6 +72,7 @@ class Tab:
     DEPOSIT = 'depositModel'
     WITHDRAW = 'withdrawModel'
     HISTORY_LIST = 'historyListModel'
+    TRANSACTION_SENDER = 'transactionSenderModel'
 
     class WalletTab:
         TOKENS_LIST = 'tokensListModel'

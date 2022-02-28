@@ -20,6 +20,7 @@ class UiForm(SetupForm):
         self.networkStatus = None
         self.ShowBlockTime = None
         self.addNewAddressBook = None
+        self.transactionSendTo = None
 
         self.showR = None
         self.usernameInfoR = None
@@ -58,6 +59,7 @@ class UiForm(SetupForm):
         self.networkStatus = self.__align_top()
         self.ShowBlockTime = self.__align_top()
         self.addNewAddressBook = self.__align_top()
+        self.transactionSendTo = self.__align_top()
 
         self.showR = self.__align_right()
         self.usernameInfoR = self.__align_right()
@@ -102,6 +104,7 @@ class UiForm(SetupForm):
         self.networkStatus.labelText.setText(translator("Network Connection Status"))
         self.ShowBlockTime.labelText.setText(translator("Show block time"))
         self.addNewAddressBook.labelText.setText(translator("Add new to addresses book"))
+        self.transactionSendTo.labelText.setText(translator("The transaction goes to this address"))
 
         self.showR.labelText.setText(translator("Show"))
         self.usernameInfoR.labelText.setText(translator(
@@ -148,6 +151,7 @@ class UiForm(SetupForm):
         self.networkStatus.labelText.setFont(font)
         self.ShowBlockTime.labelText.setFont(font)
         self.addNewAddressBook.labelText.setFont(font)
+        self.transactionSendTo.labelText.setFont(font)
 
         self.showR.labelText.setFont(font)
         self.usernameInfoR.labelText.setFont(font)

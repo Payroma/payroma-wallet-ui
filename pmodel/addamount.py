@@ -42,6 +42,7 @@ class AddAmountModel(addamount.UiForm):
     def continue_clicked(self):
         super(AddAmountModel, self).continue_clicked()
         QTimer().singleShot(5000, self.continue_completed)
+        QObject.mainModel.currentTabChanged(Tab.TRANSACTION_SENDER)
 
     @pyqtSlot()
     def cancel_clicked(self):
