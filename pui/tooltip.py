@@ -21,6 +21,9 @@ class UiForm(SetupForm):
         self.ShowBlockTime = None
         self.addNewAddressBook = None
         self.transactionSendTo = None
+        self.pending = None
+        self.success = None
+        self.failed = None
 
         self.showR = None
         self.usernameInfoR = None
@@ -37,6 +40,7 @@ class UiForm(SetupForm):
         self.walletStatusR = None
         self.networkStatusR = None
         self.menuR = None
+        self.viewTransactionR = None
 
         self.depositB = None
         self.withdrawB = None
@@ -60,6 +64,9 @@ class UiForm(SetupForm):
         self.ShowBlockTime = self.__align_top()
         self.addNewAddressBook = self.__align_top()
         self.transactionSendTo = self.__align_top()
+        self.pending = self.__align_top()
+        self.success = self.__align_top()
+        self.failed = self.__align_top()
 
         self.showR = self.__align_right()
         self.usernameInfoR = self.__align_right()
@@ -76,6 +83,7 @@ class UiForm(SetupForm):
         self.walletStatusR = self.__align_right()
         self.networkStatusR = self.__align_right()
         self.menuR = self.__align_right()
+        self.viewTransactionR = self.__align_right()
 
         self.depositB = self.__align_bottom()
         self.withdrawB = self.__align_bottom()
@@ -93,30 +101,33 @@ class UiForm(SetupForm):
         self.back.labelText.setText(translator("Back"))
         self.remove.labelText.setText(translator("Remove"))
         self.usernameAlert.labelText.setText(translator(
-            "The username/email/phone is already taken, try another username."
+            "The username/email/phone is already taken, try another username"
         ))
         self.passwordAlert.labelText.setText(translator(
-            "Password must be good at least and including UPPER/lowercase, symbols and numbers."
+            "Password must be good at least and including UPPER/lowercase, symbols and numbers"
         ))
-        self.passwordConfirmAlert.labelText.setText(translator("Password doesn't match."))
-        self.pinCodeAlert.labelText.setText(translator("PIN Code must be 6 numbers."))
-        self.addressAlert.labelText.setText(translator("This address invalid."))
+        self.passwordConfirmAlert.labelText.setText(translator("Password doesn't match"))
+        self.pinCodeAlert.labelText.setText(translator("PIN Code must be 6 numbers"))
+        self.addressAlert.labelText.setText(translator("This address invalid"))
         self.networkStatus.labelText.setText(translator("Network Connection Status"))
         self.ShowBlockTime.labelText.setText(translator("Show block time"))
         self.addNewAddressBook.labelText.setText(translator("Add new to addresses book"))
         self.transactionSendTo.labelText.setText(translator("The transaction goes to this address"))
+        self.pending.labelText.setText(translator("Pending"))
+        self.success.labelText.setText(translator("Success"))
+        self.failed.labelText.setText(translator("Failed"))
 
         self.showR.labelText.setText(translator("Show"))
         self.usernameInfoR.labelText.setText(translator(
-            "Username/email is sensitive to characters."
+            "Username/email is sensitive to characters"
         ))
         self.pinCodeInfoR.labelText.setText(translator(
-            "PIN code is important to add your wallet to our app later, It acts as a second layer of protection."
+            "PIN code is important to add your wallet to our app later, It acts as a second layer of protection"
         ))
         self.addressInfoR.labelText.setText(translator(
-            "If you have an existing wallet, set the wallet address to check."
+            "If you have an existing wallet, set the wallet address to check"
         ))
-        self.networkSettingsR.labelText.setText(translator("Network settings to add a new and switching."))
+        self.networkSettingsR.labelText.setText(translator("Network settings to add a new and switching"))
         self.addNewR.labelText.setText(translator("Add New"))
         self.networkNameAlertR.labelText.setText(translator("Network name already exists before"))
         self.networkRPCAlertR.labelText.setText(translator("This RPC is unable to connect"))
@@ -127,6 +138,7 @@ class UiForm(SetupForm):
         self.walletStatusR.labelText.setText(translator("Login status"))
         self.networkStatusR.labelText.setText(translator("Network connection status"))
         self.menuR.labelText.setText(translator("Menu"))
+        self.viewTransactionR.labelText.setText(translator("View transaction at explorer"))
 
         self.depositB.labelText.setText(translator("Deposit"))
         self.withdrawB.labelText.setText(translator("Withdraw"))
@@ -152,6 +164,9 @@ class UiForm(SetupForm):
         self.ShowBlockTime.labelText.setFont(font)
         self.addNewAddressBook.labelText.setFont(font)
         self.transactionSendTo.labelText.setFont(font)
+        self.pending.labelText.setFont(font)
+        self.success.labelText.setFont(font)
+        self.failed.labelText.setFont(font)
 
         self.showR.labelText.setFont(font)
         self.usernameInfoR.labelText.setFont(font)
@@ -168,6 +183,7 @@ class UiForm(SetupForm):
         self.walletStatusR.labelText.setFont(font)
         self.networkStatusR.labelText.setFont(font)
         self.menuR.labelText.setFont(font)
+        self.viewTransactionR.labelText.setFont(font)
 
         self.depositB.labelText.setFont(font)
         self.withdrawB.labelText.setFont(font)

@@ -1,7 +1,7 @@
 from plibs import *
 from pheader import *
 from pcontroller import translator
-from pui import SetupForm, fonts, images, Size
+from pui import SetupForm, fonts, images, styles, Size
 
 
 class UiForm(QWidget, SetupForm):
@@ -55,6 +55,7 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_style(self):
+        self.setStyleSheet(styles.data.css.historylist)
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
 
     def re_translate(self):
