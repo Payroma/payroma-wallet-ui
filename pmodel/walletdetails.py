@@ -11,8 +11,8 @@ class WalletDetailsModel(walletdetails.UiForm):
         self.reset()
 
         # Test
+        self.set_data('0x0000000000000000000000000000000000000000', time.ctime())
         self.set_private_key('0000000000000000000000000000000000000000000000000000000000000000')
-        self.set_date_created(time.ctime())
 
     @pyqtSlot()
     def back_clicked(self):

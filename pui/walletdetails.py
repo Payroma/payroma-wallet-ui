@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, to_qr_code
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
 
 
@@ -11,9 +11,10 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack = None
         self.__labelAddressTitle = None
         self.__labelAddressQR = None
-        self.__labelDateCreatedTitle = None
         self.__labelDateCreated = None
+        self.__labelDateCreatedValue = None
         self.__labelPrivateKey = None
+        self.__labelPrivateKeyValue = None
         self.__pushButtonPrivateKey = None
 
     def setup(self):
@@ -38,18 +39,22 @@ class UiForm(QWidget, SetupForm):
             self, scaled=True, fixed_size=QSize(201, 201)
         )
 
-        self.__labelDateCreatedTitle = SPGraphics.QuickLabel(
-            self, fixed_height=21
-        )
-
         self.__labelDateCreated = SPGraphics.QuickLabel(
             self, fixed_height=21
         )
-        self.__labelDateCreated.setWordWrap(False)
-        self.__labelDateCreated.setObjectName('labelDescription')
 
-        self.__labelPrivateKey = qlabeladdress.QLabelAddress(
-            self, fixed_size=Size.default, copy_tooltip=QObject.toolTip.copyR
+        self.__labelDateCreatedValue = SPGraphics.QuickLabel(
+            self, fixed_height=21
+        )
+        self.__labelDateCreatedValue.setWordWrap(False)
+        self.__labelDateCreatedValue.setObjectName('labelDescription')
+
+        self.__labelPrivateKey = SPGraphics.QuickLabel(
+            self, fixed_height=21
+        )
+
+        self.__labelPrivateKeyValue = qlabeladdress.QLabelAddress(
+            self, fixed_height=Size.default.height(), copy_tooltip=QObject.toolTip.copyR
         )
 
         self.__pushButtonPrivateKey = SPGraphics.QuickPushButton(
@@ -61,37 +66,39 @@ class UiForm(QWidget, SetupForm):
 
         self.layout().addWidget(self.__labelAddressTitle, 0, 0, 1, 2)
         self.layout().addWidget(self.__labelAddressQR, 1, 0, 1, 2, Qt.AlignHCenter)
-        self.layout().addWidget(self.__labelDateCreatedTitle, 2, 0, 1, 1)
-        self.layout().addWidget(self.__labelDateCreated, 2, 1, 1, 1)
-        self.layout().addWidget(self.__labelPrivateKey, 3, 0, 1, 2)
+        self.layout().addWidget(self.__labelDateCreated, 2, 0, 1, 1)
+        self.layout().addWidget(self.__labelDateCreatedValue, 2, 1, 1, 1)
+        self.layout().addWidget(self.__labelPrivateKey, 3, 0, 1, 1)
+        self.layout().addWidget(self.__labelPrivateKeyValue, 3, 1, 1, 1)
         self.layout().addWidget(self.__pushButtonPrivateKey, 4, 0, 1, 2)
 
         super(UiForm, self).setup()
 
     def re_style(self):
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_less_left21))
-        self.__labelPrivateKey.setIcon(QIcon(images.data.icons.changeable.copy21))
+        self.__labelPrivateKeyValue.setIcon(QIcon(images.data.icons.changeable.copy21))
 
     def re_translate(self):
-        self.__labelAddressTitle.setText(translator("QR Address"))
-        self.__labelDateCreatedTitle.setText(translator("Date Created:"))
+        self.__labelAddressTitle.setText(translator("Scan QR Address"))
+        self.__labelDateCreated.setText(translator("Date Created"))
+        self.__labelPrivateKey.setText(translator("Private Key"))
         self.__pushButtonPrivateKey.setText(translator("Show Private Key"))
 
     def re_font(self):
         font = QFont()
-
-        self.__labelPrivateKey.setFont(font)
 
         font.setPointSize(fonts.data.size.average)
         font.setBold(True)
         self.__labelAddressTitle.setFont(font)
 
         font.setPointSize(fonts.data.size.title)
-        self.__labelDateCreatedTitle.setFont(font)
+        self.__labelDateCreated.setFont(font)
+        self.__labelPrivateKey.setFont(font)
         self.__pushButtonPrivateKey.setFont(font)
 
         font.setBold(False)
-        self.__labelDateCreated.setFont(font)
+        self.__labelDateCreatedValue.setFont(font)
+        self.__labelPrivateKeyValue.setFont(font)
 
     @pyqtSlot()
     def back_clicked(self):
@@ -100,32 +107,21 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot()
     def private_key_clicked(self):
         self.__labelPrivateKey.show()
+        self.__labelPrivateKeyValue.show()
         self.__pushButtonPrivateKey.hide()
 
-    def set_address(self, text: str):
-        image_file = io.BytesIO()
-
-        qr_generator = pyqrcode.create(text, error='L', mode='binary')
-        qr_generator.png(
-            image_file, scale=7, module_color=styles.data.colors.font.getRgb(),
-            background=styles.data.colors.background.getRgb()
-        )
-
-        image = QImage.fromData(image_file.getvalue(), 'png').scaled(
-            self.__labelAddressQR.size(), Qt.KeepAspectRatio
-        )
-
-        self.__labelAddressQR.setPixmap(QPixmap.fromImage(image))
-
-    def set_date_created(self, text: str):
-        self.__labelDateCreated.setText(text)
+    def set_data(self, address: str, created_date: str):
+        pixmap = to_qr_code(address, self.__labelAddressQR.size())
+        self.__labelAddressQR.setPixmap(pixmap)
+        self.__labelDateCreatedValue.setText(created_date)
 
     def set_private_key(self, text: str):
-        self.__labelPrivateKey.setText(text, is_ellipsis=False)
-        SPGraphics.text_ellipsis(self.__labelPrivateKey.label, Qt.ElideMiddle, width=271)
+        self.__labelPrivateKeyValue.setText(text, is_ellipsis=False)
+        SPGraphics.text_ellipsis(self.__labelPrivateKeyValue.label, Qt.ElideMiddle, width=151)
 
     def reset(self):
         self.__labelAddressQR.clear()
-        self.__labelPrivateKey.clear()
+        self.__labelPrivateKeyValue.clear()
         self.__labelPrivateKey.hide()
+        self.__labelPrivateKeyValue.hide()
         self.__pushButtonPrivateKey.show()
