@@ -1,3 +1,9 @@
+HeaderWidget
+{
+	background-color: @background_second;
+}
+
+
 #lineEditDeposit,
 #lineEditWithdraw,
 #lineEditReward

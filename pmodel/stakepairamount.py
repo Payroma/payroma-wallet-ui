@@ -3,16 +3,20 @@ from pheader import *
 from pui import stakepairamount
 
 
+class GlobalEvents(QObject):
+    pairChanged = None
+
+
 class StakePairAmountModel(stakepairamount.UiForm):
+    QObject.stakePairAmountModel = GlobalEvents()
+
     def __init__(self, parent):
         super(StakePairAmountModel, self).__init__(parent)
 
         self.setup()
 
-        # Test
-        self.set_balance('547,544', 'USDT')
-        self.set_staked_balance('20,000', 'USDT')
-        self.set_claim_balance('1000', 'BUSD')
+        # Events
+        QObject.stakePairAmountModel.pairChanged = self.set_data
 
     @pyqtSlot(str)
     def deposit_changed(self, text: str):
@@ -26,5 +30,5 @@ class StakePairAmountModel(stakepairamount.UiForm):
 
     @pyqtSlot(str)
     def claim_changed(self, text: str):
-        valid = True if float(text or 0) > 0 else False
+        valid = True if text else False
         super(StakePairAmountModel, self).claim_changed(text, valid)

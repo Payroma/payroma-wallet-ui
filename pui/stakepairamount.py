@@ -126,7 +126,7 @@ class UiForm(QWidget, SetupForm):
 
     def re_translate(self):
         self.__labelBalance.setText(translator("Available"))
-        self.__labelStakedBalance.setText(translator("Stacked"))
+        self.__labelStakedBalance.setText(translator("Staked"))
         self.__lineEditDeposit.setPlaceholderText(translator("Amount"))
         self.__pushButtonDeposit.setText(translator("Deposit"))
         self.__lineEditWithdraw.setPlaceholderText(translator("Amount"))
@@ -136,14 +136,15 @@ class UiForm(QWidget, SetupForm):
     def re_font(self):
         font = QFont()
 
+        self.__labelBalance.setFont(font)
+        self.__labelStakedBalance.setFont(font)
+
         font.setPointSize(fonts.data.size.small)
         self.__pushButtonDeposit.setFont(font)
         self.__pushButtonWithdraw.setFont(font)
         self.__pushButtonClaim.setFont(font)
 
         font.setPointSize(fonts.data.size.title)
-        self.__labelBalance.setFont(font)
-        self.__labelStakedBalance.setFont(font)
         self.__lineEditDeposit.setFont(font)
         self.__lineEditWithdraw.setFont(font)
 
@@ -176,17 +177,16 @@ class UiForm(QWidget, SetupForm):
     def claim_changed(self, text: str, valid: bool = False):
         self.__pushButtonClaim.setEnabled(valid)
 
-    def set_balance(self, text: str, symbol: str):
-        self.__labelBalanceValue.setText(f'{text} {symbol}')
-        self.__labelDepositIcon.setPixmap(assetsicons.get_asset_icon(symbol))
+    def set_data(self, balance: str, staked: str, claim: str, stake_symbol: str, earn_symbol: str):
+        self.__labelBalanceValue.setText("{} {}".format(balance, stake_symbol))
+        self.__labelStakedBalanceValue.setText("{} {}".format(staked, stake_symbol))
+        self.__labelDepositIcon.setPixmap(assetsicons.get_asset_icon(stake_symbol))
+        self.__labelWithdrawIcon.setPixmap(assetsicons.get_asset_icon(stake_symbol))
+        self.update_claim(claim, earn_symbol)
 
-    def set_staked_balance(self, text: str, symbol: str):
-        self.__labelStakedBalanceValue.setText(f'{text} {symbol}')
-        self.__labelWithdrawIcon.setPixmap(assetsicons.get_asset_icon(symbol))
-
-    def set_claim_balance(self, text: str, symbol: str):
-        self.__lineEditClaim.setText(text)
+    def update_claim(self, text: str, symbol: str):
         self.__labelClaimIcon.setPixmap(assetsicons.get_asset_icon(symbol))
+        self.__lineEditClaim.setText(text)
 
     def reset(self):
         self.__labelBalanceValue.clear()

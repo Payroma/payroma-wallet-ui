@@ -19,7 +19,7 @@ class StakePairModel(stakepair.UiForm):
         self.setup()
 
         # Events
-        QObject.stakePairModel.pairChanged = self.set_pair
+        QObject.stakePairModel.pairChanged = self.set_data
         QObject.stakePairModel.approvalChanged = self.set_approved
 
         # Tabs
@@ -33,6 +33,11 @@ class StakePairModel(stakepair.UiForm):
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.STAKE_LIST)
 
-    def set_pair(self, stake_symbol: str, earn_symbol: str):
+    def set_data(
+            self, block_title: str, blocks: int, total_staked: str,
+            stake_symbol: str, earn_symbol: str
+    ):
         self.reset()
-        super(StakePairModel, self).set_pair(stake_symbol, earn_symbol)
+        super(StakePairModel, self).set_data(
+            block_title, blocks, total_staked, stake_symbol, earn_symbol
+        )

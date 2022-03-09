@@ -4,23 +4,108 @@ from pcontroller import translator
 from pui import SetupForm, fonts, images, styles, Size
 
 
+class HeaderWidget(QWidget):
+    def __init__(self, parent):
+        super(HeaderWidget, self).__init__(parent, flags=Qt.SubWindow)
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+        self.setLayout(QVBoxLayout())
+        self.layout().setAlignment(Qt.AlignHCenter)
+        self.layout().setContentsMargins(11, 11, 11, 11)
+        self.layout().setSpacing(11)
+
+        self.labelTitle = SPGraphics.QuickLabel(
+            self, fixed_height=51, align=Qt.AlignCenter
+        )
+
+        self.labelTVL = SPGraphics.QuickLabel(
+            self, fixed_height=21, align=Qt.AlignCenter
+        )
+        self.labelTVL.setWordWrap(False)
+        self.labelTVL.setObjectName('labelTVL')
+
+        self.layout().addWidget(self.labelTitle)
+        self.layout().addWidget(self.labelTVL)
+
+
+class TabsWidget(QWidget):
+    def __init__(self, parent):
+        super(TabsWidget, self).__init__(parent, flags=Qt.SubWindow)
+
+        button_size = QSize(121, 41)
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setLayout(QHBoxLayout())
+        self.layout().setAlignment(Qt.AlignHCenter)
+        self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().setSpacing(11)
+
+        self.pushButtonUpcoming = SPGraphics.QuickPushButton(
+            self, fixed_size=button_size, value_changed=self.__button_light_animate,
+            start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
+        )
+        self.pushButtonUpcoming.setCheckable(True)
+        self.pushButtonUpcoming.setAutoExclusive(True)
+
+        self.pushButtonLive = SPGraphics.QuickPushButton(
+            self, fixed_size=button_size, value_changed=self.__button_light_animate,
+            start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
+        )
+        self.pushButtonLive.setCheckable(True)
+        self.pushButtonLive.setAutoExclusive(True)
+
+        self.pushButtonEnded = SPGraphics.QuickPushButton(
+            self, fixed_size=button_size, value_changed=self.__button_light_animate,
+            start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
+        )
+        self.pushButtonEnded.setCheckable(True)
+        self.pushButtonEnded.setAutoExclusive(True)
+
+        self.layout().addWidget(self.pushButtonUpcoming)
+        self.layout().addWidget(self.pushButtonLive)
+        self.layout().addWidget(self.pushButtonEnded)
+
+    def __button_light_animate(self, value: QColor):
+        sender = self.sender()
+        if not isinstance(sender, QVariantAnimation):
+            return
+
+        css = '''
+        QPushButton {
+            color: rgba%s;
+        }
+        QPushButton:checked
+        {
+            color: %s;
+        }
+        ''' % (str(value.getRgb()), styles.data.colors.highlight.name())
+        sender.parent().setStyleSheet(css)
+
+
+class ListWidget(SPGraphics.QuickListWidget):
+    def __init__(self, parent):
+        super(ListWidget, self).__init__(
+            parent, spacing=10, empty_illustration=images.data.illustrations.no_data
+        )
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.layout().setContentsMargins(21, 0, 21, 0)
+        self.layout().setAlignment(Qt.AlignVCenter)
+        self.labelIllustration.setAlignment(Qt.AlignHCenter)
+        self.labelTitle.setAlignment(Qt.AlignHCenter)
+
+
 class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
         self.__pushButtonBack = None
         self.__headerWidget = None
-        self.__labelTitle = None
-        self.__labelTVL = None
         self.__tabsWidget = None
-        self.__pushButtonUpcoming = None
-        self.__pushButtonLive = None
-        self.__pushButtonEnded = None
         self.__listWidget = None
 
     def setup(self):
-        button_size = QSize(121, 41)
-
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QVBoxLayout())
         self.layout().setContentsMargins(0, 0, 0, 0)
@@ -33,72 +118,21 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
 
-        self.__headerWidget = QWidget(self, flags=Qt.SubWindow)
-        self.__headerWidget.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
-        self.__headerWidget.setLayout(QGridLayout())
-        self.__headerWidget.layout().setSpacing(11)
-        self.__headerWidget.setObjectName('headerWidget')
+        self.__headerWidget = HeaderWidget(self)
 
-        self.__labelTitle = SPGraphics.QuickLabel(
-            self, fixed_height=51, align=Qt.AlignCenter
-        )
+        self.__tabsWidget = TabsWidget(self)
+        self.__tabsWidget.pushButtonUpcoming.clicked.connect(self.upcoming_clicked)
+        self.__tabsWidget.pushButtonLive.clicked.connect(self.live_clicked)
+        self.__tabsWidget.pushButtonEnded.clicked.connect(self.ended_clicked)
 
-        self.__labelTVL = SPGraphics.QuickLabel(
-            self, fixed_height=21, align=Qt.AlignCenter
-        )
-        self.__labelTVL.setObjectName('labelTVL')
-
-        self.__tabsWidget = SPGraphics.QuickWidget(
-            self, fixed_height=51
-        )
-        self.__tabsWidget.setLayout(QHBoxLayout())
-        self.__tabsWidget.layout().setAlignment(Qt.AlignCenter)
-        self.__tabsWidget.layout().setContentsMargins(0, 0, 0, 0)
-
-        self.__pushButtonUpcoming = SPGraphics.QuickPushButton(
-            self, fixed_size=button_size, value_changed=self.__button_light_animate,
-            start_value=styles.data.colors.disabled_font, end_value=styles.data.colors.highlight
-        )
-        self.__pushButtonUpcoming.setCheckable(True)
-        self.__pushButtonUpcoming.setAutoExclusive(True)
-        self.__pushButtonUpcoming.clicked.connect(self.upcoming_clicked)
-
-        self.__pushButtonLive = SPGraphics.QuickPushButton(
-            self, fixed_size=button_size, value_changed=self.__button_light_animate,
-            start_value=styles.data.colors.disabled_font, end_value=styles.data.colors.highlight
-        )
-        self.__pushButtonLive.setCheckable(True)
-        self.__pushButtonLive.setAutoExclusive(True)
-        self.__pushButtonLive.setChecked(True)
-        self.__pushButtonLive.clicked.connect(self.live_clicked)
-
-        self.__pushButtonEnded = SPGraphics.QuickPushButton(
-            self, fixed_size=button_size, value_changed=self.__button_light_animate,
-            start_value=styles.data.colors.disabled_font, end_value=styles.data.colors.highlight
-        )
-        self.__pushButtonEnded.setCheckable(True)
-        self.__pushButtonEnded.setAutoExclusive(True)
-        self.__pushButtonEnded.clicked.connect(self.ended_clicked)
-
-        self.__listWidget = SPGraphics.QuickListWidget(
-            self, spacing=10, empty_illustration=images.data.illustrations.no_data
-        )
-        self.__listWidget.layout().setContentsMargins(21, 0, 21, 0)
-        self.__listWidget.layout().setAlignment(Qt.AlignVCenter)
-        self.__listWidget.labelIllustration.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelTitle.setAlignment(Qt.AlignHCenter)
+        self.__listWidget = ListWidget(self)
         self.__listWidget.itemClicked.connect(self.item_clicked)
 
         self.__pushButtonBack.raise_()
 
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__listWidget)
-        self.__headerWidget.layout().addWidget(self.__labelTitle)
-        self.__headerWidget.layout().addWidget(self.__labelTVL)
         self.__headerWidget.layout().addWidget(self.__tabsWidget)
-        self.__tabsWidget.layout().addWidget(self.__pushButtonUpcoming)
-        self.__tabsWidget.layout().addWidget(self.__pushButtonLive)
-        self.__tabsWidget.layout().addWidget(self.__pushButtonEnded)
 
         super(UiForm, self).setup()
 
@@ -107,10 +141,12 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
 
     def re_translate(self):
-        self.__labelTitle.setText(translator("Just stake some tokens to earn.\nHigh APR, low risk."))
-        self.__pushButtonUpcoming.setText(translator("Upcoming"))
-        self.__pushButtonLive.setText(translator("Live"))
-        self.__pushButtonEnded.setText(translator("Ended"))
+        self.__headerWidget.labelTitle.setText(
+            translator("Just stake some tokens to earn.\nHigh APR, low risk.")
+        )
+        self.__tabsWidget.pushButtonUpcoming.setText(translator("Upcoming"))
+        self.__tabsWidget.pushButtonLive.setText(translator("Live"))
+        self.__tabsWidget.pushButtonEnded.setText(translator("Ended"))
         self.__listWidget.labelTitle.setText(translator("No pairs has been added yet!"))
 
     def re_font(self):
@@ -118,16 +154,16 @@ class UiForm(QWidget, SetupForm):
 
         font.setPointSize(fonts.data.size.average)
         font.setBold(True)
-        self.__labelTitle.setFont(font)
+        self.__headerWidget.labelTitle.setFont(font)
 
         font.setPointSize(fonts.data.size.title)
-        self.__pushButtonUpcoming.setFont(font)
-        self.__pushButtonLive.setFont(font)
-        self.__pushButtonEnded.setFont(font)
+        self.__tabsWidget.pushButtonUpcoming.setFont(font)
+        self.__tabsWidget.pushButtonLive.setFont(font)
+        self.__tabsWidget.pushButtonEnded.setFont(font)
 
         font.setPointSize(fonts.data.size.medium)
         font.setBold(False)
-        self.__labelTVL.setFont(font)
+        self.__headerWidget.labelTVL.setFont(font)
 
         font.setFamily(fonts.data.family.black)
         self.__listWidget.labelTitle.setFont(font)
@@ -155,24 +191,13 @@ class UiForm(QWidget, SetupForm):
     def add_item(self, item: QListWidgetItem):
         self.__listWidget.add_quick_item(item)
 
-    def set_tvl(self, text: str, symbol: str):
-        self.__labelTVL.setText("TVL: {} {}".format(text, symbol))
+    def set_data(self, tvl: str, symbol: str):
+        self.update_tvl(tvl, symbol)
+
+    def update_tvl(self, tvl: str, symbol: str):
+        self.__headerWidget.labelTVL.setText("TVL: {} {}".format(tvl, symbol))
 
     def reset(self):
+        self.__headerWidget.labelTVL.clear()
         self.__listWidget.clear()
-
-    def __button_light_animate(self, value: QColor):
-        sender = self.sender()
-        if not isinstance(sender, QVariantAnimation):
-            return
-
-        css = '''
-        QPushButton {
-            color: rgba%s;
-        }
-        QPushButton:checked
-        {
-            color: %s;
-        }
-        ''' % (str(value.getRgb()), styles.data.colors.highlight.name())
-        sender.parent().setStyleSheet(css)
+        self.__tabsWidget.pushButtonLive.click()
