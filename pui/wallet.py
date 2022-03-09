@@ -4,33 +4,110 @@ from pcontroller import translator
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress, qmenu
 
 
+class HeaderWidget(QWidget):
+    def __init__(self, parent):
+        super(HeaderWidget, self).__init__(parent, flags=Qt.SubWindow)
+
+        button_size = QSize(181, 41)
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+        self.setLayout(QGridLayout())
+        self.layout().setContentsMargins(11, 11, 11, 11)
+
+        self.labelUsername = SPGraphics.QuickLabel(
+            self, fixed_height=21, align=Qt.AlignHCenter
+        )
+        self.labelUsername.setWordWrap(False)
+
+        self.pushButtonMenu = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.menuR
+        )
+
+        self.pushButtonDetails = SPGraphics.QuickPushButton(
+            self, icon=QIcon(images.data.icons.details21), icon_size=Size.s21, fixed_size=button_size
+        )
+
+        self.pushButtonAddToken = SPGraphics.QuickPushButton(
+            self, icon=QIcon(images.data.icons.plus21), icon_size=Size.s21, fixed_size=button_size
+        )
+
+        self.pushButtonExplorer = SPGraphics.QuickPushButton(
+            self, icon=QIcon(images.data.icons.external21), icon_size=Size.s21, fixed_size=button_size
+        )
+
+        self.pushButtonRemove = SPGraphics.QuickPushButton(
+            self, icon=QIcon(images.data.icons.trash21), icon_size=Size.s21, fixed_size=button_size
+        )
+
+        self.pushButtonLogout = SPGraphics.QuickPushButton(
+            self, icon=QIcon(images.data.icons.logout21), icon_size=Size.s21, fixed_size=button_size
+        )
+
+        self.menuWallet = qmenu.UiForm(self)
+        self.menuWallet.setup()
+        self.menuWallet.add_button(self.pushButtonDetails)
+        self.menuWallet.add_button(self.pushButtonAddToken)
+        self.menuWallet.add_button(self.pushButtonExplorer)
+        self.menuWallet.add_button(self.pushButtonRemove)
+        self.menuWallet.add_button(self.pushButtonLogout)
+
+        self.labelAddress = qlabeladdress.QLabelAddress(
+            self, fixed_height=21, copy_tooltip=QObject.toolTip.copyR
+        )
+
+        self.layout().addWidget(self.labelUsername, 0, 0, 1, 2)
+        self.layout().addWidget(self.pushButtonMenu, 0, 1, 1, 1, Qt.AlignRight)
+        self.layout().addWidget(self.labelAddress, 1, 0, 1, 2, Qt.AlignHCenter)
+
+
+class TabsWidget(QWidget):
+    def __init__(self, parent):
+        super(TabsWidget, self).__init__(parent, flags=Qt.SubWindow)
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setLayout(QHBoxLayout())
+        self.layout().setAlignment(Qt.AlignHCenter)
+        self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().setSpacing(21)
+
+        self.pushButtonDeposit = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.depositB
+        )
+
+        self.pushButtonWithdraw = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.withdrawB
+        )
+
+        self.pushButtonStake = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.stakeB
+        )
+
+        self.pushButtonSwap = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.swapB
+        )
+
+        self.pushButtonHistory = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.historyB
+        )
+
+        self.layout().addWidget(self.pushButtonDeposit)
+        self.layout().addWidget(self.pushButtonWithdraw)
+        self.layout().addWidget(self.pushButtonStake)
+        self.layout().addWidget(self.pushButtonSwap)
+        self.layout().addWidget(self.pushButtonHistory)
+
+
 class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
         self.__pushButtonBack = None
         self.__headerWidget = None
-        self.__labelUsername = None
-        self.__pushButtonMenu = None
-        self.__pushButtonDetails = None
-        self.__pushButtonAddToken = None
-        self.__pushButtonExplorer = None
-        self.__pushButtonRemove = None
-        self.__pushButtonLogout = None
-        self.__menuWallet = None
-        self.__labelAddress = None
-        self.__footerWidget = None
-        self.__pushButtonDeposit = None
-        self.__pushButtonWithdraw = None
-        self.__pushButtonStake = None
-        self.__pushButtonSwap = None
-        self.__pushButtonHistory = None
+        self.__tabsWidget = None
         self.__tabWidget = None
 
     def setup(self):
-        button_size = QSize(61, 31)
-        menu_button_size = QSize(181, 41)
-
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setLayout(QVBoxLayout())
         self.layout().setContentsMargins(0, 0, 0, 0)
@@ -43,87 +120,20 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
 
-        self.__headerWidget = QWidget(self, flags=Qt.SubWindow)
-        self.__headerWidget.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
-        self.__headerWidget.setLayout(QGridLayout())
-        self.__headerWidget.setObjectName('headerWidget')
+        self.__headerWidget = HeaderWidget(self)
+        self.__headerWidget.pushButtonMenu.clicked.connect(self.menu_clicked)
+        self.__headerWidget.pushButtonDetails.clicked.connect(self.details_clicked)
+        self.__headerWidget.pushButtonAddToken.clicked.connect(self.add_token_clicked)
+        self.__headerWidget.pushButtonExplorer.clicked.connect(self.explorer_clicked)
+        self.__headerWidget.pushButtonRemove.clicked.connect(self.remove_clicked)
+        self.__headerWidget.pushButtonLogout.clicked.connect(self.logout_clicked)
 
-        self.__labelUsername = SPGraphics.QuickLabel(
-            self, fixed_height=31, align=Qt.AlignHCenter | Qt.AlignBottom
-        )
-        self.__labelUsername.setWordWrap(False)
-
-        self.__pushButtonMenu = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.menuR
-        )
-        self.__pushButtonMenu.clicked.connect(self.menu_clicked)
-
-        self.__pushButtonDetails = SPGraphics.QuickPushButton(
-            self, icon=QIcon(images.data.icons.details21), icon_size=Size.s21, fixed_size=menu_button_size
-        )
-        self.__pushButtonDetails.clicked.connect(self.details_clicked)
-
-        self.__pushButtonAddToken = SPGraphics.QuickPushButton(
-            self, icon=QIcon(images.data.icons.plus21), icon_size=Size.s21, fixed_size=menu_button_size
-        )
-        self.__pushButtonAddToken.clicked.connect(self.add_token_clicked)
-
-        self.__pushButtonExplorer = SPGraphics.QuickPushButton(
-            self, icon=QIcon(images.data.icons.external21), icon_size=Size.s21, fixed_size=menu_button_size
-        )
-        self.__pushButtonExplorer.clicked.connect(self.explorer_clicked)
-
-        self.__pushButtonRemove = SPGraphics.QuickPushButton(
-            self, icon=QIcon(images.data.icons.trash21), icon_size=Size.s21, fixed_size=menu_button_size
-        )
-        self.__pushButtonRemove.clicked.connect(self.remove_clicked)
-
-        self.__pushButtonLogout = SPGraphics.QuickPushButton(
-            self, icon=QIcon(images.data.icons.logout21), icon_size=Size.s21, fixed_size=menu_button_size
-        )
-        self.__pushButtonLogout.clicked.connect(self.logout_clicked)
-
-        self.__menuWallet = qmenu.UiForm(self)
-        self.__menuWallet.setup()
-        self.__menuWallet.add_button(self.__pushButtonDetails)
-        self.__menuWallet.add_button(self.__pushButtonAddToken)
-        self.__menuWallet.add_button(self.__pushButtonExplorer)
-        self.__menuWallet.add_button(self.__pushButtonRemove)
-        self.__menuWallet.add_button(self.__pushButtonLogout)
-
-        self.__labelAddress = qlabeladdress.QLabelAddress(
-            self, fixed_height=21, copy_tooltip=QObject.toolTip.copyR
-        )
-
-        self.__footerWidget = QWidget(self, flags=Qt.SubWindow)
-        self.__footerWidget.setLayout(QHBoxLayout())
-        self.__footerWidget.layout().setContentsMargins(0, 0, 0, 0)
-        self.__footerWidget.layout().setAlignment(Qt.AlignHCenter)
-
-        self.__pushButtonDeposit = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=button_size, tooltip=QObject.toolTip.depositB
-        )
-        self.__pushButtonDeposit.clicked.connect(self.deposit_clicked)
-
-        self.__pushButtonWithdraw = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=button_size, tooltip=QObject.toolTip.withdrawB
-        )
-        self.__pushButtonWithdraw.clicked.connect(self.withdraw_clicked)
-
-        self.__pushButtonStake = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=button_size, tooltip=QObject.toolTip.stakeB
-        )
-        self.__pushButtonStake.clicked.connect(self.stake_clicked)
-
-        self.__pushButtonSwap = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=button_size, tooltip=QObject.toolTip.swapB
-        )
-        self.__pushButtonSwap.clicked.connect(self.swap_clicked)
-
-        self.__pushButtonHistory = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=button_size, tooltip=QObject.toolTip.historyB
-        )
-        self.__pushButtonHistory.clicked.connect(self.history_clicked)
+        self.__tabsWidget = TabsWidget(self)
+        self.__tabsWidget.pushButtonDeposit.clicked.connect(self.deposit_clicked)
+        self.__tabsWidget.pushButtonWithdraw.clicked.connect(self.withdraw_clicked)
+        self.__tabsWidget.pushButtonStake.clicked.connect(self.stake_clicked)
+        self.__tabsWidget.pushButtonSwap.clicked.connect(self.swap_clicked)
+        self.__tabsWidget.pushButtonHistory.clicked.connect(self.history_clicked)
 
         self.__tabWidget = QTabWidget(self)
         self.__tabWidget.findChild(QTabBar).hide()
@@ -133,49 +143,41 @@ class UiForm(QWidget, SetupForm):
 
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__tabWidget)
-        self.__headerWidget.layout().addWidget(self.__labelUsername, 0, 0, 1, 2, Qt.AlignHCenter)
-        self.__headerWidget.layout().addWidget(self.__pushButtonMenu, 0, 1, 1, 1, Qt.AlignRight)
-        self.__headerWidget.layout().addWidget(self.__labelAddress, 1, 0, 1, 2, Qt.AlignHCenter)
-        self.__headerWidget.layout().addWidget(self.__footerWidget, 2, 0, 1, 2)
-        self.__footerWidget.layout().addWidget(self.__pushButtonDeposit)
-        self.__footerWidget.layout().addWidget(self.__pushButtonWithdraw)
-        self.__footerWidget.layout().addWidget(self.__pushButtonStake)
-        self.__footerWidget.layout().addWidget(self.__pushButtonSwap)
-        self.__footerWidget.layout().addWidget(self.__pushButtonHistory)
+        self.__headerWidget.layout().addWidget(self.__tabsWidget, 2, 0, 1, 2)
 
         super(UiForm, self).setup()
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.wallet)
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
-        self.__pushButtonMenu.setIcon(QIcon(images.data.icons.changeable.dots21))
-        self.__labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
-        self.__pushButtonDeposit.setIcon(QIcon(images.data.icons.changeable.deposit24))
-        self.__pushButtonWithdraw.setIcon(QIcon(images.data.icons.changeable.withdraw24))
-        self.__pushButtonStake.setIcon(QIcon(images.data.icons.changeable.stake24))
-        self.__pushButtonSwap.setIcon(QIcon(images.data.icons.changeable.swap24))
-        self.__pushButtonHistory.setIcon(QIcon(images.data.icons.changeable.history24))
+        self.__headerWidget.pushButtonMenu.setIcon(QIcon(images.data.icons.changeable.dots21))
+        self.__headerWidget.labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
+        self.__tabsWidget.pushButtonDeposit.setIcon(QIcon(images.data.icons.changeable.deposit24))
+        self.__tabsWidget.pushButtonWithdraw.setIcon(QIcon(images.data.icons.changeable.withdraw24))
+        self.__tabsWidget.pushButtonStake.setIcon(QIcon(images.data.icons.changeable.stake24))
+        self.__tabsWidget.pushButtonSwap.setIcon(QIcon(images.data.icons.changeable.swap24))
+        self.__tabsWidget.pushButtonHistory.setIcon(QIcon(images.data.icons.changeable.history24))
 
     def re_translate(self):
-        self.__pushButtonDetails.setText(translator("Wallet Details"))
-        self.__pushButtonAddToken.setText(translator("Add Token"))
-        self.__pushButtonExplorer.setText(translator("View in Explorer"))
-        self.__pushButtonRemove.setText(translator("Remove Wallet"))
-        self.__pushButtonLogout.setText(translator("Logout"))
+        self.__headerWidget.pushButtonDetails.setText(translator("Wallet Details"))
+        self.__headerWidget.pushButtonAddToken.setText(translator("Add Token"))
+        self.__headerWidget.pushButtonExplorer.setText(translator("View at Explorer"))
+        self.__headerWidget.pushButtonRemove.setText(translator("Remove Wallet"))
+        self.__headerWidget.pushButtonLogout.setText(translator("Logout"))
 
     def re_font(self):
         font = QFont()
 
-        self.__pushButtonDetails.setFont(font)
-        self.__pushButtonAddToken.setFont(font)
-        self.__pushButtonExplorer.setFont(font)
-        self.__pushButtonRemove.setFont(font)
-        self.__pushButtonLogout.setFont(font)
-        self.__labelAddress.setFont(font)
+        self.__headerWidget.pushButtonDetails.setFont(font)
+        self.__headerWidget.pushButtonAddToken.setFont(font)
+        self.__headerWidget.pushButtonExplorer.setFont(font)
+        self.__headerWidget.pushButtonRemove.setFont(font)
+        self.__headerWidget.pushButtonLogout.setFont(font)
+        self.__headerWidget.labelAddress.setFont(font)
 
         font.setPointSize(fonts.data.size.average)
         font.setBold(True)
-        self.__labelUsername.setFont(font)
+        self.__headerWidget.labelUsername.setFont(font)
 
     @pyqtSlot()
     def back_clicked(self):
@@ -183,31 +185,31 @@ class UiForm(QWidget, SetupForm):
 
     @pyqtSlot()
     def menu_clicked(self):
-        pos = self.__pushButtonMenu.mapToGlobal(QPoint())
+        pos = self.__headerWidget.pushButtonMenu.mapToGlobal(QPoint())
         pos.setX(pos.x() - 20)
         pos.setY(pos.y() + 20)
 
-        self.__menuWallet.exec_(pos)
+        self.__headerWidget.menuWallet.exec_(pos)
 
     @pyqtSlot()
     def details_clicked(self):
-        self.__menuWallet.close()
+        self.__headerWidget.menuWallet.close()
 
     @pyqtSlot()
     def add_token_clicked(self):
-        self.__menuWallet.close()
+        self.__headerWidget.menuWallet.close()
 
     @pyqtSlot()
     def explorer_clicked(self):
-        self.__menuWallet.close()
+        self.__headerWidget.menuWallet.close()
 
     @pyqtSlot()
     def remove_clicked(self):
-        self.__menuWallet.close()
+        self.__headerWidget.menuWallet.close()
 
     @pyqtSlot()
     def logout_clicked(self):
-        self.__menuWallet.close()
+        self.__headerWidget.menuWallet.close()
 
     @pyqtSlot()
     def deposit_clicked(self):
@@ -242,12 +244,10 @@ class UiForm(QWidget, SetupForm):
         widget = self.__tabWidget.findChild(QWidget, name)
         self.__tabWidget.setCurrentWidget(widget)
 
-    def set_username(self, text: str):
-        self.__labelUsername.setText(text)
-
-    def set_address(self, text: str):
-        self.__labelAddress.setText(text, is_ellipsis=False)
+    def set_data(self, username: str, address: str):
+        self.__headerWidget.labelUsername.setText(username)
+        self.__headerWidget.labelAddress.setText(address, is_ellipsis=False)
 
     def reset(self):
-        self.__labelUsername.clear()
-        self.__labelAddress.clear()
+        self.__headerWidget.labelUsername.clear()
+        self.__headerWidget.labelAddress.clear()

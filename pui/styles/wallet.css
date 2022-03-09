@@ -1,11 +1,11 @@
+HeaderWidget
+{
+	background-color: @background_second;
+}
+
+
 TokenItem
 {
 	background-color: @background;
 	border-radius: 5px;
-}
-
-
-#headerWidget
-{
-	background-color: @background_second;
 }

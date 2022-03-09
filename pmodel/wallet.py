@@ -20,7 +20,7 @@ class WalletModel(wallet.UiForm):
         self.setup()
 
         # Events
-        QObject.walletModel.walletChanged = self.wallet_changed
+        QObject.walletModel.walletChanged = self.set_data
         QObject.walletModel.currentTabChanged = self.set_current_tab
 
         # Tabs
@@ -61,8 +61,3 @@ class WalletModel(wallet.UiForm):
     def add_token_clicked(self):
         super(WalletModel, self).add_token_clicked()
         self.set_current_tab(Tab.WalletTab.ADD_TOKEN)
-
-    def wallet_changed(self, username: str, address: str):
-        self.set_username(username)
-        self.set_address(address)
-        self.walletDetailsModel.set_address(address)
