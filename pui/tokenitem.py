@@ -37,6 +37,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
             self, fixed_height=21
         )
         self.__labelBalance.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.__labelBalance.setWordWrap(False)
         self.__labelBalance.setObjectName('labelDescription')
 
         self.__labelSymbol = SPGraphics.QuickLabel(
