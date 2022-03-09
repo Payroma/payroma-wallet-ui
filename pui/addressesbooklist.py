@@ -3,6 +3,20 @@ from pcontroller import translator
 from pui import SetupForm, fonts, images
 
 
+class ListWidget(SPGraphics.QuickListWidget):
+    def __init__(self, parent):
+        super(ListWidget, self).__init__(
+            parent, spacing=10, empty_illustration=images.data.illustrations.no_data
+        )
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.layout().setContentsMargins(21, 0, 21, 0)
+        self.layout().setAlignment(Qt.AlignVCenter)
+        self.labelIllustration.setAlignment(Qt.AlignHCenter)
+        self.labelTitle.setAlignment(Qt.AlignHCenter)
+        self.labelDescription.setAlignment(Qt.AlignHCenter)
+
+
 class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
@@ -14,14 +28,7 @@ class UiForm(QWidget, SetupForm):
         self.setLayout(QVBoxLayout())
         self.layout().setContentsMargins(0, 0, 0, 0)
 
-        self.__listWidget = SPGraphics.QuickListWidget(
-            self, spacing=10, empty_illustration=images.data.illustrations.no_data
-        )
-        self.__listWidget.layout().setContentsMargins(21, 0, 21, 0)
-        self.__listWidget.layout().setAlignment(Qt.AlignVCenter)
-        self.__listWidget.labelIllustration.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelTitle.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelDescription.setAlignment(Qt.AlignHCenter)
+        self.__listWidget = ListWidget(self)
         self.__listWidget.itemClicked.connect(self.item_clicked)
 
         self.layout().addWidget(self.__listWidget)

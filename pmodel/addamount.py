@@ -15,8 +15,8 @@ class AddAmountModel(addamount.UiForm):
             0: {'balance': '100', 'symbol': 'ETH'},
             1: {'balance': '10.456789', 'symbol': 'BNB'},
             2: {'balance': '7', 'symbol': 'BTC'},
-            3: {'balance': '547544', 'symbol': 'USDT'},
-            4: {'balance': '1244650', 'symbol': 'XRP'}
+            3: {'balance': '547,544', 'symbol': 'USDT'},
+            4: {'balance': '1,244,650', 'symbol': 'XRP'}
         }
         for name, info in self.__tokens.items():
             self.add_item(info['symbol'])
@@ -29,13 +29,13 @@ class AddAmountModel(addamount.UiForm):
 
     @pyqtSlot(str)
     def amount_changed(self, text: str):
-        balance = self.__tokens[self.__currentTokenIndex]['balance']
+        balance = self.__tokens[self.__currentTokenIndex]['balance'].replace(',', '')
         valid = True if float(text or 0) <= float(balance) else False
         super(AddAmountModel, self).amount_changed(text, valid)
 
     @pyqtSlot()
     def max_clicked(self):
-        balance = self.__tokens[self.__currentTokenIndex]['balance']
+        balance = self.__tokens[self.__currentTokenIndex]['balance'].replace(',', '')
         super(AddAmountModel, self).max_clicked(balance)
 
     @pyqtSlot()
@@ -43,8 +43,3 @@ class AddAmountModel(addamount.UiForm):
         super(AddAmountModel, self).continue_clicked()
         QTimer().singleShot(5000, self.continue_completed)
         QObject.mainModel.currentTabChanged(Tab.TRANSACTION_SENDER)
-
-    @pyqtSlot()
-    def cancel_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLET)
-        self.reset()
