@@ -15,6 +15,7 @@ class AuthenticatorModel(authenticator.UiForm):
 
     @pyqtSlot()
     def confirm_clicked(self):
+        super(AuthenticatorModel, self).confirm_clicked()
         QObject.mainModel.currentTabChanged(Tab.WALLET)
 
     @pyqtSlot()
