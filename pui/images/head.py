@@ -34,7 +34,8 @@ DEFAULT = {
             'deposit24': QPixmap(':/images/icons/light/deposit-24.png'),
             'withdraw24': QPixmap(':/images/icons/light/withdraw-24.png'),
             'stake24': QPixmap(':/images/icons/light/stake-24.png'),
-            'swap24': QPixmap(':/images/icons/light/swap-24.png')
+            'swap24': QPixmap(':/images/icons/light/swap-24.png'),
+            'web21': QPixmap(':/images/icons/light/web-21.png')
         },
 
         'info41': QPixmap(':/images/icons/info-41.png'),

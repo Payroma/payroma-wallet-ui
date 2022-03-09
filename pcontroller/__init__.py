@@ -3,8 +3,7 @@
 - Usable for any object
 """
 
-from plibs import os, sys, time, psutil, QObject, QThread, QUrl, QDesktopServices,\
-    pyqtSignal, SPSecurity, SPSettings
+from plibs import *
 from pheader import *
 
 
@@ -206,3 +205,18 @@ def clipboard(text: str):
     clip = Global.kernel.clipboard()
     clip.clear(mode=clip.Clipboard)
     clip.setText(text, mode=clip.Clipboard)
+
+
+def to_qr_code(text: str, size: QSize) -> QPixmap:
+    from pui import styles
+    image_file = io.BytesIO()
+
+    qr_generator = pyqrcode.create(text, error='L', mode='binary')
+    qr_generator.png(
+        image_file, scale=7, module_color=styles.data.colors.font.getRgb(),
+        background=styles.data.colors.background.getRgb()
+    )
+
+    image = QImage.fromData(image_file.getvalue(), 'png').scaled(size, Qt.KeepAspectRatio)
+
+    return QPixmap.fromImage(image)

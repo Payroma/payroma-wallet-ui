@@ -17,19 +17,18 @@ class UiForm(SetupForm):
         self.passwordConfirmAlert = None
         self.pinCodeAlert = None
         self.addressAlert = None
-        self.networkStatus = None
-        self.ShowBlockTime = None
+        self.showBlockTime = None
         self.addNewAddressBook = None
         self.transactionSendTo = None
         self.pending = None
         self.success = None
         self.failed = None
+        self.viewExplorer = None
 
         self.showR = None
         self.usernameInfoR = None
         self.pinCodeInfoR = None
         self.addressInfoR = None
-        self.networkSettingsR = None
         self.addNewR = None
         self.networkNameAlertR = None
         self.networkRPCAlertR = None
@@ -48,6 +47,8 @@ class UiForm(SetupForm):
         self.swapB = None
         self.historyB = None
         self.addressValidB = None
+        self.projectWebsiteB = None
+        self.viewProjectExplorerB = None
 
     def setup(self):
         self.settings = self.__align_top()
@@ -60,19 +61,18 @@ class UiForm(SetupForm):
         self.passwordConfirmAlert = self.__align_top()
         self.pinCodeAlert = self.__align_top()
         self.addressAlert = self.__align_top()
-        self.networkStatus = self.__align_top()
-        self.ShowBlockTime = self.__align_top()
+        self.showBlockTime = self.__align_top()
         self.addNewAddressBook = self.__align_top()
         self.transactionSendTo = self.__align_top()
         self.pending = self.__align_top()
         self.success = self.__align_top()
         self.failed = self.__align_top()
+        self.viewExplorer = self.__align_top()
 
         self.showR = self.__align_right()
         self.usernameInfoR = self.__align_right()
         self.pinCodeInfoR = self.__align_right()
         self.addressInfoR = self.__align_right()
-        self.networkSettingsR = self.__align_right()
         self.addNewR = self.__align_right()
         self.networkNameAlertR = self.__align_right()
         self.networkRPCAlertR = self.__align_right()
@@ -91,6 +91,8 @@ class UiForm(SetupForm):
         self.swapB = self.__align_bottom()
         self.historyB = self.__align_bottom()
         self.addressValidB = self.__align_bottom()
+        self.projectWebsiteB = self.__align_bottom()
+        self.viewProjectExplorerB = self.__align_bottom()
 
         super(UiForm, self).setup()
 
@@ -109,13 +111,13 @@ class UiForm(SetupForm):
         self.passwordConfirmAlert.labelText.setText(translator("Password doesn't match"))
         self.pinCodeAlert.labelText.setText(translator("PIN Code must be 6 numbers"))
         self.addressAlert.labelText.setText(translator("This address invalid"))
-        self.networkStatus.labelText.setText(translator("Network Connection Status"))
-        self.ShowBlockTime.labelText.setText(translator("Show block time"))
+        self.showBlockTime.labelText.setText(translator("Show block time"))
         self.addNewAddressBook.labelText.setText(translator("Add new to addresses book"))
         self.transactionSendTo.labelText.setText(translator("The transaction goes to this address"))
         self.pending.labelText.setText(translator("Pending"))
         self.success.labelText.setText(translator("Success"))
         self.failed.labelText.setText(translator("Failed"))
+        self.viewExplorer.labelText.setText(translator("View at explorer"))
 
         self.showR.labelText.setText(translator("Show"))
         self.usernameInfoR.labelText.setText(translator(
@@ -127,14 +129,13 @@ class UiForm(SetupForm):
         self.addressInfoR.labelText.setText(translator(
             "If you have an existing wallet, set the wallet address to check"
         ))
-        self.networkSettingsR.labelText.setText(translator("Network settings to add a new and switching"))
-        self.addNewR.labelText.setText(translator("Add New"))
+        self.addNewR.labelText.setText(translator("Add new"))
         self.networkNameAlertR.labelText.setText(translator("Network name already exists before"))
         self.networkRPCAlertR.labelText.setText(translator("This RPC is unable to connect"))
         self.networkChainIdAlertR.labelText.setText(translator("Chain id is wrong"))
         self.networkExplorerAlertR.labelText.setText(translator("Explorer URL is wrong"))
         self.copyR.labelText.setText(translator("Copy"))
-        self.favoriteR.labelText.setText(translator("Check to Favorite"))
+        self.favoriteR.labelText.setText(translator("Check to favorite"))
         self.walletStatusR.labelText.setText(translator("Login status"))
         self.networkStatusR.labelText.setText(translator("Network connection status"))
         self.menuR.labelText.setText(translator("Menu"))
@@ -144,8 +145,10 @@ class UiForm(SetupForm):
         self.withdrawB.labelText.setText(translator("Withdraw"))
         self.stakeB.labelText.setText(translator("Staking"))
         self.swapB.labelText.setText(translator("Swap"))
-        self.historyB.labelText.setText(translator("Transactions History"))
-        self.addressValidB.labelText.setText(translator("Address Valid"))
+        self.historyB.labelText.setText(translator("Transactions history"))
+        self.addressValidB.labelText.setText(translator("Address valid"))
+        self.projectWebsiteB.labelText.setText(translator("Project website"))
+        self.viewProjectExplorerB.labelText.setText(translator("View project contract at explorer"))
 
     def re_font(self):
         font = QFont()
@@ -160,19 +163,18 @@ class UiForm(SetupForm):
         self.passwordConfirmAlert.labelText.setFont(font)
         self.pinCodeAlert.labelText.setFont(font)
         self.addressAlert.labelText.setFont(font)
-        self.networkStatus.labelText.setFont(font)
-        self.ShowBlockTime.labelText.setFont(font)
+        self.showBlockTime.labelText.setFont(font)
         self.addNewAddressBook.labelText.setFont(font)
         self.transactionSendTo.labelText.setFont(font)
         self.pending.labelText.setFont(font)
         self.success.labelText.setFont(font)
         self.failed.labelText.setFont(font)
+        self.viewExplorer.labelText.setFont(font)
 
         self.showR.labelText.setFont(font)
         self.usernameInfoR.labelText.setFont(font)
         self.pinCodeInfoR.labelText.setFont(font)
         self.addressInfoR.labelText.setFont(font)
-        self.networkSettingsR.labelText.setFont(font)
         self.addNewR.labelText.setFont(font)
         self.networkNameAlertR.labelText.setFont(font)
         self.networkRPCAlertR.labelText.setFont(font)
@@ -191,6 +193,8 @@ class UiForm(SetupForm):
         self.swapB.labelText.setFont(font)
         self.historyB.labelText.setFont(font)
         self.addressValidB.labelText.setFont(font)
+        self.projectWebsiteB.labelText.setFont(font)
+        self.viewProjectExplorerB.labelText.setFont(font)
 
     def __align_top(self) -> SPGraphics.QuickToolTip:
         return SPGraphics.QuickToolTip(
