@@ -150,5 +150,12 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
         if not isinstance(sender, QVariantAnimation):
             return
 
-        css = 'color: rgba%s;' % str(value.getRgb())
+        css = '''
+        QWidget {
+            color: rgba%s;
+        }
+        QWidget::disabled {
+            color: %s;
+        }
+        ''' % (str(value.getRgb()), styles.data.colors.disabled_font.name())
         sender.parent().setStyleSheet(css)

@@ -183,17 +183,17 @@ QuickToolTip #mainWidget
 }
 
 
+HeaderWidget
+{
+    border-bottom: 1px solid @line;
+}
+
+
 #mainWidget,
 #shadowWidget
 {
     background-color: @background;
     border-radius: 15px;
-}
-
-
-#headerWidget
-{
-    border-bottom: 1px solid @line;
 }
 
 
