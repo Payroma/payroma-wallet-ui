@@ -1,7 +1,37 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, to_qr_code
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
+
+
+class NetworkWidget(QWidget):
+    def __init__(self, parent):
+        super(NetworkWidget, self).__init__(parent, flags=Qt.SubWindow)
+
+        self.setLayout(QGridLayout())
+        self.layout().setAlignment(Qt.AlignCenter)
+        self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().setHorizontalSpacing(11)
+        self.layout().setVerticalSpacing(0)
+
+        self.labelIcon = SPGraphics.QuickLabel(
+            self, fixed_size=Size.s41, pixmap=images.data.icons.warning41, align=Qt.AlignCenter
+        )
+
+        self.labelTitle = SPGraphics.QuickLabel(
+            self, fixed_height=21
+        )
+        self.labelTitle.setWordWrap(False)
+
+        self.pushButton = SPGraphics.QuickPushButton(
+            fixed_height=21, value_changed=QObject.mainModel.textColorAnimated,
+            start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
+        )
+        self.pushButton.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+        self.layout().addWidget(self.labelIcon, 0, 0, 2, 1)
+        self.layout().addWidget(self.labelTitle, 0, 1, 1, 1)
+        self.layout().addWidget(self.pushButton, 1, 1, 1, 1)
 
 
 class UiForm(QWidget, SetupForm):
@@ -13,14 +43,12 @@ class UiForm(QWidget, SetupForm):
         self.__labelAddressQR = None
         self.__labelAddressDescription = None
         self.__labelAddress = None
-        self.__labelNoteIcon = None
-        self.__labelNote = None
         self.__lineWidget = None
-        self.__labelNetwork = None
+        self.__networkWidget = None
 
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.setLayout(QGridLayout())
+        self.setLayout(QVBoxLayout())
         self.layout().setAlignment(Qt.AlignCenter)
         self.layout().setContentsMargins(11, 0, 11, 0)
         self.layout().setSpacing(11)
@@ -55,28 +83,15 @@ class UiForm(QWidget, SetupForm):
         self.__lineWidget.setAttribute(Qt.WA_StyledBackground, True)
         self.__lineWidget.setObjectName('lineWidget')
 
-        self.__labelNoteIcon = SPGraphics.QuickLabel(
-            self, fixed_size=Size.s41, pixmap=images.data.icons.warning41, align=Qt.AlignCenter
-        )
+        self.__networkWidget = NetworkWidget(self)
+        self.__networkWidget.pushButton.clicked.connect(self.network_clicked)
 
-        self.__labelNote = SPGraphics.QuickLabel(
-            self, fixed_height=41, align=Qt.AlignTop
-        )
-        self.__labelNote.setWordWrap(False)
-
-        self.__labelNetwork = SPGraphics.QuickLabel(
-            self, fixed_height=41, align=Qt.AlignBottom
-        )
-        self.__labelNetwork.setWordWrap(False)
-
-        self.layout().addWidget(self.__labelQRDescription, 0, 0, 1, 2)
-        self.layout().addWidget(self.__labelAddressQR, 1, 0, 1, 2, Qt.AlignHCenter)
-        self.layout().addWidget(self.__labelAddressDescription, 2, 0, 1, 2)
-        self.layout().addWidget(self.__labelAddress, 3, 0, 1, 2)
-        self.layout().addWidget(self.__lineWidget, 4, 0, 1, 2)
-        self.layout().addWidget(self.__labelNoteIcon, 5, 0, 1, 1)
-        self.layout().addWidget(self.__labelNote, 5, 1, 1, 1)
-        self.layout().addWidget(self.__labelNetwork, 5, 1, 1, 1)
+        self.layout().addWidget(self.__labelQRDescription)
+        self.layout().addWidget(self.__labelAddressQR, alignment=Qt.AlignHCenter)
+        self.layout().addWidget(self.__labelAddressDescription)
+        self.layout().addWidget(self.__labelAddress)
+        self.layout().addWidget(self.__lineWidget)
+        self.layout().addWidget(self.__networkWidget)
 
         super(UiForm, self).setup()
 
@@ -89,7 +104,7 @@ class UiForm(QWidget, SetupForm):
             "Scan the code on the withdrawal page of the trading platform APP or wallet APP"
         ))
         self.__labelAddressDescription.setText(translator("or Copy your deposit address"))
-        self.__labelNote.setText(translator("Ensure the sender network is"))
+        self.__networkWidget.labelTitle.setText(translator("Ensure the sender network is"))
 
     def re_font(self):
         font = QFont()
@@ -99,36 +114,27 @@ class UiForm(QWidget, SetupForm):
         self.__labelAddressDescription.setFont(font)
 
         font.setBold(True)
-        self.__labelNote.setFont(font)
+        self.__networkWidget.labelTitle.setFont(font)
 
         font.setBold(False)
         font.setUnderline(True)
-        self.__labelNetwork.setFont(font)
+        self.__networkWidget.pushButton.setFont(font)
 
     @pyqtSlot()
     def back_clicked(self):
         pass
 
-    def set_address(self, text: str):
-        image_file = io.BytesIO()
+    @pyqtSlot()
+    def network_clicked(self):
+        pass
 
-        qr_generator = pyqrcode.create(text, error='L', mode='binary')
-        qr_generator.png(
-            image_file, scale=7, module_color=styles.data.colors.font.getRgb(),
-            background=styles.data.colors.background.getRgb()
-        )
-
-        image = QImage.fromData(image_file.getvalue(), 'png').scaled(
-            self.__labelAddressQR.size(), Qt.KeepAspectRatio
-        )
-
-        self.__labelAddressQR.setPixmap(QPixmap.fromImage(image))
-        self.__labelAddress.setText(text, False)
-
-    def set_network_name(self, text: str):
-        self.__labelNetwork.setText(text)
+    def set_data(self, address: str, network_name: str):
+        pixmap = to_qr_code(address, self.__labelAddressQR.size())
+        self.__labelAddressQR.setPixmap(pixmap)
+        self.__labelAddress.setText(address, False)
+        self.__networkWidget.pushButton.setText(network_name)
 
     def reset(self):
         self.__labelAddressQR.clear()
         self.__labelAddress.clear()
-        self.__labelNetwork.clear()
+        self.__networkWidget.pushButton.setText("")

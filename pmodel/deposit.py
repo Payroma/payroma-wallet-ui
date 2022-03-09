@@ -10,9 +10,12 @@ class DepositModel(deposit.UiForm):
         self.setup()
 
         # Test
-        self.set_address('0x0000000000000000000000000000000000000000')
-        self.set_network_name('Binance Smart Chain')
+        self.set_data('0x0000000000000000000000000000000000000000', 'Binance Smart Chain')
 
     @pyqtSlot()
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.WALLET)
+
+    @pyqtSlot()
+    def network_clicked(self):
+        QObject.mainModel.currentTabChanged(Tab.NETWORKS_LIST)
