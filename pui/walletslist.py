@@ -1,7 +1,59 @@
 from plibs import *
 from pheader import *
 from pcontroller import translator
-from pui import SetupForm, fonts, images, styles, Size, validator
+from pui import SetupForm, fonts, images, styles, Size
+
+
+class HeaderWidget(QWidget):
+    def __init__(self, parent):
+        super(HeaderWidget, self).__init__(parent, flags=Qt.SubWindow)
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+        self.setLayout(QHBoxLayout())
+        self.layout().setAlignment(Qt.AlignHCenter)
+        self.layout().setContentsMargins(16, 16, 16, 16)
+        self.layout().setSpacing(11)
+
+        self.lineEditSearch = SPGraphics.QuickLineEdit(
+            self, fixed_height=41, layout_support=True, length=42
+        )
+        self.lineEditSearch.setProperty("iconable", True)
+        self.lineEditSearch.setMaximumWidth(501)
+        self.lineEditSearch.setFocusPolicy(Qt.ClickFocus)
+        self.lineEditSearch.setContextMenuPolicy(Qt.CustomContextMenu)
+
+        self.labelSearchIcon = SPGraphics.QuickLabel(
+            self, fixed_size=Size.s21
+        )
+
+        self.pushButtonSearchClear = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.remove
+        )
+        self.pushButtonSearchClear.hide()
+
+        self.pushButtonAddNew = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s21, fixed_size=Size.s31, tooltip=QObject.toolTip.addNewR
+        )
+
+        self.layout().addWidget(self.lineEditSearch)
+        self.layout().addWidget(self.pushButtonAddNew, alignment=Qt.AlignRight)
+        self.lineEditSearch.layout().addWidget(self.labelSearchIcon, alignment=Qt.AlignLeft)
+        self.lineEditSearch.layout().addWidget(self.pushButtonSearchClear, alignment=Qt.AlignRight)
+
+
+class ListWidget(SPGraphics.QuickListWidget):
+    def __init__(self, parent):
+        super(ListWidget, self).__init__(
+            parent, spacing=10, empty_illustration=images.data.illustrations.coin
+        )
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.layout().setContentsMargins(21, 0, 21, 0)
+        self.layout().setAlignment(Qt.AlignVCenter)
+        self.labelIllustration.setAlignment(Qt.AlignHCenter)
+        self.labelTitle.setAlignment(Qt.AlignHCenter)
+        self.labelDescription.setAlignment(Qt.AlignHCenter)
 
 
 class UiForm(QWidget, SetupForm):
@@ -9,10 +61,6 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
         self.__headerWidget = None
-        self.__lineEditSearch = None
-        self.__labelSearchIcon = None
-        self.__pushButtonSearchClear = None
-        self.__pushButtonAddNew = None
         self.__listWidget = None
 
     def setup(self):
@@ -22,63 +70,27 @@ class UiForm(QWidget, SetupForm):
         self.layout().setSpacing(0)
         self.setObjectName(Tab.WALLETS_LIST)
 
-        self.__headerWidget = QWidget(self, flags=Qt.SubWindow)
-        self.__headerWidget.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
-        self.__headerWidget.setLayout(QHBoxLayout())
-        self.__headerWidget.layout().setContentsMargins(16, 16, 11, 16)
-        self.__headerWidget.setObjectName('headerWidget')
+        self.__headerWidget = HeaderWidget(self)
+        self.__headerWidget.lineEditSearch.textChanged.connect(self.search_changed)
+        self.__headerWidget.pushButtonSearchClear.clicked.connect(self.search_clear_clicked)
+        self.__headerWidget.pushButtonAddNew.clicked.connect(self.add_new_clicked)
 
-        self.__lineEditSearch = SPGraphics.QuickLineEdit(
-            self, fixed_height=41, layout_support=True, length=42
-        )
-        self.__lineEditSearch.setProperty("iconable", True)
-        self.__lineEditSearch.setMaximumWidth(501)
-        self.__lineEditSearch.setFocusPolicy(Qt.ClickFocus)
-        self.__lineEditSearch.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.__lineEditSearch.textChanged.connect(self.search_changed)
-
-        self.__labelSearchIcon = SPGraphics.QuickLabel(
-            self, fixed_size=Size.s21
-        )
-
-        self.__pushButtonSearchClear = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.remove
-        )
-        self.__pushButtonSearchClear.hide()
-        self.__pushButtonSearchClear.clicked.connect(self.search_clear_clicked)
-
-        self.__pushButtonAddNew = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.addNewR
-        )
-        self.__pushButtonAddNew.clicked.connect(self.add_new_clicked)
-
-        self.__listWidget = SPGraphics.QuickListWidget(
-            self, spacing=10, empty_illustration=images.data.illustrations.coin
-        )
-        self.__listWidget.layout().setContentsMargins(21, 0, 21, 0)
-        self.__listWidget.layout().setAlignment(Qt.AlignVCenter)
-        self.__listWidget.labelIllustration.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelTitle.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelDescription.setAlignment(Qt.AlignHCenter)
+        self.__listWidget = ListWidget(self)
         self.__listWidget.itemClicked.connect(self.item_clicked)
 
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__listWidget)
-        self.__headerWidget.layout().addWidget(self.__lineEditSearch)
-        self.__headerWidget.layout().addWidget(self.__pushButtonAddNew, alignment=Qt.AlignRight)
-        self.__lineEditSearch.layout().addWidget(self.__labelSearchIcon, alignment=Qt.AlignLeft)
-        self.__lineEditSearch.layout().addWidget(self.__pushButtonSearchClear, alignment=Qt.AlignRight)
 
         super(UiForm, self).setup()
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.walletslist)
-        self.__labelSearchIcon.setPixmap(images.data.icons.changeable.search21)
-        self.__pushButtonSearchClear.setIcon(QIcon(images.data.icons.changeable.broom21))
-        self.__pushButtonAddNew.setIcon(QIcon(images.data.icons.changeable.plus21))
+        self.__headerWidget.labelSearchIcon.setPixmap(images.data.icons.changeable.search21)
+        self.__headerWidget.pushButtonSearchClear.setIcon(QIcon(images.data.icons.changeable.broom21))
+        self.__headerWidget.pushButtonAddNew.setIcon(QIcon(images.data.icons.changeable.plus21))
 
     def re_translate(self):
-        self.__lineEditSearch.setPlaceholderText(translator("Search"))
+        self.__headerWidget.lineEditSearch.setPlaceholderText(translator("Search"))
         self.__listWidget.labelTitle.setText(translator("No wallets has been added yet!"))
         self.__listWidget.labelDescription.setText(translator(
             "Let's add your first wallet today, click on \"+\" button. It's easy."
@@ -87,7 +99,7 @@ class UiForm(QWidget, SetupForm):
     def re_font(self):
         font = QFont()
 
-        self.__lineEditSearch.setFont(font)
+        self.__headerWidget.lineEditSearch.setFont(font)
         self.__listWidget.labelDescription.setFont(font)
 
         font.setFamily(fonts.data.family.black)
@@ -100,7 +112,7 @@ class UiForm(QWidget, SetupForm):
 
     @pyqtSlot()
     def search_clear_clicked(self):
-        self.__lineEditSearch.clear()
+        self.__headerWidget.lineEditSearch.clear()
 
     @pyqtSlot()
     def add_new_clicked(self):
@@ -114,20 +126,20 @@ class UiForm(QWidget, SetupForm):
         self.__listWidget.add_quick_item(item)
 
     def reset(self):
-        self.__lineEditSearch.clear()
+        self.__headerWidget.lineEditSearch.clear()
         self.__listWidget.clear()
 
     def __search(self, text: str):
-        if self.__lineEditSearch.text() != text:
+        if self.__headerWidget.lineEditSearch.text() != text:
             return
 
         text = text.lower()
         if text:
-            self.__pushButtonSearchClear.show()
-            self.__lineEditSearch.setProperty('clearable', True)
+            self.__headerWidget.pushButtonSearchClear.show()
+            self.__headerWidget.lineEditSearch.setProperty('clearable', True)
         else:
-            self.__pushButtonSearchClear.hide()
-            self.__lineEditSearch.setProperty('clearable', False)
+            self.__headerWidget.pushButtonSearchClear.hide()
+            self.__headerWidget.lineEditSearch.setProperty('clearable', False)
 
         for index in range(self.__listWidget.count()):
             item = self.__listWidget.item(index)
@@ -141,7 +153,7 @@ class UiForm(QWidget, SetupForm):
             else:
                 item.setHidden(True)
 
-        self.__polish(self.__lineEditSearch)
+        self.__polish(self.__headerWidget.lineEditSearch)
         self.repaint()
 
     @staticmethod

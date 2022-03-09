@@ -17,6 +17,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.setFixedHeight(81)
         self.setLayout(QGridLayout())
         self.layout().setAlignment(Qt.AlignVCenter)
+        self.layout().setContentsMargins(11, 11, 11, 11)
         self.layout().setVerticalSpacing(0)
         self.setCursor(Qt.PointingHandCursor)
         self.setGraphicsEffect(SPGraphics.QuickShadow(
@@ -30,6 +31,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelUsername = SPGraphics.QuickLabel(
             self, fixed_height=31
         )
+        self.__labelUsername.setWordWrap(False)
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
             self, copy_tooltip=QObject.toolTip.copyR
