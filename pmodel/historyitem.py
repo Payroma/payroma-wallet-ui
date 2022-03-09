@@ -8,3 +8,6 @@ class HistoryItem(historyitem.UiForm):
         super(HistoryItem, self).__init__(parent)
 
         self.setup()
+
+        # Data
+        self.interface = None

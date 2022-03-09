@@ -39,20 +39,14 @@ class HistoryListModel(historylist.UiForm):
         ]
         for transaction in transactions:
             item = historyitem.HistoryItem(self)
-            item.set_data(
-                function=transaction['function'],
-                status=transaction['status'],
-                amount=transaction['amount'],
-                symbol=transaction['symbol'],
-                address=transaction['address'],
-                date=transaction['date']
-            )
+            item.set_icon(transaction['symbol'])
+            item.set_function_name(transaction['function'])
+            item.set_status(transaction['status'])
+            item.set_balance(transaction['amount'], transaction['symbol'])
+            item.set_address(transaction['address'])
+            item.set_date(transaction['date'])
             self.add_item(item)
 
     @pyqtSlot()
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.WALLET)
-
-    @pyqtSlot(QListWidgetItem)
-    def item_clicked(self, item: QListWidgetItem):
-        widget = super(HistoryListModel, self).item_clicked(item)

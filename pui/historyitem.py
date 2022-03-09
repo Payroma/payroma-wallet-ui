@@ -114,12 +114,21 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
     def explorer_clicked(self):
         pass
 
-    def set_data(self, function: str, status: str, amount: str, symbol: str, address: str, date: str):
+    def set_icon(self, symbol: str):
         self.__labelIcon.setPixmap(assetsicons.get_asset_icon(symbol))
-        self.__labelFunctionName.setText(function)
-        self.__labelAmount.setText(f'{amount} {symbol}')
-        self.__labelAddress.setText(address)
-        self.__labelDate.setText(date)
 
+    def set_function_name(self, text: str):
+        self.__labelFunctionName.setText(text)
+
+    def set_status(self, text: str):
         for item in [self.__labelPending, self.__labelSuccess, self.__labelFailed]:
-            item.setVisible(item.property(status) or False)
+            item.setVisible(item.property(text) or False)
+
+    def set_balance(self, text: str, symbol: str):
+        self.__labelAmount.setText("{} {}".format(text, symbol))
+
+    def set_address(self, text: str):
+        self.__labelAddress.setText(text)
+
+    def set_date(self, text: str):
+        self.__labelDate.setText(text)
