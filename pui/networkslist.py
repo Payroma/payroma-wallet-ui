@@ -4,13 +4,49 @@ from pcontroller import translator
 from pui import SetupForm, fonts, images, styles, Size
 
 
+class HeaderWidget(QWidget):
+    def __init__(self, parent):
+        super(HeaderWidget, self).__init__(parent, flags=Qt.SubWindow)
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+        self.setLayout(QHBoxLayout())
+        self.layout().setContentsMargins(51, 11, 11, 11)
+        self.layout().setSpacing(0)
+
+        self.labelTitle = SPGraphics.QuickLabel(
+            self, fixed_height=31, align=Qt.AlignCenter
+        )
+        self.labelTitle.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+
+        self.pushButtonAddNew = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.addNewR
+        )
+
+        self.layout().addWidget(self.labelTitle)
+        self.layout().addWidget(self.pushButtonAddNew, alignment=Qt.AlignRight)
+
+
+class ListWidget(SPGraphics.QuickListWidget):
+    def __init__(self, parent):
+        super(ListWidget, self).__init__(
+            parent, spacing=10, empty_illustration=images.data.illustrations.no_data
+        )
+
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.layout().setContentsMargins(21, 0, 21, 0)
+        self.layout().setAlignment(Qt.AlignVCenter)
+        self.labelIllustration.setAlignment(Qt.AlignHCenter)
+        self.labelTitle.setAlignment(Qt.AlignHCenter)
+        self.labelDescription.setAlignment(Qt.AlignHCenter)
+
+
 class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
         self.__pushButtonBack = None
         self.__headerWidget = None
-        self.__pushButtonAddNew = None
         self.__listWidget = None
 
     def setup(self):
@@ -26,41 +62,26 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
 
-        self.__headerWidget = QWidget(self, flags=Qt.SubWindow)
-        self.__headerWidget.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
-        self.__headerWidget.setLayout(QHBoxLayout())
-        self.__headerWidget.layout().setContentsMargins(16, 16, 11, 16)
-        self.__headerWidget.setObjectName('headerWidget')
+        self.__headerWidget = HeaderWidget(self)
+        self.__headerWidget.pushButtonAddNew.clicked.connect(self.add_new_clicked)
 
-        self.__pushButtonAddNew = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.addNewR
-        )
-        self.__pushButtonAddNew.clicked.connect(self.add_new_clicked)
-
-        self.__listWidget = SPGraphics.QuickListWidget(
-            self, spacing=10, empty_illustration=images.data.illustrations.no_data
-        )
-        self.__listWidget.layout().setContentsMargins(21, 0, 21, 0)
-        self.__listWidget.layout().setAlignment(Qt.AlignVCenter)
-        self.__listWidget.labelIllustration.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelTitle.setAlignment(Qt.AlignHCenter)
-        self.__listWidget.labelDescription.setAlignment(Qt.AlignHCenter)
+        self.__listWidget = ListWidget(self)
         self.__listWidget.itemClicked.connect(self.item_clicked)
 
         self.__pushButtonBack.raise_()
 
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__listWidget)
-        self.__headerWidget.layout().addWidget(self.__pushButtonAddNew, alignment=Qt.AlignRight)
 
         super(UiForm, self).setup()
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.networkslist)
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
-        self.__pushButtonAddNew.setIcon(QIcon(images.data.icons.changeable.plus21))
+        self.__headerWidget.pushButtonAddNew.setIcon(QIcon(images.data.icons.changeable.plus21))
 
     def re_translate(self):
+        self.__headerWidget.labelTitle.setText(translator("Blockchain Networks"))
         self.__listWidget.labelTitle.setText(translator("No networks has been added yet!"))
         self.__listWidget.labelDescription.setText(translator(
             "Let's add your first network today, click on \"+\" button. It's easy."
@@ -71,8 +92,12 @@ class UiForm(QWidget, SetupForm):
 
         self.__listWidget.labelDescription.setFont(font)
 
-        font.setFamily(fonts.data.family.black)
         font.setPointSize(fonts.data.size.medium)
+        font.setBold(True)
+        self.__headerWidget.labelTitle.setFont(font)
+
+        font.setFamily(fonts.data.family.black)
+        font.setBold(False)
         self.__listWidget.labelTitle.setFont(font)
 
     @pyqtSlot()
