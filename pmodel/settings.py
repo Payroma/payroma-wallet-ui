@@ -9,6 +9,9 @@ class SettingsModel(settings.UiForm):
 
         self.setup()
 
+        # Test
+        self.set_data(network_connected=True, network_name="Binance Smart Chain")
+
     @pyqtSlot()
     def back_clicked(self):
         QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)

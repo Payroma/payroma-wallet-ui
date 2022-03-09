@@ -4,6 +4,36 @@ from pcontroller import translator
 from pui import SetupForm, fonts, images, styles, Size, qnotice
 
 
+class NetworkWidget(QWidget):
+    def __init__(self, parent):
+        super(NetworkWidget, self).__init__(parent, flags=Qt.SubWindow)
+
+        self.setLayout(QGridLayout())
+        self.layout().setContentsMargins(0, 11, 0, 11)
+        self.layout().setHorizontalSpacing(11)
+        self.layout().setVerticalSpacing(0)
+
+        self.qnotice = qnotice.QNotice(
+            self, fixed_size=Size.s21, tooltip=QObject.toolTip.networkStatusR
+        )
+        self.qnotice.setCursor(Qt.PointingHandCursor)
+
+        self.labelTitle = SPGraphics.QuickLabel(
+            self, fixed_height=21
+        )
+        self.labelTitle.setWordWrap(False)
+
+        self.pushButton = SPGraphics.QuickPushButton(
+            fixed_height=21, value_changed=QObject.mainModel.textColorAnimated,
+            start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
+        )
+        self.pushButton.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+
+        self.layout().addWidget(self.labelTitle, 0, 0, 1, 1)
+        self.layout().addWidget(self.qnotice, 0, 1, 1, 1, Qt.AlignRight)
+        self.layout().addWidget(self.pushButton, 1, 0, 1, 2)
+
+
 class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
@@ -12,9 +42,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelThemeIllustration = None
         self.__labelDarkMode = None
         self.__switchDarkMode = None
-        self.__qnoticeNetwork = None
-        self.__labelNetwork = None
-        self.__pushButtonNetwork = None
+        self.__networkWidget = None
         self.__labelBackupTitle = None
         self.__loadingEffectBackup = None
         self.__pushButtonBackup = None
@@ -47,19 +75,8 @@ class UiForm(QWidget, SetupForm):
         if styles.CURRENT_TEMPLATE:
             self.__switchDarkMode.setChecked(True)
 
-        self.__qnoticeNetwork = qnotice.QNotice(
-            self, fixed_size=Size.s21, tooltip=QObject.toolTip.networkStatus
-        )
-        self.__qnoticeNetwork.setCursor(Qt.PointingHandCursor)
-
-        self.__labelNetwork = SPGraphics.QuickLabel(
-            self, text='#Current network', fixed_height=31
-        )
-
-        self.__pushButtonNetwork = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.networkSettingsR
-        )
-        self.__pushButtonNetwork.clicked.connect(self.network_clicked)
+        self.__networkWidget = NetworkWidget(self)
+        self.__networkWidget.pushButton.clicked.connect(self.network_clicked)
 
         self.__labelBackupTitle = SPGraphics.QuickLabel(
             self, fixed_height=81, align=Qt.AlignCenter
@@ -89,15 +106,13 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonImport.setLayout(QVBoxLayout())
         self.__pushButtonImport.clicked.connect(self.import_clicked)
 
-        self.layout().addWidget(self.__labelThemeIllustration, 0, 0, 1, 3, Qt.AlignHCenter)
-        self.layout().addWidget(self.__labelDarkMode, 1, 1, 1, 1)
-        self.layout().addWidget(self.__switchDarkMode, 1, 2, 1, 1)
-        self.layout().addWidget(self.__qnoticeNetwork, 2, 0, 1, 1)
-        self.layout().addWidget(self.__labelNetwork, 2, 1, 1, 1)
-        self.layout().addWidget(self.__pushButtonNetwork, 2, 2, 1, 1)
-        self.layout().addWidget(self.__labelBackupTitle, 3, 0, 1, 3)
-        self.layout().addWidget(self.__pushButtonBackup, 4, 0, 1, 3, Qt.AlignHCenter)
-        self.layout().addWidget(self.__pushButtonImport, 5, 0, 1, 3, Qt.AlignHCenter)
+        self.layout().addWidget(self.__labelThemeIllustration, 0, 0, 1, 2, Qt.AlignHCenter)
+        self.layout().addWidget(self.__labelDarkMode, 1, 0, 1, 1)
+        self.layout().addWidget(self.__switchDarkMode, 1, 1, 1, 1)
+        self.layout().addWidget(self.__networkWidget, 2, 0, 1, 2)
+        self.layout().addWidget(self.__labelBackupTitle, 3, 0, 1, 2)
+        self.layout().addWidget(self.__pushButtonBackup, 4, 0, 1, 2, Qt.AlignHCenter)
+        self.layout().addWidget(self.__pushButtonImport, 5, 0, 1, 2, Qt.AlignHCenter)
         self.__pushButtonBackup.layout().addWidget(self.__loadingEffectBackup, alignment=Qt.AlignCenter)
         self.__pushButtonImport.layout().addWidget(self.__loadingEffectImport, alignment=Qt.AlignCenter)
 
@@ -106,10 +121,10 @@ class UiForm(QWidget, SetupForm):
     def re_style(self):
         self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__labelThemeIllustration.setPixmap(images.data.illustrations.theme_status)
-        self.__pushButtonNetwork.setIcon(QIcon(images.data.icons.changeable.change21))
 
     def re_translate(self):
         self.__labelDarkMode.setText(translator("Switch to dark mode theme."))
+        self.__networkWidget.labelTitle.setText(translator("Current Blockchain Network"))
         self.__labelBackupTitle.setText(translator(
             "Backup all your wallets to a specific location on your system."
         ))
@@ -121,12 +136,17 @@ class UiForm(QWidget, SetupForm):
 
         font.setPointSize(fonts.data.size.title)
         self.__labelDarkMode.setFont(font)
-        self.__labelNetwork.setFont(font)
 
         font.setBold(True)
+        self.__networkWidget.labelTitle.setFont(font)
+
         self.__labelBackupTitle.setFont(font)
         self.__pushButtonBackup.setFont(font)
         self.__pushButtonImport.setFont(font)
+
+        font.setBold(False)
+        font.setUnderline(True)
+        self.__networkWidget.pushButton.setFont(font)
 
     @pyqtSlot()
     def back_clicked(self):
@@ -162,8 +182,6 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
-    def set_network_status(self, enabled: bool):
-        self.__qnoticeNetwork.setEnabled(enabled)
-
-    def set_network_name(self, text: str):
-        self.__labelNetwork.setText(text)
+    def set_data(self, network_connected: bool, network_name: str):
+        self.__networkWidget.qnotice.setEnabled(network_connected)
+        self.__networkWidget.pushButton.setText(network_name)
