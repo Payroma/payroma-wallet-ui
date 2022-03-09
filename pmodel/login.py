@@ -36,6 +36,5 @@ class LoginModel(login.UiForm):
         QObject.mainModel.currentTabChanged(Tab.AUTHENTICATOR)
 
     def login_changed(self, username: str, address: str):
-        self.set_username(username)
-        self.set_address(address)
+        self.set_data(username, address)
         QObject.walletModel.walletChanged(username, address)

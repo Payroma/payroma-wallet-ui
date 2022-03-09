@@ -80,7 +80,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__pushButtonSkip = SPGraphics.QuickPushButton(
             self, fixed_size=QSize(151, 51), value_changed=QObject.mainModel.textColorAnimated,
-            start_value=styles.data.colors.disabled_font, end_value=styles.data.colors.highlight
+            start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
         )
         self.__pushButtonSkip.clicked.connect(self.skip_clicked)
 
@@ -156,11 +156,9 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
-    def set_username(self, text: str):
-        self.__labelUsername.setText(text)
-
-    def set_address(self, text: str):
-        self.__labelAddress.setText(text, is_ellipsis=False)
+    def set_data(self, username: str, address: str):
+        self.__labelUsername.setText(username)
+        self.__labelAddress.setText(address, is_ellipsis=False)
 
     def reset(self):
         self.__all_inputs_disabled(False)
