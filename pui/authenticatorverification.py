@@ -189,17 +189,11 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
-    def set_username(self, text: str):
-        self.__labelUsername.setText(text)
-
-    def set_address(self, text: str):
-        self.__labelAddress.setText(text, is_ellipsis=False)
-
-    def set_password(self, text: str):
-        self.__lineEditPassword.setText(text)
-
-    def set_pin_code(self, text: str):
-        self.__lineEditPINCode.setText(text)
+    def set_data(self, username: str, address: str, password: str = '', pin_code: str = ''):
+        self.__labelUsername.setText(username)
+        self.__labelAddress.setText(address, is_ellipsis=False)
+        self.__lineEditPassword.setText(password)
+        self.__lineEditPINCode.setText(pin_code)
 
     def reset(self):
         self.__all_inputs_disabled(False)

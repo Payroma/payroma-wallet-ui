@@ -10,8 +10,7 @@ class AuthenticatorVerificationModel(authenticatorverification.UiForm):
         self.setup()
 
         # Test
-        self.set_username("Wallet1")
-        self.set_address("0x0000000000000000000000000000000000000000")
+        self.set_data("Wallet1", "0x0000000000000000000000000000000000000000")
 
     @pyqtSlot()
     def back_clicked(self):

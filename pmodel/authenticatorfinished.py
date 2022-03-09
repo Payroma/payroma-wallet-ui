@@ -10,7 +10,7 @@ class AuthenticatorFinishedModel(authenticatorfinished.UiForm):
         self.setup()
 
         # Test
-        self.set_key("HAZGCNJTMNRWMZLBGM4TANJQMUYTSYRRMYYDOZBZGE2TGNZZGU2Q")
+        self.set_data("HAZGCNJTMNRWMZLBGM4TANJQMUYTSYRRMYYDOZBZGE2TGNZZGU2Q")
 
     @pyqtSlot()
     def done_clicked(self):
