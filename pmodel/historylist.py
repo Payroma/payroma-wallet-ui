@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import historylist
 from pmodel import historyitem
 
@@ -49,4 +50,4 @@ class HistoryListModel(historylist.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLET)
+        globalmethods.MainModel.setCurrentTab(Tab.WALLET)

@@ -34,18 +34,18 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelUsername.setWordWrap(False)
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
-            self, copy_tooltip=QObject.toolTip.copyR
+            self, copy_tooltip=QApplication.toolTip.copyR
         )
         self.__labelAddress.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         self.__checkboxFavorite = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.favoriteR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.favoriteR
         )
         self.__checkboxFavorite.setCheckable(True)
         self.__checkboxFavorite.clicked.connect(self.favorite_clicked)
 
         self.__qnoticeStatus = qnotice.QNotice(
-            self, fixed_size=Size.s21, tooltip=QObject.toolTip.walletStatusR
+            self, fixed_size=Size.s21, tooltip=QApplication.toolTip.walletStatusR
         )
         self.__qnoticeStatus.setDisabled(True)
 

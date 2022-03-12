@@ -42,21 +42,21 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelFunctionName.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         self.__labelPending = SPGraphics.QuickLabel(
-            self, scaled=True, fixed_size=Size.s21, tooltip=QObject.toolTip.pending
+            self, scaled=True, fixed_size=Size.s21, tooltip=QApplication.toolTip.pending
         )
         self.__labelPending.setProperty(UiForm.PENDING, True)
         self.__labelPending.setCursor(Qt.PointingHandCursor)
 
         self.__labelSuccess = SPGraphics.QuickLabel(
             self, scaled=True, fixed_size=Size.s21, pixmap=images.data.icons.ok41,
-            tooltip=QObject.toolTip.success
+            tooltip=QApplication.toolTip.success
         )
         self.__labelSuccess.setProperty(UiForm.SUCCESS, True)
         self.__labelSuccess.setCursor(Qt.PointingHandCursor)
 
         self.__labelFailed = SPGraphics.QuickLabel(
             self, scaled=True, fixed_size=Size.s21, pixmap=images.data.icons.warning41,
-            tooltip=QObject.toolTip.failed
+            tooltip=QApplication.toolTip.failed
         )
         self.__labelFailed.setProperty(UiForm.FAILED, True)
         self.__labelFailed.setCursor(Qt.PointingHandCursor)
@@ -67,12 +67,12 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelAmount.setWordWrap(False)
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
-            self, fixed_height=21, copy_tooltip=QObject.toolTip.copyR
+            self, fixed_height=21, copy_tooltip=QApplication.toolTip.copyR
         )
         self.__labelAddress.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         self.__pushButtonExplorer = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.viewTransactionR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.viewTransactionR
         )
         self.__pushButtonExplorer.clicked.connect(self.explorer_clicked)
 

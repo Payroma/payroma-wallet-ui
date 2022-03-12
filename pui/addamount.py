@@ -1,5 +1,5 @@
 from plibs import *
-from pcontroller import translator
+from pcontroller import translator, globalmethods
 from pui import SetupForm, fonts, images, styles, Size, validator, assetsicons
 
 
@@ -54,7 +54,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonMax = SPGraphics.QuickPushButton(
-            self, fixed_size=QSize(41, 21), value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=QSize(41, 21), value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonMax.clicked.connect(self.max_clicked)
@@ -66,7 +66,7 @@ class UiForm(QWidget, SetupForm):
         self.__lineWidget.setObjectName('lineWidget')
 
         self.__pushButtonContinue = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonContinue.setLayout(QVBoxLayout())

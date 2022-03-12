@@ -31,7 +31,7 @@ class HeaderWidget(QWidget):
         self.labelBlockValue.setWordWrap(False)
 
         self.pushButtonBlockTime = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.showBlockTime
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.showBlockTime
         )
 
         self.labelTotalStaked = SPGraphics.QuickLabel(
@@ -50,7 +50,7 @@ class HeaderWidget(QWidget):
         self.labelTotalStakedValue.setWordWrap(False)
 
         self.pushButtonStakingContract = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.viewExplorer
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.viewExplorer
         )
 
         self.layout().addWidget(self.labelBlock, 0, 0, 1, 1)
@@ -81,11 +81,11 @@ class PairWidget(QWidget):
         self.labelSymbol.setWordWrap(False)
 
         self.pushButtonWebsite = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.projectWebsiteB
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.projectWebsiteB
         )
 
         self.pushButtonContract = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.viewProjectExplorerB
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.viewProjectExplorerB
         )
 
         self.layout().addWidget(self.labelIcon, 0, 0, 1, 2, Qt.AlignHCenter)
@@ -136,7 +136,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.STAKE_PAIR)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)

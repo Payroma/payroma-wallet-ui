@@ -1,30 +1,25 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import login
 
 
-class GlobalEvents:
-    loginChanged = None
-
-
 class LoginModel(login.UiForm):
-    QObject.loginModel = GlobalEvents()
-
     def __init__(self, parent):
         super(LoginModel, self).__init__(parent)
 
         self.setup()
 
-        # Events
-        QObject.loginModel.loginChanged = self.login_changed
+        # Global Methods
+        globalmethods.LoginModel._setData = self.set_data
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)
 
     @pyqtSlot()
     def skip_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLET)
+        globalmethods.MainModel.setCurrentTab(Tab.WALLET)
 
     @pyqtSlot(str)
     def password_changed(self, text: str):
@@ -33,8 +28,4 @@ class LoginModel(login.UiForm):
 
     @pyqtSlot()
     def login_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.AUTHENTICATOR)
-
-    def login_changed(self, username: str, address: str):
-        self.set_data(username, address)
-        QObject.walletModel.walletChanged(username, address)
+        globalmethods.MainModel.setCurrentTab(Tab.AUTHENTICATOR)

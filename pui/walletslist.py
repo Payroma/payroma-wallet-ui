@@ -28,12 +28,12 @@ class HeaderWidget(QWidget):
         )
 
         self.pushButtonSearchClear = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.remove
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.remove
         )
         self.pushButtonSearchClear.hide()
 
         self.pushButtonAddNew = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s31, tooltip=QObject.toolTip.addNewR
+            self, icon_size=Size.s21, fixed_size=Size.s31, tooltip=QApplication.toolTip.addNewR
         )
 
         self.layout().addWidget(self.lineEditSearch)

@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, globalmethods
 from pui import SetupForm, fonts, images, styles, Size, validator
 
 
@@ -30,7 +30,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.ADD_NETWORK)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
@@ -46,7 +46,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelNameAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.networkNameAlertR
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.networkNameAlertR
         )
         self.__labelNameAlert.setCursor(Qt.PointingHandCursor)
         self.__labelNameAlert.hide()
@@ -59,7 +59,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelRPCAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.networkRPCAlertR
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.networkRPCAlertR
         )
         self.__labelRPCAlert.setCursor(Qt.PointingHandCursor)
         self.__labelRPCAlert.hide()
@@ -78,7 +78,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelChainIdAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.networkChainIdAlertR
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.networkChainIdAlertR
         )
         self.__labelChainIdAlert.setCursor(Qt.PointingHandCursor)
         self.__labelChainIdAlert.hide()
@@ -91,13 +91,13 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelExplorerAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.networkExplorerAlertR
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.networkExplorerAlertR
         )
         self.__labelExplorerAlert.setCursor(Qt.PointingHandCursor)
         self.__labelExplorerAlert.hide()
 
         self.__pushButtonAdd = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonAdd.setLayout(QVBoxLayout())

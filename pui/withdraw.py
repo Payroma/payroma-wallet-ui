@@ -31,20 +31,20 @@ class HeaderWidget(QWidget):
 
         self.labelAddressValid = SPGraphics.QuickLabel(
             self, scaled=True, fixed_size=Size.s21,
-            pixmap=images.data.icons.ok41, tooltip=QObject.toolTip.addressValidB
+            pixmap=images.data.icons.ok41, tooltip=QApplication.toolTip.addressValidB
         )
         self.labelAddressValid.setCursor(Qt.PointingHandCursor)
         self.labelAddressValid.hide()
 
         self.labelAddressAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.addressAlert
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.addressAlert
         )
         self.labelAddressAlert.setCursor(Qt.PointingHandCursor)
         self.labelAddressAlert.hide()
 
         self.pushButtonAddNew = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.addNewAddressBook
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.addNewAddressBook
         )
         self.pushButtonAddNew.hide()
 
@@ -72,7 +72,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.WITHDRAW)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)

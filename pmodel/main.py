@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import url_open
+from pcontroller import url_open, globalmethods
 from pui import main
 from pmodel.walletslist import WalletsListModel
 from pmodel.addwallet import AddWalletModel
@@ -19,26 +19,17 @@ from pmodel.historylist import HistoryListModel
 from pmodel.transactionsender import TransactionSenderModel
 
 
-class GlobalEvents:
-    currentTabChanged = None
-    themeModeChanged = None
-    backgroundColorAnimated = None
-    textColorAnimated = None
-
-
 class MainModel(main.UiForm):
-    QObject.mainModel = GlobalEvents()
-
     def __init__(self, parent):
         super(MainModel, self).__init__(parent)
 
         self.setup()
 
-        # Events
-        QObject.mainModel.currentTabChanged = self.set_current_tab
-        QObject.mainModel.themeModeChanged = self.set_theme_mode
-        QObject.mainModel.backgroundColorAnimated = self.background_color_animate
-        QObject.mainModel.textColorAnimated = self.text_color_animate
+        # Global Methods
+        globalmethods.MainModel._setCurrentTab = self.set_current_tab
+        globalmethods.MainModel._setThemeMode = self.set_theme_mode
+        globalmethods.MainModel._backgroundColorAnimate = self.background_color_animate
+        globalmethods.MainModel._textColorAnimate = self.text_color_animate
 
         # Tabs
         self.add_tab(WalletsListModel(self), Tab.WALLETS_LIST)
@@ -59,7 +50,7 @@ class MainModel(main.UiForm):
 
     @pyqtSlot()
     def settings_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.SETTINGS)
+        globalmethods.MainModel.setCurrentTab(Tab.SETTINGS)
 
     @pyqtSlot()
     def exit_clicked(self):

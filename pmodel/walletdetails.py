@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import walletdetails
 
 
@@ -10,10 +11,10 @@ class WalletDetailsModel(walletdetails.UiForm):
         self.setup()
         self.reset()
 
-        # Test
-        self.set_data('0x0000000000000000000000000000000000000000', time.ctime())
-        self.set_private_key('0000000000000000000000000000000000000000000000000000000000000000')
+        # Global Methods
+        globalmethods.WalletDetailsModel._setData = self.set_data
+        globalmethods.WalletDetailsModel._setPrivateKey = self.set_private_key
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.walletModel.currentTabChanged(Tab.WalletTab.TOKENS_LIST)
+        globalmethods.WalletModel.setCurrentTab(Tab.WalletTab.TOKENS_LIST)

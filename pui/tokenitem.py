@@ -47,7 +47,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelSymbol.setObjectName('labelDescription')
 
         self.__pushButtonRemove = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s16, fixed_size=Size.s21, tooltip=QObject.toolTip.remove
+            self, icon_size=Size.s16, fixed_size=Size.s21, tooltip=QApplication.toolTip.remove
         )
         self.__pushButtonRemove.clicked.connect(self.remove_clicked)
 

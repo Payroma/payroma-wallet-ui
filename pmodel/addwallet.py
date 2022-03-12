@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import addwallet
 
 
@@ -11,7 +12,7 @@ class AddWalletModel(addwallet.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)
 
     @pyqtSlot(str)
     def username_changed(self, text: str):

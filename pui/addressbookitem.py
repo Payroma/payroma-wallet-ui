@@ -30,7 +30,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         )
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
-            self, copy_tooltip=QObject.toolTip.copyR
+            self, copy_tooltip=QApplication.toolTip.copyR
         )
         self.__labelAddress.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
 

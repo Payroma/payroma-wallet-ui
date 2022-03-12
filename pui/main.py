@@ -38,8 +38,8 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
         self.mainWidget.layout().setContentsMargins(0, 0, 0, 0)
         self.mainWidget.layout().setSpacing(0)
 
-        QObject.toolTip = tooltip.UiForm(self)
-        QObject.toolTip.setup()
+        QApplication.toolTip = tooltip.UiForm(self)
+        QApplication.toolTip.setup()
 
         self.__headerWidget = header.UiForm(self)
         self.__headerWidget.setup()
@@ -65,10 +65,10 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
         palette.setColor(QPalette.Dark, styles.data.colors.disabled)
         Global.kernel.setPalette(palette)
 
-        QObject.quickNotification = SPGraphics.QuickNotification(
+        QApplication.quickNotification = SPGraphics.QuickNotification(
             self, stylesheet=styles.data.css.notices, top_margin=11, right_margin=11
         )
-        QObject.quickNotification.setFixedHeight(121)
+        QApplication.quickNotification.setFixedHeight(121)
 
         SPGraphics.Setup.set_colors(
             font=styles.data.colors.font.name(),

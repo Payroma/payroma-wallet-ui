@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import authenticatorverification
 
 
@@ -14,11 +15,11 @@ class AuthenticatorVerificationModel(authenticatorverification.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.DOWNLOAD)
+        globalmethods.AuthenticatorSetupModel.setCurrentTab(Tab.AuthenticatorSetupTab.DOWNLOAD)
 
     @pyqtSlot()
     def verify_clicked(self):
-        QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.SCAN)
+        globalmethods.AuthenticatorSetupModel.setCurrentTab(Tab.AuthenticatorSetupTab.SCAN)
 
     @pyqtSlot(str)
     def password_changed(self, text: str):

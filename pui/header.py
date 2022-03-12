@@ -66,11 +66,11 @@ class UiForm(QWidget, SetupForm):
         self.labelSoftwareVersion.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
 
         self.pushButtonSettings = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.settings
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.settings
         )
 
         self.pushButtonExit = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.exit
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.exit
         )
 
         self.layout().addWidget(self.labelBrandIcon, 0, 0, 2, 1)

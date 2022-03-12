@@ -1,26 +1,20 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import stakepair
 from pmodel.stakepairapproval import StakePairApprovalModel
 from pmodel.stakepairamount import StakePairAmountModel
 
 
-class GlobalEvents(QObject):
-    pairChanged = None
-    approvalChanged = None
-
-
 class StakePairModel(stakepair.UiForm):
-    QObject.stakePairModel = GlobalEvents()
-
     def __init__(self, parent):
         super(StakePairModel, self).__init__(parent)
 
         self.setup()
 
-        # Events
-        QObject.stakePairModel.pairChanged = self.set_data
-        QObject.stakePairModel.approvalChanged = self.set_approved
+        # Global Methods
+        globalmethods.StakePairModel._setData = self.set_data
+        globalmethods.StakePairModel._setApproved = self.set_approved
 
         # Tabs
         self.stakePairApprovalModel = StakePairApprovalModel(self)
@@ -31,7 +25,7 @@ class StakePairModel(stakepair.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.STAKE_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.STAKE_LIST)
 
     def set_data(
             self, block_title: str, blocks: int, total_staked: str,

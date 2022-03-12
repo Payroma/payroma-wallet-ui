@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import walletslist
 from pmodel import walletitem
 
@@ -23,12 +24,14 @@ class WalletsListModel(walletslist.UiForm):
 
     @pyqtSlot()
     def add_new_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.ADD_WALLET)
+        globalmethods.MainModel.setCurrentTab(Tab.ADD_WALLET)
 
     @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem):
         widget = super(WalletsListModel, self).item_clicked(item)
-        QObject.loginModel.loginChanged(
-            widget.get_username(), widget.get_address()
-        )
-        QObject.mainModel.currentTabChanged(Tab.LOGIN)
+        globalmethods.LoginModel.setData(widget.get_username(), widget.get_address())
+        globalmethods.WalletModel.setData(widget.get_username(), widget.get_address())
+        globalmethods.WalletDetailsModel.setData(widget.get_address(), time.ctime())
+        globalmethods.WalletDetailsModel.setPrivateKey('0' * 64)
+        globalmethods.DepositModel.setData(widget.get_address(), 'Binance Smart Chain')
+        globalmethods.MainModel.setCurrentTab(Tab.LOGIN)

@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import deposit
 
 
@@ -9,13 +10,13 @@ class DepositModel(deposit.UiForm):
 
         self.setup()
 
-        # Test
-        self.set_data('0x0000000000000000000000000000000000000000', 'Binance Smart Chain')
+        # Global Methods
+        globalmethods.DepositModel._setData = self.set_data
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLET)
+        globalmethods.MainModel.setCurrentTab(Tab.WALLET)
 
     @pyqtSlot()
     def network_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.NETWORKS_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.NETWORKS_LIST)

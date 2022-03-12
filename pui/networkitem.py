@@ -38,7 +38,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelName.setObjectName('labelDescription')
 
         self.__qnoticeStatus = qnotice.QNotice(
-            self, fixed_size=Size.s21, tooltip=QObject.toolTip.networkStatusR
+            self, fixed_size=Size.s21, tooltip=QApplication.toolTip.networkStatusR
         )
         self.__qnoticeStatus.setDisabled(True)
 

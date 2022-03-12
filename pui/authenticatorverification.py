@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, globalmethods
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress, validator
 
 
@@ -53,7 +53,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
-            self, fixed_height=21, copy_tooltip=QObject.toolTip.copyR
+            self, fixed_height=21, copy_tooltip=QApplication.toolTip.copyR
         )
 
         self.__lineEditPassword = SPGraphics.QuickLineEdit(
@@ -68,7 +68,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonPasswordEye = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.showR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.showR
         )
 
         self.__lineEditPINCode = SPGraphics.QuickLineEdit(
@@ -83,18 +83,18 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonPINCodeEye = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.showR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.showR
         )
 
         self.__labelPINCodeAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.pinCodeAlert
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.pinCodeAlert
         )
         self.__labelPINCodeAlert.setCursor(Qt.PointingHandCursor)
         self.__labelPINCodeAlert.hide()
 
         self.__pushButtonVerify = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonVerify.setLayout(QVBoxLayout())

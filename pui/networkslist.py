@@ -20,7 +20,7 @@ class HeaderWidget(QWidget):
         self.labelTitle.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
 
         self.pushButtonAddNew = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.addNewR
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.addNewR
         )
 
         self.layout().addWidget(self.labelTitle)
@@ -57,7 +57,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.NETWORKS_LIST)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)

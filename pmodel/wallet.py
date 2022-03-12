@@ -1,27 +1,21 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import wallet
 from pmodel.tokenslist import TokensListModel
 from pmodel.walletdetails import WalletDetailsModel
 from pmodel.addtoken import AddTokenModel
 
 
-class GlobalEvents:
-    walletChanged = None
-    currentTabChanged = None
-
-
 class WalletModel(wallet.UiForm):
-    QObject.walletModel = GlobalEvents()
-
     def __init__(self, parent):
         super(WalletModel, self).__init__(parent)
 
         self.setup()
 
-        # Events
-        QObject.walletModel.walletChanged = self.set_data
-        QObject.walletModel.currentTabChanged = self.set_current_tab
+        # Global Methods
+        globalmethods.WalletModel._setData = self.set_data
+        globalmethods.WalletModel._setCurrentTab = self.set_current_tab
 
         # Tabs
         self.tokensListModel = TokensListModel(self)
@@ -34,30 +28,30 @@ class WalletModel(wallet.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)
 
     @pyqtSlot()
     def deposit_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.DEPOSIT)
+        globalmethods.MainModel.setCurrentTab(Tab.DEPOSIT)
 
     @pyqtSlot()
     def withdraw_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WITHDRAW)
+        globalmethods.MainModel.setCurrentTab(Tab.WITHDRAW)
 
     @pyqtSlot()
     def stake_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.STAKE_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.STAKE_LIST)
 
     @pyqtSlot()
     def history_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.HISTORY_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.HISTORY_LIST)
 
     @pyqtSlot()
     def details_clicked(self):
         super(WalletModel, self).details_clicked()
-        self.set_current_tab(Tab.WalletTab.WALLET_DETAILS)
+        globalmethods.WalletModel.setCurrentTab(Tab.WalletTab.WALLET_DETAILS)
 
     @pyqtSlot()
     def add_token_clicked(self):
         super(WalletModel, self).add_token_clicked()
-        self.set_current_tab(Tab.WalletTab.ADD_TOKEN)
+        globalmethods.WalletModel.setCurrentTab(Tab.WalletTab.ADD_TOKEN)

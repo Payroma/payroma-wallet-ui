@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, globalmethods
 from pui import SetupForm, fonts, images, styles, Size
 
 
@@ -119,7 +119,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.AUTHENTICATOR)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
@@ -140,7 +140,7 @@ class UiForm(QWidget, SetupForm):
         self.__codeInputWidget = CodeInputWidget(self, text_changed=self.otp_code_changed)
 
         self.__pushButtonConfirm = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonConfirm.setLayout(QVBoxLayout())
@@ -153,7 +153,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonForgot = SPGraphics.QuickPushButton(
-            self, fixed_size=QSize(301, 31), value_changed=QObject.mainModel.textColorAnimated,
+            self, fixed_size=QSize(301, 31), value_changed=globalmethods.MainModel.textColorAnimate,
             start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
         )
         self.__pushButtonForgot.clicked.connect(self.forgot_clicked)

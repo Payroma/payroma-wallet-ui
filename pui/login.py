@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, globalmethods
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
 
 
@@ -30,7 +30,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.LOGIN)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
@@ -44,7 +44,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
-            self, fixed_height=21, copy_tooltip=QObject.toolTip.copyR
+            self, fixed_height=21, copy_tooltip=QApplication.toolTip.copyR
         )
 
         self.__lineEditPassword = SPGraphics.QuickLineEdit(
@@ -59,14 +59,14 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonPasswordEye = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.showR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.showR
         )
 
         self.__strengthBar = SPInputmanager.QStrengthBar(self)
         self.__strengthBar.setFixedSize(QSize(301, 21))
 
         self.__pushButtonLogin = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonLogin.setLayout(QVBoxLayout())
@@ -79,7 +79,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonSkip = SPGraphics.QuickPushButton(
-            self, fixed_size=QSize(151, 51), value_changed=QObject.mainModel.textColorAnimated,
+            self, fixed_size=QSize(151, 51), value_changed=globalmethods.MainModel.textColorAnimate,
             start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
         )
         self.__pushButtonSkip.clicked.connect(self.skip_clicked)

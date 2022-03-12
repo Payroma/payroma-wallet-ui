@@ -1,24 +1,19 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import withdraw
 from pmodel.addressesbooklist import AddressesBookListModel
 from pmodel.addamount import AddAmountModel
 
 
-class GlobalEvents:
-    addressChanged = None
-
-
 class WithdrawModel(withdraw.UiForm):
-    QObject.withdrawModel = GlobalEvents()
-
     def __init__(self, parent):
         super(WithdrawModel, self).__init__(parent)
 
         self.setup()
 
-        # Events
-        QObject.withdrawModel.addressChanged = self.set_address
+        # Global Methods
+        globalmethods.WithdrawModel._setAddress = self.set_address
 
         # Tabs
         self.addressesBookListModel = AddressesBookListModel(self)
@@ -36,7 +31,7 @@ class WithdrawModel(withdraw.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLET)
+        globalmethods.MainModel.setCurrentTab(Tab.WALLET)
 
     @pyqtSlot(str)
     def address_changed(self, text: str):
@@ -47,4 +42,4 @@ class WithdrawModel(withdraw.UiForm):
 
     def __search(self, text: str):
         if self.__address == text:
-            QObject.addressesBookListModel.searchChanged(text)
+            globalmethods.AddressesBookListModel.search(text)

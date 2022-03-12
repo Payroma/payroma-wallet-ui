@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import networkslist
 from pmodel import networkitem
 
@@ -26,11 +27,11 @@ class NetworksListModel(networkslist.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.SETTINGS)
+        globalmethods.MainModel.setCurrentTab(Tab.SETTINGS)
 
     @pyqtSlot()
     def add_new_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.ADD_NETWORK)
+        globalmethods.MainModel.setCurrentTab(Tab.ADD_NETWORK)
 
     @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem):

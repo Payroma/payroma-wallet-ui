@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, globalmethods
 from pui import SetupForm, fonts, images, styles, Size, validator
 
 
@@ -47,7 +47,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.ADD_WALLET)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
@@ -69,13 +69,13 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__labelUsernameInfo = SPGraphics.QuickLabel(
-            self, fixed_size=Size.s21, tooltip=QObject.toolTip.usernameInfoR
+            self, fixed_size=Size.s21, tooltip=QApplication.toolTip.usernameInfoR
         )
         self.__labelUsernameInfo.setCursor(Qt.PointingHandCursor)
 
         self.__labelUsernameAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.usernameAlert
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.usernameAlert
         )
         self.__labelUsernameAlert.setCursor(Qt.PointingHandCursor)
         self.__labelUsernameAlert.hide()
@@ -92,12 +92,12 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonPasswordEye = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.showR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.showR
         )
 
         self.__labelPasswordAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.passwordAlert
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.passwordAlert
         )
         self.__labelPasswordAlert.setCursor(Qt.PointingHandCursor)
         self.__labelPasswordAlert.hide()
@@ -117,12 +117,12 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonConfirmPasswordEye = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.showR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.showR
         )
 
         self.__labelConfirmPasswordAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.passwordConfirmAlert
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.passwordConfirmAlert
         )
         self.__labelConfirmPasswordAlert.setCursor(Qt.PointingHandCursor)
         self.__labelConfirmPasswordAlert.hide()
@@ -140,17 +140,17 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonPINCodeEye = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.showR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.showR
         )
 
         self.__labelPINCodeInfo = SPGraphics.QuickLabel(
-            self, fixed_size=Size.s21, tooltip=QObject.toolTip.pinCodeInfoR
+            self, fixed_size=Size.s21, tooltip=QApplication.toolTip.pinCodeInfoR
         )
         self.__labelPINCodeInfo.setCursor(Qt.PointingHandCursor)
 
         self.__labelPINCodeAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.pinCodeAlert
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.pinCodeAlert
         )
         self.__labelPINCodeAlert.setCursor(Qt.PointingHandCursor)
         self.__labelPINCodeAlert.hide()
@@ -168,19 +168,19 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__labelAddressInfo = SPGraphics.QuickLabel(
-            self, fixed_size=Size.s21, tooltip=QObject.toolTip.addressInfoR
+            self, fixed_size=Size.s21, tooltip=QApplication.toolTip.addressInfoR
         )
         self.__labelAddressInfo.setCursor(Qt.PointingHandCursor)
 
         self.__labelAddressAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.addressAlert
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.addressAlert
         )
         self.__labelAddressAlert.setCursor(Qt.PointingHandCursor)
         self.__labelAddressAlert.hide()
 
         self.__pushButtonAdd = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonAdd.setLayout(QVBoxLayout())

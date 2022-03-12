@@ -26,7 +26,7 @@ class UiForm(QWidget, SetupForm):
 
         self.labelAddressDonate = qlabeladdress.QLabelAddress(
             self, '0x9BfDe70BF991697bCD8bAD287D2C46AaD662544d', fixed_height=31,
-            copy_tooltip=QObject.toolTip.copy
+            copy_tooltip=QApplication.toolTip.copy
         )
 
         self.labelSplit = SPGraphics.QuickLabel(

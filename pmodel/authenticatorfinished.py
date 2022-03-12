@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import authenticatorfinished
 
 
@@ -14,4 +15,4 @@ class AuthenticatorFinishedModel(authenticatorfinished.UiForm):
 
     @pyqtSlot()
     def done_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)

@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import settings
 
 
@@ -14,16 +15,16 @@ class SettingsModel(settings.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.WALLETS_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)
 
     @pyqtSlot(bool)
     def switch_clicked(self, state: bool):
         theme_name = 'dark' if state else ''
-        QObject.mainModel.themeModeChanged(theme_name)
+        globalmethods.MainModel.setThemeMode(theme_name)
 
     @pyqtSlot()
     def network_clicked(self):
-        QObject.mainModel.currentTabChanged(Tab.NETWORKS_LIST)
+        globalmethods.MainModel.setCurrentTab(Tab.NETWORKS_LIST)
 
     @pyqtSlot()
     def backup_clicked(self):

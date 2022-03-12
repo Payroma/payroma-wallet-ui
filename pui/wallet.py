@@ -21,7 +21,7 @@ class HeaderWidget(QWidget):
         self.labelUsername.setWordWrap(False)
 
         self.pushButtonMenu = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QObject.toolTip.menuR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.menuR
         )
 
         self.pushButtonDetails = SPGraphics.QuickPushButton(
@@ -53,7 +53,7 @@ class HeaderWidget(QWidget):
         self.menuWallet.add_button(self.pushButtonLogout)
 
         self.labelAddress = qlabeladdress.QLabelAddress(
-            self, fixed_height=21, copy_tooltip=QObject.toolTip.copyR
+            self, fixed_height=21, copy_tooltip=QApplication.toolTip.copyR
         )
 
         self.layout().addWidget(self.labelUsername, 0, 0, 1, 2)
@@ -72,23 +72,23 @@ class TabsWidget(QWidget):
         self.layout().setSpacing(21)
 
         self.pushButtonDeposit = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.depositB
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QApplication.toolTip.depositB
         )
 
         self.pushButtonWithdraw = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.withdrawB
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QApplication.toolTip.withdrawB
         )
 
         self.pushButtonStake = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.stakeB
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QApplication.toolTip.stakeB
         )
 
         self.pushButtonSwap = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.swapB
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QApplication.toolTip.swapB
         )
 
         self.pushButtonHistory = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QObject.toolTip.historyB
+            self, icon_size=Size.s24, fixed_size=Size.s31, tooltip=QApplication.toolTip.historyB
         )
 
         self.layout().addWidget(self.pushButtonDeposit)
@@ -115,7 +115,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.WALLET)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)

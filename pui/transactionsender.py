@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, globalmethods
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress, assetsicons
 
 
@@ -24,7 +24,7 @@ class NetworkWidget(QWidget):
         self.labelTitle.setWordWrap(False)
 
         self.pushButton = SPGraphics.QuickPushButton(
-            fixed_height=21, value_changed=QObject.mainModel.textColorAnimated,
+            fixed_height=21, value_changed=globalmethods.MainModel.textColorAnimate,
             start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
         )
         self.pushButton.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -122,7 +122,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.TRANSACTION_SENDER)
 
         self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QObject.toolTip.back
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
         )
         self.__pushButtonBack.move(10, 10)
         self.__pushButtonBack.clicked.connect(self.back_clicked)
@@ -137,7 +137,7 @@ class UiForm(QWidget, SetupForm):
         self.__lineWidget.setObjectName('lineWidget')
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
-            self, tooltip=QObject.toolTip.transactionSendTo, copy_tooltip=QObject.toolTip.copyR
+            self, tooltip=QApplication.toolTip.transactionSendTo, copy_tooltip=QApplication.toolTip.copyR
         )
         self.__labelAddress.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.__labelAddress.setCursor(Qt.PointingHandCursor)
@@ -163,7 +163,7 @@ class UiForm(QWidget, SetupForm):
         self.__gasWidget = GasWidget(self)
 
         self.__pushButtonConfirm = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonConfirm.setLayout(QVBoxLayout())

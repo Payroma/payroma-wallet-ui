@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, to_qr_code
+from pcontroller import translator, to_qr_code, globalmethods
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
 
 
@@ -24,7 +24,7 @@ class NetworkWidget(QWidget):
         self.labelTitle.setWordWrap(False)
 
         self.pushButton = SPGraphics.QuickPushButton(
-            fixed_height=21, value_changed=QObject.mainModel.textColorAnimated,
+            fixed_height=21, value_changed=globalmethods.MainModel.textColorAnimate,
             start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
         )
         self.pushButton.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -73,7 +73,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
-            self, copy_tooltip=QObject.toolTip.copyR
+            self, copy_tooltip=QApplication.toolTip.copyR
         )
         self.__labelAddress.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
 

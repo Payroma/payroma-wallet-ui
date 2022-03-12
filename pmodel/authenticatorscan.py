@@ -1,5 +1,6 @@
 from plibs import *
 from pheader import *
+from pcontroller import globalmethods
 from pui import authenticatorscan
 
 
@@ -14,11 +15,11 @@ class AuthenticatorScanModel(authenticatorscan.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.VERIFICATION)
+        globalmethods.AuthenticatorSetupModel.setCurrentTab(Tab.AuthenticatorSetupTab.VERIFICATION)
 
     @pyqtSlot()
     def confirm_clicked(self):
-        QObject.authenticatorSetupModel.currentTabChanged(Tab.AuthenticatorSetupTab.FINISHED)
+        globalmethods.AuthenticatorSetupModel.setCurrentTab(Tab.AuthenticatorSetupTab.FINISHED)
 
     def otp_code_changed(self, text: str, valid: bool = False):
         if len(text) == 6:

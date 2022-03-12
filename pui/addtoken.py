@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, globalmethods
 from pui import SetupForm, fonts, images, styles, Size, validator, assetsicons
 
 
@@ -49,7 +49,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelAddressAlert = SPGraphics.QuickLabel(
             self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QObject.toolTip.addressAlert
+            fixed_size=Size.s21, tooltip=QApplication.toolTip.addressAlert
         )
         self.__labelAddressAlert.setCursor(Qt.PointingHandCursor)
         self.__labelAddressAlert.hide()
@@ -67,7 +67,7 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditDecimals.textChanged.connect(self.decimals_changed)
 
         self.__pushButtonAdd = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonAdd.setLayout(QVBoxLayout())

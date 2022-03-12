@@ -1,5 +1,5 @@
 from plibs import *
-from pcontroller import translator
+from pcontroller import translator, globalmethods
 from pui import SetupForm, fonts, styles, Size, validator, assetsicons
 
 
@@ -65,7 +65,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonDeposit = SPGraphics.QuickPushButton(
-            self, fixed_size=button_size, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=button_size, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonDeposit.setDisabled(True)
@@ -84,7 +84,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonWithdraw = SPGraphics.QuickPushButton(
-            self, fixed_size=button_size, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=button_size, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonWithdraw.setDisabled(True)
@@ -102,7 +102,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonClaim = SPGraphics.QuickPushButton(
-            self, fixed_size=button_size, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=button_size, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonClaim.setDisabled(True)

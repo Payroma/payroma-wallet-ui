@@ -49,7 +49,7 @@ class QLabelAddress(SPGraphics.QuickWidget):
     @pyqtSlot()
     def __clicked(self):
         clipboard(self.text())
-        QObject.quickNotification.successfully(translator("Copied Successfully"))
+        QApplication.quickNotification.successfully(translator("Copied Successfully"))
 
     def clear(self):
         self.label.clear()

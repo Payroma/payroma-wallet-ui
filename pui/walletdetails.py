@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, to_qr_code
+from pcontroller import translator, to_qr_code, globalmethods
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
 
 
@@ -54,11 +54,11 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__labelPrivateKeyValue = qlabeladdress.QLabelAddress(
-            self, fixed_height=Size.default.height(), copy_tooltip=QObject.toolTip.copyR
+            self, fixed_height=Size.default.height(), copy_tooltip=QApplication.toolTip.copyR
         )
 
         self.__pushButtonPrivateKey = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=QObject.mainModel.backgroundColorAnimated,
+            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonPrivateKey.setLayout(QVBoxLayout())
