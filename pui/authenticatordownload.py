@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, globalmethods
+from pcontroller import translator
 from pui import SetupForm, fonts, styles, Size
 
 
@@ -71,7 +71,7 @@ class UiForm(QWidget, SetupForm):
         self.__lineWidget.setObjectName('lineWidget')
 
         self.__pushButtonNext = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
+            self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonNext.clicked.connect(self.next_clicked)

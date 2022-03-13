@@ -1,5 +1,5 @@
 from plibs import *
-from pcontroller import translator, globalmethods
+from pcontroller import translator
 from pui import SetupForm, fonts, styles, Size
 
 
@@ -22,7 +22,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonApproval = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
+            self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonApproval.clicked.connect(self.approval_clicked)

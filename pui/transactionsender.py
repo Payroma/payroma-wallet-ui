@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, globalmethods
+from pcontroller import translator
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress, assetsicons
 
 
@@ -24,7 +24,7 @@ class NetworkWidget(QWidget):
         self.labelTitle.setWordWrap(False)
 
         self.pushButton = SPGraphics.QuickPushButton(
-            fixed_height=21, value_changed=globalmethods.MainModel.textColorAnimate,
+            fixed_height=21, value_changed=QApplication.textColorAnimate,
             start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
         )
         self.pushButton.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
@@ -156,7 +156,7 @@ class UiForm(QWidget, SetupForm):
         self.__gasWidget = GasWidget(self)
 
         self.__pushButtonConfirm = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
+            self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonConfirm.setLayout(QVBoxLayout())
@@ -247,7 +247,10 @@ class UiForm(QWidget, SetupForm):
         self.__labelFunctionName.setText(function)
         self.__labelIcon.setPixmap(assetsicons.get_asset_icon(symbol))
         self.__labelAmount.setText("{} {}".format(amount, symbol))
-        self.update_gas(estimated_gas, max_fee, total, max_amount, symbol)
+        self.__gasWidget.labelEstimatedFeeValue.setText(estimated_gas)
+        self.__gasWidget.labelMaxFeeValue.setText("{} {}".format(max_fee, symbol))
+        self.__gasWidget.labelTotalValue.setText(total)
+        self.__gasWidget.labelMaxAmountValue.setText("{} {}".format(max_amount, symbol))
 
     def update_gas(self, estimated_gas: str, max_fee: str, total: str, max_amount: str, symbol: str):
         self.__gasWidget.labelEstimatedFeeValue.setText(estimated_gas)

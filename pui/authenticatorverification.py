@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, globalmethods
+from pcontroller import translator
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress, validator
 
 
@@ -94,7 +94,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelPINCodeAlert.hide()
 
         self.__pushButtonVerify = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
+            self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonVerify.setLayout(QVBoxLayout())

@@ -1,5 +1,5 @@
 from plibs import *
-from pui import SetupForm, fonts, images, styles, Size, qlabeladdress, qnotice
+from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
 
 
 class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):

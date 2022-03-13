@@ -1,7 +1,7 @@
 from plibs import *
 from pheader import *
 from pcontroller import translator
-from pui import SetupForm, images, styles, Size, qnotice
+from pui import SetupForm, styles, Size, qnotice
 
 
 class HeaderWidget(QWidget):
@@ -151,8 +151,10 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot()
     def __tab_changed(self):
         widget = self.__tabWidget.currentWidget()
-        self.__tabTransMotion = SPGraphics.GeometryMotion(widget)
-        self.__tabTransMotion.temp_x(start_x=widget.width(), end_x=0, duration=500).start()
+        self.__tabTransMotion = SPGraphics.OpacityMotion(widget)
+        self.__tabTransMotion.temp_show(
+            duration=500, finished=lambda: widget.setGraphicsEffect(None)
+        ).start()
 
     def add_tab(self, model: QObject, name: str):
         self.__tabWidget.addTab(model, name)

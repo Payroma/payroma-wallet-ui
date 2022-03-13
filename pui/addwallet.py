@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, globalmethods
+from pcontroller import translator
 from pui import SetupForm, fonts, images, styles, Size, validator
 
 
@@ -173,7 +173,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelAddressAlert.hide()
 
         self.__pushButtonAdd = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
+            self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonAdd.setLayout(QVBoxLayout())

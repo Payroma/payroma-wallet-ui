@@ -1,6 +1,3 @@
-from plibs import *
-
-
 class MainModel:
     _setCurrentTab = None
     _setThemeMode = None
@@ -14,14 +11,6 @@ class MainModel:
     @staticmethod
     def setThemeMode(name: str = ''):
         MainModel._setThemeMode(name)
-
-    @staticmethod
-    def backgroundColorAnimate(value: QColor):
-        MainModel._backgroundColorAnimate(value)
-
-    @staticmethod
-    def textColorAnimate(value: QColor):
-        MainModel._textColorAnimate(value)
 
 
 class LoginModel:

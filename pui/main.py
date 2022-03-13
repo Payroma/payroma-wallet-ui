@@ -40,6 +40,9 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
         QApplication.toolTip = tooltip.UiForm(self)
         QApplication.toolTip.setup()
 
+        QApplication.backgroundColorAnimate = self.__background_color_animate
+        QApplication.textColorAnimate = self.__text_color_animate
+
         self.__headerWidget = header.UiForm(self)
         self.__headerWidget.setup()
         self.__headerWidget.pushButtonBack.clicked.connect(self.back_clicked)
@@ -118,8 +121,10 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
     @pyqtSlot(int)
     def __tab_changed(self, index: int):
         widget = self.__tabWidget.currentWidget()
-        self.__tabTransMotion = SPGraphics.GeometryMotion(widget)
-        self.__tabTransMotion.temp_x(start_x=widget.width(), end_x=0, duration=500).start()
+        self.__tabTransMotion = SPGraphics.OpacityMotion(widget)
+        self.__tabTransMotion.temp_show(
+            duration=500, finished=lambda: widget.setGraphicsEffect(None)
+        ).start()
 
         if index > 0 and self.__headerWidget.pushButtonBack.isHidden():
             self.__headerWidget.back_button_visible(True)
@@ -139,7 +144,7 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
         images.update(name)
         AppReForm.re_style_all()
 
-    def background_color_animate(self, value: QColor):
+    def __background_color_animate(self, value: QColor):
         sender = self.sender()
         if not isinstance(sender, QVariantAnimation):
             return
@@ -158,7 +163,7 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
         )
         sender.parent().setStyleSheet(css)
 
-    def text_color_animate(self, value: QColor):
+    def __text_color_animate(self, value: QColor):
         sender = self.sender()
         if not isinstance(sender, QVariantAnimation):
             return

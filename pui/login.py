@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, globalmethods
+from pcontroller import translator
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
 
 
@@ -59,7 +59,7 @@ class UiForm(QWidget, SetupForm):
         self.__strengthBar.setFixedSize(QSize(301, 21))
 
         self.__pushButtonLogin = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
+            self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonLogin.setLayout(QVBoxLayout())
@@ -72,7 +72,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonSkip = SPGraphics.QuickPushButton(
-            self, fixed_size=QSize(151, 51), value_changed=globalmethods.MainModel.textColorAnimate,
+            self, fixed_size=QSize(151, 51), value_changed=QApplication.textColorAnimate,
             start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
         )
         self.__pushButtonSkip.clicked.connect(self.skip_clicked)

@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, to_qr_code, globalmethods
+from pcontroller import translator, to_qr_code
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
 
 
@@ -8,6 +8,7 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
+        self.__pushButtonBack = None
         self.__labelAddressTitle = None
         self.__labelAddressQR = None
         self.__labelDateCreated = None
@@ -23,6 +24,12 @@ class UiForm(QWidget, SetupForm):
         self.layout().setContentsMargins(11, 0, 11, 0)
         self.layout().setSpacing(11)
         self.setObjectName(Tab.WalletTab.WALLET_DETAILS)
+
+        self.__pushButtonBack = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
+        )
+        self.__pushButtonBack.move(10, 10)
+        self.__pushButtonBack.clicked.connect(self.back_clicked)
 
         self.__labelAddressTitle = SPGraphics.QuickLabel(
             self, fixed_height=21, align=Qt.AlignCenter
@@ -51,7 +58,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonPrivateKey = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
+            self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonPrivateKey.setLayout(QVBoxLayout())
@@ -68,6 +75,7 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_style(self):
+        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_less_left21))
         self.__labelPrivateKeyValue.setIcon(QIcon(images.data.icons.changeable.copy21))
 
     def re_translate(self):

@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, globalmethods
+from pcontroller import translator
 from pui import SetupForm, fonts, images, styles, Size
 
 
@@ -133,7 +133,7 @@ class UiForm(QWidget, SetupForm):
         self.__codeInputWidget = CodeInputWidget(self, text_changed=self.otp_code_changed)
 
         self.__pushButtonConfirm = SPGraphics.QuickPushButton(
-            self, fixed_size=Size.default, value_changed=globalmethods.MainModel.backgroundColorAnimate,
+            self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
         self.__pushButtonConfirm.setLayout(QVBoxLayout())
@@ -146,7 +146,7 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__pushButtonForgot = SPGraphics.QuickPushButton(
-            self, fixed_size=QSize(301, 31), value_changed=globalmethods.MainModel.textColorAnimate,
+            self, fixed_size=QSize(301, 31), value_changed=QApplication.textColorAnimate,
             start_value=styles.data.colors.font_description, end_value=styles.data.colors.highlight
         )
         self.__pushButtonForgot.clicked.connect(self.forgot_clicked)

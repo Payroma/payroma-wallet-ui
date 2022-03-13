@@ -1,7 +1,7 @@
 from plibs import *
 from pheader import *
 from pcontroller import translator
-from pui import SetupForm, fonts, images, styles, Size
+from pui import SetupForm, fonts, images, styles
 
 
 class HeaderWidget(QWidget):

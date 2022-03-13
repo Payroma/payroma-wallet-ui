@@ -28,8 +28,6 @@ class MainModel(main.UiForm):
         # Global Methods
         globalmethods.MainModel._setCurrentTab = self.set_current_tab
         globalmethods.MainModel._setThemeMode = self.set_theme_mode
-        globalmethods.MainModel._backgroundColorAnimate = self.background_color_animate
-        globalmethods.MainModel._textColorAnimate = self.text_color_animate
 
         # Tabs
         self.add_tab(WalletsListModel(self), Tab.WALLETS_LIST)

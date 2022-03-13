@@ -14,3 +14,7 @@ class WalletDetailsModel(walletdetails.UiForm):
         # Global Methods
         globalmethods.WalletDetailsModel._setData = self.set_data
         globalmethods.WalletDetailsModel._setPrivateKey = self.set_private_key
+
+    @pyqtSlot()
+    def back_clicked(self):
+        globalmethods.WalletModel.setCurrentTab(Tab.WalletTab.TOKENS_LIST)
