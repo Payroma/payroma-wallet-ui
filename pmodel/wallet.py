@@ -43,6 +43,10 @@ class WalletModel(wallet.UiForm):
         globalmethods.MainModel.setCurrentTab(Tab.HISTORY_LIST)
 
     @pyqtSlot()
+    def swap_clicked(self):
+        globalmethods.MainModel.setCurrentTab(Tab.SWAP)
+
+    @pyqtSlot()
     def details_clicked(self):
         super(WalletModel, self).details_clicked()
         globalmethods.WalletModel.setCurrentTab(Tab.WalletTab.WALLET_DETAILS)

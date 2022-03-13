@@ -66,6 +66,7 @@ DEFAULT = {
         'no_data': QPixmap(':/images/illustrations/nodata.png'),
         'theme_status': QPixmap(':/images/illustrations/sun.png'),
         'authenticator': QPixmap(':/images/illustrations/authenticator.png'),
+        'swap': QPixmap(':/images/illustrations/swap.png'),
         'done': QPixmap(':/images/illustrations/done.png')
     }
 

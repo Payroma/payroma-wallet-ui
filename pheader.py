@@ -71,6 +71,7 @@ class Tab:
     STAKE_PAIR = 'stakePairModel'
     DEPOSIT = 'depositModel'
     WITHDRAW = 'withdrawModel'
+    SWAP = 'swapModel'
     HISTORY_LIST = 'historyListModel'
     TRANSACTION_SENDER = 'transactionSenderModel'
 

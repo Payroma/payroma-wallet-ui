@@ -15,6 +15,7 @@ from pmodel.stakepair import StakePairModel
 from pmodel.authenticatorsetup import AuthenticatorSetupModel
 from pmodel.deposit import DepositModel
 from pmodel.withdraw import WithdrawModel
+from pmodel.swap import SwapModel
 from pmodel.historylist import HistoryListModel
 from pmodel.transactionsender import TransactionSenderModel
 
@@ -43,6 +44,7 @@ class MainModel(main.UiForm):
         self.add_tab(AuthenticatorSetupModel(self), Tab.AUTHENTICATOR_SETUP)
         self.add_tab(DepositModel(self), Tab.DEPOSIT)
         self.add_tab(WithdrawModel(self), Tab.WITHDRAW)
+        self.add_tab(SwapModel(self), Tab.SWAP)
         self.add_tab(HistoryListModel(self), Tab.HISTORY_LIST)
         self.add_tab(TransactionSenderModel(self), Tab.TRANSACTION_SENDER)
 
