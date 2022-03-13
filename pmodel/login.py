@@ -14,10 +14,6 @@ class LoginModel(login.UiForm):
         globalmethods.LoginModel._setData = self.set_data
 
     @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)
-
-    @pyqtSlot()
     def skip_clicked(self):
         globalmethods.MainModel.setCurrentTab(Tab.WALLET)
 
@@ -28,4 +24,4 @@ class LoginModel(login.UiForm):
 
     @pyqtSlot()
     def login_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.AUTHENTICATOR)
+        globalmethods.MainModel.setCurrentTab(Tab.AUTHENTICATOR, recordable=False)

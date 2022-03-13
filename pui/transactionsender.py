@@ -101,7 +101,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__networkWidget = None
         self.__lineWidget = None
         self.__labelAddress = None
@@ -120,12 +119,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setContentsMargins(11, 0, 11, 0)
         self.layout().setSpacing(16)
         self.setObjectName(Tab.TRANSACTION_SENDER)
-
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
 
         self.__networkWidget = NetworkWidget(self)
         self.__networkWidget.pushButton.clicked.connect(self.network_clicked)
@@ -174,8 +167,6 @@ class UiForm(QWidget, SetupForm):
             light_color=styles.data.colors.white.name()
         )
 
-        self.__pushButtonBack.raise_()
-
         self.layout().addWidget(self.__networkWidget, 0, 0, 1, 2)
         self.layout().addWidget(self.__lineWidget, 1, 0, 1, 2)
         self.layout().addWidget(self.__labelAddress, 2, 0, 1, 2, Qt.AlignHCenter)
@@ -191,7 +182,6 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.transactionsender)
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
 
     def re_translate(self):
@@ -230,10 +220,6 @@ class UiForm(QWidget, SetupForm):
         self.__labelAmount.setFont(font)
 
     @pyqtSlot()
-    def back_clicked(self):
-        pass
-
-    @pyqtSlot()
     def network_clicked(self):
         pass
 
@@ -244,13 +230,11 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot()
     def confirm_clicked(self):
         self.__loadingEffectConfirm.start()
-        self.__pushButtonBack.hide()
         self.__networkWidget.pushButton.setDisabled(True)
         self.__pushButtonConfirm.setText("")
 
     def confirm_completed(self):
         self.__loadingEffectConfirm.stop()
-        self.__pushButtonBack.show()
         self.__networkWidget.pushButton.setEnabled(True)
         QTimer().singleShot(1000, self.re_translate)
 

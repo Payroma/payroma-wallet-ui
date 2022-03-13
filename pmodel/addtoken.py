@@ -10,10 +10,6 @@ class AddTokenModel(addtoken.UiForm):
 
         self.setup()
 
-    @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.WalletModel.setCurrentTab(Tab.WalletTab.TOKENS_LIST)
-
     @pyqtSlot(str)
     def address_changed(self, text: str):
         valid = True if len(text) == 42 else False

@@ -8,6 +8,7 @@ DEFAULT = {
 
     'icons': {
         'changeable': {
+            'minimize21': QPixmap(':/images/icons/light/minimize-21.png'),
             'settings21': QPixmap(':/images/icons/light/settings-21.png'),
             'close21': QPixmap(':/images/icons/light/close-21.png'),
             'arrow_left21': QPixmap(':/images/icons/light/arrow-left-21.png'),

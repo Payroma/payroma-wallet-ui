@@ -10,8 +10,8 @@ class HeaderWidget(QWidget):
 
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
-        self.setLayout(QHBoxLayout())
-        self.layout().setContentsMargins(51, 11, 11, 11)
+        self.setLayout(QGridLayout())
+        self.layout().setContentsMargins(11, 11, 11, 11)
         self.layout().setSpacing(0)
 
         self.labelTitle = SPGraphics.QuickLabel(
@@ -23,8 +23,8 @@ class HeaderWidget(QWidget):
             self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.addNewR
         )
 
-        self.layout().addWidget(self.labelTitle)
-        self.layout().addWidget(self.pushButtonAddNew, alignment=Qt.AlignRight)
+        self.layout().addWidget(self.labelTitle, 0, 0, 1, 2)
+        self.layout().addWidget(self.pushButtonAddNew, 0, 1, 1, 1, Qt.AlignRight)
 
 
 class ListWidget(SPGraphics.QuickListWidget):
@@ -45,7 +45,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__headerWidget = None
         self.__listWidget = None
 
@@ -56,19 +55,11 @@ class UiForm(QWidget, SetupForm):
         self.layout().setSpacing(0)
         self.setObjectName(Tab.NETWORKS_LIST)
 
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
-
         self.__headerWidget = HeaderWidget(self)
         self.__headerWidget.pushButtonAddNew.clicked.connect(self.add_new_clicked)
 
         self.__listWidget = ListWidget(self)
         self.__listWidget.itemClicked.connect(self.item_clicked)
-
-        self.__pushButtonBack.raise_()
 
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__listWidget)
@@ -77,7 +68,6 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.networkslist)
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__headerWidget.pushButtonAddNew.setIcon(QIcon(images.data.icons.changeable.plus21))
 
     def re_translate(self):
@@ -99,10 +89,6 @@ class UiForm(QWidget, SetupForm):
         font.setFamily(fonts.data.family.black)
         font.setBold(False)
         self.__listWidget.labelTitle.setFont(font)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
 
     @pyqtSlot()
     def add_new_clicked(self):

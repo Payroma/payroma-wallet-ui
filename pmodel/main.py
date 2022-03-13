@@ -48,9 +48,26 @@ class MainModel(main.UiForm):
         self.add_tab(HistoryListModel(self), Tab.HISTORY_LIST)
         self.add_tab(TransactionSenderModel(self), Tab.TRANSACTION_SENDER)
 
+        self.__previousTabs = []
+        self.__latestTab = None
+
+    @pyqtSlot()
+    def back_clicked(self):
+        self.__latestTab = self.__previousTabs.pop()
+        super(MainModel, self).set_current_tab(self.__latestTab)
+
+    @pyqtSlot()
+    def home_clicked(self):
+        self.__previousTabs.clear()
+        super(MainModel, self).set_current_tab(Tab.WALLETS_LIST)
+
     @pyqtSlot()
     def settings_clicked(self):
         globalmethods.MainModel.setCurrentTab(Tab.SETTINGS)
+
+    @pyqtSlot()
+    def minimize_clicked(self):
+        self.showMinimized()
 
     @pyqtSlot()
     def exit_clicked(self):
@@ -62,3 +79,15 @@ class MainModel(main.UiForm):
 
     def default_theme(self):
         pass
+
+    def set_current_tab(self, name: str, recordable: bool = True):
+        super(MainModel, self).set_current_tab(name)
+
+        if not self.__previousTabs:
+            self.__latestTab = Tab.WALLETS_LIST
+
+        if not self.__previousTabs or self.__previousTabs[-1] != self.__latestTab:
+            self.__previousTabs.append(self.__latestTab)
+
+        if recordable:
+            self.__latestTab = name

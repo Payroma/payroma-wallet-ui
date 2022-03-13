@@ -28,7 +28,3 @@ class AuthenticatorSetupModel(authenticatorsetup.UiForm):
         self.add_tab(self.authenticatorVerificationModel, Tab.AuthenticatorSetupTab.VERIFICATION)
         self.add_tab(self.authenticatorScanModel, Tab.AuthenticatorSetupTab.SCAN)
         self.add_tab(self.authenticatorFinishedModel, Tab.AuthenticatorSetupTab.FINISHED)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)

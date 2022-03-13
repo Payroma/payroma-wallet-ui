@@ -102,7 +102,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__headerWidget = None
         self.__tabsWidget = None
         self.__tabWidget = None
@@ -113,12 +112,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setContentsMargins(0, 0, 0, 0)
         self.layout().setSpacing(0)
         self.setObjectName(Tab.WALLET)
-
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
 
         self.__headerWidget = HeaderWidget(self)
         self.__headerWidget.pushButtonMenu.clicked.connect(self.menu_clicked)
@@ -139,8 +132,6 @@ class UiForm(QWidget, SetupForm):
         self.__tabWidget.findChild(QTabBar).hide()
         self.__tabWidget.currentChanged.connect(self.__tab_changed)
 
-        self.__pushButtonBack.raise_()
-
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__tabWidget)
         self.__headerWidget.layout().addWidget(self.__tabsWidget, 2, 0, 1, 2)
@@ -149,7 +140,6 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.wallet)
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__headerWidget.pushButtonMenu.setIcon(QIcon(images.data.icons.changeable.dots21))
         self.__headerWidget.labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
         self.__tabsWidget.pushButtonDeposit.setIcon(QIcon(images.data.icons.changeable.deposit24))
@@ -178,10 +168,6 @@ class UiForm(QWidget, SetupForm):
         font.setPointSize(fonts.data.size.average)
         font.setBold(True)
         self.__headerWidget.labelUsername.setFont(font)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
 
     @pyqtSlot()
     def menu_clicked(self):

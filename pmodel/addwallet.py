@@ -10,10 +10,6 @@ class AddWalletModel(addwallet.UiForm):
 
         self.setup()
 
-    @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)
-
     @pyqtSlot(str)
     def username_changed(self, text: str):
         valid = True if len(text) > 5 else False

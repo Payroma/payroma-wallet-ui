@@ -13,10 +13,6 @@ class SettingsModel(settings.UiForm):
         # Test
         self.set_data(network_connected=True, network_name="Binance Smart Chain")
 
-    @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)
-
     @pyqtSlot(bool)
     def switch_clicked(self, state: bool):
         theme_name = 'dark' if state else ''

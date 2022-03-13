@@ -10,10 +10,6 @@ class AddNetworkModel(addnetwork.UiForm):
 
         self.setup()
 
-    @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.NETWORKS_LIST)
-
     @pyqtSlot(str)
     def name_changed(self, text: str):
         valid = True if len(text) > 5 else False

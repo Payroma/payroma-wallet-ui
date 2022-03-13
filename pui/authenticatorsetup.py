@@ -12,7 +12,7 @@ class HeaderWidget(QWidget):
         self.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
         self.setLayout(QGridLayout())
         self.layout().setAlignment(Qt.AlignCenter)
-        self.layout().setContentsMargins(21, 21, 21, 21)
+        self.layout().setContentsMargins(11, 21, 11, 21)
         self.layout().setHorizontalSpacing(0)
         self.layout().setVerticalSpacing(11)
 
@@ -26,7 +26,7 @@ class HeaderWidget(QWidget):
         )
 
         self.progressDownloadWidget = SPGraphics.QuickWidget(
-            self, fixed_size=QSize(31, 1)
+            self, fixed_size=QSize(51, 1)
         )
         self.progressDownloadWidget.setAttribute(Qt.WA_StyledBackground, True)
         self.progressDownloadWidget.setObjectName('progressDownloadWidget')
@@ -41,7 +41,7 @@ class HeaderWidget(QWidget):
         )
 
         self.progressVerificationWidget = SPGraphics.QuickWidget(
-            self, fixed_size=QSize(31, 1)
+            self, fixed_size=QSize(51, 1)
         )
         self.progressVerificationWidget.setAttribute(Qt.WA_StyledBackground, True)
         self.progressVerificationWidget.setObjectName('progressVerificationWidget')
@@ -112,7 +112,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__headerWidget = None
         self.__tabWidget = None
 
@@ -123,19 +122,11 @@ class UiForm(QWidget, SetupForm):
         self.layout().setSpacing(0)
         self.setObjectName(Tab.AUTHENTICATOR_SETUP)
 
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
-
         self.__headerWidget = HeaderWidget(self)
 
         self.__tabWidget = QTabWidget(self)
         self.__tabWidget.findChild(QTabBar).hide()
         self.__tabWidget.currentChanged.connect(self.__tab_changed)
-
-        self.__pushButtonBack.raise_()
 
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__tabWidget)
@@ -144,7 +135,6 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.authenticatorsetup)
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
 
     def re_translate(self):
         self.__headerWidget.labelDownload.setText(translator("Download App"))
@@ -157,10 +147,6 @@ class UiForm(QWidget, SetupForm):
         self.__headerWidget.labelDownload.setFont(font)
         self.__headerWidget.labelVerification.setFont(font)
         self.__headerWidget.labelScan.setFont(font)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
 
     @pyqtSlot()
     def __tab_changed(self):

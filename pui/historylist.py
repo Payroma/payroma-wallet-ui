@@ -12,7 +12,7 @@ class HeaderWidget(QWidget):
         self.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
         self.setLayout(QVBoxLayout())
         self.layout().setAlignment(Qt.AlignHCenter)
-        self.layout().setContentsMargins(21, 21, 21, 21)
+        self.layout().setContentsMargins(11, 21, 11, 21)
         self.layout().setSpacing(11)
 
         self.labelTitle = SPGraphics.QuickLabel(
@@ -40,7 +40,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__headerWidget = None
         self.__listWidget = None
 
@@ -51,18 +50,10 @@ class UiForm(QWidget, SetupForm):
         self.layout().setSpacing(0)
         self.setObjectName(Tab.HISTORY_LIST)
 
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
-
         self.__headerWidget = HeaderWidget(self)
 
         self.__listWidget = ListWidget(self)
         self.__listWidget.itemClicked.connect(self.item_clicked)
-
-        self.__pushButtonBack.raise_()
 
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__listWidget)
@@ -71,7 +62,6 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.historylist)
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
 
     def re_translate(self):
         self.__headerWidget.labelTitle.setText(translator("Transactions History"))
@@ -90,10 +80,6 @@ class UiForm(QWidget, SetupForm):
         font.setFamily(fonts.data.family.black)
         font.setBold(False)
         self.__listWidget.labelTitle.setFont(font)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
 
     @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem) -> QWidget:

@@ -47,7 +47,3 @@ class HistoryListModel(historylist.UiForm):
             item.set_address(transaction['address'])
             item.set_date(transaction['date'])
             self.add_item(item)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLET)

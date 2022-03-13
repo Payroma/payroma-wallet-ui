@@ -60,7 +60,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__headerWidget = None
         self.__tabWidget = None
 
@@ -71,12 +70,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setSpacing(0)
         self.setObjectName(Tab.WITHDRAW)
 
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
-
         self.__headerWidget = HeaderWidget(self)
         self.__headerWidget.lineEditAddress.textChanged.connect(self.address_changed)
         self.__headerWidget.pushButtonAddNew.clicked.connect(self.add_new_clicked)
@@ -85,8 +78,6 @@ class UiForm(QWidget, SetupForm):
         self.__tabWidget.findChild(QTabBar).hide()
         self.__tabWidget.currentChanged.connect(self.__tab_changed)
 
-        self.__pushButtonBack.raise_()
-
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__tabWidget)
 
@@ -94,7 +85,6 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.withdraw)
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__headerWidget.labelAddressIcon.setPixmap(images.data.icons.changeable.search21)
         self.__headerWidget.pushButtonAddNew.setIcon(QIcon(images.data.icons.changeable.plus21))
 
@@ -111,10 +101,6 @@ class UiForm(QWidget, SetupForm):
         font.setPointSize(fonts.data.size.medium)
         font.setBold(True)
         self.__headerWidget.labelTitle.setFont(font)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
 
     @pyqtSlot()
     def add_new_clicked(self):

@@ -8,7 +8,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__labelTitle = None
         self.__lineEditName = None
         self.__labelNameAlert = None
@@ -28,12 +27,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setAlignment(Qt.AlignCenter)
         self.layout().setSpacing(11)
         self.setObjectName(Tab.ADD_NETWORK)
-
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
 
         self.__labelTitle = SPGraphics.QuickLabel(
             self, fixed_height=51, align=Qt.AlignCenter
@@ -124,9 +117,6 @@ class UiForm(QWidget, SetupForm):
 
         super(UiForm, self).setup()
 
-    def re_style(self):
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
-
     def re_translate(self):
         self.__labelTitle.setText(translator("Add a Network"))
         self.__lineEditName.setPlaceholderText(translator("Network Name"))
@@ -151,10 +141,6 @@ class UiForm(QWidget, SetupForm):
 
         font.setPointSize(fonts.data.size.medium)
         self.__labelTitle.setFont(font)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
 
     @pyqtSlot(str)
     def name_changed(self, text: str, valid: bool = False):
@@ -192,13 +178,11 @@ class UiForm(QWidget, SetupForm):
     def add_clicked(self):
         self.__all_inputs_disabled(True)
         self.__loadingEffectAdd.start()
-        self.__pushButtonBack.hide()
         self.__pushButtonAdd.setText("")
 
     def add_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectAdd.stop()
-        self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
     def reset(self):

@@ -8,7 +8,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__labelIcon = None
         self.__labelUsername = None
         self.__labelAddress = None
@@ -28,12 +27,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setContentsMargins(11, 0, 11, 0)
         self.layout().setSpacing(11)
         self.setObjectName(Tab.LOGIN)
-
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
 
         self.__labelIcon = SPGraphics.QuickLabel(
             self, scaled=True, fixed_size=Size.s100, pixmap=images.data.brands.brand
@@ -102,7 +95,6 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_style(self):
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
         self.__labelPasswordIcon.setPixmap(images.data.icons.changeable.key21)
         self.__pushButtonPasswordEye.setIcon(QIcon(images.data.icons.changeable.eye_visible21))
@@ -131,10 +123,6 @@ class UiForm(QWidget, SetupForm):
         self.__labelUsername.setFont(font)
 
     @pyqtSlot()
-    def back_clicked(self):
-        pass
-
-    @pyqtSlot()
     def skip_clicked(self):
         pass
 
@@ -147,13 +135,11 @@ class UiForm(QWidget, SetupForm):
     def login_clicked(self):
         self.__all_inputs_disabled(True)
         self.__loadingEffectLogin.start()
-        self.__pushButtonBack.hide()
         self.__pushButtonLogin.setText("")
 
     def login_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectLogin.stop()
-        self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
     def set_data(self, username: str, address: str):

@@ -23,10 +23,6 @@ class StakePairModel(stakepair.UiForm):
         self.add_tab(self.stakePairApprovalModel, '')
         self.add_tab(self.stakePairAmountModel, '')
 
-    @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.STAKE_LIST)
-
     def set_data(
             self, block_title: str, blocks: int, total_staked: str,
             stake_symbol: str, earn_symbol: str

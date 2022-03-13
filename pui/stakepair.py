@@ -13,7 +13,7 @@ class HeaderWidget(QWidget):
         self.setLayout(QGridLayout())
         self.layout().setAlignment(Qt.AlignHCenter)
         self.layout().setContentsMargins(11, 11, 11, 11)
-        self.layout().setHorizontalSpacing(21)
+        self.layout().setHorizontalSpacing(31)
 
         self.labelBlock = SPGraphics.QuickLabel(
             self, fixed_height=21
@@ -120,7 +120,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__headerWidget = None
         self.__parisWidget = None
         self.__tabWidget = None
@@ -135,12 +134,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setSpacing(0)
         self.setObjectName(Tab.STAKE_PAIR)
 
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
-
         self.__headerWidget = HeaderWidget(self)
         self.__headerWidget.pushButtonBlockTime.clicked.connect(self.block_time_clicked)
         self.__headerWidget.pushButtonStakingContract.clicked.connect(self.staking_contract_clicked)
@@ -154,8 +147,6 @@ class UiForm(QWidget, SetupForm):
         self.__tabWidget = QTabWidget(self)
         self.__tabWidget.findChild(QTabBar).hide()
 
-        self.__pushButtonBack.raise_()
-
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__parisWidget)
         self.layout().addWidget(self.__tabWidget)
@@ -164,7 +155,6 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.stakepair)
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__headerWidget.pushButtonBlockTime.setIcon(QIcon(images.data.icons.changeable.time21))
         self.__headerWidget.pushButtonStakingContract.setIcon(
             QIcon(images.data.icons.changeable.external21)
@@ -205,10 +195,6 @@ class UiForm(QWidget, SetupForm):
         font.setBold(True)
         self.__parisWidget.labelStakeWidget.labelSymbol.setFont(font)
         self.__parisWidget.labelEarnWidget.labelSymbol.setFont(font)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
 
     @pyqtSlot()
     def block_time_clicked(self):

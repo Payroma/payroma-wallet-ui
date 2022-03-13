@@ -38,7 +38,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__labelThemeIllustration = None
         self.__labelDarkMode = None
         self.__switchDarkMode = None
@@ -55,12 +54,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setAlignment(Qt.AlignCenter)
         self.layout().setSpacing(11)
         self.setObjectName(Tab.SETTINGS)
-
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
 
         self.__labelThemeIllustration = SPGraphics.QuickLabel(
             self, fixed_size=Size.s100, scaled=True
@@ -119,7 +112,6 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_style(self):
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__labelThemeIllustration.setPixmap(images.data.illustrations.theme_status)
 
     def re_translate(self):
@@ -148,10 +140,6 @@ class UiForm(QWidget, SetupForm):
         font.setUnderline(True)
         self.__networkWidget.pushButton.setFont(font)
 
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
-
     @pyqtSlot(bool)
     def switch_clicked(self, state: bool):
         pass
@@ -163,23 +151,19 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot()
     def backup_clicked(self):
         self.__loadingEffectBackup.start()
-        self.__pushButtonBack.hide()
         self.__pushButtonBackup.setText("")
 
     @pyqtSlot()
     def import_clicked(self):
         self.__loadingEffectImport.start()
-        self.__pushButtonBack.hide()
         self.__pushButtonImport.setText("")
 
     def backup_completed(self):
         self.__loadingEffectBackup.stop()
-        self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
     def import_completed(self):
         self.__loadingEffectImport.stop()
-        self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
     def set_data(self, network_connected: bool, network_name: str):

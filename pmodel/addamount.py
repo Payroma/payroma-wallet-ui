@@ -43,4 +43,4 @@ class AddAmountModel(addamount.UiForm):
     def continue_clicked(self):
         super(AddAmountModel, self).continue_clicked()
         QTimer().singleShot(5000, self.continue_completed)
-        globalmethods.MainModel.setCurrentTab(Tab.TRANSACTION_SENDER)
+        globalmethods.MainModel.setCurrentTab(Tab.TRANSACTION_SENDER, recordable=False)

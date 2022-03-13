@@ -183,7 +183,8 @@ QuickToolTip #mainWidget
 }
 
 
-HeaderWidget
+HeaderWidget,
+#headerWidget
 {
     border-bottom: 1px solid @line;
 }

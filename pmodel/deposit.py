@@ -14,9 +14,5 @@ class DepositModel(deposit.UiForm):
         globalmethods.DepositModel._setData = self.set_data
 
     @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLET)
-
-    @pyqtSlot()
     def network_clicked(self):
         globalmethods.MainModel.setCurrentTab(Tab.NETWORKS_LIST)

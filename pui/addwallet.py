@@ -8,7 +8,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__labelTitle = None
         self.__lineEditUsername = None
         self.__labelUsernameIcon = None
@@ -45,12 +44,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setContentsMargins(11, 0, 11, 0)
         self.layout().setSpacing(11)
         self.setObjectName(Tab.ADD_WALLET)
-
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
 
         self.__labelTitle = SPGraphics.QuickLabel(
             self, fixed_height=51, align=Qt.AlignCenter
@@ -232,7 +225,6 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.addwallet)
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
         self.__labelUsernameIcon.setPixmap(images.data.icons.changeable.username21)
         self.__labelUsernameInfo.setPixmap(images.data.icons.changeable.info21)
         self.__labelPasswordIcon.setPixmap(images.data.icons.changeable.key21)
@@ -273,10 +265,6 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonAdd.setFont(font)
         self.__labelTitle.setFont(font)
 
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
-
     @pyqtSlot(str)
     def username_changed(self, text: str, valid: bool = False):
         self.__lineEditUsername.setProperty('isValid', valid)
@@ -315,13 +303,11 @@ class UiForm(QWidget, SetupForm):
     def add_clicked(self):
         self.__all_inputs_disabled(True)
         self.__loadingEffectAdd.start()
-        self.__pushButtonBack.hide()
         self.__pushButtonAdd.setText("")
 
     def add_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectAdd.stop()
-        self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
     def reset(self):

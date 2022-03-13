@@ -7,7 +7,9 @@ class UiForm(SetupForm):
     def __init__(self, parent):
         self.__parent = parent
 
+        self.home = None
         self.settings = None
+        self.minimize = None
         self.exit = None
         self.copy = None
         self.back = None
@@ -51,7 +53,9 @@ class UiForm(SetupForm):
         self.viewProjectExplorerB = None
 
     def setup(self):
+        self.home = self.__align_top()
         self.settings = self.__align_top()
+        self.minimize = self.__align_top()
         self.exit = self.__align_top()
         self.copy = self.__align_top()
         self.back = self.__align_top()
@@ -97,7 +101,9 @@ class UiForm(SetupForm):
         super(UiForm, self).setup()
 
     def re_translate(self):
+        self.home.labelText.setText(translator("Home"))
         self.settings.labelText.setText(translator("Settings"))
+        self.minimize.labelText.setText(translator("Minimize"))
         self.exit.labelText.setText(translator("Exit"))
         self.copy.labelText.setText(translator("Copy"))
         self.back.labelText.setText(translator("Back"))
@@ -153,7 +159,9 @@ class UiForm(SetupForm):
     def re_font(self):
         font = QFont()
 
+        self.home.labelText.setFont(font)
         self.settings.labelText.setFont(font)
+        self.minimize.labelText.setFont(font)
         self.exit.labelText.setFont(font)
         self.copy.labelText.setFont(font)
         self.back.labelText.setFont(font)

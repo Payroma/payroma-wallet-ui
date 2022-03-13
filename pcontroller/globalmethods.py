@@ -8,8 +8,8 @@ class MainModel:
     _textColorAnimate = None
 
     @staticmethod
-    def setCurrentTab(name: str):
-        MainModel._setCurrentTab(name)
+    def setCurrentTab(name: str, recordable: bool = True):
+        MainModel._setCurrentTab(name, recordable)
 
     @staticmethod
     def setThemeMode(name: str = ''):

@@ -34,4 +34,4 @@ class WalletsListModel(walletslist.UiForm):
         globalmethods.WalletDetailsModel.setData(widget.get_address(), time.ctime())
         globalmethods.WalletDetailsModel.setPrivateKey('0' * 64)
         globalmethods.DepositModel.setData(widget.get_address(), 'Binance Smart Chain')
-        globalmethods.MainModel.setCurrentTab(Tab.LOGIN)
+        globalmethods.MainModel.setCurrentTab(Tab.LOGIN, recordable=False)

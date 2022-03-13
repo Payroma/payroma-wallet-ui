@@ -2,7 +2,6 @@ from plibs import *
 from pheader import *
 from pui import AppReForm, SetupForm, fonts, images, styles, Size, header, footer, tooltip
 
-
 Size.defaultMainWidget = QSize(450, 660)
 Size.minimumMainWidget = QSize(450, 600)
 
@@ -43,7 +42,10 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
 
         self.__headerWidget = header.UiForm(self)
         self.__headerWidget.setup()
+        self.__headerWidget.pushButtonBack.clicked.connect(self.back_clicked)
+        self.__headerWidget.pushButtonHome.clicked.connect(self.home_clicked)
         self.__headerWidget.pushButtonSettings.clicked.connect(self.settings_clicked)
+        self.__headerWidget.pushButtonMinimize.clicked.connect(self.minimize_clicked)
         self.__headerWidget.pushButtonExit.clicked.connect(self.exit_clicked)
 
         self.__tabWidget = QTabWidget(self)
@@ -87,7 +89,19 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
         Global.kernel.setFont(font)
 
     @pyqtSlot()
+    def back_clicked(self):
+        pass
+
+    @pyqtSlot()
+    def home_clicked(self):
+        pass
+
+    @pyqtSlot()
     def settings_clicked(self):
+        pass
+
+    @pyqtSlot()
+    def minimize_clicked(self):
         pass
 
     @pyqtSlot()
@@ -101,17 +115,16 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
     def default_theme(self):
         pass
 
-    @pyqtSlot()
-    def __tab_changed(self):
-        try:
-            self.__launched
-        except AttributeError:
-            self.__launched = True
-            return
-
+    @pyqtSlot(int)
+    def __tab_changed(self, index: int):
         widget = self.__tabWidget.currentWidget()
         self.__tabTransMotion = SPGraphics.GeometryMotion(widget)
         self.__tabTransMotion.temp_x(start_x=widget.width(), end_x=0, duration=500).start()
+
+        if index > 0 and self.__headerWidget.pushButtonBack.isHidden():
+            self.__headerWidget.back_button_visible(True)
+        elif index < 1 and self.__headerWidget.pushButtonBack.isVisible():
+            self.__headerWidget.back_button_visible(False)
 
     def add_tab(self, model: QObject, name: str):
         self.__tabWidget.addTab(model, name)

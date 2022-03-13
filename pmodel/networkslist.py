@@ -26,10 +26,6 @@ class NetworksListModel(networkslist.UiForm):
             self.networks.append(item)
 
     @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.SETTINGS)
-
-    @pyqtSlot()
     def add_new_clicked(self):
         globalmethods.MainModel.setCurrentTab(Tab.ADD_NETWORK)
 

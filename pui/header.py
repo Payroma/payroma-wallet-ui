@@ -7,15 +7,18 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent)
 
-        self.labelBrandIcon = None
+        self.pushButtonBack = None
+        self.pushButtonHome = None
         self.labelBrandName = None
         self.labelSoftwareVersion = None
         self.pushButtonSettings = None
+        self.pushButtonMinimize = None
         self.pushButtonExit = None
 
         self.__leftClickPressed = None
         self.__clickPressedX = None
         self.__clickPressedY = None
+        self.__backMotion = None
 
     def mousePressEvent(self, event):
         super(UiForm, self).mousePressEvent(event)
@@ -50,9 +53,14 @@ class UiForm(QWidget, SetupForm):
         self.layout().setVerticalSpacing(0)
         self.setObjectName('headerWidget')
 
-        self.labelBrandIcon = SPGraphics.QuickLabel(
-            self, scaled=True, fixed_size=Size.s41,
-            pixmap=images.data.brands.brand, align=Qt.AlignCenter
+        self.pushButtonBack = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.back
+        )
+        self.pushButtonBack.hide()
+
+        self.pushButtonHome = SPGraphics.QuickPushButton(
+            self, icon=QIcon(images.data.brands.brand), icon_size=Size.s41, fixed_size=Size.s41,
+            tooltip=QApplication.toolTip.home
         )
 
         self.labelBrandName = SPGraphics.QuickLabel(
@@ -64,32 +72,58 @@ class UiForm(QWidget, SetupForm):
             self, text=VERSION
         )
         self.labelSoftwareVersion.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed))
+        self.labelSoftwareVersion.setObjectName('labelDescription')
 
         self.pushButtonSettings = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.settings
+            self, icon_size=Size.s21, fixed_size=Size.s31, tooltip=QApplication.toolTip.settings
+        )
+
+        self.pushButtonMinimize = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s21, fixed_size=Size.s31, tooltip=QApplication.toolTip.minimize
         )
 
         self.pushButtonExit = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.exit
+            self, icon_size=Size.s21, fixed_size=Size.s31, tooltip=QApplication.toolTip.exit
         )
 
-        self.layout().addWidget(self.labelBrandIcon, 0, 0, 2, 1)
-        self.layout().addWidget(self.labelBrandName, 0, 1, 1, 1)
-        self.layout().addWidget(self.labelSoftwareVersion, 1, 1, 1, 1)
-        self.layout().addWidget(self.pushButtonSettings, 0, 2, 2, 1, Qt.AlignRight)
-        self.layout().addWidget(self.pushButtonExit, 0, 3, 2, 1)
+        self.layout().addWidget(self.pushButtonBack, 0, 0, 2, 1)
+        self.layout().addWidget(self.pushButtonHome, 0, 1, 2, 1)
+        self.layout().addWidget(self.labelBrandName, 0, 2, 1, 1)
+        self.layout().addWidget(self.labelSoftwareVersion, 1, 2, 1, 1)
+        self.layout().addWidget(self.pushButtonSettings, 0, 3, 2, 1, Qt.AlignRight)
+        self.layout().addWidget(self.pushButtonMinimize, 0, 4, 2, 1)
+        self.layout().addWidget(self.pushButtonExit, 0, 5, 2, 1)
 
         super(UiForm, self).setup()
 
     def re_style(self):
+        self.pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_less_left21))
         self.pushButtonSettings.setIcon(QIcon(images.data.icons.changeable.settings21))
+        self.pushButtonMinimize.setIcon(QIcon(images.data.icons.changeable.minimize21))
         self.pushButtonExit.setIcon(QIcon(images.data.icons.changeable.close21))
 
     def re_font(self):
-        font = QFont(fonts.data.family.brand, fonts.data.size.small)
+        font = QFont()
 
+        font.setPointSize(fonts.data.size.small)
         self.labelSoftwareVersion.setFont(font)
 
+        font.setFamily(fonts.data.family.brand)
         font.setPointSize(fonts.data.size.brand)
         font.setBold(True)
         self.labelBrandName.setFont(font)
+
+    def back_button_visible(self, status: bool):
+        if status:
+            self.pushButtonBack.show()
+            self.__backMotion = SPGraphics.GeometryMotion(self.pushButtonBack)
+            self.__backMotion.temp_x(
+                start_x=40, end_x=self.pushButtonBack.x(), duration=300
+            ).start()
+
+        else:
+            self.__backMotion = SPGraphics.GeometryMotion(self.pushButtonBack)
+            self.__backMotion.temp_x(
+                start_x=self.pushButtonBack.x(), end_x=40, duration=300,
+                finished=self.pushButtonBack.hide
+            ).start()

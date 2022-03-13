@@ -100,7 +100,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__headerWidget = None
         self.__tabsWidget = None
         self.__listWidget = None
@@ -112,12 +111,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setSpacing(0)
         self.setObjectName(Tab.STAKE_LIST)
 
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
-
         self.__headerWidget = HeaderWidget(self)
 
         self.__tabsWidget = TabsWidget(self)
@@ -128,8 +121,6 @@ class UiForm(QWidget, SetupForm):
         self.__listWidget = ListWidget(self)
         self.__listWidget.itemClicked.connect(self.item_clicked)
 
-        self.__pushButtonBack.raise_()
-
         self.layout().addWidget(self.__headerWidget)
         self.layout().addWidget(self.__listWidget)
         self.__headerWidget.layout().addWidget(self.__tabsWidget)
@@ -138,7 +129,6 @@ class UiForm(QWidget, SetupForm):
 
     def re_style(self):
         self.setStyleSheet(styles.data.css.stakelist)
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
 
     def re_translate(self):
         self.__headerWidget.labelTitle.setText(
@@ -167,10 +157,6 @@ class UiForm(QWidget, SetupForm):
 
         font.setFamily(fonts.data.family.black)
         self.__listWidget.labelTitle.setFont(font)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
 
     @pyqtSlot()
     def upcoming_clicked(self):

@@ -29,10 +29,6 @@ class WithdrawModel(withdraw.UiForm):
         super(WithdrawModel, self).hideEvent(event)
         self.reset()
 
-    @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLET)
-
     @pyqtSlot(str)
     def address_changed(self, text: str):
         valid = True if len(text) == 42 else False

@@ -80,10 +80,6 @@ class StakeListModel(stakelist.UiForm):
             item.interface = info
             self.add_item(item)
 
-    @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLET)
-
     @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem):
         widget = super(StakeListModel, self).item_clicked(item)

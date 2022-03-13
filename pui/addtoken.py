@@ -8,7 +8,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__labelTitle = None
         self.__labelIcon = None
         self.__lineEditAddress = None
@@ -25,12 +24,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setContentsMargins(11, 0, 11, 0)
         self.layout().setSpacing(11)
         self.setObjectName(Tab.WalletTab.ADD_TOKEN)
-
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
 
         self.__labelTitle = SPGraphics.QuickLabel(
             self, fixed_height=21, align=Qt.AlignCenter
@@ -90,9 +83,6 @@ class UiForm(QWidget, SetupForm):
 
         super(UiForm, self).setup()
 
-    def re_style(self):
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_less_left21))
-
     def re_translate(self):
         self.__labelTitle.setText(translator("Add Token / Custom Token"))
         self.__lineEditAddress.setPlaceholderText(translator("Contract Address (0x)"))
@@ -113,10 +103,6 @@ class UiForm(QWidget, SetupForm):
 
         font.setPointSize(fonts.data.size.average)
         self.__labelTitle.setFont(font)
-
-    @pyqtSlot()
-    def back_clicked(self):
-        pass
 
     @pyqtSlot(str)
     def address_changed(self, text: str, valid: bool = False):
@@ -141,13 +127,11 @@ class UiForm(QWidget, SetupForm):
     def add_clicked(self):
         self.__all_inputs_disabled(True)
         self.__loadingEffectAdd.start()
-        self.__pushButtonBack.hide()
         self.__pushButtonAdd.setText("")
 
     def add_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectAdd.stop()
-        self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
     def reset(self):

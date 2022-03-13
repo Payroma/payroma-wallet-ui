@@ -27,16 +27,12 @@ class WalletModel(wallet.UiForm):
         self.add_tab(self.addTokenModel, Tab.WalletTab.ADD_TOKEN)
 
     @pyqtSlot()
-    def back_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLETS_LIST)
-
-    @pyqtSlot()
     def deposit_clicked(self):
         globalmethods.MainModel.setCurrentTab(Tab.DEPOSIT)
 
     @pyqtSlot()
     def withdraw_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WITHDRAW)
+        globalmethods.MainModel.setCurrentTab(Tab.WITHDRAW, recordable=False)
 
     @pyqtSlot()
     def stake_clicked(self):

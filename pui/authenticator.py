@@ -101,7 +101,6 @@ class UiForm(QWidget, SetupForm):
     def __init__(self, parent):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
-        self.__pushButtonBack = None
         self.__labelIcon = None
         self.__labelTitle = None
         self.__labelDescription = None
@@ -117,12 +116,6 @@ class UiForm(QWidget, SetupForm):
         self.layout().setContentsMargins(11, 0, 11, 0)
         self.layout().setSpacing(21)
         self.setObjectName(Tab.AUTHENTICATOR)
-
-        self.__pushButtonBack = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.back
-        )
-        self.__pushButtonBack.move(10, 10)
-        self.__pushButtonBack.clicked.connect(self.back_clicked)
 
         self.__labelIcon = SPGraphics.QuickLabel(
             self, fixed_size=Size.s100, pixmap=images.data.illustrations.authenticator
@@ -168,9 +161,6 @@ class UiForm(QWidget, SetupForm):
 
         super(UiForm, self).setup()
 
-    def re_style(self):
-        self.__pushButtonBack.setIcon(QIcon(images.data.icons.changeable.arrow_left21))
-
     def re_translate(self):
         self.__labelTitle.setText(translator("Authenticator"))
         self.__labelDescription.setText(
@@ -196,10 +186,6 @@ class UiForm(QWidget, SetupForm):
         self.__labelTitle.setFont(font)
 
     @pyqtSlot()
-    def back_clicked(self):
-        pass
-
-    @pyqtSlot()
     def forgot_clicked(self):
         pass
 
@@ -211,13 +197,11 @@ class UiForm(QWidget, SetupForm):
     def confirm_clicked(self):
         self.__all_inputs_disabled(True)
         self.__loadingEffectConfirm.start()
-        self.__pushButtonBack.hide()
         self.__pushButtonConfirm.setText("")
 
     def confirm_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectConfirm.stop()
-        self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
     def reset(self):
