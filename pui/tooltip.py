@@ -118,7 +118,9 @@ class UiForm(SetupForm):
         self.pinCodeAlert.labelText.setText(translator("PIN Code must be 6 numbers"))
         self.addressAlert.labelText.setText(translator("This address invalid"))
         self.showBlockTime.labelText.setText(translator("Show block time"))
-        self.addNewAddressBook.labelText.setText(translator("Add new to addresses book"))
+        self.addNewAddressBook.labelText.setText(translator(
+            "New address detected! Click here to add to your address book."
+        ))
         self.transactionSendTo.labelText.setText(translator("The transaction goes to this address"))
         self.pending.labelText.setText(translator("Pending"))
         self.success.labelText.setText(translator("Success"))

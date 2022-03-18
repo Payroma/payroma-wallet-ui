@@ -189,8 +189,8 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditClaim.setText(text)
 
     def reset(self):
-        self.__labelBalanceValue.clear()
-        self.__labelStakedBalanceValue.clear()
+        self.__labelBalanceValue.setText(translator("Loading"))
+        self.__labelStakedBalanceValue.setText(translator("Loading"))
         self.__lineEditDeposit.clear()
         self.__lineEditWithdraw.clear()
-        self.__lineEditClaim.clear()
+        self.__lineEditClaim.setText(translator("Loading"))

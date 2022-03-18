@@ -153,7 +153,7 @@ class UiForm(QWidget, SetupForm):
 
     def reset(self):
         self.__all_inputs_disabled(False)
-        self.__labelBalanceValue.clear()
+        self.__labelBalanceValue.setText(translator("Loading"))
         self.__comboBoxToken.clear()
         self.__lineEditAmount.clear()
 

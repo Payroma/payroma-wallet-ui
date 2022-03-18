@@ -132,7 +132,7 @@ class UiForm(QWidget, SetupForm):
 
     def re_translate(self):
         self.__headerWidget.labelTitle.setText(
-            translator("Just stake some tokens to earn.\nHigh APR, low risk.")
+            translator("Just stake some tokens to earn.\nHigh APY, Low risk.")
         )
         self.__tabsWidget.pushButtonUpcoming.setText(translator("Upcoming"))
         self.__tabsWidget.pushButtonLive.setText(translator("Live"))

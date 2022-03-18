@@ -55,7 +55,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelAPY.setObjectName('labelDescription')
 
         self.__labelAPYValue = SPGraphics.QuickLabel(
-            self, fixed_height=21
+            self, translator("Loading"), fixed_height=21
         )
         self.__labelAPYValue.setObjectName('labelAPYValue')
 
@@ -65,7 +65,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelDuration.setObjectName('labelDescription')
 
         self.__labelDurationValue = SPGraphics.QuickLabel(
-            self, fixed_height=21
+            self, translator("Loading"), fixed_height=21
         )
 
         self.layout().addWidget(self.__labelEarnTokenIcon, 0, 0, 2, 1)

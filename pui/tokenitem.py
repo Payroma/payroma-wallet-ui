@@ -1,4 +1,5 @@
 from plibs import *
+from pcontroller import translator
 from pui import SetupForm, fonts, styles, images, Size, assetsicons
 
 
@@ -11,6 +12,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelBalance = None
         self.__labelSymbol = None
         self.__pushButtonRemove = None
+        self.__pushButtonExplorer = None
 
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
@@ -34,7 +36,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelName.setWordWrap(False)
 
         self.__labelBalance = SPGraphics.QuickLabel(
-            self, fixed_height=21
+            self, translator("Loading"), fixed_height=21
         )
         self.__labelBalance.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.__labelBalance.setWordWrap(False)
@@ -51,17 +53,24 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         )
         self.__pushButtonRemove.clicked.connect(self.remove_clicked)
 
+        self.__pushButtonExplorer = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.viewExplorer
+        )
+        self.__pushButtonExplorer.clicked.connect(self.explorer_clicked)
+
         self.layout().addWidget(self.__labelIcon, 0, 0, 2, 1)
         self.layout().addWidget(self.__labelName, 0, 1, 1, 2)
         self.layout().addWidget(self.__labelBalance, 1, 1, 1, 1)
         self.layout().addWidget(self.__labelSymbol, 1, 2, 1, 1, Qt.AlignLeft)
         self.layout().addWidget(self.__pushButtonRemove, 0, 3, 1, 1, Qt.AlignRight)
+        self.layout().addWidget(self.__pushButtonExplorer, 1, 3, 1, 1, Qt.AlignRight)
 
         self.item.setSizeHint(self.size())
         super(UiForm, self).setup()
 
     def re_style(self):
         self.__pushButtonRemove.setIcon(QIcon(images.data.icons.changeable.close21))
+        self.__pushButtonExplorer.setIcon(QIcon(images.data.icons.changeable.external21))
 
     def re_font(self):
         font = QFont()
@@ -76,6 +85,10 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
 
     @pyqtSlot()
     def remove_clicked(self):
+        pass
+
+    @pyqtSlot()
+    def explorer_clicked(self):
         pass
 
     def get_name(self) -> str:
@@ -99,4 +112,5 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelSymbol.setText(text)
 
     def set_master(self):
-        self.__pushButtonRemove.deleteLater()
+        self.__pushButtonRemove.hide()
+        self.__pushButtonExplorer.hide()

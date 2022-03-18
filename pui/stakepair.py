@@ -247,8 +247,8 @@ class UiForm(QWidget, SetupForm):
 
     def reset(self):
         self.__headerWidget.labelBlock.clear()
-        self.__headerWidget.labelBlockValue.clear()
-        self.__headerWidget.labelTotalStakedValue.clear()
+        self.__headerWidget.labelBlockValue.setText(translator("Loading"))
+        self.__headerWidget.labelTotalStakedValue.setText(translator("Loading"))
         self.__parisWidget.labelStakeWidget.labelIcon.clear()
         self.__parisWidget.labelStakeWidget.labelSymbol.clear()
         self.__parisWidget.labelEarnWidget.labelIcon.clear()
