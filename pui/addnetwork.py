@@ -9,6 +9,8 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
         self.__labelTitle = None
+        self.__labelIcon = None
+        self.__labelWarning = None
         self.__lineEditName = None
         self.__labelNameAlert = None
         self.__lineEditRPC = None
@@ -23,14 +25,23 @@ class UiForm(QWidget, SetupForm):
 
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.setLayout(QVBoxLayout())
+        self.setLayout(QGridLayout())
         self.layout().setAlignment(Qt.AlignCenter)
         self.layout().setSpacing(11)
         self.setObjectName(Tab.ADD_NETWORK)
 
         self.__labelTitle = SPGraphics.QuickLabel(
-            self, fixed_height=51, align=Qt.AlignCenter
+            self, fixed_height=21, align=Qt.AlignCenter
         )
+
+        self.__labelIcon = SPGraphics.QuickLabel(
+            self, fixed_size=Size.s41, pixmap=images.data.icons.warning41, align=Qt.AlignCenter
+        )
+
+        self.__labelWarning = SPGraphics.QuickLabel(
+            self, fixed_height=51
+        )
+        self.__labelWarning.setObjectName('labelDescription')
 
         self.__lineEditName = SPGraphics.QuickLineEdit(
             self, fixed_size=Size.default, layout_support=True, length=40
@@ -102,13 +113,15 @@ class UiForm(QWidget, SetupForm):
             light_color=styles.data.colors.white.name()
         )
 
-        self.layout().addWidget(self.__labelTitle)
-        self.layout().addWidget(self.__lineEditName)
-        self.layout().addWidget(self.__lineEditRPC)
-        self.layout().addWidget(self.__lineEditSymbol)
-        self.layout().addWidget(self.__lineEditChainId)
-        self.layout().addWidget(self.__lineEditExplorer)
-        self.layout().addWidget(self.__pushButtonAdd)
+        self.layout().addWidget(self.__labelTitle, 0, 0, 1, 2)
+        self.layout().addWidget(self.__labelIcon, 1, 0, 1, 1)
+        self.layout().addWidget(self.__labelWarning, 1, 1, 1, 1)
+        self.layout().addWidget(self.__lineEditName, 2, 0, 1, 2, Qt.AlignHCenter)
+        self.layout().addWidget(self.__lineEditRPC, 3, 0, 1, 2, Qt.AlignHCenter)
+        self.layout().addWidget(self.__lineEditSymbol, 4, 0, 1, 2, Qt.AlignHCenter)
+        self.layout().addWidget(self.__lineEditChainId, 5, 0, 1, 2, Qt.AlignHCenter)
+        self.layout().addWidget(self.__lineEditExplorer, 6, 0, 1, 2, Qt.AlignHCenter)
+        self.layout().addWidget(self.__pushButtonAdd, 7, 0, 1, 2, Qt.AlignHCenter)
         self.__lineEditName.layout().addWidget(self.__labelNameAlert, alignment=Qt.AlignRight)
         self.__lineEditRPC.layout().addWidget(self.__labelRPCAlert, alignment=Qt.AlignRight)
         self.__lineEditChainId.layout().addWidget(self.__labelChainIdAlert, alignment=Qt.AlignRight)
@@ -119,6 +132,10 @@ class UiForm(QWidget, SetupForm):
 
     def re_translate(self):
         self.__labelTitle.setText(translator("Add a Network"))
+        self.__labelWarning.setText(translator(
+            "A malicious network provider can lie about the state of the blockchain "
+            "and record your network activity. Only add custom networks you trust."
+        ))
         self.__lineEditName.setPlaceholderText(translator("Network Name"))
         self.__lineEditRPC.setPlaceholderText(translator("RPC URL"))
         self.__lineEditSymbol.setPlaceholderText(translator("Currency Symbol"))
@@ -129,6 +146,7 @@ class UiForm(QWidget, SetupForm):
     def re_font(self):
         font = QFont()
 
+        self.__labelWarning.setFont(font)
         self.__lineEditName.setFont(font)
         self.__lineEditRPC.setFont(font)
         self.__lineEditSymbol.setFont(font)
