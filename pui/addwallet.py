@@ -310,6 +310,9 @@ class UiForm(QWidget, SetupForm):
         self.__loadingEffectAdd.stop()
         QTimer().singleShot(1000, self.re_translate)
 
+    def get_strength_state(self) -> str:
+        return self.__strengthBar.state().text
+
     def reset(self):
         self.__all_inputs_disabled(False)
         self.__lineEditUsername.clear()
