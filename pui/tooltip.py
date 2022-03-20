@@ -30,7 +30,6 @@ class UiForm(SetupForm):
         self.showR = None
         self.usernameInfoR = None
         self.pinCodeInfoR = None
-        self.addressInfoR = None
         self.addNewR = None
         self.networkNameAlertR = None
         self.networkRPCAlertR = None
@@ -76,7 +75,6 @@ class UiForm(SetupForm):
         self.showR = self.__align_right()
         self.usernameInfoR = self.__align_right()
         self.pinCodeInfoR = self.__align_right()
-        self.addressInfoR = self.__align_right()
         self.addNewR = self.__align_right()
         self.networkNameAlertR = self.__align_right()
         self.networkRPCAlertR = self.__align_right()
@@ -134,9 +132,6 @@ class UiForm(SetupForm):
         self.pinCodeInfoR.labelText.setText(translator(
             "PIN code is important to add your wallet to our app later, It acts as a second layer of protection"
         ))
-        self.addressInfoR.labelText.setText(translator(
-            "If you have an existing wallet, set the wallet address to check"
-        ))
         self.addNewR.labelText.setText(translator("Add new"))
         self.networkNameAlertR.labelText.setText(translator("Network name already exists before"))
         self.networkRPCAlertR.labelText.setText(translator("This RPC is unable to connect"))
@@ -184,7 +179,6 @@ class UiForm(SetupForm):
         self.showR.labelText.setFont(font)
         self.usernameInfoR.labelText.setFont(font)
         self.pinCodeInfoR.labelText.setFont(font)
-        self.addressInfoR.labelText.setFont(font)
         self.addNewR.labelText.setFont(font)
         self.networkNameAlertR.labelText.setFont(font)
         self.networkRPCAlertR.labelText.setFont(font)

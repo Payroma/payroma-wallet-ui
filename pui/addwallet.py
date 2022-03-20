@@ -27,10 +27,7 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonPINCodeEye = None
         self.__labelPINCodeInfo = None
         self.__labelPINCodeAlert = None
-        self.__lineEditAddress = None
-        self.__labelAddressIcon = None
-        self.__labelAddressAlert = None
-        self.__labelAddressInfo = None
+        self.__lineWidget = None
         self.__pushButtonAdd = None
         self.__loadingEffectAdd = None
         self.__inputManager = None
@@ -46,7 +43,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.ADD_WALLET)
 
         self.__labelTitle = SPGraphics.QuickLabel(
-            self, fixed_height=51, align=Qt.AlignCenter
+            self, fixed_height=71, align=Qt.AlignHCenter
         )
 
         self.__lineEditUsername = SPGraphics.QuickLineEdit(
@@ -148,29 +145,11 @@ class UiForm(QWidget, SetupForm):
         self.__labelPINCodeAlert.setCursor(Qt.PointingHandCursor)
         self.__labelPINCodeAlert.hide()
 
-        self.__lineEditAddress = SPGraphics.QuickLineEdit(
-            self, fixed_size=Size.default, layout_support=True, length=42
+        self.__lineWidget = SPGraphics.QuickWidget(
+            self, fixed_height=1
         )
-        self.__lineEditAddress.setProperty("iconable", True)
-        self.__lineEditAddress.setProperty("iconableRight", True)
-        self.__lineEditAddress.setValidator(validator.address)
-        self.__lineEditAddress.textChanged.connect(self.address_changed)
-
-        self.__labelAddressIcon = SPGraphics.QuickLabel(
-            self, fixed_size=Size.s21
-        )
-
-        self.__labelAddressInfo = SPGraphics.QuickLabel(
-            self, fixed_size=Size.s21, tooltip=QApplication.toolTip.addressInfoR
-        )
-        self.__labelAddressInfo.setCursor(Qt.PointingHandCursor)
-
-        self.__labelAddressAlert = SPGraphics.QuickLabel(
-            self, scaled=True, pixmap=images.data.icons.warning41,
-            fixed_size=Size.s21, tooltip=QApplication.toolTip.addressAlert
-        )
-        self.__labelAddressAlert.setCursor(Qt.PointingHandCursor)
-        self.__labelAddressAlert.hide()
+        self.__lineWidget.setAttribute(Qt.WA_StyledBackground, True)
+        self.__lineWidget.setObjectName('lineWidget')
 
         self.__pushButtonAdd = SPGraphics.QuickPushButton(
             self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
@@ -191,7 +170,7 @@ class UiForm(QWidget, SetupForm):
         self.layout().addWidget(self.__strengthBar)
         self.layout().addWidget(self.__lineEditConfirmPassword)
         self.layout().addWidget(self.__lineEditPINCode)
-        self.layout().addWidget(self.__lineEditAddress)
+        self.layout().addWidget(self.__lineWidget)
         self.layout().addWidget(self.__pushButtonAdd)
         self.__lineEditUsername.layout().addWidget(self.__labelUsernameIcon, alignment=Qt.AlignLeft)
         self.__lineEditUsername.layout().addWidget(self.__labelUsernameAlert, alignment=Qt.AlignRight)
@@ -206,9 +185,6 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditPINCode.layout().addWidget(self.__labelPINCodeAlert, alignment=Qt.AlignRight)
         self.__lineEditPINCode.layout().addWidget(self.__pushButtonPINCodeEye)
         self.__lineEditPINCode.layout().addWidget(self.__labelPINCodeInfo)
-        self.__lineEditAddress.layout().addWidget(self.__labelAddressIcon, alignment=Qt.AlignLeft)
-        self.__lineEditAddress.layout().addWidget(self.__labelAddressAlert, alignment=Qt.AlignRight)
-        self.__lineEditAddress.layout().addWidget(self.__labelAddressInfo)
         self.__pushButtonAdd.layout().addWidget(self.__loadingEffectAdd, alignment=Qt.AlignCenter)
 
         self.__inputManager = SPInputmanager.InputManager(self.__lineEditPassword)
@@ -234,19 +210,16 @@ class UiForm(QWidget, SetupForm):
         self.__labelPINCodeIcon.setPixmap(images.data.icons.changeable.pin_code21)
         self.__pushButtonPINCodeEye.setIcon(QIcon(images.data.icons.changeable.eye_visible21))
         self.__labelPINCodeInfo.setPixmap(images.data.icons.changeable.info21)
-        self.__labelAddressIcon.setPixmap(images.data.icons.changeable.wallet21)
-        self.__labelAddressInfo.setPixmap(images.data.icons.changeable.info21)
 
     def re_translate(self):
         self.__labelTitle.setText(translator(
-            "Create a new or add an existing wallet,\n"
+            "Create a new or add an existing wallet, "
             "whatever, your private key and password are not stored anywhere."
         ))
         self.__lineEditUsername.setPlaceholderText(translator("Username/Email/Phone"))
         self.__lineEditPassword.setPlaceholderText(translator("Password"))
         self.__lineEditConfirmPassword.setPlaceholderText(translator("Confirm password"))
         self.__lineEditPINCode.setPlaceholderText(translator("PIN Code 6 numbers"))
-        self.__lineEditAddress.setPlaceholderText(translator("Wallet address ( Optional )"))
         self.__pushButtonAdd.setText(translator("Add Wallet"))
 
     def re_font(self):
@@ -258,7 +231,6 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditPassword.setFont(font)
         self.__lineEditConfirmPassword.setFont(font)
         self.__lineEditPINCode.setFont(font)
-        self.__lineEditAddress.setFont(font)
 
         font.setPointSize(fonts.data.size.title)
         font.setBold(True)
@@ -292,13 +264,6 @@ class UiForm(QWidget, SetupForm):
         self.__labelPINCodeAlert.setHidden(valid or not text)
         self.__inputs_validation()
 
-    @pyqtSlot(str)
-    def address_changed(self, text: str, valid: bool = False):
-        self.__lineEditAddress.setProperty('isValid', valid)
-        self.__labelAddressAlert.setHidden(valid or not text)
-        self.__polish(self.__lineEditAddress)
-        self.__inputs_validation()
-
     @pyqtSlot()
     def add_clicked(self):
         self.__all_inputs_disabled(True)
@@ -319,7 +284,6 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditPassword.clear()
         self.__lineEditConfirmPassword.clear()
         self.__lineEditPINCode.clear()
-        self.__lineEditAddress.clear()
 
     def __inputs_validation(self):
         valid = False
@@ -327,8 +291,7 @@ class UiForm(QWidget, SetupForm):
             self.__lineEditUsername.property('isValid') and
             self.__lineEditPassword.property('isValid') and
             self.__lineEditConfirmPassword.property('isValid') and
-            self.__lineEditPINCode.property('isValid') and
-            self.__lineEditAddress.property('isValid')
+            self.__lineEditPINCode.property('isValid')
         ):
             valid = True
 
@@ -339,7 +302,6 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditPassword.setDisabled(status)
         self.__lineEditConfirmPassword.setDisabled(status)
         self.__lineEditPINCode.setDisabled(status)
-        self.__lineEditAddress.setDisabled(status)
 
     @staticmethod
     def __polish(widget: QLineEdit):
