@@ -24,7 +24,7 @@ class UiForm(QWidget, SetupForm):
 
         self.__labelIllustration = SPGraphics.QuickLabel(
             self, scaled=True, fixed_size=QSize(151, 151),
-            pixmap=images.data.illustrations.done, align=Qt.AlignHCenter
+            pixmap=images.data.illustrations.confirmed, align=Qt.AlignHCenter
         )
 
         self.__labelTitle = SPGraphics.QuickLabel(

@@ -30,11 +30,6 @@ class AddWalletModel(addwallet.UiForm):
         valid = True if len(text) > 5 else False
         super(AddWalletModel, self).pin_code_changed(text, valid)
 
-    @pyqtSlot(str)
-    def address_changed(self, text: str):
-        valid = True if len(text) == 42 else False
-        super(AddWalletModel, self).address_changed(text, valid)
-
     @pyqtSlot()
     def add_clicked(self):
         super(AddWalletModel, self).add_clicked()

@@ -67,7 +67,9 @@ DEFAULT = {
         'theme_status': QPixmap(':/images/illustrations/sun.png'),
         'authenticator': QPixmap(':/images/illustrations/authenticator.png'),
         'swap': QPixmap(':/images/illustrations/swap.png'),
-        'done': QPixmap(':/images/illustrations/done.png')
+        'done': QPixmap(':/images/illustrations/done.png'),
+        'verify': QPixmap(':/images/illustrations/verify.png'),
+        'confirmed': QPixmap(':/images/illustrations/confirmed.png')
     }
 
 }
