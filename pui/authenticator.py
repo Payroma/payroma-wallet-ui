@@ -202,6 +202,7 @@ class UiForm(QWidget, SetupForm):
     def confirm_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectConfirm.stop()
+        self.__codeInputWidget.clear()
         QTimer().singleShot(1000, self.re_translate)
 
     def reset(self):

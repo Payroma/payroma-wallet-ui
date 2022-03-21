@@ -161,6 +161,7 @@ class UiForm(QWidget, SetupForm):
         self.__all_inputs_disabled(False)
         self.__loadingEffectVerify.stop()
         self.__pushButtonBack.show()
+        self.__lineEditPINCode.clear()
         QTimer().singleShot(1000, self.re_translate)
 
     def set_data(self, username: str, address: str = ''):

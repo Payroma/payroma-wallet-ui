@@ -141,6 +141,7 @@ class UiForm(QWidget, SetupForm):
     def login_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectLogin.stop()
+        self.__lineEditPassword.clear()
         QTimer().singleShot(1000, self.re_translate)
 
     def set_data(self, username: str, address: str):
