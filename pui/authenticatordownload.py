@@ -52,7 +52,7 @@ class UiForm(QWidget, SetupForm):
             self, fixed_size=button_size
         )
         self.__pushButtonAppStore.setObjectName('pushButtonAppStore')
-        self.__pushButtonGooglePlay.clicked.connect(self.app_store_clicked)
+        self.__pushButtonAppStore.clicked.connect(self.app_store_clicked)
 
         self.__labelAuthy = SPGraphics.QuickLabel(
             self, fixed_height=21
@@ -62,7 +62,7 @@ class UiForm(QWidget, SetupForm):
             self, fixed_size=button_size
         )
         self.__pushButtonAuthy.setObjectName('pushButtonAuthy')
-        self.__pushButtonGooglePlay.clicked.connect(self.authy_clicked)
+        self.__pushButtonAuthy.clicked.connect(self.authy_clicked)
 
         self.__lineWidget = SPGraphics.QuickWidget(
             self, fixed_height=1

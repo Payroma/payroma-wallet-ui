@@ -18,13 +18,9 @@ class WalletModel(wallet.UiForm):
         globalmethods.WalletModel._setCurrentTab = self.set_current_tab
 
         # Tabs
-        self.tokensListModel = TokensListModel(self)
-        self.walletDetailsModel = WalletDetailsModel(self)
-        self.addTokenModel = AddTokenModel(self)
-
-        self.add_tab(self.tokensListModel, Tab.WalletTab.TOKENS_LIST)
-        self.add_tab(self.walletDetailsModel, Tab.WalletTab.WALLET_DETAILS)
-        self.add_tab(self.addTokenModel, Tab.WalletTab.ADD_TOKEN)
+        self.add_tab(TokensListModel(self), Tab.WalletTab.TOKENS_LIST)
+        self.add_tab(WalletDetailsModel(self), Tab.WalletTab.WALLET_DETAILS)
+        self.add_tab(AddTokenModel(self), Tab.WalletTab.ADD_TOKEN)
 
     @pyqtSlot()
     def deposit_clicked(self):

@@ -19,12 +19,7 @@ class AuthenticatorSetupModel(authenticatorsetup.UiForm):
         globalmethods.AuthenticatorSetupModel._setCurrentTab = self.set_current_tab
 
         # Tabs
-        self.authenticatorDownloadModel = AuthenticatorDownloadModel(self)
-        self.authenticatorVerificationModel = AuthenticatorVerificationModel(self)
-        self.authenticatorScanModel = AuthenticatorScanModel(self)
-        self.authenticatorFinishedModel = AuthenticatorFinishedModel(self)
-
-        self.add_tab(self.authenticatorDownloadModel, Tab.AuthenticatorSetupTab.DOWNLOAD)
-        self.add_tab(self.authenticatorVerificationModel, Tab.AuthenticatorSetupTab.VERIFICATION)
-        self.add_tab(self.authenticatorScanModel, Tab.AuthenticatorSetupTab.SCAN)
-        self.add_tab(self.authenticatorFinishedModel, Tab.AuthenticatorSetupTab.FINISHED)
+        self.add_tab(AuthenticatorDownloadModel(self), Tab.AuthenticatorSetupTab.DOWNLOAD)
+        self.add_tab(AuthenticatorVerificationModel(self), Tab.AuthenticatorSetupTab.VERIFICATION)
+        self.add_tab(AuthenticatorScanModel(self), Tab.AuthenticatorSetupTab.SCAN)
+        self.add_tab(AuthenticatorFinishedModel(self), Tab.AuthenticatorSetupTab.FINISHED)

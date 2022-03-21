@@ -233,12 +233,12 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
-    def set_data(self, text: str, description: str = ''):
+    def set_data(self, username: str, key: str):
         title = 'Payroma%20Wallet'
-        qr_format = f'otpauth://totp/{title}:{description}?secret={text}&issuer={title}'
+        qr_format = f'otpauth://totp/{title}:{username}?secret={key}&issuer={title}'
         pixmap = to_qr_code(qr_format, self.__labelQR.size())
         self.__labelQR.setPixmap(pixmap)
-        self.__labelKey.setText(text, is_ellipsis=False)
+        self.__labelKey.setText(key, is_ellipsis=False)
         SPGraphics.text_ellipsis(self.__labelKey.label, Qt.ElideMiddle, width=221)
 
     def reset(self):

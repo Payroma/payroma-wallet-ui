@@ -84,8 +84,8 @@ class UiForm(QWidget, SetupForm):
     def done_clicked(self):
         pass
 
-    def set_data(self, text: str):
-        self.__labelKey.setText(text, is_ellipsis=False)
+    def set_data(self, key: str):
+        self.__labelKey.setText(key, is_ellipsis=False)
         SPGraphics.text_ellipsis(self.__labelKey.label, Qt.ElideMiddle, width=221)
 
     def reset(self):

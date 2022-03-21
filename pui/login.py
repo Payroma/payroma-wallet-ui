@@ -33,8 +33,9 @@ class UiForm(QWidget, SetupForm):
         )
 
         self.__labelUsername = SPGraphics.QuickLabel(
-            self, fixed_height=35, align=Qt.AlignCenter
+            self, fixed_height=31, align=Qt.AlignCenter
         )
+        self.__labelUsername.setWordWrap(False)
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
             self, fixed_height=21, copy_tooltip=QApplication.toolTip.copyR

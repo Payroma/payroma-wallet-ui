@@ -16,7 +16,7 @@ class HeaderWidget(QWidget):
         self.layout().setContentsMargins(11, 11, 11, 11)
 
         self.labelUsername = SPGraphics.QuickLabel(
-            self, fixed_height=21, align=Qt.AlignHCenter
+            self, fixed_height=21, align=Qt.AlignCenter
         )
         self.labelUsername.setWordWrap(False)
 

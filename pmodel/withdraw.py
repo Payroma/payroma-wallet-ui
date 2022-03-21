@@ -16,11 +16,8 @@ class WithdrawModel(withdraw.UiForm):
         globalmethods.WithdrawModel._setAddress = self.set_address
 
         # Tabs
-        self.addressesBookListModel = AddressesBookListModel(self)
-        self.addAmountModel = AddAmountModel(self)
-
-        self.add_tab(self.addressesBookListModel, '')
-        self.add_tab(self.addAmountModel, '')
+        self.add_tab(AddressesBookListModel(self), '')
+        self.add_tab(AddAmountModel(self), '')
 
         # data
         self.__address = ''

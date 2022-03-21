@@ -11,7 +11,7 @@ class AuthenticatorScanModel(authenticatorscan.UiForm):
         self.setup()
 
         # Test
-        self.set_data("HAZGCNJTMNRWMZLBGM4TANJQMUYTSYRRMYYDOZBZGE2TGNZZGU2Q", "Wallet1")
+        self.set_data("Wallet1", "HAZGCNJTMNRWMZLBGM4TANJQMUYTSYRRMYYDOZBZGE2TGNZZGU2Q")
 
     @pyqtSlot()
     def back_clicked(self):
