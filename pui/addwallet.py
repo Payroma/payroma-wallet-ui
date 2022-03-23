@@ -284,7 +284,7 @@ class UiForm(QWidget, SetupForm):
     def get_strength_text(self) -> str:
         return self.__strengthBar.state().text
 
-    def get_password_confirm_text(self) -> str:
+    def get_confirm_password_text(self) -> str:
         return self.__lineEditConfirmPassword.text()
 
     def get_pin_code_text(self) -> str:
