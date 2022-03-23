@@ -275,8 +275,20 @@ class UiForm(QWidget, SetupForm):
         self.__loadingEffectAdd.stop()
         QTimer().singleShot(1000, self.re_translate)
 
-    def get_strength_state(self) -> str:
+    def get_username_text(self) -> str:
+        return self.__lineEditUsername.text()
+
+    def get_password_text(self) -> str:
+        return self.__lineEditPassword.text()
+
+    def get_strength_text(self) -> str:
         return self.__strengthBar.state().text
+
+    def get_password_confirm_text(self) -> str:
+        return self.__lineEditConfirmPassword.text()
+
+    def get_pin_code_text(self) -> str:
+        return self.__lineEditPINCode.text()
 
     def reset(self):
         self.__all_inputs_disabled(False)

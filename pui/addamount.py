@@ -151,6 +151,9 @@ class UiForm(QWidget, SetupForm):
         icon.addPixmap(token_icon, QIcon.Selected, QIcon.Off)
         self.__comboBoxToken.addItem(icon, symbol)
 
+    def get_amount_text(self) -> str:
+        return self.__lineEditAmount.text()
+
     def reset(self):
         self.__all_inputs_disabled(False)
         self.__labelBalanceValue.setText(translator("Loading"))

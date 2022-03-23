@@ -11,6 +11,7 @@ class CodeInputWidget(QWidget):
         font = QFont('Roboto', 18)
         line_edit_size = QSize(41, 51)
         self.textChanged = text_changed
+        self.__text = ''
 
         self.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
         self.setLayout(QHBoxLayout())
@@ -78,6 +79,9 @@ class CodeInputWidget(QWidget):
         self.__lineEdit5.clear()
         self.__lineEdit6.clear()
 
+    def text(self) -> str:
+        return self.__text
+
     @pyqtSlot(str)
     def __auto_cursor_move(self, text: str):
         inputs = [
@@ -93,8 +97,8 @@ class CodeInputWidget(QWidget):
         elif not text and current_index > 0:
             inputs[current_index - 1].setFocus()
 
-        code = ''.join(i.text() for i in inputs)
-        self.textChanged(code)
+        self.__text = ''.join(i.text() for i in inputs)
+        self.textChanged(self.__text)
 
 
 class UiForm(QWidget, SetupForm):
@@ -204,6 +208,9 @@ class UiForm(QWidget, SetupForm):
         self.__loadingEffectConfirm.stop()
         self.__codeInputWidget.clear()
         QTimer().singleShot(1000, self.re_translate)
+
+    def get_otp_code_text(self) -> str:
+        return self.__codeInputWidget.text()
 
     def reset(self):
         self.__all_inputs_disabled(False)

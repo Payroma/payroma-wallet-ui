@@ -148,6 +148,9 @@ class UiForm(QWidget, SetupForm):
         self.__labelUsername.setText(username)
         self.__labelAddress.setText(address, is_ellipsis=False)
 
+    def get_password_text(self) -> str:
+        return self.__lineEditPassword.text()
+
     def reset(self):
         self.__all_inputs_disabled(False)
         self.__labelUsername.clear()

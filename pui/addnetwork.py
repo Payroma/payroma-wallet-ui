@@ -203,6 +203,21 @@ class UiForm(QWidget, SetupForm):
         self.__loadingEffectAdd.stop()
         QTimer().singleShot(1000, self.re_translate)
 
+    def get_name_text(self) -> str:
+        return self.__lineEditName.text()
+
+    def get_rpc_text(self) -> str:
+        return self.__lineEditRPC.text()
+
+    def get_symbol_text(self) -> str:
+        return self.__lineEditSymbol.text()
+
+    def get_chain_id_text(self) -> str:
+        return self.__lineEditChainId.text()
+
+    def get_explorer_text(self) -> str:
+        return self.__lineEditExplorer.text()
+
     def reset(self):
         self.__all_inputs_disabled(False)
         self.__lineEditName.clear()

@@ -150,6 +150,19 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.show()
         QTimer().singleShot(1000, self.re_translate)
 
+    def set_data(self, symbol: str, decimals: str):
+        self.__lineEditSymbol.setText(symbol)
+        self.__lineEditDecimals.setText(decimals)
+
+    def get_address_text(self) -> str:
+        return self.__lineEditAddress.text()
+
+    def get_symbol_text(self) -> str:
+        return self.__lineEditSymbol.text()
+
+    def get_decimals_text(self) -> str:
+        return self.__lineEditDecimals.text()
+
     def reset(self):
         self.__all_inputs_disabled(False)
         self.__lineEditAddress.clear()

@@ -172,6 +172,9 @@ class UiForm(QWidget, SetupForm):
         else:
             self.__labelAddress.hide()
 
+    def get_pin_code_text(self) -> str:
+        return self.__lineEditPINCode.text()
+
     def reset(self):
         self.__all_inputs_disabled(False)
         self.__labelUsername.clear()

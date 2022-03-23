@@ -131,6 +131,9 @@ class UiForm(QWidget, SetupForm):
     def set_address(self, text: str):
         self.__headerWidget.lineEditAddress.setText(text)
 
+    def get_address_text(self) -> str:
+        return self.__headerWidget.lineEditAddress.text()
+
     def reset(self):
         self.__headerWidget.lineEditAddress.clear()
         self.__tabWidget.setCurrentIndex(0)

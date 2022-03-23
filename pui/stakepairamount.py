@@ -188,6 +188,12 @@ class UiForm(QWidget, SetupForm):
         self.__labelClaimIcon.setPixmap(assetsicons.get_asset_icon(symbol))
         self.__lineEditClaim.setText(text)
 
+    def get_deposit_text(self) -> str:
+        return self.__lineEditDeposit.text()
+
+    def get_withdraw_text(self) -> str:
+        return self.__lineEditWithdraw.text()
+
     def reset(self):
         self.__labelBalanceValue.setText(translator("Loading"))
         self.__labelStakedBalanceValue.setText(translator("Loading"))
