@@ -23,6 +23,7 @@ class Size:
     s91 = QSize(91, 91)
     s100 = QSize(100, 100)
     default = QSize(301, 51)
+    messageBox = QSize(401, 201)
     defaultMainWidget = None
     minimumMainWidget = None
     maximumMainWidget = None
