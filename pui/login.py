@@ -151,6 +151,9 @@ class UiForm(QWidget, SetupForm):
     def get_password_text(self) -> str:
         return self.__lineEditPassword.text()
 
+    def get_strength_text(self) -> str:
+        return self.__strengthBar.state().text
+
     def reset(self):
         self.__all_inputs_disabled(False)
         self.__labelUsername.clear()
