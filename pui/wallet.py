@@ -239,3 +239,4 @@ class UiForm(QWidget, SetupForm):
     def reset(self):
         self.__headerWidget.labelUsername.clear()
         self.__headerWidget.labelAddress.clear()
+        self.__tabWidget.setCurrentIndex(0)

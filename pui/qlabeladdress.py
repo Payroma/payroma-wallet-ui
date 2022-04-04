@@ -52,6 +52,7 @@ class QLabelAddress(SPGraphics.QuickWidget):
         QApplication.quickNotification.successfully(translator("Copied Successfully"))
 
     def clear(self):
+        self.__text = ''
         self.label.clear()
 
     def text(self) -> str:

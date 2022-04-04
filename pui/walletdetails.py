@@ -52,10 +52,12 @@ class UiForm(QWidget, SetupForm):
         self.__labelPrivateKey = SPGraphics.QuickLabel(
             self, fixed_height=21
         )
+        self.__labelPrivateKey.hide()
 
         self.__labelPrivateKeyValue = qlabeladdress.QLabelAddress(
             self, fixed_height=Size.default.height(), copy_tooltip=QApplication.toolTip.copyR
         )
+        self.__labelPrivateKeyValue.hide()
 
         self.__pushButtonPrivateKey = SPGraphics.QuickPushButton(
             self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,

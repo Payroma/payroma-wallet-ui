@@ -30,9 +30,6 @@ class UiForm(QWidget, SetupForm):
         self.__lineWidget = None
         self.__pushButtonAdd = None
         self.__loadingEffectAdd = None
-        self.__inputManager = None
-        self.__inputManagerConfirm = None
-        self.__inputManagerPINCode = None
 
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
@@ -187,15 +184,15 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditPINCode.layout().addWidget(self.__labelPINCodeInfo)
         self.__pushButtonAdd.layout().addWidget(self.__loadingEffectAdd, alignment=Qt.AlignCenter)
 
-        self.__inputManager = SPInputmanager.InputManager(self.__lineEditPassword)
-        self.__inputManager.eye_connect(self.__pushButtonPasswordEye)
-        self.__inputManager.strength_bar_connect(self.__strengthBar)
+        password_input = SPInputmanager.InputManager(self.__lineEditPassword)
+        password_input.eye_connect(self.__pushButtonPasswordEye)
+        password_input.strength_bar_connect(self.__strengthBar)
 
-        self.__inputManagerConfirm = SPInputmanager.InputManager(self.__lineEditConfirmPassword)
-        self.__inputManagerConfirm.eye_connect(self.__pushButtonConfirmPasswordEye)
+        confirm_input = SPInputmanager.InputManager(self.__lineEditConfirmPassword)
+        confirm_input.eye_connect(self.__pushButtonConfirmPasswordEye)
 
-        self.__inputManagerPINCode = SPInputmanager.InputManager(self.__lineEditPINCode)
-        self.__inputManagerPINCode.eye_connect(self.__pushButtonPINCodeEye)
+        pin_code_input = SPInputmanager.InputManager(self.__lineEditPINCode)
+        pin_code_input.eye_connect(self.__pushButtonPINCodeEye)
 
         super(UiForm, self).setup()
 

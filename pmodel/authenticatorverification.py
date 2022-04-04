@@ -22,6 +22,11 @@ class AuthenticatorVerificationModel(authenticatorverification.UiForm):
         globalmethods.AuthenticatorSetupModel.setCurrentTab(Tab.AuthenticatorSetupTab.SCAN)
 
     @pyqtSlot(str)
+    def password_changed(self, text: str):
+        valid = True if len(text) > 5 else False
+        super(AuthenticatorVerificationModel, self).password_changed(text, valid)
+
+    @pyqtSlot(str)
     def pin_code_changed(self, text: str):
         valid = True if len(text) > 5 else False
         super(AuthenticatorVerificationModel, self).pin_code_changed(text, valid)

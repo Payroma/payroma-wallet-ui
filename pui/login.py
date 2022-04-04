@@ -18,7 +18,6 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonLogin = None
         self.__loadingEffectLogin = None
         self.__pushButtonSkip = None
-        self.__inputManager = None
 
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
@@ -89,9 +88,9 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditPassword.layout().addWidget(self.__pushButtonPasswordEye, alignment=Qt.AlignRight)
         self.__pushButtonLogin.layout().addWidget(self.__loadingEffectLogin, alignment=Qt.AlignCenter)
 
-        self.__inputManager = SPInputmanager.InputManager(self.__lineEditPassword)
-        self.__inputManager.eye_connect(self.__pushButtonPasswordEye)
-        self.__inputManager.strength_bar_connect(self.__strengthBar)
+        password_input = SPInputmanager.InputManager(self.__lineEditPassword)
+        password_input.eye_connect(self.__pushButtonPasswordEye)
+        password_input.strength_bar_connect(self.__strengthBar)
 
         super(UiForm, self).setup()
 
