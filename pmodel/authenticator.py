@@ -15,7 +15,9 @@ class AuthenticatorModel(authenticator.UiForm, event.EventForm):
     def forgot_clicked(self):
         event.mainTabChanged.notify(tab=Tab.AUTHENTICATOR_SETUP, recordable=False)
 
-    def otp_code_changed(self, text: str, valid: bool = False):
+    @pyqtSlot(str)
+    def otp_code_changed(self, text: str):
+        valid = False
         if len(text) == 6:
             valid = True
         super(AuthenticatorModel, self).otp_code_changed(text, valid)

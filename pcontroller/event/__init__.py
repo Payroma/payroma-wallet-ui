@@ -19,8 +19,8 @@ class EventForm:
         authenticatorSetupVerified.listen(self.authenticator_setup_verified_event)
         walletTabChanged.listen(self.wallet_tab_changed_event)
         stakePairChanged.listen(self.stake_pair_changed_event)
-        stakePairApproved.listen(self.stake_pair_approved)
-        withdrawAddressChanged.listen(self.withdraw_address_changed)
+        stakePairApproved.listen(self.stake_pair_approved_event)
+        withdrawAddressChanged.listen(self.withdraw_address_changed_event)
 
     def app_started_event(self):
         pass
@@ -64,8 +64,8 @@ class EventForm:
     ):
         pass
 
-    def stake_pair_approved(self):
+    def stake_pair_approved_event(self):
         pass
 
-    def withdraw_address_changed(self, address: str):
+    def withdraw_address_changed_event(self, address: str):
         pass

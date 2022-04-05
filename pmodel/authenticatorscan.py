@@ -19,7 +19,9 @@ class AuthenticatorScanModel(authenticatorscan.UiForm, event.EventForm):
     def back_clicked(self):
         event.authenticatorSetupTabChanged.notify(tab=Tab.AuthenticatorSetupTab.VERIFICATION)
 
-    def otp_code_changed(self, text: str, valid: bool = False):
+    @pyqtSlot(str)
+    def otp_code_changed(self, text: str):
+        valid = False
         if len(text) == 6:
             valid = True
         super(AuthenticatorScanModel, self).otp_code_changed(text, valid)
