@@ -38,9 +38,7 @@ def graphics_setup():
         failed=pui.styles.data.colors.negative.name()
     )
 
-    title_font = QFont(pui.fonts.data.family.normal, pui.fonts.data.size.title)
-    title_font.setBold(True)
-    title_font.setItalic(True)
+    title_font = QFont(pui.fonts.data.family.normal, pui.fonts.data.size.normal)
     title_text = "{} {}".format(SOFTWARE_NAME, "Message")
 
     SPGraphics.Setup.set_message_box_details(
