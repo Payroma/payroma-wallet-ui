@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import stakepairapproval
 
 
@@ -12,4 +12,4 @@ class StakePairApprovalModel(stakepairapproval.UiForm):
 
     @pyqtSlot()
     def approval_clicked(self):
-        globalmethods.StakePairModel.setApproved()
+        event.stakePairApproved.notify()

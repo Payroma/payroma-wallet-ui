@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import authenticatordownload
 
 
@@ -12,4 +12,4 @@ class AuthenticatorDownloadModel(authenticatordownload.UiForm):
 
     @pyqtSlot()
     def next_clicked(self):
-        globalmethods.AuthenticatorSetupModel.setCurrentTab(Tab.AuthenticatorSetupTab.VERIFICATION)
+        event.authenticatorSetupTabChanged.notify(tab=Tab.AuthenticatorSetupTab.VERIFICATION)

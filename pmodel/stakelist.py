@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import stakelist
 from pmodel import stakeitem
 
@@ -83,18 +83,14 @@ class StakeListModel(stakelist.UiForm):
     @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem):
         widget = super(StakeListModel, self).item_clicked(item)
-        globalmethods.StakePairModel.setData(
-            'Ends in',
-            widget.interface['block'],
-            widget.interface['totalStaked'],
-            widget.interface['stakeSymbol'],
-            widget.interface['earnSymbol']
+        event.stakePairChanged.notify(
+            block_title='Ends in',
+            blocks=widget.interface['block'],
+            total_staked=widget.interface['totalStaked'],
+            balance=widget.interface['balance'],
+            staked=widget.interface['staked'],
+            claim=widget.interface['claim'],
+            stake_symbol=widget.interface['stakeSymbol'],
+            earn_symbol=widget.interface['earnSymbol']
         )
-        globalmethods.StakePairAmountModel.setData(
-            widget.interface['balance'],
-            widget.interface['staked'],
-            widget.interface['claim'],
-            widget.interface['stakeSymbol'],
-            widget.interface['earnSymbol']
-        )
-        globalmethods.MainModel.setCurrentTab(Tab.STAKE_PAIR)
+        event.mainTabChanged.notify(tab=Tab.STAKE_PAIR)

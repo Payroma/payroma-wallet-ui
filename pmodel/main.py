@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import url_open, globalmethods
+from pcontroller import event, url_open
 from pui import main
 from pmodel.walletslist import WalletsListModel
 from pmodel.addwallet import AddWalletModel
@@ -20,15 +20,12 @@ from pmodel.historylist import HistoryListModel
 from pmodel.transactionsender import TransactionSenderModel
 
 
-class MainModel(main.UiForm):
+class MainModel(main.UiForm, event.EventForm):
     def __init__(self, parent):
         super(MainModel, self).__init__(parent)
 
         self.setup()
-
-        # Global Methods
-        globalmethods.MainModel._setCurrentTab = self.set_current_tab
-        globalmethods.MainModel._setThemeMode = self.set_theme_mode
+        self.events_listening()
 
         # Tabs
         self.add_tab(WalletsListModel(self), Tab.WALLETS_LIST)
@@ -51,6 +48,14 @@ class MainModel(main.UiForm):
         self.__previousTabs = []
         self.__latestTab = None
 
+        event.appStarted.notify()
+
+    def main_tab_changed_event(self, tab: str, recordable: bool = True):
+        self.set_current_tab(tab, recordable)
+
+    def theme_changed_event(self, name: str):
+        self.set_theme_mode(name)
+
     @pyqtSlot()
     def back_clicked(self):
         self.__latestTab = self.__previousTabs.pop()
@@ -63,7 +68,7 @@ class MainModel(main.UiForm):
 
     @pyqtSlot()
     def settings_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.SETTINGS)
+        event.mainTabChanged.notify(tab=Tab.SETTINGS)
 
     @pyqtSlot()
     def minimize_clicked(self):

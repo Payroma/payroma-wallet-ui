@@ -1,26 +1,27 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import settings
 
 
-class SettingsModel(settings.UiForm):
+class SettingsModel(settings.UiForm, event.EventForm):
     def __init__(self, parent):
         super(SettingsModel, self).__init__(parent)
 
         self.setup()
+        self.events_listening()
 
-        # Test
-        self.set_data(network_connected=True, network_name="Binance Smart Chain")
+    def network_changed_event(self, name: str, status: bool):
+        self.set_data(status, name)
 
     @pyqtSlot(bool)
     def switch_clicked(self, state: bool):
         theme_name = 'dark' if state else ''
-        globalmethods.MainModel.setThemeMode(theme_name)
+        event.themeChanged.notify(name=theme_name)
 
     @pyqtSlot()
     def network_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.NETWORKS_LIST)
+        event.mainTabChanged.notify(tab=Tab.NETWORKS_LIST)
 
     @pyqtSlot()
     def backup_clicked(self):

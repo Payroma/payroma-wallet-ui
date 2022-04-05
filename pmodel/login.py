@@ -1,21 +1,23 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import login
 
 
-class LoginModel(login.UiForm):
+class LoginModel(login.UiForm, event.EventForm):
     def __init__(self, parent):
         super(LoginModel, self).__init__(parent)
 
         self.setup()
+        self.events_listening()
 
-        # Global Methods
-        globalmethods.LoginModel._setData = self.set_data
+    def wallet_changed_event(self, username: str, address: str):
+        self.reset()
+        self.set_data(username, address)
 
     @pyqtSlot()
     def skip_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.WALLET)
+        event.mainTabChanged.notify(tab=Tab.WALLET)
 
     @pyqtSlot(str)
     def password_changed(self, text: str):
@@ -24,4 +26,4 @@ class LoginModel(login.UiForm):
 
     @pyqtSlot()
     def login_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.AUTHENTICATOR, recordable=False)
+        event.mainTabChanged.notify(tab=Tab.AUTHENTICATOR, recordable=False)

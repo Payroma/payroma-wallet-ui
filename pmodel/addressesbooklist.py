@@ -1,18 +1,16 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import addressesbooklist
 from pmodel import addressbookitem
 
 
-class AddressesBookListModel(addressesbooklist.UiForm):
+class AddressesBookListModel(addressesbooklist.UiForm, event.EventForm):
     def __init__(self, parent):
         super(AddressesBookListModel, self).__init__(parent)
 
         self.setup()
-
-        # Global Methods
-        globalmethods.AddressesBookListModel._search = self.search
+        self.events_listening()
 
         # Test
         wallets = {
@@ -25,7 +23,10 @@ class AddressesBookListModel(addressesbooklist.UiForm):
             item.set_address(address)
             self.add_item(item)
 
+    def withdraw_address_changed(self, address: str):
+        self.search(address)
+
     @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem):
         widget = super(AddressesBookListModel, self).item_clicked(item)
-        globalmethods.WithdrawModel.setAddress(widget.get_address())
+        event.withdrawAddressChanged.notify(address=widget.get_address())

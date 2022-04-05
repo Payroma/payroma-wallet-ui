@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import transactionsender
 
 
@@ -28,7 +28,7 @@ class TransactionSenderModel(transactionsender.UiForm):
 
     @pyqtSlot()
     def network_clicked(self):
-        globalmethods.MainModel.setCurrentTab(Tab.NETWORKS_LIST)
+        event.mainTabChanged.notify(tab=Tab.NETWORKS_LIST)
 
     @pyqtSlot()
     def confirm_clicked(self):
@@ -37,4 +37,4 @@ class TransactionSenderModel(transactionsender.UiForm):
 
     def confirm_completed(self):
         super(TransactionSenderModel, self).confirm_completed()
-        globalmethods.MainModel.setCurrentTab(Tab.HISTORY_LIST)
+        event.mainTabChanged.notify(tab=Tab.HISTORY_LIST)

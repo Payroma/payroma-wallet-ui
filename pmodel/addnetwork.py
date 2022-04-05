@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import addnetwork
 
 
@@ -9,6 +9,10 @@ class AddNetworkModel(addnetwork.UiForm):
         super(AddNetworkModel, self).__init__(parent)
 
         self.setup()
+
+    def showEvent(self, a0: QShowEvent):
+        super(AddNetworkModel, self).showEvent(a0)
+        self.reset()
 
     @pyqtSlot(str)
     def name_changed(self, text: str):

@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import addtoken
 
 
@@ -12,7 +12,7 @@ class AddTokenModel(addtoken.UiForm):
 
     @pyqtSlot()
     def back_clicked(self):
-        globalmethods.WalletModel.setCurrentTab(Tab.WalletTab.TOKENS_LIST)
+        event.walletTabChanged.notify(tab=Tab.WalletTab.TOKENS_LIST)
 
     @pyqtSlot(str)
     def address_changed(self, text: str):

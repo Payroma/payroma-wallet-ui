@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import globalmethods
+from pcontroller import event
 from pui import addwallet
 
 
@@ -9,6 +9,10 @@ class AddWalletModel(addwallet.UiForm):
         super(AddWalletModel, self).__init__(parent)
 
         self.setup()
+
+    def showEvent(self, a0: QShowEvent):
+        super(AddWalletModel, self).showEvent(a0)
+        self.reset()
 
     @pyqtSlot(str)
     def username_changed(self, text: str):
