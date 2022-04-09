@@ -10,6 +10,10 @@ class AddTokenModel(addtoken.UiForm):
 
         self.setup()
 
+    def showEvent(self, a0: QShowEvent):
+        super(AddTokenModel, self).showEvent(a0)
+        self.reset()
+
     @pyqtSlot()
     def back_clicked(self):
         event.walletTabChanged.notify(tab=Tab.WalletTab.TOKENS_LIST)

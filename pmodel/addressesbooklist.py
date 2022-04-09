@@ -23,7 +23,7 @@ class AddressesBookListModel(addressesbooklist.UiForm, event.EventForm):
             item.set_address(address)
             self.add_item(item)
 
-    def withdraw_address_changed(self, address: str):
+    def withdraw_address_changed_event(self, address: str):
         self.search(address)
 
     @pyqtSlot(QListWidgetItem)

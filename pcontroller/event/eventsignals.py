@@ -21,6 +21,8 @@ authenticatorSetupVerified = eventcaller.EventCaller()
 
 walletTabChanged = eventcaller.EventCaller()
 
+tokenEdited = eventcaller.EventCaller()
+
 stakePairChanged = eventcaller.EventCaller()
 stakePairApproved = eventcaller.EventCaller()
 

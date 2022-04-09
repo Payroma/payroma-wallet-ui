@@ -1,5 +1,3 @@
-from plibs import *
-from pheader import *
 from pui import walletitem
 
 

@@ -125,7 +125,7 @@ class UiForm(QWidget, SetupForm):
             duration=500, finished=lambda: widget.setGraphicsEffect(None)
         ).start()
 
-    def add_tab(self, model: QObject, name: str):
+    def add_tab(self, model: QWidget, name: str):
         self.__tabWidget.addTab(model, name)
 
     def set_address(self, text: str):

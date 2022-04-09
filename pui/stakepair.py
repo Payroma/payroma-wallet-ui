@@ -220,7 +220,7 @@ class UiForm(QWidget, SetupForm):
     def earn_contract_clicked(self):
         pass
 
-    def add_tab(self, model: QObject, name: str):
+    def add_tab(self, model: QWidget, name: str):
         self.__tabWidget.addTab(model, name)
 
     def set_data(

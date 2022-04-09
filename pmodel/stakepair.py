@@ -30,5 +30,5 @@ class StakePairModel(stakepair.UiForm, event.EventForm):
             earn_symbol=earn_symbol
         )
 
-    def stake_pair_approved(self):
+    def stake_pair_approved_event(self):
         self.set_approved()

@@ -1,14 +1,24 @@
 from plibs import *
-from pheader import *
+from pcontroller import event
 from pui import tokenslist
 from pmodel import tokenitem
 
 
-class TokensListModel(tokenslist.UiForm):
+class TokensListModel(tokenslist.UiForm, event.EventForm):
     def __init__(self, parent):
         super(TokensListModel, self).__init__(parent)
 
         self.setup()
+        self.events_listening()
+
+    def token_edited_event(self):
+        self.refresh()
+
+    def network_changed_event(self, name: str, status: bool):
+        self.refresh()
+
+    def refresh(self):
+        self.reset()
 
         # Test
         tokens = {
@@ -26,7 +36,3 @@ class TokensListModel(tokenslist.UiForm):
             self.add_item(item)
             if name == 'Ethereum Token':
                 item.set_master()
-
-    @pyqtSlot(QListWidgetItem)
-    def item_clicked(self, item: QListWidgetItem):
-        widget = super(TokensListModel, self).item_clicked(item)

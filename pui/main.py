@@ -131,7 +131,7 @@ class UiForm(SPGraphics.QuickMainWidget, SetupForm):
         elif index < 1 and self.__headerWidget.pushButtonBack.isVisible():
             self.__headerWidget.back_button_visible(False)
 
-    def add_tab(self, model: QObject, name: str):
+    def add_tab(self, model: QWidget, name: str):
         self.__tabWidget.addTab(model, name)
 
     def set_current_tab(self, name: str):

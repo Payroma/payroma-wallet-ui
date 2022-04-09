@@ -21,7 +21,7 @@ class WithdrawModel(withdraw.UiForm, event.EventForm):
         super(WithdrawModel, self).hideEvent(a0)
         self.reset()
 
-    def withdraw_address_changed(self, address: str):
+    def withdraw_address_changed_event(self, address: str):
         self.set_address(address)
 
     @pyqtSlot(str)

@@ -18,6 +18,7 @@ class EventForm:
         authenticatorSetupTabChanged.listen(self.authenticator_setup_tab_changed_event)
         authenticatorSetupVerified.listen(self.authenticator_setup_verified_event)
         walletTabChanged.listen(self.wallet_tab_changed_event)
+        tokenEdited.listen(self.token_edited_event)
         stakePairChanged.listen(self.stake_pair_changed_event)
         stakePairApproved.listen(self.stake_pair_approved_event)
         withdrawAddressChanged.listen(self.withdraw_address_changed_event)
@@ -56,6 +57,9 @@ class EventForm:
         pass
 
     def wallet_tab_changed_event(self, tab: str):
+        pass
+
+    def token_edited_event(self):
         pass
 
     def stake_pair_changed_event(

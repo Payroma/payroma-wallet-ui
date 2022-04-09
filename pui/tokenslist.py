@@ -56,7 +56,7 @@ class UiForm(QWidget, SetupForm):
     def item_clicked(self, item: QListWidgetItem) -> QWidget:
         return self.__listWidget.itemWidget(item)
 
-    def add_item(self, item: QListWidgetItem):
+    def add_item(self, item: SPGraphics.QuickListWidgetItem):
         self.__listWidget.add_quick_item(item)
 
     def reset(self):
