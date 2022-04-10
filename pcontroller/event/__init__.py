@@ -22,6 +22,7 @@ class EventForm:
         stakePairChanged.listen(self.stake_pair_changed_event)
         stakePairApproved.listen(self.stake_pair_approved_event)
         withdrawAddressChanged.listen(self.withdraw_address_changed_event)
+        addressBookEdited.listen(self.address_book_edited_event)
 
     def app_started_event(self):
         pass
@@ -72,4 +73,7 @@ class EventForm:
         pass
 
     def withdraw_address_changed_event(self, address: str):
+        pass
+
+    def address_book_edited_event(self):
         pass

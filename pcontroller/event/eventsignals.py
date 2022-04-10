@@ -27,3 +27,5 @@ stakePairChanged = eventcaller.EventCaller()
 stakePairApproved = eventcaller.EventCaller()
 
 withdrawAddressChanged = eventcaller.EventCaller()
+
+addressBookEdited = eventcaller.EventCaller()

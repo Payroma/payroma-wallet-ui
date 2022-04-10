@@ -9,6 +9,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelIcon = None
         self.__labelUsername = None
         self.__labelAddress = None
+        self.__pushButtonRemove = None
 
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
@@ -28,20 +29,28 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelUsername = SPGraphics.QuickLabel(
             self, fixed_height=31
         )
+        self.__labelUsername.setWordWrap(False)
 
         self.__labelAddress = qlabeladdress.QLabelAddress(
             self, copy_tooltip=QApplication.toolTip.copyR
         )
         self.__labelAddress.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
 
+        self.__pushButtonRemove = SPGraphics.QuickPushButton(
+            self, icon_size=Size.s16, fixed_size=Size.s21, tooltip=QApplication.toolTip.remove
+        )
+        self.__pushButtonRemove.clicked.connect(self.remove_clicked)
+
         self.layout().addWidget(self.__labelIcon, 0, 0, 2, 1)
         self.layout().addWidget(self.__labelUsername, 0, 1, 1, 1)
-        self.layout().addWidget(self.__labelAddress, 1, 1, 1, 1)
+        self.layout().addWidget(self.__pushButtonRemove, 0, 2, 1, 1, Qt.AlignTop | Qt.AlignRight)
+        self.layout().addWidget(self.__labelAddress, 1, 1, 1, 2)
 
         self.item.setSizeHint(self.size())
         super(UiForm, self).setup()
 
     def re_style(self):
+        self.__pushButtonRemove.setIcon(QIcon(images.data.icons.changeable.close21))
         self.__labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
 
     def re_font(self):
@@ -53,8 +62,8 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         font.setBold(True)
         self.__labelUsername.setFont(font)
 
-    @pyqtSlot(bool)
-    def favorite_clicked(self, state: bool):
+    @pyqtSlot()
+    def remove_clicked(self):
         pass
 
     def get_username(self) -> str:

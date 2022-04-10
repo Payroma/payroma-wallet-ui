@@ -1,5 +1,4 @@
 from plibs import *
-from pheader import *
 from pcontroller import event
 from pui import withdraw
 from pmodel.addressesbooklist import AddressesBookListModel
@@ -33,8 +32,10 @@ class WithdrawModel(withdraw.UiForm, event.EventForm):
         if text != self.get_address_text():
             return
 
+        addable = False
         if len(text) == 42:
             valid = True
+            addable = True
 
         event.withdrawAddressChanged.notify(address=text)
-        super(WithdrawModel, self).address_changed(text, valid, valid)
+        super(WithdrawModel, self).address_changed(text, valid, addable)
