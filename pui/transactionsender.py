@@ -105,6 +105,7 @@ class UiForm(QWidget, SetupForm):
         self.__lineWidget = None
         self.__labelAddress = None
         self.__labelFunctionName = None
+        self.__pushButtonDetails = None
         self.__labelIcon = None
         self.__labelAmount = None
         self.__lineWidget2 = None
@@ -139,6 +140,12 @@ class UiForm(QWidget, SetupForm):
             self, fixed_height=21
         )
 
+        self.__pushButtonDetails = SPGraphics.QuickPushButton(
+            self, fixed_size=QSize(61, 21), value_changed=QApplication.backgroundColorAnimate,
+            start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
+        )
+        self.__pushButtonDetails.clicked.connect(self.details_clicked)
+
         self.__labelIcon = SPGraphics.QuickLabel(
             self, scaled=True, fixed_size=Size.s41, align=Qt.AlignCenter
         )
@@ -167,15 +174,16 @@ class UiForm(QWidget, SetupForm):
             light_color=styles.data.colors.white.name()
         )
 
-        self.layout().addWidget(self.__networkWidget, 0, 0, 1, 2)
-        self.layout().addWidget(self.__lineWidget, 1, 0, 1, 2)
-        self.layout().addWidget(self.__labelAddress, 2, 0, 1, 2, Qt.AlignHCenter)
+        self.layout().addWidget(self.__networkWidget, 0, 0, 1, 3)
+        self.layout().addWidget(self.__lineWidget, 1, 0, 1, 3)
+        self.layout().addWidget(self.__labelAddress, 2, 0, 1, 3, Qt.AlignHCenter)
         self.layout().addWidget(self.__labelFunctionName, 3, 0, 1, 2)
+        self.layout().addWidget(self.__pushButtonDetails, 3, 2, 1, 1)
         self.layout().addWidget(self.__labelIcon, 4, 0, 1, 1)
-        self.layout().addWidget(self.__labelAmount, 4, 1, 1, 1, Qt.AlignLeft)
-        self.layout().addWidget(self.__lineWidget2, 5, 0, 1, 2)
-        self.layout().addWidget(self.__gasWidget, 6, 0, 1, 2)
-        self.layout().addWidget(self.__pushButtonConfirm, 7, 0, 1, 2, Qt.AlignHCenter)
+        self.layout().addWidget(self.__labelAmount, 4, 1, 1, 2, Qt.AlignLeft)
+        self.layout().addWidget(self.__lineWidget2, 5, 0, 1, 3)
+        self.layout().addWidget(self.__gasWidget, 6, 0, 1, 3)
+        self.layout().addWidget(self.__pushButtonConfirm, 7, 0, 1, 3, Qt.AlignHCenter)
         self.__pushButtonConfirm.layout().addWidget(self.__loadingEffectConfirm, alignment=Qt.AlignCenter)
 
         super(UiForm, self).setup()
@@ -186,6 +194,7 @@ class UiForm(QWidget, SetupForm):
 
     def re_translate(self):
         self.__networkWidget.labelTitle.setText(translator("Current Network"))
+        self.__pushButtonDetails.setText(translator("Details"))
         self.__gasWidget.labelEstimatedFee.setText(translator("Estimated Gas Fee"))
         self.__gasWidget.labelMaxFee.setText(translator("Max Fee"))
         self.__gasWidget.labelTotal.setText(translator("Total"))
@@ -200,6 +209,9 @@ class UiForm(QWidget, SetupForm):
         self.__gasWidget.labelMaxFeeValue.setFont(font)
         self.__gasWidget.labelMaxAmount.setFont(font)
         self.__gasWidget.labelMaxAmountValue.setFont(font)
+
+        font.setPointSize(fonts.data.size.small)
+        self.__pushButtonDetails.setFont(font)
 
         font.setPointSize(fonts.data.size.title)
         font.setUnderline(True)
@@ -224,7 +236,7 @@ class UiForm(QWidget, SetupForm):
         pass
 
     @pyqtSlot()
-    def gas_edit_clicked(self):
+    def details_clicked(self):
         pass
 
     @pyqtSlot()
@@ -238,25 +250,22 @@ class UiForm(QWidget, SetupForm):
         self.__networkWidget.pushButton.setEnabled(True)
         QTimer().singleShot(1000, self.re_translate)
 
-    def set_data(
-            self, network: str, address: str, function: str, amount: str, symbol: str,
-            estimated_gas: str, max_fee: str, total: str, max_amount: str
-    ):
+    def set_data(self, network: str, address: str, function: str, amount: str, symbol: str):
         self.__networkWidget.pushButton.setText(network)
         self.__labelAddress.setText(address, False)
         self.__labelFunctionName.setText(function)
         self.__labelIcon.setPixmap(assetsicons.get_asset_icon(symbol))
         self.__labelAmount.setText("{} {}".format(amount, symbol))
-        self.__gasWidget.labelEstimatedFeeValue.setText(estimated_gas)
-        self.__gasWidget.labelMaxFeeValue.setText("{} {}".format(max_fee, symbol))
-        self.__gasWidget.labelTotalValue.setText(total)
-        self.__gasWidget.labelMaxAmountValue.setText("{} {}".format(max_amount, symbol))
 
-    def update_gas(self, estimated_gas: str, max_fee: str, total: str, max_amount: str, symbol: str):
+    def update_gas(
+            self, estimated_gas: str, max_fee: str, total: str, max_amount: str,
+            symbol: str, confirmable: bool = True
+    ):
         self.__gasWidget.labelEstimatedFeeValue.setText(estimated_gas)
         self.__gasWidget.labelMaxFeeValue.setText("{} {}".format(max_fee, symbol))
         self.__gasWidget.labelTotalValue.setText(total)
         self.__gasWidget.labelMaxAmountValue.setText("{} {}".format(max_amount, symbol))
+        self.__pushButtonConfirm.setProperty('confirmable', confirmable)
         self.__refresh_effect()
 
     def reset(self):
@@ -265,10 +274,10 @@ class UiForm(QWidget, SetupForm):
         self.__labelFunctionName.clear()
         self.__labelIcon.clear()
         self.__labelAmount.clear()
-        self.__gasWidget.labelEstimatedFeeValue.clear()
-        self.__gasWidget.labelMaxFeeValue.clear()
-        self.__gasWidget.labelTotalValue.clear()
-        self.__gasWidget.labelMaxAmountValue.clear()
+        self.__gasWidget.labelEstimatedFeeValue.setText('--')
+        self.__gasWidget.labelMaxFeeValue.setText('--')
+        self.__gasWidget.labelTotalValue.setText('--')
+        self.__gasWidget.labelMaxAmountValue.setText('--')
 
     def __refresh_effect(self):
         self.__pushButtonConfirm.setDisabled(True)
@@ -276,7 +285,11 @@ class UiForm(QWidget, SetupForm):
         self.__gasRefreshMotion.temp_hide(1000, finished=self.__refresh_effect_complete).start()
 
     def __refresh_effect_complete(self):
+        valid = False
+        if self.__pushButtonConfirm.property('confirmable'):
+            valid = True
+
         self.__gasRefreshMotion = SPGraphics.OpacityMotion(self.__gasWidget)
         self.__gasRefreshMotion.temp_show(
-            500, finished=lambda: self.__pushButtonConfirm.setEnabled(True)
+            500, finished=lambda: self.__pushButtonConfirm.setEnabled(valid)
         ).start()

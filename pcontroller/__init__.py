@@ -35,9 +35,9 @@ class ThreadingResult:
         if self.isValid:
             QApplication.quickNotification.successfully(self.message)
         elif self.isError:
-            QApplication.quickNotification.failed(self.errorMessage, timeout=2500)
+            QApplication.quickNotification.failed(self.errorMessage, timeout=4000)
         else:
-            QApplication.quickNotification.warning(self.message, timeout=2500)
+            QApplication.quickNotification.warning(self.message, timeout=4000)
 
 
 class SignalsThread(QObject):

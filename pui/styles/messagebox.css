@@ -11,6 +11,21 @@ QGroupBox
 }
 
 
+QScrollArea #detailsWidget
+{
+    background: transparent;
+}
+
+
+QTextEdit
+{
+    background-color: @background_second;
+    selection-background-color: gray;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
 #labelTitle
 {
     background-color: @background_second;
