@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, button_text_visible
 from pui import SetupForm, fonts, images, styles, Size
 
 
@@ -201,13 +201,13 @@ class UiForm(QWidget, SetupForm):
     def confirm_clicked(self):
         self.__all_inputs_disabled(True)
         self.__loadingEffectConfirm.start()
-        self.__pushButtonConfirm.setText("")
+        button_text_visible(self.__pushButtonConfirm, False)
 
     def confirm_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectConfirm.stop()
         self.__codeInputWidget.clear()
-        QTimer().singleShot(1000, self.re_translate)
+        button_text_visible(self.__pushButtonConfirm, True)
 
     def get_otp_code_text(self) -> str:
         return self.__codeInputWidget.text()

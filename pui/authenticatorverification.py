@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, button_text_visible
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress, validator
 
 
@@ -185,7 +185,7 @@ class UiForm(QWidget, SetupForm):
         self.__all_inputs_disabled(True)
         self.__loadingEffectVerify.start()
         self.__pushButtonBack.hide()
-        self.__pushButtonVerify.setText("")
+        button_text_visible(self.__pushButtonVerify, False)
 
     def verify_completed(self):
         self.__all_inputs_disabled(False)
@@ -193,7 +193,7 @@ class UiForm(QWidget, SetupForm):
         self.__pushButtonBack.show()
         self.__lineEditPassword.clear()
         self.__lineEditPINCode.clear()
-        QTimer().singleShot(1000, self.re_translate)
+        button_text_visible(self.__pushButtonVerify, True)
 
     def set_data(self, username: str, address: str):
         self.__labelUsername.setText(username)

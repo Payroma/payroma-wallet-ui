@@ -1,5 +1,5 @@
 from plibs import *
-from pcontroller import translator
+from pcontroller import translator, button_text_visible
 from pui import SetupForm, fonts, images, styles, Size, validator, assetsicons
 
 
@@ -127,6 +127,7 @@ class UiForm(QWidget, SetupForm):
     def token_changed(self, index: int, balance: str = '0'):
         self.__labelBalanceValue.setText("{} {}".format(balance, self.__comboBoxToken.currentText()))
         self.__lineEditAmount.clear()
+        self.__all_inputs_disabled(False)
 
     @pyqtSlot(str)
     def amount_changed(self, text: str, valid: bool = False):
@@ -138,12 +139,12 @@ class UiForm(QWidget, SetupForm):
     def continue_clicked(self):
         self.__all_inputs_disabled(True)
         self.__loadingEffectContinue.start()
-        self.__pushButtonContinue.setText("")
+        button_text_visible(self.__pushButtonContinue, False)
 
     def continue_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectContinue.stop()
-        QTimer().singleShot(1000, self.re_translate)
+        button_text_visible(self.__pushButtonContinue, True)
 
     def add_item(self, symbol: str):
         token_icon = assetsicons.get_asset_icon(symbol)
@@ -155,7 +156,7 @@ class UiForm(QWidget, SetupForm):
         return self.__lineEditAmount.text()
 
     def reset(self):
-        self.__all_inputs_disabled(False)
+        self.__all_inputs_disabled(True)
         self.__labelBalanceValue.setText(translator("Loading"))
         self.__comboBoxToken.clear()
         self.__lineEditAmount.clear()

@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, button_text_visible
 from pui import SetupForm, fonts, images, styles, Size, validator
 
 
@@ -265,12 +265,12 @@ class UiForm(QWidget, SetupForm):
     def add_clicked(self):
         self.__all_inputs_disabled(True)
         self.__loadingEffectAdd.start()
-        self.__pushButtonAdd.setText("")
+        button_text_visible(self.__pushButtonAdd, False)
 
     def add_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectAdd.stop()
-        QTimer().singleShot(1000, self.re_translate)
+        button_text_visible(self.__pushButtonAdd, True)
 
     def get_username_text(self) -> str:
         return self.__lineEditUsername.text()

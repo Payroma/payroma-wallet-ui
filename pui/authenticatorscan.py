@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, to_qr_code
+from pcontroller import translator, to_qr_code, button_text_visible
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress
 
 
@@ -229,14 +229,14 @@ class UiForm(QWidget, SetupForm):
         self.__all_inputs_disabled(True)
         self.__loadingEffectConfirm.start()
         self.__pushButtonBack.hide()
-        self.__pushButtonConfirm.setText("")
+        button_text_visible(self.__pushButtonConfirm, False)
 
     def confirm_completed(self):
         self.__all_inputs_disabled(False)
         self.__loadingEffectConfirm.stop()
         self.__pushButtonBack.show()
         self.__codeInputWidget.clear()
-        QTimer().singleShot(1000, self.re_translate)
+        button_text_visible(self.__pushButtonConfirm, True)
 
     def set_data(self, username: str, key: str):
         title = 'Payroma%20Wallet'

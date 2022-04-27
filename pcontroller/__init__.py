@@ -245,3 +245,11 @@ def to_qr_code(text: str, size: QSize) -> QPixmap:
     image = QImage.fromData(image_file.getvalue(), 'png').scaled(size, Qt.KeepAspectRatio)
 
     return QPixmap.fromImage(image)
+
+
+def button_text_visible(button: QPushButton, status: bool):
+    if status:
+        button.setText(button.property('textValue'))
+    else:
+        button.setProperty('textValue', button.text())
+        button.setText("")

@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, button_text_visible
 from pui import SetupForm, fonts, images, styles, Size, qnotice
 
 
@@ -151,20 +151,20 @@ class UiForm(QWidget, SetupForm):
     @pyqtSlot()
     def backup_clicked(self):
         self.__loadingEffectBackup.start()
-        self.__pushButtonBackup.setText("")
+        button_text_visible(self.__pushButtonBackup, False)
 
     @pyqtSlot()
     def import_clicked(self):
         self.__loadingEffectImport.start()
-        self.__pushButtonImport.setText("")
+        button_text_visible(self.__pushButtonImport, False)
 
     def backup_completed(self):
         self.__loadingEffectBackup.stop()
-        QTimer().singleShot(1000, self.re_translate)
+        button_text_visible(self.__pushButtonBackup, True)
 
     def import_completed(self):
         self.__loadingEffectImport.stop()
-        QTimer().singleShot(1000, self.re_translate)
+        button_text_visible(self.__pushButtonImport, True)
 
     def set_data(self, network_connected: bool, network_name: str):
         self.__networkWidget.qnotice.setEnabled(network_connected)

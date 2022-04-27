@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator
+from pcontroller import translator, button_text_visible
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress, assetsicons
 
 
@@ -243,12 +243,12 @@ class UiForm(QWidget, SetupForm):
     def confirm_clicked(self):
         self.__loadingEffectConfirm.start()
         self.__networkWidget.pushButton.setDisabled(True)
-        self.__pushButtonConfirm.setText("")
+        button_text_visible(self.__pushButtonConfirm, False)
 
     def confirm_completed(self):
         self.__loadingEffectConfirm.stop()
         self.__networkWidget.pushButton.setEnabled(True)
-        QTimer().singleShot(1000, self.re_translate)
+        button_text_visible(self.__pushButtonConfirm, True)
 
     def set_data(self, network: str, address: str, function: str, amount: str, symbol: str):
         self.__networkWidget.pushButton.setText(network)
@@ -278,6 +278,7 @@ class UiForm(QWidget, SetupForm):
         self.__gasWidget.labelMaxFeeValue.setText('--')
         self.__gasWidget.labelTotalValue.setText('--')
         self.__gasWidget.labelMaxAmountValue.setText('--')
+        self.__pushButtonConfirm.setDisabled(True)
 
     def __refresh_effect(self):
         self.__pushButtonConfirm.setDisabled(True)

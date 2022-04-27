@@ -1,15 +1,23 @@
-from plibs import *
-from pheader import *
 from pcontroller import event
 from pui import historylist
 from pmodel import historyitem
 
 
-class HistoryListModel(historylist.UiForm):
+class HistoryListModel(historylist.UiForm, event.EventForm):
     def __init__(self, parent):
         super(HistoryListModel, self).__init__(parent)
 
         self.setup()
+        self.events_listening()
+
+    def wallet_changed_event(self, username: str, address: str):
+        self.refresh()
+
+    def transaction_history_edited_event(self):
+        self.refresh()
+
+    def refresh(self):
+        self.reset()
 
         # Test
         transactions = [

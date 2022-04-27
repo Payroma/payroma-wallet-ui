@@ -20,14 +20,13 @@ authenticatorSetupTabChanged = eventcaller.EventCaller()
 authenticatorSetupVerified = eventcaller.EventCaller()
 
 walletTabChanged = eventcaller.EventCaller()
-
 tokenEdited = eventcaller.EventCaller()
 
 stakePairChanged = eventcaller.EventCaller()
 stakePairApproved = eventcaller.EventCaller()
 
 withdrawAddressChanged = eventcaller.EventCaller()
-
 addressBookEdited = eventcaller.EventCaller()
 
 transactionSenderChanged = eventcaller.EventCaller()
+transactionHistoryEdited = eventcaller.EventCaller()

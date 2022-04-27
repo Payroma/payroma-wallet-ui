@@ -1,5 +1,5 @@
 from plibs import *
-from pcontroller import translator
+from pcontroller import translator, button_text_visible
 from pui import SetupForm, fonts, styles, Size
 
 
@@ -8,6 +8,7 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).__init__(parent, flags=Qt.SubWindow)
 
         self.__labelTitle = None
+        self.__loadingEffectApproval = None
         self.__pushButtonApproval = None
 
     def setup(self):
@@ -21,14 +22,21 @@ class UiForm(QWidget, SetupForm):
             self, fixed_height=61, align=Qt.AlignCenter
         )
 
+        self.__loadingEffectApproval = SPGraphics.QLoadingEffect(
+            self, color=styles.data.colors.highlight_third.name(),
+            light_color=styles.data.colors.white.name()
+        )
+
         self.__pushButtonApproval = SPGraphics.QuickPushButton(
             self, fixed_size=Size.default, value_changed=QApplication.backgroundColorAnimate,
             start_value=styles.data.colors.highlight, end_value=styles.data.colors.highlight_hover
         )
+        self.__pushButtonApproval.setLayout(QVBoxLayout())
         self.__pushButtonApproval.clicked.connect(self.approval_clicked)
 
         self.layout().addWidget(self.__labelTitle, alignment=Qt.AlignHCenter)
         self.layout().addWidget(self.__pushButtonApproval, alignment=Qt.AlignHCenter)
+        self.__pushButtonApproval.layout().addWidget(self.__loadingEffectApproval, alignment=Qt.AlignCenter)
 
         super(UiForm, self).setup()
 
@@ -48,4 +56,9 @@ class UiForm(QWidget, SetupForm):
 
     @pyqtSlot()
     def approval_clicked(self):
-        pass
+        self.__loadingEffectApproval.start()
+        button_text_visible(self.__pushButtonApproval, False)
+
+    def approval_completed(self):
+        self.__loadingEffectApproval.stop()
+        button_text_visible(self.__pushButtonApproval, True)
