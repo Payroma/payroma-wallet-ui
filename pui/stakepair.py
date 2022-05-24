@@ -224,15 +224,13 @@ class UiForm(QWidget, SetupForm):
         self.__tabWidget.addTab(model, name)
 
     def set_data(
-            self, block_title: str, blocks: int, total_staked: str, stake_symbol: str, earn_symbol: str
+            self, block_title: str, stake_symbol: str, earn_symbol: str
     ):
         self.__stakeSymbol = stake_symbol
         self.__earnSymbol = earn_symbol
         self.__headerWidget.labelBlock.setText(translator(block_title))
         self.__parisWidget.labelStakeWidget.labelIcon.setPixmap(assetsicons.get_asset_icon(stake_symbol))
         self.__parisWidget.labelEarnWidget.labelIcon.setPixmap(assetsicons.get_asset_icon(earn_symbol))
-        self.update_blocks(blocks)
-        self.update_total_staked(total_staked, stake_symbol)
         self.re_translate()
 
     def update_blocks(self, blocks: int):

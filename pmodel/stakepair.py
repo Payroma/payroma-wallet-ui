@@ -24,11 +24,11 @@ class StakePairModel(stakepair.UiForm, event.EventForm):
         self.reset()
         self.set_data(
             block_title=block_title,
-            blocks=blocks,
-            total_staked=total_staked,
             stake_symbol=stake_symbol,
             earn_symbol=earn_symbol
         )
+        self.update_blocks(blocks)
+        self.update_total_staked(total_staked, stake_symbol)
 
     def stake_pair_approved_event(self):
         self.set_approved()
