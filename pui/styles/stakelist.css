@@ -28,7 +28,7 @@ QPushButton:checked
 }
 
 
-#labelAPYValue
+#labelAPRValue
 {
 	color: @positive;
 }

@@ -132,7 +132,7 @@ class UiForm(QWidget, SetupForm):
 
     def re_translate(self):
         self.__headerWidget.labelTitle.setText(
-            translator("Just stake some tokens to earn.\nHigh APY, Low risk.")
+            translator("Just stake some tokens to earn.\nHigh APR, Low risk.")
         )
         self.__tabsWidget.pushButtonUpcoming.setText(translator("Upcoming"))
         self.__tabsWidget.pushButtonLive.setText(translator("Live"))
@@ -160,15 +160,15 @@ class UiForm(QWidget, SetupForm):
 
     @pyqtSlot()
     def upcoming_clicked(self):
-        pass
+        self.__tabsWidget.pushButtonUpcoming.setChecked(True)
 
     @pyqtSlot()
     def live_clicked(self):
-        pass
+        self.__tabsWidget.pushButtonLive.setChecked(True)
 
     @pyqtSlot()
     def ended_clicked(self):
-        pass
+        self.__tabsWidget.pushButtonEnded.setChecked(True)
 
     @pyqtSlot(QListWidgetItem)
     def item_clicked(self, item: QListWidgetItem) -> QWidget:
@@ -184,6 +184,4 @@ class UiForm(QWidget, SetupForm):
         self.__headerWidget.labelTVL.setText("TVL: {} {}".format(tvl, symbol))
 
     def reset(self):
-        self.__headerWidget.labelTVL.clear()
         self.__listWidget.clear()
-        self.__tabsWidget.pushButtonLive.click()
