@@ -1,5 +1,5 @@
 from plibs import *
-from pcontroller import translator
+from pcontroller import translator, button_text_visible
 from pui import SetupForm, fonts, styles, Size, validator, assetsicons
 
 
@@ -96,6 +96,7 @@ class UiForm(QWidget, SetupForm):
         self.__lineEditClaim.setProperty('iconable', True)
         self.__lineEditClaim.setObjectName('lineEditClaim')
         self.__lineEditClaim.textChanged.connect(self.claim_changed)
+        self.__lineEditClaim.selectionChanged.connect(lambda: self.__lineEditClaim.setSelection(0, 0))
 
         self.__labelClaimIcon = SPGraphics.QuickLabel(
             self, scaled=True, fixed_size=Size.s21
@@ -155,38 +156,59 @@ class UiForm(QWidget, SetupForm):
 
     @pyqtSlot()
     def deposit_clicked(self):
-        pass
+        self.__all_inputs_disabled(True)
+        button_text_visible(self.__pushButtonDeposit, False)
+        self.__pushButtonDeposit.setText(translator("In Process"))
+
+    def deposit_completed(self):
+        self.__all_inputs_disabled(False)
+        button_text_visible(self.__pushButtonDeposit, True)
+        self.__lineEditDeposit.clear()
 
     @pyqtSlot()
     def withdraw_clicked(self):
-        pass
+        self.__all_inputs_disabled(True)
+        button_text_visible(self.__pushButtonWithdraw, False)
+        self.__pushButtonWithdraw.setText(translator("In Process"))
+
+    def withdraw_completed(self):
+        self.__all_inputs_disabled(False)
+        button_text_visible(self.__pushButtonWithdraw, True)
+        self.__lineEditWithdraw.clear()
 
     @pyqtSlot()
     def claim_clicked(self):
-        pass
+        self.__all_inputs_disabled(True)
+        button_text_visible(self.__pushButtonClaim, False)
+        self.__pushButtonClaim.setText(translator("In Process"))
+
+    def claim_completed(self):
+        self.__all_inputs_disabled(False)
+        button_text_visible(self.__pushButtonClaim, True)
+        self.__lineEditClaim.clear()
 
     @pyqtSlot(str)
     def deposit_changed(self, text: str, valid: bool = False):
-        self.__pushButtonDeposit.setEnabled(valid)
+        self.__lineEditDeposit.setProperty('isValid', valid)
+        self.__inputs_validation()
 
     @pyqtSlot(str)
     def withdraw_changed(self, text: str, valid: bool = False):
-        self.__pushButtonWithdraw.setEnabled(valid)
+        self.__lineEditWithdraw.setProperty('isValid', valid)
+        self.__inputs_validation()
 
     @pyqtSlot(str)
     def claim_changed(self, text: str, valid: bool = False):
-        self.__pushButtonClaim.setEnabled(valid)
+        self.__lineEditClaim.setProperty('isValid', valid)
+        self.__inputs_validation()
 
     def set_data(self, balance: str, staked: str, claim: str, stake_symbol: str, earn_symbol: str):
         self.__labelBalanceValue.setText("{} {}".format(balance, stake_symbol))
         self.__labelStakedBalanceValue.setText("{} {}".format(staked, stake_symbol))
         self.__labelDepositIcon.setPixmap(assetsicons.get_asset_icon(stake_symbol))
         self.__labelWithdrawIcon.setPixmap(assetsicons.get_asset_icon(stake_symbol))
-        self.update_claim(claim, earn_symbol)
-
-    def update_claim(self, text: str, symbol: str):
-        self.__labelClaimIcon.setPixmap(assetsicons.get_asset_icon(symbol))
-        self.__lineEditClaim.setText(text)
+        self.__labelClaimIcon.setPixmap(assetsicons.get_asset_icon(earn_symbol))
+        self.__lineEditClaim.setText(claim)
 
     def get_deposit_text(self) -> str:
         return self.__lineEditDeposit.text()
@@ -195,8 +217,27 @@ class UiForm(QWidget, SetupForm):
         return self.__lineEditWithdraw.text()
 
     def reset(self):
+        self.__all_inputs_disabled(False)
         self.__labelBalanceValue.setText(translator("Loading"))
         self.__labelStakedBalanceValue.setText(translator("Loading"))
         self.__lineEditDeposit.clear()
         self.__lineEditWithdraw.clear()
         self.__lineEditClaim.setText(translator("Loading"))
+
+    def __inputs_validation(self):
+        valid = self.__lineEditDeposit.property('isValid')
+        if valid is not None:
+            self.__pushButtonDeposit.setEnabled(valid)
+
+        valid = self.__lineEditWithdraw.property('isValid')
+        if valid is not None:
+            self.__pushButtonWithdraw.setEnabled(valid)
+
+        valid = self.__lineEditClaim.property('isValid')
+        if valid is not None:
+            self.__pushButtonClaim.setEnabled(valid)
+
+    def __all_inputs_disabled(self, status: bool):
+        self.__lineEditDeposit.setDisabled(status)
+        self.__lineEditWithdraw.setDisabled(status)
+        self.__lineEditClaim.setDisabled(status)

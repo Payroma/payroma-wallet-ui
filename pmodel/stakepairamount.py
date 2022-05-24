@@ -38,3 +38,18 @@ class StakePairAmountModel(stakepairamount.UiForm, event.EventForm):
     def claim_changed(self, text: str):
         valid = True if text else False
         super(StakePairAmountModel, self).claim_changed(text, valid)
+
+    @pyqtSlot()
+    def deposit_clicked(self):
+        super(StakePairAmountModel, self).deposit_clicked()
+        QTimer().singleShot(5000, self.deposit_completed)
+
+    @pyqtSlot()
+    def withdraw_clicked(self):
+        super(StakePairAmountModel, self).withdraw_clicked()
+        QTimer().singleShot(5000, self.withdraw_completed)
+
+    @pyqtSlot()
+    def claim_clicked(self):
+        super(StakePairAmountModel, self).claim_clicked()
+        QTimer().singleShot(5000, self.claim_completed)
