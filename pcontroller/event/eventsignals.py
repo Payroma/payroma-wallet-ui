@@ -7,6 +7,7 @@ mainTabChanged = eventcaller.EventCaller()
 themeChanged = eventcaller.EventCaller()
 
 networkChanged = eventcaller.EventCaller()
+networkBlockChanged = eventcaller.EventCaller()
 networkEdited = eventcaller.EventCaller()
 
 walletChanged = eventcaller.EventCaller()

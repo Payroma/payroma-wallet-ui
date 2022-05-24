@@ -17,6 +17,7 @@ class NetworkWidget(QWidget):
             self, fixed_size=Size.s21, tooltip=QApplication.toolTip.networkStatusR
         )
         self.qnotice.setCursor(Qt.PointingHandCursor)
+        self.qnotice.setDisabled(True)
 
         self.labelTitle = SPGraphics.QuickLabel(
             self, fixed_height=21

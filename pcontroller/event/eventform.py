@@ -10,6 +10,7 @@ class EventForm:
         mainTabChanged.listen(self.main_tab_changed_event)
         themeChanged.listen(self.theme_changed_event)
         networkChanged.listen(self.network_changed_event)
+        networkBlockChanged.listen(self.network_block_changed_event)
         networkEdited.listen(self.network_edited_event)
         walletChanged.listen(self.wallet_changed_event)
         walletEdited.listen(self.wallet_edited_event)
@@ -36,6 +37,9 @@ class EventForm:
         pass
 
     def network_changed_event(self, name: str, status: bool):
+        pass
+
+    def network_block_changed_event(self, block_number: int):
         pass
 
     def network_edited_event(self):
