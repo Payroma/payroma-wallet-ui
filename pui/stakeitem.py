@@ -11,8 +11,8 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelStakeTokenIcon = None
         self.__labelStakeSymbol = None
         self.__labelEarnSymbol = None
-        self.__labelAPY = None
-        self.__labelAPYValue = None
+        self.__labelAPR = None
+        self.__labelAPRValue = None
         self.__labelDuration = None
         self.__labelDurationValue = None
 
@@ -49,15 +49,15 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         )
         self.__labelEarnSymbol.setWordWrap(False)
 
-        self.__labelAPY = SPGraphics.QuickLabel(
+        self.__labelAPR = SPGraphics.QuickLabel(
             self, fixed_height=21
         )
-        self.__labelAPY.setObjectName('labelDescription')
+        self.__labelAPR.setObjectName('labelDescription')
 
-        self.__labelAPYValue = SPGraphics.QuickLabel(
+        self.__labelAPRValue = SPGraphics.QuickLabel(
             self, translator("Loading"), fixed_height=21
         )
-        self.__labelAPYValue.setObjectName('labelAPYValue')
+        self.__labelAPRValue.setObjectName('labelAPRValue')
 
         self.__labelDuration = SPGraphics.QuickLabel(
             self, fixed_height=21
@@ -72,8 +72,8 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.layout().addWidget(self.__labelStakeTokenIcon, 0, 0, 2, 1, Qt.AlignRight | Qt.AlignBottom)
         self.layout().addWidget(self.__labelStakeSymbol, 0, 1, 1, 1)
         self.layout().addWidget(self.__labelEarnSymbol, 1, 1, 1, 1)
-        self.layout().addWidget(self.__labelAPY, 0, 2, 1, 1)
-        self.layout().addWidget(self.__labelAPYValue, 1, 2, 1, 1)
+        self.layout().addWidget(self.__labelAPR, 0, 2, 1, 1)
+        self.layout().addWidget(self.__labelAPRValue, 1, 2, 1, 1)
         self.layout().addWidget(self.__labelDuration, 0, 3, 1, 1)
         self.layout().addWidget(self.__labelDurationValue, 1, 3, 1, 1)
 
@@ -81,18 +81,18 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         super(UiForm, self).setup()
 
     def re_translate(self):
-        self.__labelAPY.setText(translator("APY"))
+        self.__labelAPR.setText(translator("APR"))
         self.__labelDuration.setText(translator("Duration"))
 
     def re_font(self):
         font = QFont()
 
         self.__labelStakeSymbol.setFont(font)
-        self.__labelAPY.setFont(font)
+        self.__labelAPR.setFont(font)
         self.__labelDuration.setFont(font)
 
         font.setPointSize(fonts.data.size.title)
-        self.__labelAPYValue.setFont(font)
+        self.__labelAPRValue.setFont(font)
         self.__labelDurationValue.setFont(font)
 
         font.setBold(True)
@@ -104,8 +104,13 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelStakeSymbol.setText("{} {}".format(translator("Stake"), stake))
         self.__labelEarnSymbol.setText("{} {}".format(translator("Earn"), earn))
 
-    def set_apy(self, value: int):
-        self.__labelAPYValue.setText("{:,}%".format(value))
+    def set_apr(self, text: str):
+        self.__labelAPRValue.setText(text)
 
-    def set_duration_type(self, locked: bool):
-        self.__labelDurationValue.setText(translator("Locked" if locked else "Flexible Lock"))
+    def set_duration(self, locked: bool, start_time: int = None, end_time: int = None):
+        if locked:
+            text = '%d %s' % (int((end_time - start_time) / 86400), translator("Days"))
+        else:
+            text = translator("Flexible")
+
+        self.__labelDurationValue.setText(text)
