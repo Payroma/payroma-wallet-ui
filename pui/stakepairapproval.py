@@ -62,3 +62,9 @@ class UiForm(QWidget, SetupForm):
     def approval_completed(self):
         self.__loadingEffectApproval.stop()
         button_text_visible(self.__pushButtonApproval, True)
+
+    def unlock(self):
+        self.__pushButtonApproval.setEnabled(True)
+
+    def reset(self):
+        self.__pushButtonApproval.setDisabled(True)
