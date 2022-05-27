@@ -40,6 +40,7 @@ DEFAULT = {
         },
 
         'info41': QPixmap(':/images/icons/info-41.png'),
+        'checked41': QPixmap(':/images/icons/checked-41.png'),
         'ok41': QPixmap(':/images/icons/ok-41.png'),
         'warning41': QPixmap(':/images/icons/warning-41.png'),
         'failed41': QPixmap(':/images/icons/failed-41.png'),

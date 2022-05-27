@@ -1,5 +1,5 @@
 from plibs import *
-from pui import SetupForm, fonts, styles, images, Size, qnotice, assetsicons
+from pui import SetupForm, fonts, styles, images, Size, assetsicons
 
 
 class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
@@ -10,7 +10,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelSymbol = None
         self.__labelName = None
         self.__pushButtonRemove = None
-        self.__qnoticeStatus = None
+        self.__labelChecked = None
 
     def setup(self):
         self.setAttribute(Qt.WA_StyledBackground, True)
@@ -44,16 +44,17 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         )
         self.__pushButtonRemove.clicked.connect(self.remove_clicked)
 
-        self.__qnoticeStatus = qnotice.QNotice(
-            self, fixed_size=Size.s21, tooltip=QApplication.toolTip.networkStatusR
+        self.__labelChecked = SPGraphics.QuickLabel(
+            self, scaled=True, fixed_size=Size.s21, pixmap=images.data.icons.checked41
         )
-        self.__qnoticeStatus.setDisabled(True)
+        self.__labelChecked.setProperty('isChecked', False)
+        self.__labelChecked.hide()
 
         self.layout().addWidget(self.__labelIcon, 0, 0, 2, 1)
         self.layout().addWidget(self.__labelSymbol, 0, 1, 1, 1)
         self.layout().addWidget(self.__pushButtonRemove, 0, 2, 1, 1, Qt.AlignTop | Qt.AlignRight)
         self.layout().addWidget(self.__labelName, 1, 1, 1, 1)
-        self.layout().addWidget(self.__qnoticeStatus, 1, 2, 1, 1, Qt.AlignRight)
+        self.layout().addWidget(self.__labelChecked, 1, 2, 1, 1, Qt.AlignRight)
 
         self.item.setSizeHint(self.size())
         super(UiForm, self).setup()
@@ -81,6 +82,9 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
     def get_name(self) -> str:
         return self.__labelName.text()
 
+    def is_checked(self) -> bool:
+        return self.__labelChecked.property('isChecked')
+
     def set_symbol(self, text: str):
         icon = assetsicons.get_asset_icon(text)
         self.__labelIcon.setPixmap(icon)
@@ -89,8 +93,9 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
     def set_name(self, text: str):
         self.__labelName.setText(text)
 
-    def set_status(self, enabled: bool):
-        self.__qnoticeStatus.setEnabled(enabled)
+    def set_checked(self, status: bool):
+        self.__labelChecked.setVisible(status)
+        self.__labelChecked.setProperty('isChecked', status)
 
     def set_master(self):
         self.__pushButtonRemove.hide()

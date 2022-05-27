@@ -58,7 +58,7 @@ class NetworksListModel(networkslist.UiForm, event.EventForm):
 
     def set_current_network(self, name: str):
         for item in self.__networkItems:
-            item.set_status(item.get_name() == name)
+            item.set_checked(item.get_name() == name)
 
         event.networkChanged.notify(
             name=name,
