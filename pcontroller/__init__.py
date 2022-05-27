@@ -83,6 +83,20 @@ class ThreadingArea(QThread):
             (_type, _value, _traceback) = sys.exc_info()
             sys.excepthook(_type, _value, _traceback)
 
+    def start(self, priority=None):
+        if self.isRunning():
+            self.terminate()
+            self.wait()
+
+        if priority:
+            super(ThreadingArea, self).start(priority=priority)
+        else:
+            super(ThreadingArea, self).start()
+
+    def stop(self):
+        self.terminate()
+        self.wait()
+
 
 class Struct:
     def __init__(self, data, parent=None):
