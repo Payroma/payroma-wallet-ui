@@ -23,8 +23,11 @@ class HeaderWidget(QWidget):
             self, icon_size=Size.s21, fixed_size=Size.s41, tooltip=QApplication.toolTip.addNewR
         )
 
+        self.switchVisible = SPGraphics.QSwitch(self, 10, 13)
+
         self.layout().addWidget(self.labelTitle, 0, 0, 1, 2)
         self.layout().addWidget(self.pushButtonAddNew, 0, 1, 1, 1, Qt.AlignRight)
+        self.layout().addWidget(self.switchVisible, 1, 1, 1, 1, Qt.AlignRight)
 
 
 class ListWidget(SPGraphics.QuickListWidget):
@@ -56,6 +59,7 @@ class UiForm(QWidget, SetupForm):
         self.setObjectName(Tab.NETWORKS_LIST)
 
         self.__headerWidget = HeaderWidget(self)
+        self.__headerWidget.switchVisible.clicked.connect(self.switch_clicked)
         self.__headerWidget.pushButtonAddNew.clicked.connect(self.add_new_clicked)
 
         self.__listWidget = ListWidget(self)
@@ -89,6 +93,10 @@ class UiForm(QWidget, SetupForm):
         font.setFamily(fonts.data.family.black)
         font.setBold(False)
         self.__listWidget.labelTitle.setFont(font)
+
+    @pyqtSlot(bool)
+    def switch_clicked(self, state: bool):
+        self.__headerWidget.switchVisible.setChecked(state)
 
     @pyqtSlot()
     def add_new_clicked(self):
