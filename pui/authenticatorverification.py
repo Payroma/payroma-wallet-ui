@@ -145,7 +145,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelTitle.setText(translator("Wallet Verification"))
         self.__labelDescription.setText(translator("Confirm your wallet to generate your key."))
         self.__lineEditPassword.setPlaceholderText(translator("Password"))
-        self.__lineEditPINCode.setPlaceholderText(translator("PIN Code 6 numbers"))
+        self.__lineEditPINCode.setPlaceholderText(translator("PIN Code 6 Numbers"))
         self.__pushButtonVerify.setText(translator("Verify"))
 
     def re_font(self):

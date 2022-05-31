@@ -19,7 +19,7 @@ class UiForm(SetupForm):
         self.passwordConfirmAlert = None
         self.pinCodeAlert = None
         self.addressAlert = None
-        self.showBlockTime = None
+        self.blockTimer = None
         self.addNewAddressBook = None
         self.transactionSendTo = None
         self.pending = None
@@ -40,7 +40,6 @@ class UiForm(SetupForm):
         self.walletStatusR = None
         self.networkStatusR = None
         self.menuR = None
-        self.viewTransactionR = None
 
         self.depositB = None
         self.withdrawB = None
@@ -64,7 +63,7 @@ class UiForm(SetupForm):
         self.passwordConfirmAlert = self.__align_top()
         self.pinCodeAlert = self.__align_top()
         self.addressAlert = self.__align_top()
-        self.showBlockTime = self.__align_top()
+        self.blockTimer = self.__align_top()
         self.addNewAddressBook = self.__align_top()
         self.transactionSendTo = self.__align_top()
         self.pending = self.__align_top()
@@ -85,7 +84,6 @@ class UiForm(SetupForm):
         self.walletStatusR = self.__align_right()
         self.networkStatusR = self.__align_right()
         self.menuR = self.__align_right()
-        self.viewTransactionR = self.__align_right()
 
         self.depositB = self.__align_bottom()
         self.withdrawB = self.__align_bottom()
@@ -106,52 +104,50 @@ class UiForm(SetupForm):
         self.copy.labelText.setText(translator("Copy"))
         self.back.labelText.setText(translator("Back"))
         self.remove.labelText.setText(translator("Remove"))
-        self.usernameAlert.labelText.setText(translator(
-            "The username/email/phone is already taken, try another username"
-        ))
+        self.usernameAlert.labelText.setText(translator("The username/email/phone is already taken!"))
         self.passwordAlert.labelText.setText(translator(
-            "Password must be good at least and including UPPER/lowercase, symbols and numbers"
+            "Password must be good at least and including UPPER/lowercase, symbols and numbers."
         ))
-        self.passwordConfirmAlert.labelText.setText(translator("Password doesn't match"))
-        self.pinCodeAlert.labelText.setText(translator("PIN Code must be 6 numbers"))
-        self.addressAlert.labelText.setText(translator("This address invalid"))
-        self.showBlockTime.labelText.setText(translator("Show block time"))
+        self.passwordConfirmAlert.labelText.setText(translator("Password doesn't match!"))
+        self.pinCodeAlert.labelText.setText(translator("The PIN code must be 6 digits!"))
+        self.addressAlert.labelText.setText(translator("This address invalid!"))
+        self.blockTimer.labelText.setText(translator("Block Timer"))
         self.addNewAddressBook.labelText.setText(translator(
             "New address detected! Click here to add to your address book."
         ))
-        self.transactionSendTo.labelText.setText(translator("The transaction goes to this address"))
+        self.transactionSendTo.labelText.setText(translator("The transaction goes to this address."))
         self.pending.labelText.setText(translator("Pending"))
         self.success.labelText.setText(translator("Success"))
         self.failed.labelText.setText(translator("Failed"))
-        self.viewExplorer.labelText.setText(translator("View at explorer"))
+        self.viewExplorer.labelText.setText(translator("View at Explorer"))
 
         self.showR.labelText.setText(translator("Show"))
         self.usernameInfoR.labelText.setText(translator(
-            "Username/email is sensitive to characters"
+            "Username/email is sensitive to characters."
         ))
         self.pinCodeInfoR.labelText.setText(translator(
-            "PIN code is important to add your wallet to our app later, It acts as a second layer of protection"
+            "PIN code is important to add your wallet to the app later, "
+            "It acts as a second layer of protection and don't share it with anyone."
         ))
-        self.addNewR.labelText.setText(translator("Add new"))
-        self.networkNameAlertR.labelText.setText(translator("Network name already exists before"))
-        self.networkRPCAlertR.labelText.setText(translator("This RPC is unable to connect"))
-        self.networkChainIdAlertR.labelText.setText(translator("Chain id is wrong"))
-        self.networkExplorerAlertR.labelText.setText(translator("Explorer URL is wrong"))
+        self.addNewR.labelText.setText(translator("Add New"))
+        self.networkNameAlertR.labelText.setText(translator("Network name already exists before!"))
+        self.networkRPCAlertR.labelText.setText(translator("This RPC is unable to connect!"))
+        self.networkChainIdAlertR.labelText.setText(translator("Chain id is wrong!"))
+        self.networkExplorerAlertR.labelText.setText(translator("Explorer URL is wrong!"))
         self.copyR.labelText.setText(translator("Copy"))
-        self.favoriteR.labelText.setText(translator("Check to favorite"))
-        self.walletStatusR.labelText.setText(translator("Login status"))
-        self.networkStatusR.labelText.setText(translator("Network connection status"))
+        self.favoriteR.labelText.setText(translator("Check to Favorite"))
+        self.walletStatusR.labelText.setText(translator("Login Status"))
+        self.networkStatusR.labelText.setText(translator("Network Connection Status"))
         self.menuR.labelText.setText(translator("Menu"))
-        self.viewTransactionR.labelText.setText(translator("View transaction at explorer"))
 
         self.depositB.labelText.setText(translator("Deposit"))
         self.withdrawB.labelText.setText(translator("Withdraw"))
         self.stakeB.labelText.setText(translator("Staking"))
         self.swapB.labelText.setText(translator("Swap"))
-        self.historyB.labelText.setText(translator("Transactions history"))
-        self.addressValidB.labelText.setText(translator("Address valid"))
-        self.projectWebsiteB.labelText.setText(translator("Project website"))
-        self.viewProjectExplorerB.labelText.setText(translator("View project contract at explorer"))
+        self.historyB.labelText.setText(translator("Transactions History"))
+        self.addressValidB.labelText.setText(translator("Address Valid"))
+        self.projectWebsiteB.labelText.setText(translator("Project Website"))
+        self.viewProjectExplorerB.labelText.setText(translator("View the project contract at explorer."))
 
     def re_font(self):
         font = QFont()
@@ -168,7 +164,7 @@ class UiForm(SetupForm):
         self.passwordConfirmAlert.labelText.setFont(font)
         self.pinCodeAlert.labelText.setFont(font)
         self.addressAlert.labelText.setFont(font)
-        self.showBlockTime.labelText.setFont(font)
+        self.blockTimer.labelText.setFont(font)
         self.addNewAddressBook.labelText.setFont(font)
         self.transactionSendTo.labelText.setFont(font)
         self.pending.labelText.setFont(font)
@@ -189,7 +185,6 @@ class UiForm(SetupForm):
         self.walletStatusR.labelText.setFont(font)
         self.networkStatusR.labelText.setFont(font)
         self.menuR.labelText.setFont(font)
-        self.viewTransactionR.labelText.setFont(font)
 
         self.depositB.labelText.setFont(font)
         self.withdrawB.labelText.setFont(font)

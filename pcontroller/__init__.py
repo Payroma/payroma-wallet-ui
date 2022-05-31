@@ -267,3 +267,14 @@ def button_text_visible(button: QPushButton, status: bool):
     else:
         button.setProperty('textValue', button.text())
         button.setText("")
+
+
+def re_amount(text: str) -> str:
+    maximum = 115792089237316203707617735395386539918674240093853421928448
+    try:
+        if float(text.replace(',', '')) >= maximum:
+            text = translator("Unlimited")
+    except ValueError:
+        pass
+
+    return text

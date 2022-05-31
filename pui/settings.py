@@ -117,7 +117,7 @@ class UiForm(QWidget, SetupForm):
 
     def re_translate(self):
         self.__labelDarkMode.setText(translator("Switch to dark mode theme."))
-        self.__networkWidget.labelTitle.setText(translator("Current Blockchain Network"))
+        self.__networkWidget.labelTitle.setText(translator("Current blockchain network."))
         self.__labelBackupTitle.setText(translator(
             "Backup all your wallets to a specific location on your system."
         ))

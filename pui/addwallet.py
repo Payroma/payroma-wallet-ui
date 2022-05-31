@@ -211,12 +211,12 @@ class UiForm(QWidget, SetupForm):
     def re_translate(self):
         self.__labelTitle.setText(translator(
             "Create a new or add an existing wallet, "
-            "whatever, your private key and password are not stored anywhere."
+            "whatever, your private keys and passwords are not stored anywhere."
         ))
-        self.__lineEditUsername.setPlaceholderText(translator("Username/Email/Phone"))
+        self.__lineEditUsername.setPlaceholderText(translator("Username / Email / Phone"))
         self.__lineEditPassword.setPlaceholderText(translator("Password"))
-        self.__lineEditConfirmPassword.setPlaceholderText(translator("Confirm password"))
-        self.__lineEditPINCode.setPlaceholderText(translator("PIN Code 6 numbers"))
+        self.__lineEditConfirmPassword.setPlaceholderText(translator("Confirm Password"))
+        self.__lineEditPINCode.setPlaceholderText(translator("PIN Code 6 Numbers"))
         self.__pushButtonAdd.setText(translator("Add Wallet"))
 
     def re_font(self):

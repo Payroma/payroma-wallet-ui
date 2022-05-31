@@ -1,4 +1,5 @@
 from plibs import *
+from pcontroller import re_amount
 from pui import SetupForm, fonts, styles, images, Size, qlabeladdress, assetsicons
 
 
@@ -72,7 +73,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
         self.__labelAddress.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
 
         self.__pushButtonExplorer = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.viewTransactionR
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.viewExplorer
         )
         self.__pushButtonExplorer.clicked.connect(self.explorer_clicked)
 
@@ -125,7 +126,7 @@ class UiForm(SPGraphics.QuickListWidgetItem, SetupForm):
             item.setVisible(item.property(text) or False)
 
     def set_balance(self, text: str, symbol: str):
-        self.__labelAmount.setText("{} {}".format(text, symbol))
+        self.__labelAmount.setText("{} {}".format(re_amount(text), symbol))
 
     def set_address(self, text: str):
         self.__labelAddress.setText(text)

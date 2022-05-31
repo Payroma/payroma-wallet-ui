@@ -1,6 +1,6 @@
 from plibs import *
 from pheader import *
-from pcontroller import translator, button_text_visible
+from pcontroller import translator, button_text_visible, re_amount
 from pui import SetupForm, fonts, images, styles, Size, qlabeladdress, assetsicons
 
 
@@ -15,11 +15,11 @@ class NetworkWidget(QWidget):
         self.layout().setVerticalSpacing(0)
 
         self.labelIcon = SPGraphics.QuickLabel(
-            self, fixed_size=Size.s41, pixmap=images.data.icons.info41, align=Qt.AlignCenter
+            self, fixed_size=Size.s41, pixmap=images.data.icons.warning41, align=Qt.AlignCenter
         )
 
         self.labelTitle = SPGraphics.QuickLabel(
-            self, fixed_height=21
+            self, fixed_height=41
         )
         self.labelTitle.setWordWrap(False)
 
@@ -193,7 +193,9 @@ class UiForm(QWidget, SetupForm):
         self.__labelAddress.setIcon(QIcon(images.data.icons.changeable.copy21))
 
     def re_translate(self):
-        self.__networkWidget.labelTitle.setText(translator("Current Network"))
+        self.__networkWidget.labelTitle.setText(translator(
+            "Ensure that the address is correct and\non the same network."
+        ))
         self.__pushButtonDetails.setText(translator("Details"))
         self.__gasWidget.labelEstimatedFee.setText(translator("Estimated Gas Fee"))
         self.__gasWidget.labelMaxFee.setText(translator("Max Fee"))
@@ -255,7 +257,7 @@ class UiForm(QWidget, SetupForm):
         self.__labelAddress.setText(address, False)
         self.__labelFunctionName.setText(function)
         self.__labelIcon.setPixmap(assetsicons.get_asset_icon(symbol))
-        self.__labelAmount.setText("{} {}".format(amount, symbol))
+        self.__labelAmount.setText("{} {}".format(re_amount(amount), symbol))
 
     def update_gas(
             self, estimated_gas: str, max_fee: str, total: str, max_amount: str,

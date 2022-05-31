@@ -25,7 +25,7 @@ class HeaderWidget(QWidget):
 class ListWidget(SPGraphics.QuickListWidget):
     def __init__(self, parent):
         super(ListWidget, self).__init__(
-            parent, spacing=10, empty_illustration=images.data.illustrations.coin
+            parent, spacing=10, empty_illustration=images.data.illustrations.no_data
         )
 
         self.setAttribute(Qt.WA_StyledBackground, True)

@@ -89,7 +89,7 @@ class UiForm(QWidget, SetupForm):
         self.__headerWidget.pushButtonAddNew.setIcon(QIcon(images.data.icons.changeable.plus21))
 
     def re_translate(self):
-        self.__headerWidget.labelTitle.setText(translator("Send to"))
+        self.__headerWidget.labelTitle.setText(translator("Send To"))
         self.__headerWidget.lineEditAddress.setPlaceholderText(translator("Search, Public Address (0x)"))
 
     def re_font(self):

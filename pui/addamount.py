@@ -38,6 +38,7 @@ class UiForm(QWidget, SetupForm):
         self.__comboBoxToken = SPGraphics.QuickComboBox(
             self, max_visible_items=4, icon_size=Size.s24, fixed_size=Size.default
         )
+        self.__comboBoxToken.wheelEvent = lambda event: None
         self.__comboBoxToken.currentIndexChanged.connect(self.token_changed)
 
         self.__lineEditAmount = SPGraphics.QuickLineEdit(

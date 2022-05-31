@@ -41,7 +41,9 @@ class UiForm(QWidget, SetupForm):
         super(UiForm, self).setup()
 
     def re_translate(self):
-        self.__labelTitle.setText(translator("Authorize this staking contract to automate transactions for you"))
+        self.__labelTitle.setText(
+            translator("Authorize this staking contract to automate transactions for you.")
+        )
         self.__pushButtonApproval.setText(translator("Approval"))
 
     def re_font(self):

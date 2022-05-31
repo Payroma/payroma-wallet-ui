@@ -2,6 +2,7 @@ from plibs import *
 from pheader import *
 from pui import AppReForm, SetupForm, fonts, images, styles, Size, header, footer, tooltip
 
+
 Size.defaultMainWidget = QSize(450, 660)
 Size.minimumMainWidget = QSize(450, 600)
 

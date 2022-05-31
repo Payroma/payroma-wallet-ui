@@ -31,7 +31,7 @@ class HeaderWidget(QWidget):
         self.labelBlockValue.setWordWrap(False)
 
         self.pushButtonBlockTime = SPGraphics.QuickPushButton(
-            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.showBlockTime
+            self, icon_size=Size.s21, fixed_size=Size.s21, tooltip=QApplication.toolTip.blockTimer
         )
 
         self.labelTotalStaked = SPGraphics.QuickLabel(

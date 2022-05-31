@@ -82,7 +82,7 @@ class UiForm(QWidget, SetupForm):
         self.layout().addWidget(self.__labelQRDescription)
         self.layout().addWidget(self.__labelAddressQR, alignment=Qt.AlignHCenter)
         self.layout().addWidget(self.__labelAddressDescription)
-        self.layout().addWidget(self.__labelAddress)
+        self.layout().addWidget(self.__labelAddress, alignment=Qt.AlignHCenter)
         self.layout().addWidget(self.__lineWidget)
         self.layout().addWidget(self.__networkWidget)
 
@@ -95,8 +95,8 @@ class UiForm(QWidget, SetupForm):
         self.__labelQRDescription.setText(translator(
             "Scan the code on the withdrawal page of the trading platform APP or wallet APP"
         ))
-        self.__labelAddressDescription.setText(translator("or Copy your deposit address"))
-        self.__networkWidget.labelTitle.setText(translator("Ensure the sender network is"))
+        self.__labelAddressDescription.setText(translator("or Copy your deposit address."))
+        self.__networkWidget.labelTitle.setText(translator("Ensure that sender on the same network."))
 
     def re_font(self):
         font = QFont()

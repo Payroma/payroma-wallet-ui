@@ -86,7 +86,7 @@ class TabsWidget(QWidget):
 class ListWidget(SPGraphics.QuickListWidget):
     def __init__(self, parent):
         super(ListWidget, self).__init__(
-            parent, spacing=10, empty_illustration=images.data.illustrations.no_data
+            parent, spacing=10, empty_illustration=images.data.illustrations.coin
         )
 
         self.setAttribute(Qt.WA_StyledBackground, True)
@@ -94,6 +94,7 @@ class ListWidget(SPGraphics.QuickListWidget):
         self.layout().setAlignment(Qt.AlignVCenter)
         self.labelIllustration.setAlignment(Qt.AlignHCenter)
         self.labelTitle.setAlignment(Qt.AlignHCenter)
+        self.labelDescription.setAlignment(Qt.AlignHCenter)
 
 
 class UiForm(QWidget, SetupForm):
@@ -137,7 +138,10 @@ class UiForm(QWidget, SetupForm):
         self.__tabsWidget.pushButtonUpcoming.setText(translator("Upcoming"))
         self.__tabsWidget.pushButtonLive.setText(translator("Live"))
         self.__tabsWidget.pushButtonEnded.setText(translator("Ended"))
-        self.__listWidget.labelTitle.setText(translator("No pairs has been added yet!"))
+        self.__listWidget.labelTitle.setText(translator("No stake pairs has been added yet!"))
+        self.__listWidget.labelDescription.setText(
+            translator("Maybe the current network doesn't have staking contracts.")
+        )
 
     def re_font(self):
         font = QFont()
