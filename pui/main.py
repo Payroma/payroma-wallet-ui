@@ -3,7 +3,11 @@ from pheader import *
 from pui import AppReForm, SetupForm, fonts, images, styles, Size, header, footer, tooltip
 
 
-Size.defaultMainWidget = QSize(450, 660)
+screenSize = QApplication.desktop().screenGeometry()
+adjustSize = screenSize.height() * 70 / 100
+height = min(max(adjustSize, 660), 750)
+
+Size.defaultMainWidget = QSize(450, height)
 Size.minimumMainWidget = QSize(450, 600)
 
 
