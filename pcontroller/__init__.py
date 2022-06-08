@@ -278,3 +278,15 @@ def re_amount(text: str) -> str:
         pass
 
     return text
+
+
+def url_correction(url: str, protocol: str = 'http'):
+    try:
+        protocol, domain = url.split('://')
+    except TypeError:
+        domain = url
+
+    while domain.endswith('/'):
+        domain = domain.replace('//', '/')[:-1]
+
+    return protocol + '://' + domain
